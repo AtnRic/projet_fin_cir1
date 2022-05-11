@@ -2,5 +2,8 @@
 #include <stdlib.h>
 
 int main() {
-	printf("hello world !");
+	for (int i = 0; i <= 10; i++) {
+		printf("hello world !");
+	}
+	
 }
