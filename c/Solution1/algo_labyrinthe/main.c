@@ -51,6 +51,12 @@ typedef struct subset {
 	int rang;	//à noter que rang != hauteur
 }subset;
 
+typedef struct poids {
+	int weight;
+	struct Bord bord;
+	struct poids* next;
+}poids;
+
 Graph* createGraph(int S, int B) {
 	Graph* graph = (Graph*)malloc(sizeof(Graph));
 	graph->S = S;

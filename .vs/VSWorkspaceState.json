@@ -1,8 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\c"
+    "\\c",
+    "\\c\\Solution1",
+    "\\c\\Solution1\\algo_labyrinthe"
   ],
-  "SelectedNode": "\\c",
+  "SelectedNode": "\\c\\Solution1\\algo_labyrinthe\\main.c",
   "PreviewInSolutionExplorer": false
 }
