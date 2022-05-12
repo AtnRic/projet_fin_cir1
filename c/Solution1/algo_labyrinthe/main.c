@@ -1,9 +1,9 @@
-#include <stdlib.h>
+ï»¿#include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
 #include "Structures.h"
 
-//Ce qui doit être obtenu
+//Ce qui doit Ãªtre obtenu
 /*var labyrinthe = [
 		["k", "f", "b", "f", "f", "f", "b", "f", "f", "o"],
 		["e", "h", "g", "m", "b", "h", "g", "m", "f", "h"],
@@ -45,7 +45,7 @@ Graph* createGraph(int S, int B) {
 	return graph;
 }
 
-//Fonction qui trouve la racine d'un élément i
+//Fonction qui trouve la racine d'un Ã©lÃ©ment i
 int find(subset subsets[], int i) {
 	// Trouve la racine et fait de la racine le parent de i
 	if (subsets[i].parent != i)
@@ -53,8 +53,8 @@ int find(subset subsets[], int i) {
 	return subsets[i].parent;
 }
 
-//Fonction qui unit 2 éléments à leurs racines
-//L'élément ayant le rang le plus faible est relié à la racine de l'élément ayant le rang le plus élevé
+//Fonction qui unit 2 Ã©lÃ©ments Ã  leurs racines
+//L'Ã©lÃ©ment ayant le rang le plus faible est reliÃ© Ã  la racine de l'Ã©lÃ©ment ayant le rang le plus Ã©levÃ©
 void Union(subset subsets[], int xracine, int yracine) {
 	if (subsets[xracine].rang < subsets[yracine].rang) {
 		subsets[xracine].parent = yracine;
@@ -64,14 +64,14 @@ void Union(subset subsets[], int xracine, int yracine) {
 		subsets[yracine].parent = xracine;
 		return;
 	}
-	else { //cas où les rang sont égaux, faire rang+1
+	else { //cas oÃ¹ les rang sont Ã©gaux, faire rang+1
 		subsets[yracine].parent = xracine;
 		subsets[xracine].rang++;
 		return;
 	}
 }
 
-//Vérifie si le graph contient un cycle ou pas
+//VÃ©rifie si le graph contient un cycle ou pas
 int isCycle(Graph* graph) {
 	int S = graph->S;
 	int B = graph->B;
@@ -80,7 +80,7 @@ int isCycle(Graph* graph) {
 		subsets[v].parent = v;
 		subsets[v].rang = 0;
 	}
-	// Parcours la totalité des sommets des bords et si les ensembles sont identiques alors il y a un cycle
+	// Parcours la totalitÃ© des sommets des bords et si les ensembles sont identiques alors il y a un cycle
 	for (int e = 0; e < B; ++e) {
 		int x = find(subsets, graph->Bord[e].racine);
 		int y = find(subsets, graph->Bord[e].dest);
@@ -91,14 +91,29 @@ int isCycle(Graph* graph) {
 	return 0;
 }
 
+/*Algo Kruskal pseudo-code*/
+/*	E <- NULL
+	pour chaque sommet v appartenant S[G]
+		faire CRÃ‰ER - ENSEMBLE(v)
+	trier les arÃªtes de A par ordre croissant de poids w
+	pour chaque arÃªte(u, v) appartenant A pris par ordre de poids croissant
+		faire si TROUVER - ENSEMBLE(u) != TROUVER - ENSEMBLE(v)
+			alors E <- E Union{ (u, v) }
+			UNION(u, v)
+	retourner E
+*/
 
 //Algorithme de Kruskal
-int Kruskal(Graph* graph, int S, int B) {
-	for (int i = 0; i < S; i++) {
-		createGraph(i, B);
+int Kruskal(Graph* graph, int U, int V) {
+	subset* subsets = (subset*)malloc(U * sizeof(subset));
+	subset* Subsets = (subset*)malloc(V * sizeof(subset));
+	for (int i = 0; i < U; i++) {
+		createGraph(i, V);
 	}
-	
-
+	if (find(subsets, U) != find(Subsets, V)) {
+		Union( subsets, U, V);
+	}
+	return graph;
 }
 
 int main() {
@@ -115,12 +130,12 @@ int main() {
 	graph->Bord[1].dest = 2;
 
 	//Ajouter bord 0-2
-	graph->Bord[0].racine = 2;
-	graph->Bord[0].dest = 2;
+	/*graph->Bord[0].racine = 2;
+	graph->Bord[0].dest = 2;*/
 
 	//Ajouter bord 2-3
-	/*sgraph->Bord[2].racine = 2;
-	graph->Bord[2].dest = 3;*/
+	graph->Bord[2].racine = 2;
+	graph->Bord[2].dest = 3;
 
 	if (isCycle(graph)) {
 		printf("Le graph a un cycle");
