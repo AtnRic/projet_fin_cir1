@@ -3,12 +3,12 @@
 #include <stdbool.h>
 #include "Structures.h"
 
-<<<<<<< HEAD
+
 //Ce qui doit être obtenu
-=======
+
 //test
-//Ce qui doit �tre obtenu
->>>>>>> m-a-i-n
+//Ce qui doit �tre obtenu
+
 /*var labyrinthe = [
 		["k", "f", "b", "f", "f", "f", "b", "f", "f", "o"],
 		["e", "h", "g", "m", "b", "h", "g", "m", "f", "h"],
@@ -40,7 +40,43 @@ var correspondance = {
 console.log(labyrinthe[3][1]);*/
 
 
+/*-----------Liste chainée POUR LE GARDE---------------*/
 
+typedef struct LinkedElemGuard {
+	//pas encore adapté au garde
+	int data;
+	struct LinkedElemGuard* next;
+	struct LinkedElemGuard* previous;
+}LinkedElemGuard;
+
+typedef struct LinkedListGuard {
+	struct LinkedElem* head;
+	struct LinkedElem* tail;
+	int size;
+}LinkedListGuard;
+
+/*---------------Définition du garde-------------------*/
+
+typedef struct Guard {
+	//Position du garde sur la grille
+	int posy;
+	int posx;
+
+	//Les valeurs sont true s'il n'y a pas de mur a {gauche, droite, en haut, en bas} du garde
+	bool left;
+	bool right;
+	bool up;
+	bool down;
+
+	/*valeur de déplacement : initialisée puis ne change que lorsque que la garde touche un mur
+	peut prendre 1 2 3 4 comme valeurs (gauche droite haut bas)
+	ex : si le garde se dirige à gauche (valeur 1) et percute un mur, la valeur devient 2 et le garde repart dans l'autre sens
+	//c'était la première idée Wallah, mais Thibaut le boss m'a donné une bête d'idée
+	*/
+
+	/*On crée une liste chainée bilatère modélisant la trajectoire (qui n'est que linéaire étant donné qu'on ne peut pas faire d'aléatoire)*/
+	LinkedListGuard deplacementGarde;
+}Guard;
 
 Graph* createGraph(int S, int B) {
 	Graph* graph = (Graph*)malloc(sizeof(Graph));
