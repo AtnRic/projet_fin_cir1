@@ -7,7 +7,7 @@
 //Ce qui doit Ãªtre obtenu
 =======
 //test
-//Ce qui doit être obtenu
+//Ce qui doit ï¿½tre obtenu
 >>>>>>> m-a-i-n
 /*var labyrinthe = [
 		["k", "f", "b", "f", "f", "f", "b", "f", "f", "o"],
