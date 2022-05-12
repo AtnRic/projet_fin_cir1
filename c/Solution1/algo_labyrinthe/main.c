@@ -45,6 +45,12 @@ Graph* createGraph(int S, int B) {
 	return graph;
 }
 
+/* Pseudo code fonction find
+function Find(x)
+	if x.parent != x
+		x.parent : = Find(x.parent)
+	return x.parent
+*/
 //Fonction qui trouve la racine d'un élément i
 int find(subset subsets[], int i) {
 	// Trouve la racine et fait de la racine le parent de i
@@ -91,18 +97,17 @@ int isCycle(Graph* graph) {
 	return 0;
 }
 
-/*Algo Kruskal pseudo-code*/
-/*	E <- NULL
+/*Algo Kruskal pseudo-code
+	graph <- NULL
 	pour chaque sommet v appartenant S[G]
 		faire CRÉER - ENSEMBLE(v)
 	trier les arêtes de A par ordre croissant de poids w
 	pour chaque arête(u, v) appartenant A pris par ordre de poids croissant
 		faire si TROUVER - ENSEMBLE(u) != TROUVER - ENSEMBLE(v)
-			alors E <- E Union{ (u, v) }
+			alors graph <- graph Union{ (u, v) }
 			UNION(u, v)
 	retourner E
 */
-
 //Algorithme de Kruskal
 int Kruskal(Graph* graph, int U, int V) {
 	subset* subsets = (subset*)malloc(U * sizeof(subset));
@@ -111,7 +116,7 @@ int Kruskal(Graph* graph, int U, int V) {
 		createGraph(i, V);
 	}
 	if (find(subsets, U) != find(Subsets, V)) {
-		Union( subsets, U, V);
+		Union( subsets, find(subsets, U), find(Subsets, V));
 	}
 	return graph;
 }
