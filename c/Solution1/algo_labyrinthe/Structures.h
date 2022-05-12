@@ -9,36 +9,74 @@ typedef struct Bord {
 typedef struct Graph {
 	int S;	// S : nombre de sommets
 	int B;	// B : Nombre de bord
-	struct Bord* Bord; //Graph représenté par un ensemble de bord
+	struct Bord* Bord; //Graph reprï¿½sentï¿½ par un ensemble de bord
 }Graph;
 
 typedef struct subset {
 	int parent;
-	int rang;	//à noter que rang != hauteur
+	int rang;	//ï¿½ noter que rang != hauteur
 }subset;
 
 typedef struct poids {
 	int weight; //valeur du poids
-	struct Bord* bord; //pointeur sur le bord auquel le poids est relié
-	struct poids* next; //pointeur vers élément suivant
+	struct Bord* bord; //pointeur sur le bord auquel le poids est reliï¿½
+	struct poids* next; //pointeur vers ï¿½lï¿½ment suivant
 }poids;
 
 typedef struct LinkedListPoids {
-	poids* head; // pointeur vers la tête de liste (le poids le plus petit)
+	poids* head; // pointeur vers la tï¿½te de liste (le poids le plus petit)
 	int size;
 	poids* tail; // pointeur vers la queue de liste
 } LinkedListPoids;
 
+/*-----------Liste chainÃ©e POUR LE GARDE---------------*/
+
+typedef struct LinkedElemGuard {
+	//pas encore adaptÃ© au garde
+	int data;
+	struct LinkedElemGuard* next;
+	struct LinkedElemGuard* previous;
+}LinkedElemGuard;
+
+typedef struct LinkedListGuard {
+	struct LinkedElem* head;
+	struct LinkedElem* tail;
+	int size;
+}LinkedListGuard;
+
+/*---------------DÃ©finition du garde-------------------*/
+
+typedef struct Guard {
+	//Position du garde sur la grille
+	int posy;
+	int posx;
+
+	//Les valeurs sont true s'il n'y a pas de mur a {gauche, droite, en haut, en bas} du garde
+	bool left;
+	bool right;
+	bool up;
+	bool down;
+
+	/*valeur de dÃ©placement : initialisÃ©e puis ne change que lorsque que la garde touche un mur
+	peut prendre 1 2 3 4 comme valeurs (gauche droite haut bas)
+	ex : si le garde se dirige Ã  gauche (valeur 1) et percute un mur, la valeur devient 2 et le garde repart dans l'autre sens
+	//c'Ã©tait la premiÃ¨re idÃ©e Wallah, mais Thibaut le boss m'a donnÃ© une bÃªte d'idÃ©e
+	*/
+
+	/*On crÃ©e une liste chainÃ©e bilatÃ¨re modÃ©lisant la trajectoire (qui n'est que linÃ©aire Ã©tant donnÃ© qu'on ne peut pas faire d'alÃ©atoire)*/
+	LinkedListGuard deplacementGarde;
+}Guard;
+
 Graph* createGraph(int S, int B);
 
-//Fonction qui trouve la racine d'un élément i
+//Fonction qui trouve la racine d'un ï¿½lï¿½ment i
 int find(subset subsets[], int i);
 
-//Fonction qui unit 2 éléments à leurs racines
-//L'élément ayant le rang le plus faible est relié à la racine de l'élément ayant le rang le plus élevé
+//Fonction qui unit 2 ï¿½lï¿½ments ï¿½ leurs racines
+//L'ï¿½lï¿½ment ayant le rang le plus faible est reliï¿½ ï¿½ la racine de l'ï¿½lï¿½ment ayant le rang le plus ï¿½levï¿½
 void Union(subset subsets[], int xracine, int yracine);
 
-//Vérifie si le graph contient un cycle ou pas
+//Vï¿½rifie si le graph contient un cycle ou pas
 int isCycle(Graph* graph);
 
 //Algorithme de Kruskal
