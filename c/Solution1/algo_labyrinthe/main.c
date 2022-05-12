@@ -122,6 +122,45 @@ int Kruskal(Graph* graph, int U, int V) {
 	return graph;
 }
 
+/*-------Hippolyte-Début--------------*/
+//fonction de création de la liste chainée bilatère
+LinkedListGuard* newLinkedListGuard() {
+	LinkedListGuard* elem;
+	elem = (LinkedListGuard*)malloc(sizeof(LinkedListGuard));
+	if (elem != NULL) {
+		elem->head = NULL;
+		elem->tail = NULL;
+		elem->size = 0;
+	}
+	return elem;
+}
+
+int DrawTrajGuard(LinkedListGuard* list, LinkedElemGuard* newItem) {
+	/**
+	* La structue de liste chainée bilatère permet de pouvoir faire des vas et viens
+	*/
+	//on vérifie si la liste chainée ne présente pas d'anomalie
+	if ((list == NULL) || (newItem == NULL)) return EXIT_FAILURE;
+	//si la liste est vide, la première position est aussi la dernière, et le tableau a alors une taille de 1
+	if (list->size == 0) {
+		list->tail = newItem;
+		list->head = newItem;
+		list->size = 1;
+	}
+	else {
+		//on ajoute forcément les éléments par la fin
+		//on sauvegarde l'ancien list->tail pour pouvoir fixer son next sur le nouveau tail
+		LinkedElemGuard* tmp = list->tail;
+		list->tail = newItem;
+		tmp->next = list->tail;
+		list->size++;
+		free(tmp);
+	}
+	return EXIT_SUCCESS;
+}
+
+/*-----------fin----------------------*/
+
 int main() {
 	int S = 3;
 	int B = 3;

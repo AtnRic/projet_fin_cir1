@@ -38,9 +38,9 @@ typedef struct LinkedElemGuard {
 	struct LinkedElemGuard* previous;
 }LinkedElemGuard;
 
-typedef struct LinkedListGuard {
-	struct LinkedElem* head;
-	struct LinkedElem* tail;
+typedef struct LinkedListGuard{
+	struct LinkedElemGuard* head;
+	struct LinkedElemGuard* tail;
 	int size;
 }LinkedListGuard;
 
@@ -64,7 +64,7 @@ typedef struct Guard {
 	*/
 
 	/*On crée une liste chainée bilatère modélisant la trajectoire (qui n'est que linéaire étant donné qu'on ne peut pas faire d'aléatoire)*/
-	LinkedListGuard deplacementGarde;
+	LinkedListGuard* deplacementGarde;
 }Guard;
 
 Graph* createGraph(int S, int B);
@@ -81,3 +81,9 @@ int isCycle(Graph* graph);
 
 //Algorithme de Kruskal
 int Kruskal(Graph* graph, int S, int B);
+
+//crée une liste chainée bilatère pour la trajectoire du garde
+LinkedListGuard* newLinkedListGuard();
+
+//forme case par case la trajectoire du garde
+int DrawTrajGuard(LinkedListGuard* list, LinkedElemGuard* newItem);
