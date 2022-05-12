@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include "Structures.h"
 
 //Ce qui doit être obtenu
 /*var labyrinthe = [
@@ -34,28 +35,7 @@ var correspondance = {
 console.log(labyrinthe[3][1]);*/
 
 
-typedef struct Bord {
-	int racine;
-	int dest;
-}Bord;
 
-
-typedef struct Graph {
-	int S;	// S : nombre de sommets
-	int B;	// B : Nombre de bord
-	struct Bord* Bord; //Graph représenté par un ensemble de bord
-}Graph;
-
-typedef struct subset {
-	int parent;
-	int rang;	//à noter que rang != hauteur
-}subset;
-
-typedef struct poids {
-	int weight;
-	struct Bord bord;
-	struct poids* next;
-}poids;
 
 Graph* createGraph(int S, int B) {
 	Graph* graph = (Graph*)malloc(sizeof(Graph));
@@ -92,8 +72,7 @@ void Union(subset subsets[], int xracine, int yracine) {
 }
 
 //Vérifie si le graph contient un cycle ou pas
-int isCycle(Graph* graph)
-{
+int isCycle(Graph* graph) {
 	int S = graph->S;
 	int B = graph->B;
 	subset* subsets = (subset*)malloc(S * sizeof(subset));
@@ -110,6 +89,16 @@ int isCycle(Graph* graph)
 		Union(subsets, x, y);
 	}
 	return 0;
+}
+
+
+//Algorithme de Kruskal
+int Kruskal(Graph* graph, int S, int B) {
+	for (int i = 0; i < S; i++) {
+		createGraph(i, B);
+	}
+	
+
 }
 
 int main() {
