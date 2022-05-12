@@ -3,7 +3,12 @@
 #include <stdbool.h>
 #include "Structures.h"
 
+<<<<<<< HEAD
 //Ce qui doit Ãªtre obtenu
+=======
+//test
+//Ce qui doit être obtenu
+>>>>>>> m-a-i-n
 /*var labyrinthe = [
 		["k", "f", "b", "f", "f", "f", "b", "f", "f", "o"],
 		["e", "h", "g", "m", "b", "h", "g", "m", "f", "h"],
