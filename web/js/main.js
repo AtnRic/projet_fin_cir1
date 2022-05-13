@@ -53,7 +53,7 @@ function CreateGrid(size, tab, spawnCellId) {
       //newCellp.innerHTML = tab[j][i];
       switch (tab[j][i]) {
         case "a":
-          AppendImage("../images/mazes/jungle_maze_four.png", newCell, "t1");
+          AppendImage("../images/mazes/jungle_maze_four_a.png", newCell, "t1");
           break;
         case "b":
           AppendImage("../images/mazes/jungle_maze_three.png", newCell, "t2");
@@ -84,7 +84,7 @@ function CreateGrid(size, tab, spawnCellId) {
           break;
         case "f":
           tmp_img = AppendImage(
-            "../images/mazes/jungle_maze_two.png",
+            "../images/mazes/jungle_maze_two_a.png",
             newCell,
             "t2"
           );
@@ -97,7 +97,7 @@ function CreateGrid(size, tab, spawnCellId) {
           break;
         case "g":
           tmp_img = AppendImage(
-            "../images/mazes/jungle_maze_two.png",
+            "../images/mazes/jungle_maze_two_b.png",
             newCell,
             "t3"
           );
@@ -108,7 +108,7 @@ function CreateGrid(size, tab, spawnCellId) {
           break;
         case "h":
           tmp_img = AppendImage(
-            "../images/mazes/jungle_maze_border.png",
+            "../images/mazes/jungle_maze_border_a.png",
             newCell,
             "t4"
           );
@@ -116,7 +116,7 @@ function CreateGrid(size, tab, spawnCellId) {
           break;
         case "i":
           tmp_img = AppendImage(
-            "../images/mazes/jungle_maze_border.png",
+            "../images/mazes/jungle_maze_border_b.png",
             newCell,
             "t1"
           );
@@ -124,7 +124,7 @@ function CreateGrid(size, tab, spawnCellId) {
           break;
         case "j":
           tmp_img = AppendImage(
-            "../images/mazes/jungle_maze_border.png",
+            "../images/mazes/jungle_maze_border_c.png",
             newCell,
             "t2"
           );
@@ -132,14 +132,14 @@ function CreateGrid(size, tab, spawnCellId) {
           break;
         case "k":
           tmp_img = AppendImage(
-            "../images/mazes/jungle_maze_border.png",
+            "../images/mazes/jungle_maze_border_a.png",
             newCell,
             "t3"
           );
           break;
         case "l":
           tmp_img = AppendImage(
-            "../images/mazes/jungle_maze_one.png",
+            "../images/mazes/jungle_maze_one_a.png",
             newCell,
             "t4"
           );
@@ -147,7 +147,7 @@ function CreateGrid(size, tab, spawnCellId) {
           break;
         case "m":
           tmp_img = AppendImage(
-            "../images/mazes/jungle_maze_one.png",
+            "../images/mazes/jungle_maze_one_b.png",
             newCell,
             "t2"
           );
@@ -155,7 +155,7 @@ function CreateGrid(size, tab, spawnCellId) {
           break;
         case "n":
           tmp_img = AppendImage(
-            "../images/mazes/jungle_maze_one.png",
+            "../images/mazes/jungle_maze_one_c.png",
             newCell,
             "t3"
           );
@@ -163,7 +163,7 @@ function CreateGrid(size, tab, spawnCellId) {
           break;
         case "o":
           tmp_img = AppendImage(
-            "../images/mazes/jungle_maze_one.png",
+            "../images/mazes/jungle_maze_one_a.png",
             newCell,
             "t4"
           );
