@@ -188,7 +188,7 @@ int Kruskal(Graph* graph, int nombreSommets) {
 			subsets->data->gauche = Subsets->data->droite = 0;
 		}
 		if (U = V - 1) {
-			Subsets->data->gauche = subsets->data->droite = 0;
+			Subsets->data->gauche = subsets->data->droite = 0; 
 		}
 		if (U = V + sqrt(nombreSommets)) Subsets->data->bas = subsets->data->haut = 0;
 		if (U = V - sqrt(nombreSommets)) Subsets->data->haut = subsets->data->bas = 0;

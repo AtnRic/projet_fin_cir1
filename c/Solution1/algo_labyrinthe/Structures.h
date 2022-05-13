@@ -41,4 +41,4 @@ void Union(subset subsets[], int xracine, int yracine);
 int isCycle(Graph* graph);
 
 //Algorithme de Kruskal
-int Kruskal(Graph* graph, int U, int V);
+int Kruskal(Graph* graph, int nombreSommets);
