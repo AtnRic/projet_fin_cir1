@@ -3,6 +3,7 @@
 typedef struct Bord {
 	int racine;
 	int dest;
+	int weight;
 }Bord;
 
 
@@ -16,18 +17,6 @@ typedef struct subset {
 	int parent;
 	int rang;	//à noter que rang != hauteur
 }subset;
-
-typedef struct poids {
-	int weight; //valeur du poids
-	struct Bord* bord; //pointeur sur le bord auquel le poids est relié
-	struct poids* next; //pointeur vers élément suivant
-}poids;
-
-typedef struct LinkedListPoids {
-	poids* head; // pointeur vers la tête de liste (le poids le plus petit)
-	int size;
-	poids* tail; // pointeur vers la queue de liste
-} LinkedListPoids;
 
 Graph* createGraph(int S, int B);
 

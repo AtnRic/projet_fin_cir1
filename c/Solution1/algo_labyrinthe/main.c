@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include "Structures.h"
+#define MAXSIZE 16340
 
 //Ce qui doit être obtenu
 /*var labyrinthe = [
@@ -36,7 +37,6 @@ console.log(labyrinthe[3][1]);*/
 
 
 
-
 Graph* createGraph(int S, int B) {
 	Graph* graph = (Graph*)malloc(sizeof(Graph));
 	graph->S = S;
@@ -44,6 +44,7 @@ Graph* createGraph(int S, int B) {
 	graph->Bord = (Bord*)malloc(graph->B * sizeof(Bord));
 	return graph;
 }
+
 
 /* Pseudo code fonction find
 function Find(x)
@@ -58,6 +59,7 @@ int find(subset subsets[], int i) {
 		subsets[i].parent = find(subsets, subsets[i].parent);
 	return subsets[i].parent;
 }
+
 
 //Fonction qui unit 2 éléments à leurs racines
 //L'élément ayant le rang le plus faible est relié à la racine de l'élément ayant le rang le plus élevé
@@ -110,11 +112,15 @@ int isCycle(Graph* graph) {
 */
 //Algorithme de Kruskal
 int Kruskal(Graph* graph, int U, int V) {
+	int tab[MAXSIZE];
+	srand(time(NULL));
 	subset* subsets = (subset*)malloc(U * sizeof(subset));
 	subset* Subsets = (subset*)malloc(V * sizeof(subset));
-	for (int i = 0; i < U; i++) {
-		createGraph(i, V);
+	for (int i = 0; i < U; ++i) {
+		graph = createGraph(i, V);
+		tab[i] = graph->Bord.weight = rand();
 	}
+	//Tri par fusion 
 	if (find(subsets, U) != find(Subsets, V)) {
 		Union( subsets, find(subsets, U), find(Subsets, V));
 	}
@@ -135,8 +141,8 @@ int main() {
 	graph->Bord[1].dest = 2;
 
 	//Ajouter bord 0-2
-	/*graph->Bord[0].racine = 2;
-	graph->Bord[0].dest = 2;*/
+	graph->Bord[0].racine = 2;
+	graph->Bord[0].dest = 2;
 
 	//Ajouter bord 2-3
 	graph->Bord[2].racine = 2;
@@ -147,3 +153,5 @@ int main() {
 	}
 	else printf("Le graph ne comporte pas de cycle");
 }
+
+//faire un tableau avec allocation dynamique des valeurs lorsque celui-ci est dépassé en taille
