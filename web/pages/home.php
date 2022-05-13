@@ -10,31 +10,35 @@ require '../tools/header.php';
 require '../tools/_main_tools.php';
 ?>
 <body>
-<h1>Welcome to the Super Labyrinth 3000 deluxe !</h1>
-<h2>Choose your level</h2>
-<div class="container">
-    <div class="easy">
+<div class="header">
+    <h1 class="title">Welcome to Jungle Survival</h1>
+    <h2 class="title sub">Choose your level</h2>
+</div>
+<div class="center">
+<div class="container level">
+    <div class="easy but">
         <div class="tuile"></div>
         <h3>Welcome to the jungle</h3>
         <p>Easy</p>
     </div>
-    <div class="medium">
+    <div class="medium but">
         <div class="tuile"></div>
         <h3>????</h3>
         <p>Medium</p>
     </div>
-    <div class="hard">
+    <div class="hard but">
         <div class="tuile"></div>
         <h3>A space journey</h3>
         <p>Hard</p>
     </div>
 </div>
-<h2>Or create your own !</h2>
-<div class="container">
-    <div class="create">
+<h2 class="title sub own">Or create your own !</h2>
+<div class="container ">
+    <div class="create but">
         <div class="tuile"></div>
         <h3>Your own template</h3>
     </div>
+</div>
 </div>
 
 </body>

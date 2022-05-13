@@ -1,38 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;1,300;1,800&display=swap');
+
 *{
-    font-family:  -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family:  -apple-system, BlinkMacSystemFont, 'Montserrat', 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    padding: 0;
+    margin: 0;
 }
-body{
-    display: block;
-}
-h1, h2, h3, p{
+
+.title  {
+    padding-top: 2vh;
     text-align: center;
+    font-style: italic;
+    font-size: 4vh;
 }
-h2{
-    margin-bottom: 30px;
+
+.sub {
+    font-size: 3vh;
 }
+
 .container{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     flex-direction: row;
-    align-content: center;
-    align-items: flex-start;
-    width: 99vw;
-    margin-left: 0;
+    width: 100vw;
+    justify-content: space-evenly;
 }
+
+.center {
+    position: absolute;
+    top: 50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Boutons de niveau */
+
+.but {
+    display: block;
+    width: 100%;
+    justify-content: center;
+}
+
+.but h3 {
+    margin-top: 2vh;
+    width: 100%;
+    text-align: center;
+}
+
+.but p {
+    margin-top: 1vh;
+    width: 100%;
+    text-align: center;
+    font-style: italic;
+    font-weight: 300;
+}
+
+.own {
+    padding-bottom: 4vh;
+}
+
 .tuile{
+    margin: 0 auto;
     width: 150px;
     height: 150px;
     border-radius: 20px;
-    background-color: red;
+    background-color: blue;
 }
+
 .easy, .medium, .hard, .create{
     display: block;
     max-width: 180px;
-    margin-left: 5%;
-    margin-right: 5%;
     transition-duration: 0.2s;
 }
+
 .easy:hover, .medium:hover, .hard:hover, .create:hover{
     transform: scale(1.15);
 }
+
