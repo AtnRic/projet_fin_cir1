@@ -13,9 +13,18 @@ typedef struct Graph {
 	struct Bord* Bord; //Graph représenté par un ensemble de bord
 }Graph;
 
+typedef struct Data {
+	int haut;
+	int droite;
+	int bas;
+	int gauche;
+}Data;
+
 typedef struct subset {
 	int parent;
 	int rang;	//à noter que rang != hauteur
+	struct Bord* Bord;
+	struct Data* data;
 }subset;
 
 Graph* createGraph(int S, int B);
