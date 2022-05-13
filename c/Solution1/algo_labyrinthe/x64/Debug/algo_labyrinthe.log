@@ -1,3 +1,4 @@
-﻿  main.c
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(116,14): warning C4047: 'return' : les niveaux d'indirection de 'int' et de 'Graph *' sont différents
-  algo_labyrinthe.vcxproj -> C:\MAMP\htdocs\Projet CIR1\c\Solution1\x64\Debug\algo_labyrinthe.exe
+﻿  tri.c
+  LINK : C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\x64\Debug\algo_labyrinthe.exe introuvable ou non généré par la dernière édition de liens incrémentielle ; édition de liens complète en cours
+tri.obj : error LNK2005: main déjà défini(e) dans main.obj
+C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\x64\Debug\algo_labyrinthe.exe : fatal error LNK1169: un ou plusieurs symboles définis à différentes reprises ont été rencontrés
