@@ -35,8 +35,67 @@ var correspondance = {
 };
 console.log(labyrinthe[3][1]);*/
 
+/*Tri Fusion*/
+void triFusion(int i, int j, int tab[], int tmp[]) {
+	if (j <= i) { return; }
 
+	int m = (i + j) / 2;
 
+	triFusion(i, m, tab, tmp);     //trier la moiti� gauche r�cursivement
+	triFusion(m + 1, j, tab, tmp); //trier la moiti� droite r�cursivement
+	int pg = i;     //pg pointe au d�but du sous-tableau de gauche
+	int pd = m + 1; //pd pointe au d�but du sous-tableau de droite
+	int c;          //compteur
+// on boucle de i � j pour remplir chaque �l�ment du tableau final fusionn�
+	for (c = i; c <= j; c++) {
+		if (pg == m + 1) { //le pointeur du sous-tableau de gauche a atteint la limite
+			tmp[c] = tab[pd];
+			pd++;
+		}
+		else if (pd == j + 1) { //le pointeur du sous-tableau de droite a atteint la limite
+			tmp[c] = tab[pg];
+			pg++;
+		}
+		else if (tab[pg] < tab[pd]) { //le pointeur du sous-tableau de gauche pointe vers un �l�ment plus petit
+			tmp[c] = tab[pg];
+			pg++;
+		}
+		else {  //le pointeur du sous-tableau de droite pointe vers un �l�ment plus petit
+			tmp[c] = tab[pd];
+			pd++;
+		}
+	}
+	for (c = i; c <= j; c++) {  //copier les �l�ments de tmp � tab
+		tab[c] = tmp[c];
+	}
+}
+int main() {
+	int  nbr, u;
+	nbr = 100000000;
+	int* tab = (int*)malloc(nbr * sizeof(int));
+	int* tmp = (int*)malloc(nbr * sizeof(int));
+	if (tab != NULL && tmp != NULL) {
+		srand(time(NULL));
+
+		for (int i = 0; i <= nbr; i++) {
+			float v = (float)((float)rand() / (float)RAND_MAX);
+			u = v * 100.0;
+			(*(tab + i)) = u;
+
+		}
+	}
+	triFusion(0, nbr - 1, tab, tmp);
+
+	printf("\n Tableau trie : ");
+	for (int j = 0; j < nbr; j++) {
+		//printf(" %4d", tab[j]);
+	}
+	printf("\n");
+	return 0;
+}
+/*Fin tri Fusion*/
+
+/*Algorithme Kruskal*/
 Graph* createGraph(int S, int B) {
 	Graph* graph = (Graph*)malloc(sizeof(Graph));
 	graph->S = S;
@@ -111,18 +170,54 @@ int isCycle(Graph* graph) {
 	retourner E
 */
 //Algorithme de Kruskal
-int Kruskal(Graph* graph, int U, int V) {
+int Kruskal(Graph* graph, int nombreSommets) {
+	int U, V;
 	int tab[MAXSIZE];
-	srand(time(NULL));
 	subset* subsets = (subset*)malloc(U * sizeof(subset));
 	subset* Subsets = (subset*)malloc(V * sizeof(subset));
-	for (int i = 0; i < U; ++i) {
+	for (int i = 0; i < nombreSommets; ++i) {
+		srand(time(NULL));
 		graph = createGraph(i, V);
-		tab[i] = graph->Bord.weight = rand();
+		tab[i] = graph->Bord->weight = rand();
+		subsets->data->haut = subsets->data->droite = subsets->data->bas = subsets->data->gauche = 1;
 	}
 	//Tri par fusion 
 	if (find(subsets, U) != find(Subsets, V)) {
 		Union( subsets, find(subsets, U), find(Subsets, V));
+		if (U = V + 1) {
+			subsets->data->gauche = Subsets->data->droite = 0;
+		}
+		if (U = V - 1) {
+			Subsets->data->gauche = subsets->data->droite = 0;
+		}
+		if (U = V + sqrt(nombreSommets)) Subsets->data->bas = subsets->data->haut = 0;
+		if (U = V - sqrt(nombreSommets)) Subsets->data->haut = subsets->data->bas = 0;
+	}
+	for (int i = 0; i < nombreSommets; i++) {
+		if (subsets->data->haut == 1) {
+			if (subsets->data->droite == 1) {
+				if (subsets->data->bas == 1) {
+					if (subsets->data->gauche == 1) {
+						subsets->dataRenvoye = "p";
+					}
+					else subsets->dataRenvoye = "o";
+				}
+				else if (subsets->data->gauche == 1) subsets->dataRenvoye = "n";
+				else subsets->dataRenvoye = "h";
+			}
+			else if ((subsets->data->bas == 1) && (subsets->data->gauche == 1)) subsets->dataRenvoye = "m";
+			else if (subsets->data->bas == 1) subsets->dataRenvoye = "f";
+			else if (subsets->data->gauche == 1) subsets->dataRenvoye = "k";
+			else subsets->dataRenvoye = "b";
+		}
+		else if ((subsets->data->droite == 1) && (subsets->data->bas == 1) && (subsets->data->gauche == 1)) subsets->dataRenvoye = "l";
+		else if ((subsets->data->droite == 1) && (subsets->data->bas == 1)) subsets->dataRenvoye = "i";
+		else if ((subsets->data->bas == 1) && (subsets->data ->gauche == 1)) subsets->dataRenvoye = "j";
+		else if ((subsets ->data->droite == 1) && (subsets->data ->gauche == 1)) subsets->dataRenvoye = "g";
+		else if (subsets->data->droite == 1) subsets ->dataRenvoye = "c";
+		else if (subsets->data->bas == 1) subsets ->dataRenvoye = "d";
+		else if (subsets->data ->gauche == 1) subsets->dataRenvoye = "e";
+		else subsets->dataRenvoye = "a";
 	}
 	return graph;
 }

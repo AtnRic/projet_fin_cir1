@@ -25,6 +25,7 @@ typedef struct subset {
 	int rang;	//à noter que rang != hauteur
 	struct Bord* Bord;
 	struct Data* data;
+	char dataRenvoye;
 }subset;
 
 Graph* createGraph(int S, int B);
@@ -40,4 +41,4 @@ void Union(subset subsets[], int xracine, int yracine);
 int isCycle(Graph* graph);
 
 //Algorithme de Kruskal
-int Kruskal(Graph* graph, int S, int B);
+int Kruskal(Graph* graph, int U, int V);
