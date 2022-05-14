@@ -4,6 +4,7 @@
 #include "Structures.h"
 #define MAXSIZE 16340
 
+
 //Ce qui doit être obtenu
 /*var labyrinthe = [
 		["k", "f", "b", "f", "f", "f", "b", "f", "f", "o"],
