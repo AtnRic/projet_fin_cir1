@@ -200,9 +200,9 @@ function SpawnPlayer(cellId) {
   PlayerImg.src = "../images/heros/jungle_hero_droite_sprite.png";
   PlayerPosElement.appendChild(Player);
 
-  activate = false;
+  let activate = false;
   document.addEventListener("keydown", function (event) {
-    if (activate == false) {
+    if (activate === false) {
       activate = true;
       let box = document.getElementById("1");
       let width = box.offsetWidth;
@@ -215,7 +215,7 @@ function SpawnPlayer(cellId) {
         duration: 550,
       });
 
-      if (event.key == "ArrowDown") {
+      if (event.key === "ArrowDown") {
         PHP_Function("../tools/function.php", "Down", function Handle(output) {
           if (output) {
             PlayerPos += cellNum;
@@ -225,7 +225,7 @@ function SpawnPlayer(cellId) {
           }
         });
       }
-      if (event.key == "ArrowUp") {
+      if (event.key === "ArrowUp") {
         PHP_Function("../tools/function.php", "Up", function Handle(output) {
           if (output) {
             PlayerPos -= cellNum;
@@ -236,7 +236,7 @@ function SpawnPlayer(cellId) {
         });
       }
 
-      if (event.key == "ArrowLeft") {
+      if (event.key === "ArrowLeft") {
         PHP_Function("../tools/function.php", "Left", function Handle(output) {
           if (output) {
             PlayerPos -= 1;
@@ -247,7 +247,7 @@ function SpawnPlayer(cellId) {
           }
         });
       }
-      if (event.key == "ArrowRight") {
+      if (event.key === "ArrowRight") {
         PHP_Function("../tools/function.php", "Right", function Handle(output) {
           if (output) {
             PlayerPos += 1;
@@ -276,10 +276,10 @@ function LabAnim(attClass) {
     update: function (a) {
       for (let i = 0; i < document.getElementsByClassName(attClass).length; i++) {
         document.getElementsByClassName(attClass)[i].style.opacity =
-          "(100 - Math.round(a.progress)) / 100 - 0.2";
-        if (a.progress === 100) {
-          document.getElementsByClassName(attClass)[i].style.opacity = "1";
-        }
+          (100 - Math.round(a.progress)) / 100;//(-0.2)
+        //if (a.progress == 100) {
+          //document.getElementsByClassName(attClass)[i].style.opacity = "1";
+        //}
       }
     },
   });

@@ -1,6 +1,7 @@
 *{
-  background-image: url("../images/front/gauche.png");
+  background-image: url("../images/front/fond.png");
   background-size: cover;
+  background-position: bottom;
 }
 table {width: 90%; height: 90%; border: 5px black solid; }
 /*
@@ -26,7 +27,7 @@ body{
   margin-left: 50%;
   background-image: none;
 }
-.global, td, .container, table, tr, .player, .playerimg{
+.global, td, .container, table, tr{
   background-image: none;
 }
 
@@ -51,7 +52,9 @@ body{
 */
 .two{
   position: relative;
+
   top: 0;
+  right: 0;
   z-index: 2;
   background-image: url("../images/front/droite.png");
   background-size: cover;
@@ -62,22 +65,22 @@ body{
 .walls
 {
   position:absolute;
+  top: 0;
   width: 100%;
   height: 100%;
-  margin-top: -50%;
 }
 
 .global{
   position: relative;
-  margin: 0;
-  top: -550px;
+  margin: auto;
+  top: -78%;
 }
 
 #player{
   position:absolute;
   margin-left:25%;
-  width: 60px;
-  height: 75px;
+  width: 40px;
+  height: 60px;
   overflow: hidden;
   margin-top: -50%;
   z-index: 100;
@@ -104,20 +107,29 @@ background-color:yellow;
 @media screen and (min-width: 1000px) {
   .global { display:block;
     width: 600px;height: 600px;
-    margin: calc(50vh - 450px) auto auto;
+    /*margin: calc(50vh - 450px) auto auto;*/
   }
 }
 
 @media screen and (max-width: 1000px) {
-  .global { display:block; margin:auto; width: 800px;height: 800px; margin-top: calc(50vh - 400px);}
+  .global { display:block;
+    width: 800px;height: 800px;
+    margin: calc(50vh - 400px) auto auto;
+  }
 }
 
 @media screen and (max-width: 800px) {
-  .global { display:block; margin:auto; width: 600px;height: 600px; margin-top: calc(50vh - 300px);}
+  .global { display:block;
+    width: 600px;height: 600px;
+    margin: calc(50vh - 300px) auto auto;
+  }
 
 }
 
 @media screen and (max-width: 600px) {
-  .global { display:block; margin:auto; width: 400px;height: 400px; margin-top: calc(50vh - 200px);}
+  .global { display:block;
+    width: 400px;height: 400px;
+    margin: calc(50vh - 200px) auto auto;
+  }
 
 }
