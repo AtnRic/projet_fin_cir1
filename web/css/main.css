@@ -63,6 +63,7 @@ body{
 */
 .two{
   position: relative;
+
   top: 0;
   right: 0;
   z-index: 2;
@@ -83,7 +84,7 @@ body{
 .global{
   position: relative;
   margin: auto;
-  top: -83%;
+  top: -78%;
 }
 
 #player, .Garde {
