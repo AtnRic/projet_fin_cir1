@@ -210,7 +210,7 @@ function SpawnPlayer(cellId) {
 
       const animation = anime({
         targets: "#playerimg",
-        translateX: [40, -200],
+        translateX: [25, -130],
         easing: "steps(6)",
         duration: 550,
       });

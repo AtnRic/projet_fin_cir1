@@ -78,8 +78,8 @@ body{
 #player{
   position:absolute;
   margin-left:25%;
-  width: 40px;
-  height: 60px;
+  width: 25px;
+  height: 49px;
   overflow: hidden;
   margin-top: -50%;
   z-index: 100;
@@ -103,16 +103,16 @@ table, tr, td{
 background-color:yellow;
 }
 
-@media screen and (min-width: 1000px) {
+@media screen and (min-width: 1600px) {
   .global { display:block;
-    width: 600px;height: 600px;
+    width: 700px;height: 700px;
     /*margin: calc(50vh - 450px) auto auto;*/
   }
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1600px) {
   .global { display:block;
-    width: 800px;height: 800px;
+    width: 580px;height: 579px;
     margin: calc(50vh - 400px) auto auto;
   }
 }
