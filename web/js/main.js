@@ -274,11 +274,11 @@ function LabAnim(attClass) {
     direction: "reverse",
     delay: anime.stagger(50, { easing: "easeOutQuad" }),
     update: function (a) {
-      for (i = 0; i < document.getElementsByClassName(attClass).length; i++) {
+      for (let i = 0; i < document.getElementsByClassName(attClass).length; i++) {
         document.getElementsByClassName(attClass)[i].style.opacity =
-          (100 - Math.round(a.progress)) / 100 - 0.2;
-        if (a.progress == 100) {
-          document.getElementsByClassName(attClass)[i].style.opacity = 1;
+          "(100 - Math.round(a.progress)) / 100 - 0.2";
+        if (a.progress === 100) {
+          document.getElementsByClassName(attClass)[i].style.opacity = "1";
         }
       }
     },
