@@ -550,6 +550,8 @@ const container = document.getElementById("container");
 let rows = document.getElementsByClassName("gridRow");
 let cells = document.getElementsByClassName("cell");
 
+var list = [new Garde(0, 0)];
+
 CreateGrid(8, labyrinthe, 14);
 
 function CreateGrid(size, tab, spawnCellId) {
@@ -723,8 +725,13 @@ function CreateGrid(size, tab, spawnCellId) {
   //#endregion
 
   //#region PLAYER
-  SpawnPlayer(spawnCellId);
+  setTimeout(function () {
+    SpawnPlayer(spawnCellId);
+  }, 2000);
   //#endregion PLAYER
+  setTimeout(function () {
+    GenerationGarde(list);
+  }, 3000);
 }
 
 function SpawnPlayer(cellId) {
@@ -828,15 +835,19 @@ function SpawnPlayer(cellId) {
     loop: true,
   });
 }
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
 
 function LabAnim(attClass) {
   anime({
     targets: "." + attClass,
-    translateY: 1000,
+    translateY: getRandomInt(3000) - getRandomInt(1500),
+    translateX: getRandomInt(3000) - getRandomInt(1500),
     duration: 2000,
     direction: "reverse",
-    easing: "easeInElastic(1, .6)",
-    delay: anime.stagger(25, { easing: "easeOutQuad" }),
+    easing: "easeInElastic(1, .4)",
+    delay: anime.stagger(100, {}),
   });
 }
 
@@ -889,9 +900,6 @@ function PHP_Function(fileName, functionName, Awaiting, Arguments) {
   });
 }
 
-var list = [new Garde(0, 0)];
-GenerationGarde(list);
-
 function Garde(id, pos) {
   this.id = id;
   this.pos = pos;
@@ -912,8 +920,8 @@ function GenerationGarde(gardeList) {
 
     let width = box.offsetWidth;
     let height = box.offsetHeight;
-    GardeDiv.style.width = width / 1.5 + "px";
-    GardeDiv.style.height = height / 1.5 + "px";
+    GardeDiv.style.width = width / 2 + "px";
+    GardeDiv.style.height = height + "px";
     GardeDiv.classList.add("Garde");
     GardeDiv.id = "G_div" + gardeList[i].id;
     GardeDiv.classList.add("Garde");
@@ -921,6 +929,15 @@ function GenerationGarde(gardeList) {
     GardeImg.id = "G_ui" + gardeList[i].id;
     GardeImg.src = "../images/gardes/jungle_guard_droite_sprite.png";
     GardeDiv.appendChild(GardeImg);
+    anime({
+      targets: "#G_div" + gardeList[i].id,
+      translateY: getRandomInt(3000) - getRandomInt(1500),
+      translateX: getRandomInt(3000) - getRandomInt(1500),
+      duration: 2000,
+      direction: "reverse",
+      easing: "easeInElastic(1, .7)",
+      delay: anime.stagger(100, {}),
+    });
   }
 }
 
@@ -938,20 +955,13 @@ function MoveGarde(gardeId, posIndent, indentX, indentY) {
       let Garde = document.getElementById("G_div" + list[i].id);
       newCell.appendChild(Garde);
       console.log(GardeImg.width);
-      Garde.style.width = width + "px";
+      Garde.style.width = width / 2 + "px";
       Garde.style.height = height + "px";
     }
   }
 
   let W = GardeImg.width;
 
-  anime({
-    targets: "#G_ui" + gardeId,
-    translateX: [W / 9, 8 * (W / 9)],
-    easing: "steps(9)",
-    duration: 5000,
-    loop: true,
-  });
   anime({
     targets: "#G_div" + gardeId,
     translateX: indentX,
