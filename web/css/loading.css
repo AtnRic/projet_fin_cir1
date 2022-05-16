@@ -1,0 +1,33 @@
+html, body { height: 100%; }
+
+body {
+	background-color: #95C1BC;
+	color: #fff;
+	font-family: Helvetica;
+	font-size: 20px;
+	text-align: center;
+    margin: auto;
+}
+
+p {
+	display: block;
+	width: 100%;
+}
+
+.first, .second, .last {
+	display: block;
+	height: 100px;
+	position: absolute;
+	width: 50%;
+	z-index: 999;
+}
+
+.first {
+	background-color: black;
+	right: 50%;
+}
+
+.last {
+	background-color: black;
+	right: 0;
+}
