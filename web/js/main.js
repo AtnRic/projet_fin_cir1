@@ -1,14 +1,444 @@
 var labyrinthe = [
-  ["k", "f", "b", "f", "f", "f", "b", "f", "f", "o"],
-  ["e", "h", "g", "m", "b", "h", "g", "m", "f", "h"],
-  ["l", "g", "j", "f", "i", "g", "g", "k", "f", "i"],
-  ["n", "j", "f", "h", "k", "d", "a", "a", "f", "h"],
-  ["e", "f", "h", "j", "i", "m", "i", "g", "k", "i"],
-  ["g", "n", "j", "f", "b", "f", "f", "i", "j", "o"],
-  ["g", "j", "f", "f", "i", "k", "h", "k", "f", "h"],
-  ["e", "b", "f", "f", "b", "i", "j", "d", "o", "l"],
-  ["g", "j", "f", "f", "i", "k", "h", "k", "f", "h"],
-  ["j", "f", "f", "f", "f", "i", "j", "d", "o", "l"],
+  [
+    "k",
+    "f",
+    "b",
+    "f",
+    "f",
+    "f",
+    "b",
+    "f",
+    "f",
+    "o",
+    "k",
+    "f",
+    "b",
+    "f",
+    "f",
+    "f",
+    "b",
+    "f",
+    "f",
+    "o",
+  ],
+  [
+    "e",
+    "h",
+    "g",
+    "m",
+    "b",
+    "h",
+    "g",
+    "m",
+    "f",
+    "h",
+    "k",
+    "f",
+    "b",
+    "f",
+    "f",
+    "f",
+    "b",
+    "f",
+    "f",
+    "o",
+  ],
+  [
+    "l",
+    "g",
+    "j",
+    "f",
+    "i",
+    "g",
+    "g",
+    "k",
+    "f",
+    "i",
+    "k",
+    "f",
+    "b",
+    "f",
+    "f",
+    "f",
+    "b",
+    "f",
+    "f",
+    "o",
+  ],
+  [
+    "n",
+    "j",
+    "f",
+    "h",
+    "k",
+    "d",
+    "a",
+    "a",
+    "f",
+    "h",
+    "k",
+    "f",
+    "b",
+    "f",
+    "f",
+    "f",
+    "b",
+    "f",
+    "f",
+    "o",
+  ],
+  [
+    "e",
+    "f",
+    "h",
+    "j",
+    "i",
+    "m",
+    "i",
+    "g",
+    "k",
+    "i",
+    "k",
+    "f",
+    "b",
+    "f",
+    "f",
+    "f",
+    "b",
+    "f",
+    "f",
+    "o",
+  ],
+  [
+    "g",
+    "n",
+    "j",
+    "f",
+    "b",
+    "f",
+    "f",
+    "i",
+    "j",
+    "o",
+    "k",
+    "f",
+    "b",
+    "f",
+    "f",
+    "f",
+    "b",
+    "f",
+    "f",
+    "o",
+  ],
+  [
+    "k",
+    "f",
+    "b",
+    "f",
+    "f",
+    "f",
+    "b",
+    "f",
+    "f",
+    "o",
+    "k",
+    "f",
+    "b",
+    "f",
+    "f",
+    "f",
+    "b",
+    "f",
+    "f",
+    "o",
+  ],
+  [
+    "e",
+    "h",
+    "g",
+    "m",
+    "b",
+    "h",
+    "g",
+    "m",
+    "f",
+    "h",
+    "k",
+    "f",
+    "b",
+    "f",
+    "f",
+    "f",
+    "b",
+    "f",
+    "f",
+    "o",
+  ],
+  [
+    "l",
+    "g",
+    "j",
+    "f",
+    "i",
+    "g",
+    "g",
+    "k",
+    "f",
+    "i",
+    "k",
+    "f",
+    "b",
+    "f",
+    "f",
+    "f",
+    "b",
+    "f",
+    "f",
+    "o",
+  ],
+  [
+    "n",
+    "j",
+    "f",
+    "h",
+    "k",
+    "d",
+    "a",
+    "a",
+    "f",
+    "h",
+    "k",
+    "f",
+    "b",
+    "f",
+    "f",
+    "f",
+    "b",
+    "f",
+    "f",
+    "o",
+  ],
+  [
+    "e",
+    "f",
+    "h",
+    "j",
+    "i",
+    "m",
+    "i",
+    "g",
+    "k",
+    "i",
+    "k",
+    "f",
+    "b",
+    "f",
+    "f",
+    "f",
+    "b",
+    "f",
+    "f",
+    "o",
+  ],
+  [
+    "g",
+    "n",
+    "j",
+    "f",
+    "b",
+    "f",
+    "f",
+    "i",
+    "j",
+    "o",
+    "k",
+    "f",
+    "b",
+    "f",
+    "f",
+    "f",
+    "b",
+    "f",
+    "f",
+    "o",
+  ],
+  [
+    "k",
+    "f",
+    "b",
+    "f",
+    "f",
+    "f",
+    "b",
+    "f",
+    "f",
+    "o",
+    "k",
+    "f",
+    "b",
+    "f",
+    "f",
+    "f",
+    "b",
+    "f",
+    "f",
+    "o",
+  ],
+  [
+    "e",
+    "h",
+    "g",
+    "m",
+    "b",
+    "h",
+    "g",
+    "m",
+    "f",
+    "h",
+    "k",
+    "f",
+    "b",
+    "f",
+    "f",
+    "f",
+    "b",
+    "f",
+    "f",
+    "o",
+  ],
+  [
+    "l",
+    "g",
+    "j",
+    "f",
+    "i",
+    "g",
+    "g",
+    "k",
+    "f",
+    "i",
+    "k",
+    "f",
+    "b",
+    "f",
+    "f",
+    "f",
+    "b",
+    "f",
+    "f",
+    "o",
+  ],
+  [
+    "n",
+    "j",
+    "f",
+    "h",
+    "k",
+    "d",
+    "a",
+    "a",
+    "f",
+    "h",
+    "k",
+    "f",
+    "b",
+    "f",
+    "f",
+    "f",
+    "b",
+    "f",
+    "f",
+    "o",
+  ],
+  [
+    "e",
+    "f",
+    "h",
+    "j",
+    "i",
+    "m",
+    "i",
+    "g",
+    "k",
+    "i",
+    "k",
+    "f",
+    "b",
+    "f",
+    "f",
+    "f",
+    "b",
+    "f",
+    "f",
+    "o",
+  ],
+  [
+    "g",
+    "n",
+    "j",
+    "f",
+    "b",
+    "f",
+    "f",
+    "i",
+    "j",
+    "o",
+    "k",
+    "f",
+    "b",
+    "f",
+    "f",
+    "f",
+    "b",
+    "f",
+    "f",
+    "o",
+  ],
+  [
+    "g",
+    "n",
+    "j",
+    "f",
+    "b",
+    "f",
+    "f",
+    "i",
+    "j",
+    "o",
+    "k",
+    "f",
+    "b",
+    "f",
+    "f",
+    "f",
+    "b",
+    "f",
+    "f",
+    "o",
+  ],
+  [
+    "g",
+    "n",
+    "j",
+    "f",
+    "b",
+    "f",
+    "f",
+    "i",
+    "j",
+    "o",
+    "k",
+    "f",
+    "b",
+    "f",
+    "f",
+    "f",
+    "b",
+    "f",
+    "f",
+    "o",
+  ],
 ];
 
 var correspondance = {
@@ -105,11 +535,22 @@ var Space = {
 
 let Ambiance = Space;
 
+function SetAmbiance(AmbianceName) {
+  switch (AmbianceName) {
+    case "Jungle":
+      Ambiance = Jungle;
+    case "Retro":
+      Ambiance = Retro;
+    case "Space":
+      Ambiance = Space;
+  }
+}
+
 const container = document.getElementById("container");
 let rows = document.getElementsByClassName("gridRow");
 let cells = document.getElementsByClassName("cell");
 
-CreateGrid(10, labyrinthe, 14);
+CreateGrid(8, labyrinthe, 14);
 
 function CreateGrid(size, tab, spawnCellId) {
   //#region ROWS
@@ -299,13 +740,20 @@ function SpawnPlayer(cellId) {
   PlayerImg.src = Ambiance.Pl;
   PlayerPosElement.appendChild(Player);
 
+  let box = document.getElementById("1");
+  let width = box.offsetWidth;
+  let height = box.offsetHeight;
+
+  Player.style.width = width / 2 + "px";
+  Player.style.height = height + "px";
+  let X = parseFloat(Player.style.width);
   anime({
     targets: "#player",
     translateY: 1000,
-    duration: 3500,
+    duration: 500,
+    easing: "easeInElastic(1, .6)",
     direction: "reverse",
   });
-
   activate = false;
   document.addEventListener("keydown", function (event) {
     if (activate == false) {
@@ -314,11 +762,12 @@ function SpawnPlayer(cellId) {
       let width = box.offsetWidth;
       let height = box.offsetHeight;
 
-      const animation = anime({
+      anime({
         targets: "#playerimg",
-        translateX: [25, -130],
-        easing: "steps(6)",
-        duration: 550,
+        translateX: [X, -(7.5 * X)],
+        easing: "steps(8)",
+        duration: 500,
+        loop: false,
       });
 
       MoveGarde(0, 1, -height, 0);
@@ -366,11 +815,17 @@ function SpawnPlayer(cellId) {
           }
         });
       }
-      //document.getElementById("pos").innerHTML = PlayerPos;
       setTimeout(function () {
         activate = false;
       }, 150);
     }
+  });
+
+  anime({
+    targets: ".global",
+    rotate: anime.stagger([-360, 360]),
+    easing: "easeInOutQuad",
+    loop: true,
   });
 }
 
@@ -378,22 +833,10 @@ function LabAnim(attClass) {
   anime({
     targets: "." + attClass,
     translateY: 1000,
-    duration: 1000,
+    duration: 2000,
     direction: "reverse",
-    delay: anime.stagger(50, { easing: "easeOutQuad" }),
-    update: function (a) {
-      for (
-        let i = 0;
-        i < document.getElementsByClassName(attClass).length;
-        i++
-      ) {
-        document.getElementsByClassName(attClass)[i].style.opacity =
-          (100 - Math.round(a.progress)) / 100; //(-0.2)
-        //if (a.progress == 100) {
-        //document.getElementsByClassName(attClass)[i].style.opacity = "1";
-        //}
-      }
-    },
+    easing: "easeInElastic(1, .6)",
+    delay: anime.stagger(25, { easing: "easeOutQuad" }),
   });
 }
 
@@ -446,7 +889,7 @@ function PHP_Function(fileName, functionName, Awaiting, Arguments) {
   });
 }
 
-var list = [new Garde(0, 20)];
+var list = [new Garde(0, 0)];
 GenerationGarde(list);
 
 function Garde(id, pos) {
@@ -461,30 +904,54 @@ function GenerationGarde(gardeList) {
   }
 
   for (i = 0; i < gardeList.length; i++) {
-    console.log(gardeList[i].id);
     var Cell = document.getElementById(gardeList[i].pos);
     const GardeDiv = document.createElement("div");
     const GardeImg = document.createElement("img");
     Cell.appendChild(GardeDiv);
+    let box = document.getElementById("1");
+
+    let width = box.offsetWidth;
+    let height = box.offsetHeight;
+    GardeDiv.style.width = width / 1.5 + "px";
+    GardeDiv.style.height = height / 1.5 + "px";
     GardeDiv.classList.add("Garde");
     GardeDiv.id = "G_div" + gardeList[i].id;
     GardeDiv.classList.add("Garde");
     GardeImg.classList.add("GardeImg");
     GardeImg.id = "G_ui" + gardeList[i].id;
-    GardeImg.src = "../images/gardes/retro_guard.png";
+    GardeImg.src = "../images/gardes/jungle_guard_droite_sprite.png";
     GardeDiv.appendChild(GardeImg);
   }
 }
 
 function MoveGarde(gardeId, posIndent, indentX, indentY) {
+  let X;
+  let box = document.getElementById("1");
+  let width = box.offsetWidth;
+  let height = box.offsetHeight;
+  let GardeImg = document.getElementById("G_ui" + gardeId);
+
   for (i = 0; i < list.length; i++) {
     if (list[i].id == gardeId) {
       list[i].pos += posIndent;
       let newCell = document.getElementById(list[i].pos);
       let Garde = document.getElementById("G_div" + list[i].id);
       newCell.appendChild(Garde);
+      console.log(GardeImg.width);
+      Garde.style.width = width + "px";
+      Garde.style.height = height + "px";
     }
   }
+
+  let W = GardeImg.width;
+
+  anime({
+    targets: "#G_ui" + gardeId,
+    translateX: [W / 9, 8 * (W / 9)],
+    easing: "steps(9)",
+    duration: 5000,
+    loop: true,
+  });
   anime({
     targets: "#G_div" + gardeId,
     translateX: indentX,
