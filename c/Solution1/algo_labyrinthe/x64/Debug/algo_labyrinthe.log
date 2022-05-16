@@ -16,7 +16,8 @@ C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(317,10): warning C
 C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(328,10): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
 C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(333,14): warning C4047: 'return' : les niveaux d'indirection de 'int' et de 'void *' sont différents
 C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(349,10): warning C4244: 'fonction' : conversion de 'time_t' en 'unsigned int', perte possible de données
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(370,20): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(356,39): warning C4047: '=' : les niveaux d'indirection de 'int' et de 'subset *' sont différents
 C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(371,20): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(372,20): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
 C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(341,1): warning C4047: 'initialisation' : les niveaux d'indirection de 'int' et de 'void *' sont différents
   algo_labyrinthe.vcxproj -> C:\MAMP\htdocs\Projet CIR1\c\Solution1\x64\Debug\algo_labyrinthe.exe

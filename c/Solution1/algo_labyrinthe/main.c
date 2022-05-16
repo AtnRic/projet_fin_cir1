@@ -5,7 +5,7 @@
 #include <math.h>
 #include<time.h>
 #include "Structures.h"
-#define MAXSIZE 16340
+#define MAXSIZE 123
 
 
 //Ce qui doit être obtenu
@@ -353,6 +353,7 @@ Graph * Kruskal(Graph* graph, int nombreSommets) {
 			((subsets + i)->data)->haut = 1;
 			((subsets + i)->data)->droite = ((subsets + i)->data)->bas = ((subsets + i)->data)->gauche = 1;
 			//Subsets[i]->data.haut = Subsets[i]->data.droite = Subsets[i]->data.bas = Subsets[i]->data.gauche = 1;
+			(subsets + i)->parent = subsets + i;
 		}
 	}
 	//Tri par fusion 
