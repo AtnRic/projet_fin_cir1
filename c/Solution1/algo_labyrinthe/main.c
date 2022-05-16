@@ -159,6 +159,40 @@ int isCycle(Graph* graph) {
 	return 0;
 }
 
+/*void Fuuuuuusion(int i, int j, int tab[], int tmp[]) {
+	if (j <= i) { return; }
+
+	int m = (i + j) / 2;
+
+	Fuuuuuusion(i, m, tab, tmp);     //trier la moiti� gauche r�cursivement
+	Fuuuuuusion(m + 1, j, tab, tmp); //trier la moiti� droite r�cursivement
+	int pg = i;     //pg pointe au d�but du sous-tableau de gauche
+	int pd = m + 1; //pd pointe au d�but du sous-tableau de droite
+	int c;          //compteur
+// on boucle de i � j pour remplir chaque �l�ment du tableau final fusionn�
+	for (c = i; c <= j; c++) {
+		if (pg == m + 1) { //le pointeur du sous-tableau de gauche a atteint la limite
+			tmp[c] = tab[pd];
+			pd++;
+		}
+		else if (pd == j + 1) { //le pointeur du sous-tableau de droite a atteint la limite
+			tmp[c] = tab[pg];
+			pg++;
+		}
+		else if (tab[pg] < tab[pd]) { //le pointeur du sous-tableau de gauche pointe vers un �l�ment plus petit
+			tmp[c] = tab[pg];
+			pg++;
+		}
+		else {  //le pointeur du sous-tableau de droite pointe vers un �l�ment plus petit
+			tmp[c] = tab[pd];
+			pd++;
+		}
+	}
+	for (c = i; c <= j; c++) {  //copier les �l�ments de tmp � tab
+		tab[c] = tmp[c];
+	}
+}*/
+
 /*Algo Kruskal pseudo-code
 	graph <- NULL
 	pour chaque sommet v appartenant S[G]
@@ -185,7 +219,7 @@ int Kruskal(Graph* graph, int nombreSommets) {
 		//Subsets[i]->data.haut = Subsets[i]->data.droite = Subsets[i]->data.bas = Subsets[i]->data.gauche = 1;
 	}
 	//Tri par fusion 
-	for () {
+	while(graph->S != nombreSommets) {
 		U = rand() % nombreSommets;
 		if ((U > sqrt(nombreSommets)) && (U % (sqrt(nombreSommets)+1)!=1) && (U % (sqrt(nombreSommets)+1) != 1)&&(U >= nombreSommets-sqrt(nombreSommets))){ //U n'est pas sur les bords du tableau donc toutes possibilités possibles
 			if (U % (sqrt(nombreSommets) + 1) != 1) {
@@ -301,16 +335,40 @@ int Kruskal(Graph* graph, int nombreSommets) {
 			}
 		}
 		else if ((U % (sqrt(nombreSommets) + 1) != 1) && (U % (sqrt(nombreSommets) + 1) != 1)) {
-
+			tmp = rand() % 2;
+			switch (tmp) {
+			case 0:
+				V = U - 1;
+				break;
+			case 1:
+				V = U - sqrt(nombreSommets);
+				break;
+			}
 		}
 		else if ((U % (sqrt(nombreSommets) + 1) != 1) && (U >= nombreSommets - sqrt(nombreSommets))) {
-
+			tmp = rand() % 2;
+			switch (tmp) {
+			case 0:
+				V = U + 1;
+				break;
+			case 1:
+				V = U - sqrt(nombreSommets);
+				break;
+			}
 		}
 		else if ((U >= nombreSommets - sqrt(nombreSommets)) && (U % (sqrt(nombreSommets) + 1) != 1)) {
-
+			tmp = rand() % 2;
+			switch (tmp) {
+			case 0:
+				V = U + 1;
+				break;
+			case 1:
+				V = U -  sqrt(nombreSommets);
+				break;
+			}
 		}
 		else {
-
+		return EXIT_FAILURE;
 		}
 
 		if (find(subsets, U) != find(Subsets, V)) {
@@ -354,6 +412,19 @@ int Kruskal(Graph* graph, int nombreSommets) {
 		else subsets->dataRenvoye = "a";
 	}
 	return graph;
+}
+
+void affichageDeSesGrandsMorts(Graph* graph) {
+	printf("[");
+	for (int i = 0; i < graph->S; i++) {
+		if ((i % sqrt(graph->S) == 0) && i != graph->S) {
+			printf("], [");
+		}
+		else if (i == graph->S) {
+			printf("]");
+		}
+		printf("\"%d\", ", graph->S[i]);
+	}
 }
 
 int main() {
