@@ -1,7 +1,7 @@
 *{
-    background-color: green;
-    background-size: cover;
-    background-position: top;
+    background-color: #D4DAED;
+    background-size: auto;
+    background-position: right bottom;
 }
 
 .sline {
@@ -19,9 +19,10 @@
     z-index: 2;
     background-image: url("../images/retro/retro.png");
     background-size: cover;
+    background-color: transparent;
 }
 
-table {width: 59%; height: 59%; border: 5px black solid;}
+table {width: 55%; height: 55%; border: 5px black solid;}
 
 body{
     overflow: hidden;
@@ -57,10 +58,11 @@ body{
 }
 
 .global{
-    position: relative;
+    position: absolute;
     margin: auto;
-    top: 225px;
-    right: -300px;
+    top: 295px;
+    right: 65px;
+    background: none;
 }
 
 #player {
@@ -69,14 +71,14 @@ body{
     overflow: hidden;
     margin-top: -50%;
     z-index: 100;
-    background-image: none;
+    background: none;
 }
 
 #playerimg, .GardeImg
 {
     width: auto;
     height: 100%;
-    background-image: none;
+    background: none;
 }
 
 .Garde{
@@ -85,7 +87,7 @@ body{
     position:absolute;
     overflow: hidden;
     z-index: 100;
-    background-image: none;
+    background: none;
 }
 
 table, tr, td{
@@ -101,7 +103,7 @@ table, tr, td{
 @media screen and (min-width: 1600px) {
     .global { display:block;
         width: 700px;height: 700px;
-        /*margin: calc(50vh - 450px) auto auto;*/
+        margin: calc(50vh - 450px) auto auto;
     }
 }
 
