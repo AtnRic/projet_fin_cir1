@@ -1,6 +1,9 @@
 ﻿#include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include <string.h>
+#include <math.h>
+#include<time.h>
 #include "Structures.h"
 #define MAXSIZE 16340
 
@@ -99,9 +102,11 @@ void triFusion(int i, int j, int tab[], int tmp[]) {
 /*Algorithme Kruskal*/
 Graph* createGraph(int S, int B) {
 	Graph* graph = (Graph*)malloc(sizeof(Graph));
-	graph->S = S;
-	graph->B = B;
-	graph->Bord = (Bord*)malloc(graph->B * sizeof(Bord));
+	if (graph != NULL) {
+		(graph->S) = S;
+		(graph->B) = B;
+		graph->Bord = (Bord*)malloc(graph->B * sizeof(Bord));
+	}
 	return graph;
 }
 
@@ -113,23 +118,26 @@ function Find(x)
 	return x.parent
 */
 //Fonction qui trouve la racine d'un élément i
-int find(subset subsets[], int i) {
+int find(subset * subsets, int i) {
 	// Trouve la racine et fait de la racine le parent de i
-	if (subsets[i].parent != i)
-		subsets[i].parent = find(subsets, subsets[i].parent);
-	return subsets[i].parent;
+	if ( (subsets + i)->parent != NULL ) {
+		if ((subsets + i)->parent != i) {
+			(subsets + i)->parent = find(subsets, subsets[i].parent);
+		}
+	}
+	return (subsets+i)->parent;
 }
 
 
 //Fonction qui unit 2 éléments à leurs racines
 //L'élément ayant le rang le plus faible est relié à la racine de l'élément ayant le rang le plus élevé
-void Union(subset subsets[], int xracine, int yracine) {
-	if (subsets[xracine].rang < subsets[yracine].rang) {
-		subsets[xracine].parent = yracine;
+void Union(subset * subsets, int xracine, int yracine) {
+	if ((subsets+xracine)->rang < (subsets+yracine)->rang) {
+		(subsets+xracine)->parent = yracine;
 		return;
 	}
-	else if (subsets[xracine].rang > subsets[yracine].rang) {
-		subsets[yracine].parent = xracine;
+	else if ((subsets+xracine)->rang > (subsets+yracine)->rang) {
+		(subsets+yracine)->parent = xracine;
 		return;
 	}
 	else { //cas où les rang sont égaux, faire rang+1
@@ -144,54 +152,22 @@ int isCycle(Graph* graph) {
 	int S = graph->S;
 	int B = graph->B;
 	subset* subsets = (subset*)malloc(S * sizeof(subset));
-	for (int v = 0; v < S; ++v) {
-		subsets[v].parent = v;
-		subsets[v].rang = 0;
+	if (subsets != NULL) {
+		for (int v = 0; v < S; ++v) {
+			(subsets + v)->parent = v;
+			(subsets + v)->rang = 0;
+		}
 	}
 	// Parcours la totalité des sommets des bords et si les ensembles sont identiques alors il y a un cycle
 	for (int e = 0; e < B; ++e) {
-		int x = find(subsets, graph->Bord[e].racine);
-		int y = find(subsets, graph->Bord[e].dest);
+		int x = find(subsets, (graph->Bord+e)->racine);
+		int y = find(subsets, (graph->Bord+e)->dest);
 		if (x == y)
 			return 1;
 		Union(subsets, x, y);
 	}
 	return 0;
 }
-
-/*void Fuuuuuusion(int i, int j, int tab[], int tmp[]) {
-	if (j <= i) { return; }
-
-	int m = (i + j) / 2;
-
-	Fuuuuuusion(i, m, tab, tmp);     //trier la moiti� gauche r�cursivement
-	Fuuuuuusion(m + 1, j, tab, tmp); //trier la moiti� droite r�cursivement
-	int pg = i;     //pg pointe au d�but du sous-tableau de gauche
-	int pd = m + 1; //pd pointe au d�but du sous-tableau de droite
-	int c;          //compteur
-// on boucle de i � j pour remplir chaque �l�ment du tableau final fusionn�
-	for (c = i; c <= j; c++) {
-		if (pg == m + 1) { //le pointeur du sous-tableau de gauche a atteint la limite
-			tmp[c] = tab[pd];
-			pd++;
-		}
-		else if (pd == j + 1) { //le pointeur du sous-tableau de droite a atteint la limite
-			tmp[c] = tab[pg];
-			pg++;
-		}
-		else if (tab[pg] < tab[pd]) { //le pointeur du sous-tableau de gauche pointe vers un �l�ment plus petit
-			tmp[c] = tab[pg];
-			pg++;
-		}
-		else {  //le pointeur du sous-tableau de droite pointe vers un �l�ment plus petit
-			tmp[c] = tab[pd];
-			pd++;
-		}
-	}
-	for (c = i; c <= j; c++) {  //copier les �l�ments de tmp � tab
-		tab[c] = tmp[c];
-	}
-}*/
 
 /*Algo Kruskal pseudo-code
 	graph <- NULL
@@ -204,77 +180,37 @@ int isCycle(Graph* graph) {
 			UNION(u, v)
 	retourner E
 */
-//Algorithme de Kruskal de génération et transcription
-int Kruskal(Graph* graph, int nombreSommets) {
-	int U, V, tmp;
-	int tab[MAXSIZE];
-	subset* subsets = (subset*)malloc(U * sizeof(subset));
-	subset* Subsets = (subset*)malloc(V * sizeof(subset));
-	for (int i = 0; i < nombreSommets; ++i) {
-		srand(time(NULL));
-		graph = createGraph(i, V);
-		//graph = createGraph(i, U);
-		tab[i] = graph->Bord[i].weight = rand();
-		subsets[i]->data.haut = subsets[i]->data.droite = subsets[i]->data.bas = subsets[i]->data.gauche = 1;
-		//Subsets[i]->data.haut = Subsets[i]->data.droite = Subsets[i]->data.bas = Subsets[i]->data.gauche = 1;
-	}
-	//Tri par fusion 
-	while(graph->S != nombreSommets) {
-		U = rand() % nombreSommets;
-		if ((U > sqrt(nombreSommets)) && (U % (sqrt(nombreSommets)+1)!=1) && (U % (sqrt(nombreSommets)+1) != 1)&&(U >= nombreSommets-sqrt(nombreSommets))){ //U n'est pas sur les bords du tableau donc toutes possibilités possibles
-			if (U % (sqrt(nombreSommets) + 1) != 1) {
-				if (U % (sqrt(nombreSommets) + 1) != 1) {
-					if (U >= nombreSommets - sqrt(nombreSommets)) {
-						tmp = rand() % 4;
-						switch (tmp) {
-						case 0:
-							V = U - 1;
-							break;
-						case 1:
-							V = U + 1;
-							break;
-						case 2:
-							V = U - sqrt(nombreSommets);
-							break;
-						case 3:
-							V = U + sqrt(nombreSommets);
-							break;
-						}
-					}
-					else {
-						tmp = rand() % 3;
-						switch (tmp) {
-						case 0:
-							V = U - 1;
-							break;
-						case 1:
-							V = U + 1;
-							break;
-						case 2:
-							V = U - sqrt(nombreSommets);
-							break;
-						}
+
+int PremierPavéDeElseIf(int U, int V, int nombreSommets) {
+	int tmp;
+	if (U > (int)sqrt(nombreSommets)) { //U n'est pas sur les bords du tableau donc toutes possibilités possibles
+		if (U % (int)(sqrt(nombreSommets) + 1) != 1) {
+			if (U % (int)(sqrt(nombreSommets) + 1) != 1) {
+				if (U >= nombreSommets - sqrt(nombreSommets)) {
+					tmp = rand() % 4;
+					switch (tmp) {
+					case 0:
+						V = U - 1;
+						break;
+					case 1:
+						V = U + 1;
+						break;
+					case 2:
+						V = U - (int)sqrt(nombreSommets);
+						break;
+					case 3:
+						V = U + (int)sqrt(nombreSommets);
+						break;
 					}
 				}
-				else if (U >= nombreSommets - sqrt(nombreSommets)) {
+				else {
 					tmp = rand() % 3;
 					switch (tmp) {
 					case 0:
 						V = U - 1;
 						break;
 					case 1:
-						V = U + sqrt(nombreSommets);
-						break;
-					case 2:
-						V = U - sqrt(nombreSommets);
-						break;
-					}
-				}
-				else {
-					tmp = rand() % 2;
-					switch (tmp) {
-					case 0:
-						V = U - 1;
+						V = U + 1;
 						break;
 					case 2:
 						V = U - sqrt(nombreSommets);
@@ -282,49 +218,37 @@ int Kruskal(Graph* graph, int nombreSommets) {
 					}
 				}
 			}
-			else if ((U % (sqrt(nombreSommets) + 1) != 1) && (U >= nombreSommets - sqrt(nombreSommets))) {
+			else if (U >= nombreSommets - sqrt(nombreSommets)) {
 				tmp = rand() % 3;
 				switch (tmp) {
 				case 0:
-					V = U + sqrt(nombreSommets);
+					V = U - 1;
 					break;
 				case 1:
-					V = U + 1;
+					V = U + sqrt(nombreSommets);
 					break;
 				case 2:
 					V = U - sqrt(nombreSommets);
 					break;
 				}
 			}
-			else if (U % (sqrt(nombreSommets) + 1) != 1) {
-				tmp = rand() % 2;
-				switch (tmp) {
-				case 0:
-					V = U + sqrt(nombreSommets);
-					break;
-				case 1:
-					V = U - sqrt(nombreSommets);
-					break;
-				}
-			}
-			else if (U >= nombreSommets - sqrt(nombreSommets)) {
+			else {
 				tmp = rand() % 2;
 				switch (tmp) {
 				case 0:
 					V = U - 1;
 					break;
-				case 1:
+				case 2:
 					V = U - sqrt(nombreSommets);
 					break;
 				}
 			}
-			else V = U - sqrt(nombreSommets);
 		}
-		else if ((U % (sqrt(nombreSommets) + 1) != 1) && (U%(sqrt(nombreSommets) + 1) != 1) && (U >= nombreSommets - sqrt(nombreSommets)) ) {
+		else if ((U % (int)(sqrt(nombreSommets) + 1) != 1) && (U >= nombreSommets - sqrt(nombreSommets))) {
 			tmp = rand() % 3;
 			switch (tmp) {
 			case 0:
-				V = U - 1;
+				V = U + sqrt(nombreSommets);
 				break;
 			case 1:
 				V = U + 1;
@@ -334,7 +258,18 @@ int Kruskal(Graph* graph, int nombreSommets) {
 				break;
 			}
 		}
-		else if ((U % (sqrt(nombreSommets) + 1) != 1) && (U % (sqrt(nombreSommets) + 1) != 1)) {
+		else if (U % (int)(sqrt(nombreSommets) + 1) != 1) {
+			tmp = rand() % 2;
+			switch (tmp) {
+			case 0:
+				V = U + sqrt(nombreSommets);
+				break;
+			case 1:
+				V = U - sqrt(nombreSommets);
+				break;
+			}
+		}
+		else if (U >= nombreSommets - sqrt(nombreSommets)) {
 			tmp = rand() % 2;
 			switch (tmp) {
 			case 0:
@@ -345,32 +280,85 @@ int Kruskal(Graph* graph, int nombreSommets) {
 				break;
 			}
 		}
-		else if ((U % (sqrt(nombreSommets) + 1) != 1) && (U >= nombreSommets - sqrt(nombreSommets))) {
-			tmp = rand() % 2;
-			switch (tmp) {
-			case 0:
-				V = U + 1;
-				break;
-			case 1:
-				V = U - sqrt(nombreSommets);
-				break;
-			}
+		else V = U - sqrt(nombreSommets);
+	}
+	else if ((U % (int)(sqrt(nombreSommets) + 1) != 1) && (U % (int)(sqrt(nombreSommets) + 1) != 1) && (U >= nombreSommets - sqrt(nombreSommets))) {
+		tmp = rand() % 3;
+		switch (tmp) {
+		case 0:
+			V = U - 1;
+			break;
+		case 1:
+			V = U + 1;
+			break;
+		case 2:
+			V = U - sqrt(nombreSommets);
+			break;
 		}
-		else if ((U >= nombreSommets - sqrt(nombreSommets)) && (U % (sqrt(nombreSommets) + 1) != 1)) {
-			tmp = rand() % 2;
-			switch (tmp) {
-			case 0:
-				V = U + 1;
-				break;
-			case 1:
-				V = U -  sqrt(nombreSommets);
-				break;
-			}
+	}
+	else if ((U % (int)(sqrt(nombreSommets) + 1) != 1) && (U % (int)(sqrt(nombreSommets) + 1) != 1)) {
+		tmp = rand() % 2;
+		switch (tmp) {
+		case 0:
+			V = U - 1;
+			break;
+		case 1:
+			V = U - sqrt(nombreSommets);
+			break;
 		}
-		else {
-		return EXIT_FAILURE;
+	}
+	else if ((U % (int)(sqrt(nombreSommets) + 1) != 1) && (U >= nombreSommets - sqrt(nombreSommets))) {
+		tmp = rand() % 2;
+		switch (tmp) {
+		case 0:
+			V = U + 1;
+			break;
+		case 1:
+			V = U - sqrt(nombreSommets);
+			break;
 		}
-
+	}
+	else if ((U >= nombreSommets - sqrt(nombreSommets)) && (U % (int)(sqrt(nombreSommets) + 1) != 1)) {
+		tmp = rand() % 2;
+		switch (tmp) {
+		case 0:
+			V = U + 1;
+			break;
+		case 1:
+			V = U - sqrt(nombreSommets);
+			break;
+		}
+	}
+	else {
+		return NULL;
+	}
+	return V;
+}
+//Algorithme de Kruskal de génération et transcription
+Graph * Kruskal(Graph* graph, int nombreSommets) {
+	int U = nombreSommets;
+	int V = nombreSommets;
+	int tmp = NULL;
+	int tab[MAXSIZE];
+	subset* subsets = (subset*)malloc(U * sizeof(subset));
+	subset* Subsets = (subset*)malloc(V * sizeof(subset));
+	for (int i = 0; i < nombreSommets; ++i) {
+		if ((subsets + i) != NULL) {
+			(*(subsets + i)).data = (Data*)malloc(sizeof(Data));
+			(*(subsets + i)).Bord = (Bord*)malloc(sizeof(Bord));
+			srand(time(NULL));
+			graph = createGraph(i, V);
+			//graph = createGraph(i, U);
+			tab[i] = graph->Bord[i].weight = rand();
+			((subsets + i)->data)->haut = 1;
+			((subsets + i)->data)->droite = ((subsets + i)->data)->bas = ((subsets + i)->data)->gauche = 1;
+			//Subsets[i]->data.haut = Subsets[i]->data.droite = Subsets[i]->data.bas = Subsets[i]->data.gauche = 1;
+		}
+	}
+	//Tri par fusion 
+	while(graph->S != nombreSommets) {
+		U = rand() % nombreSommets;
+		V = PremierPavéDeElseIf(U, V, nombreSommets);
 		if (find(subsets, U) != find(Subsets, V)) {
 				Union( subsets, find(subsets, U), find(Subsets, V));
 				if (U = V + 1) {
@@ -381,6 +369,7 @@ int Kruskal(Graph* graph, int nombreSommets) {
 				}
 				else if (U = V + sqrt(nombreSommets)) Subsets->data->bas = subsets->data->haut = 0;
 				else if (U = V - sqrt(nombreSommets)) Subsets->data->haut = subsets->data->bas = 0;
+				graph->S++;
 		}
 	}
 	
@@ -389,27 +378,26 @@ int Kruskal(Graph* graph, int nombreSommets) {
 			if (subsets->data->droite == 1) {
 				if (subsets->data->bas == 1) {
 					if (subsets->data->gauche == 1) {
-						subsets->dataRenvoye = "p";
-						return EXIT_FAILURE;
+						return NULL;
 					}
-					else subsets->dataRenvoye = "o";
+					else subsets->dataRenvoye[i] = 'o';
 				}
-				else if (subsets->data->gauche == 1) subsets->dataRenvoye = "n";
-				else subsets->dataRenvoye = "h";
+				else if (subsets->data->gauche == 1) subsets->dataRenvoye[i] = 'n';
+				else subsets->dataRenvoye[i] = 'h';
 			}
-			else if ((subsets->data->bas == 1) && (subsets->data->gauche == 1)) subsets->dataRenvoye = "m";
-			else if (subsets->data->bas == 1) subsets->dataRenvoye = "f";
-			else if (subsets->data->gauche == 1) subsets->dataRenvoye = "k";
-			else subsets->dataRenvoye = "b";
+			else if ((subsets->data->bas == 1) && (subsets->data->gauche == 1)) subsets->dataRenvoye[i] = 'm';
+			else if (subsets->data->bas == 1) subsets->dataRenvoye[i] = 'f';
+			else if (subsets->data->gauche == 1) subsets->dataRenvoye[i] = 'k';
+			else subsets->dataRenvoye[i] = 'b';
 		}
-		else if ((subsets->data->droite == 1) && (subsets->data->bas == 1) && (subsets->data->gauche == 1)) subsets->dataRenvoye = "l";
-		else if ((subsets->data->droite == 1) && (subsets->data->bas == 1)) subsets->dataRenvoye = "i";
-		else if ((subsets->data->bas == 1) && (subsets->data ->gauche == 1)) subsets->dataRenvoye = "j";
-		else if ((subsets ->data->droite == 1) && (subsets->data ->gauche == 1)) subsets->dataRenvoye = "g";
-		else if (subsets->data->droite == 1) subsets ->dataRenvoye = "c";
-		else if (subsets->data->bas == 1) subsets ->dataRenvoye = "d";
-		else if (subsets->data ->gauche == 1) subsets->dataRenvoye = "e";
-		else subsets->dataRenvoye = "a";
+		else if ((subsets->data->droite == 1) && (subsets->data->bas == 1) && (subsets->data->gauche == 1)) subsets->dataRenvoye[i] = 'l';
+		else if ((subsets->data->droite == 1) && (subsets->data->bas == 1)) subsets->dataRenvoye[i] = 'i';
+		else if ((subsets->data->bas == 1) && (subsets->data->gauche == 1)) subsets->dataRenvoye[i] = 'j';
+		else if ((subsets->data->droite == 1) && (subsets->data->gauche == 1)) subsets->dataRenvoye[i] = 'g';
+		else if (subsets->data->droite == 1) subsets->dataRenvoye[i] = 'c';
+		else if (subsets->data->bas == 1) subsets->dataRenvoye[i] = 'd';
+		else if (subsets->data ->gauche == 1) subsets->dataRenvoye[i] = 'e';
+		else subsets->dataRenvoye[i] = 'a';
 	}
 	return graph;
 }
@@ -417,41 +405,22 @@ int Kruskal(Graph* graph, int nombreSommets) {
 void affichageDeSesGrandsMorts(Graph* graph) {
 	printf("[");
 	for (int i = 0; i < graph->S; i++) {
-		if ((i % sqrt(graph->S) == 0) && i != graph->S) {
+		if ((i % (int)sqrt(graph->S) == 0) && i != graph->S) {
 			printf("], [");
 		}
 		else if (i == graph->S) {
 			printf("]");
 		}
-		printf("\"%d\", ", graph->S[i]);
+		printf("\"%d\", ", (graph+i)->S);
 	}
 }
 
 int main() {
-	int S = 3;
-	int B = 3;
+	int S = 10;
+	int B = 10;
 	Graph* graph = createGraph(S, B);
-
-	//Ajouter bord 0-1
-	graph->Bord[0].racine = 0;
-	graph->Bord[0].dest = 1;
-
-	//Ajouter bord 1-2
-	graph->Bord[1].racine = 1;
-	graph->Bord[1].dest = 2;
-
-	//Ajouter bord 0-2
-	graph->Bord[0].racine = 2;
-	graph->Bord[0].dest = 2;
-
-	//Ajouter bord 2-3
-	graph->Bord[2].racine = 2;
-	graph->Bord[2].dest = 3;
-
-	if (isCycle(graph)) {
-		printf("Le graph a un cycle");
-	}
-	else printf("Le graph ne comporte pas de cycle");
+	Kruskal(graph, S);
+	affichageDeSesGrandsMorts(graph);
 }
 
 //faire un tableau avec allocation dynamique des valeurs lorsque celui-ci est dépassé en taille
