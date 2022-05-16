@@ -70,7 +70,7 @@ void triFusion(int i, int j, int tab[], int tmp[]) {
 		tab[c] = tmp[c];
 	}
 }
-int main() {
+/*int main() {
 	int  nbr, u;
 	nbr = 100000000;
 	int* tab = (int*)malloc(nbr * sizeof(int));
@@ -93,7 +93,7 @@ int main() {
 	}
 	printf("\n");
 	return 0;
-}
+}*/
 /*Fin tri Fusion*/
 
 /*Algorithme Kruskal*/
@@ -172,34 +172,58 @@ int isCycle(Graph* graph) {
 */
 //Algorithme de Kruskal
 int Kruskal(Graph* graph, int nombreSommets) {
-	int U, V;
+	int U, V, tmp;
 	int tab[MAXSIZE];
 	subset* subsets = (subset*)malloc(U * sizeof(subset));
 	subset* Subsets = (subset*)malloc(V * sizeof(subset));
 	for (int i = 0; i < nombreSommets; ++i) {
 		srand(time(NULL));
 		graph = createGraph(i, V);
-		tab[i] = graph->Bord->weight = rand();
-		subsets->data->haut = subsets->data->droite = subsets->data->bas = subsets->data->gauche = 1;
+		//graph = createGraph(i, U);
+		tab[i] = graph->Bord[i].weight = rand();
+		subsets[i]->data.haut = subsets[i]->data.droite = subsets[i]->data.bas = subsets[i]->data.gauche = 1;
+		//Subsets[i]->data.haut = Subsets[i]->data.droite = Subsets[i]->data.bas = Subsets[i]->data.gauche = 1;
 	}
 	//Tri par fusion 
-	if (find(subsets, U) != find(Subsets, V)) {
-		Union( subsets, find(subsets, U), find(Subsets, V));
-		if (U = V + 1) {
-			subsets->data->gauche = Subsets->data->droite = 0;
+	for () {
+		U = rand() % nombreSommets;
+		if ((U != sqrt(nombreSommets)) && (U % (sqrt(nombreSommets)+1)!=1) && (U % (sqrt(nombreSommets)+1) != 1)&&(U >= nombreSommets-sqrt(nombreSommets))){
+			tmp = rand() % 4;
+			switch(tmp) {
+				case 0:
+					V = U - 1;
+					break;
+				case 1:
+					V = U + 1;
+					break;
+				case 2:
+					V = U - sqrt(nombreSommets);
+					break;
+				case 3:
+					V = U + sqrt(nombreSommets);
+					break;
+			}
 		}
-		if (U = V - 1) {
-			Subsets->data->gauche = subsets->data->droite = 0; 
+		if (find(subsets, U) != find(Subsets, V)) {
+				Union( subsets, find(subsets, U), find(Subsets, V));
+				if (U = V + 1) {
+					subsets->data->gauche = Subsets->data->droite = 0;
+				}
+				else if (U = V - 1) {
+					Subsets->data->gauche = subsets->data->droite = 0; 
+				}
+				else if (U = V + sqrt(nombreSommets)) Subsets->data->bas = subsets->data->haut = 0;
+				else if (U = V - sqrt(nombreSommets)) Subsets->data->haut = subsets->data->bas = 0;
 		}
-		if (U = V + sqrt(nombreSommets)) Subsets->data->bas = subsets->data->haut = 0;
-		if (U = V - sqrt(nombreSommets)) Subsets->data->haut = subsets->data->bas = 0;
 	}
+	
 	for (int i = 0; i < nombreSommets; i++) {
 		if (subsets->data->haut == 1) {
 			if (subsets->data->droite == 1) {
 				if (subsets->data->bas == 1) {
 					if (subsets->data->gauche == 1) {
 						subsets->dataRenvoye = "p";
+						return EXIT_FAILURE;
 					}
 					else subsets->dataRenvoye = "o";
 				}
