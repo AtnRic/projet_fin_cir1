@@ -170,7 +170,7 @@ int isCycle(Graph* graph) {
 			UNION(u, v)
 	retourner E
 */
-//Algorithme de Kruskal
+//Algorithme de Kruskal de génération et transcription
 int Kruskal(Graph* graph, int nombreSommets) {
 	int U, V, tmp;
 	int tab[MAXSIZE];
@@ -187,11 +187,72 @@ int Kruskal(Graph* graph, int nombreSommets) {
 	//Tri par fusion 
 	for () {
 		U = rand() % nombreSommets;
-		if ((U != sqrt(nombreSommets)) && (U % (sqrt(nombreSommets)+1)!=1) && (U % (sqrt(nombreSommets)+1) != 1)&&(U >= nombreSommets-sqrt(nombreSommets))){
-			tmp = rand() % 4;
-			switch(tmp) {
+		if ((U > sqrt(nombreSommets)) && (U % (sqrt(nombreSommets)+1)!=1) && (U % (sqrt(nombreSommets)+1) != 1)&&(U >= nombreSommets-sqrt(nombreSommets))){ //U n'est pas sur les bords du tableau donc toutes possibilités possibles
+			if (U % (sqrt(nombreSommets) + 1) != 1) {
+				if (U % (sqrt(nombreSommets) + 1) != 1) {
+					if (U >= nombreSommets - sqrt(nombreSommets)) {
+						tmp = rand() % 4;
+						switch (tmp) {
+						case 0:
+							V = U - 1;
+							break;
+						case 1:
+							V = U + 1;
+							break;
+						case 2:
+							V = U - sqrt(nombreSommets);
+							break;
+						case 3:
+							V = U + sqrt(nombreSommets);
+							break;
+						}
+					}
+					else {
+						tmp = rand() % 3;
+						switch (tmp) {
+						case 0:
+							V = U - 1;
+							break;
+						case 1:
+							V = U + 1;
+							break;
+						case 2:
+							V = U - sqrt(nombreSommets);
+							break;
+						}
+					}
+				}
+				else if (U >= nombreSommets - sqrt(nombreSommets)) {
+					tmp = rand() % 3;
+					switch (tmp) {
+					case 0:
+						V = U - 1;
+						break;
+					case 1:
+						V = U + sqrt(nombreSommets);
+						break;
+					case 2:
+						V = U - sqrt(nombreSommets);
+						break;
+					}
+				}
+				else {
+					tmp = rand() % 2;
+					switch (tmp) {
+					case 0:
+						V = U - 1;
+						break;
+					case 2:
+						V = U - sqrt(nombreSommets);
+						break;
+					}
+				}
+			}
+			else if ((U % (sqrt(nombreSommets) + 1) != 1) && (U >= nombreSommets - sqrt(nombreSommets))) {
+				tmp = rand() % 3;
+				switch (tmp) {
 				case 0:
-					V = U - 1;
+					V = U + sqrt(nombreSommets);
 					break;
 				case 1:
 					V = U + 1;
@@ -199,11 +260,47 @@ int Kruskal(Graph* graph, int nombreSommets) {
 				case 2:
 					V = U - sqrt(nombreSommets);
 					break;
-				case 3:
+				}
+			}
+			else if (U % (sqrt(nombreSommets) + 1) != 1) {
+				tmp = rand() % 2;
+				switch (tmp) {
+				case 0:
 					V = U + sqrt(nombreSommets);
 					break;
+				case 1:
+					V = U - sqrt(nombreSommets);
+					break;
+				}
+			}
+			else if (U >= nombreSommets - sqrt(nombreSommets)) {
+				tmp = rand() % 2;
+				switch (tmp) {
+				case 0:
+					V = U - 1;
+					break;
+				case 1:
+					V = U - sqrt(nombreSommets);
+					break;
+				}
+			}
+			else V = U - sqrt(nombreSommets);
+		}
+		else if ((U % (sqrt(nombreSommets) + 1) != 1) && (U%(sqrt(nombreSommets) + 1) != 1) && (U >= nombreSommets - sqrt(nombreSommets)) ) {
+			tmp = rand() % 3;
+			switch (tmp) {
+			case 0:
+				V = U - 1;
+				break;
+			case 1:
+				V = U + 1;
+				break;
+			case 2:
+				V = U - sqrt(nombreSommets);
+				break;
 			}
 		}
+		else if ()
 		if (find(subsets, U) != find(Subsets, V)) {
 				Union( subsets, find(subsets, U), find(Subsets, V));
 				if (U = V + 1) {
