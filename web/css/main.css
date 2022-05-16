@@ -44,12 +44,7 @@ body{
   left: 0;
   height: 100vh;
 }
-/*
-.one{
-  background-image: url("../images/front/gauche.png");
-  background-size: cover;
-}
-*/
+
 .two{
   position: relative;
   top: 0;
@@ -57,8 +52,6 @@ body{
   z-index: 2;
   background-image: url("../images/front/droite.png");
   background-size: cover;
-
-
 }
 
 .walls
@@ -75,39 +68,28 @@ body{
   top: -83%;
 }
 
-#player{
+#player {
   position:absolute;
   margin-left:25%;
-  width: 25px;
-  height: 49px;
   overflow: hidden;
   margin-top: -50%;
   z-index: 100;
   background-image: none;
 }
 
-#playerimg
+#playerimg, .GardeImg
 {
   width: auto;
   height: 100%;
   background-image: none;
 }
 
-.Garde{
+.Garde{  
+  margin-top: -30%;
+  margin-left: 20%;
   position:absolute;
-  margin-left:25%;
-  width: 25px;
-  height: 49px;
   overflow: hidden;
-  margin-top: -50%;
   z-index: 100;
-  background-image: none;
-}
-
-
-.GardeImg{
-  width: 100%;
-  height: auto;
   background-image: none;
 }
 
