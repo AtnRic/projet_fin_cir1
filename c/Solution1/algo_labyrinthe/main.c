@@ -300,7 +300,19 @@ int Kruskal(Graph* graph, int nombreSommets) {
 				break;
 			}
 		}
-		else if ()
+		else if ((U % (sqrt(nombreSommets) + 1) != 1) && (U % (sqrt(nombreSommets) + 1) != 1)) {
+
+		}
+		else if ((U % (sqrt(nombreSommets) + 1) != 1) && (U >= nombreSommets - sqrt(nombreSommets))) {
+
+		}
+		else if ((U >= nombreSommets - sqrt(nombreSommets)) && (U % (sqrt(nombreSommets) + 1) != 1)) {
+
+		}
+		else {
+
+		}
+
 		if (find(subsets, U) != find(Subsets, V)) {
 				Union( subsets, find(subsets, U), find(Subsets, V));
 				if (U = V + 1) {
