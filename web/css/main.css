@@ -93,6 +93,24 @@ body{
   background-image: none;
 }
 
+.Garde{
+  position:absolute;
+  margin-left:25%;
+  width: 25px;
+  height: 49px;
+  overflow: hidden;
+  margin-top: -50%;
+  z-index: 100;
+  background-image: none;
+}
+
+
+.GardeImg{
+  width: 100%;
+  height: auto;
+  background-image: none;
+}
+
 table, tr, td{
   padding: 0;
   border-spacing: 0;
