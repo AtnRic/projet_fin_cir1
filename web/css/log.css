@@ -1,0 +1,112 @@
+*{
+    font-family: "8-bit HUD", serif;
+    background-color: black;
+
+    overflow: hidden;
+}
+html, body{
+    scroll-behavior: smooth;
+}
+.press{
+    width: 98vw;
+    height: 100vh;
+    background-image: url("../images/front/log.png");
+    background-position: center;
+    background-size: cover;
+    z-index: 0;
+}
+h1, p{
+    color: white;
+    text-align: center;
+
+
+}
+#press::before{
+    content: ">>> ";
+}
+#press::after{
+    content: " <<<";
+}
+#press {
+    animation: blinker 1.5s step-end infinite;
+}
+
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
+}
+
+#press{
+    position: absolute;
+    bottom: 50px;
+    right: 50%;
+    transform: translateX(50%);
+}
+#press:hover{
+    text-decoration: underline;
+}
+#name{
+    position: absolute;
+    top: 50px;
+    right: 50%;
+    transform: translateX(50%);
+}
+
+.choose{
+    height: 100vh;
+    width: 98vw;
+}
+.choose h1{
+    margin-top: 5vh;
+}
+
+.container{
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    transform: translateX(50%) translateY(150%);
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 98vw;
+    justify-content: space-evenly;
+}
+
+.center {
+    position: absolute;
+    top: 50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+}
+
+.but {
+    display: block;
+    width: 98%;
+    justify-content: center;
+}
+
+.but h3 {
+    margin-top: 2vh;
+    width: 98%;
+    text-align: center;
+    color: white;
+    font-style: italic;
+}
+
+
+
+.tuile{
+    margin: 0 auto;
+    width: 180px;
+    height: 40vh;
+    border-radius: 20px;
+    background-color: blue;
+}
+
+.signin, .signup, .without{
+    display: block;
+    max-width: 180px;
+
+}
+
