@@ -1,6 +1,6 @@
 #pragma once
 
-typedef struct Bord {
+/*typedef struct Bord {
 	int racine;
 	int dest;
 	int weight;
@@ -11,7 +11,7 @@ typedef struct Graph {
 	int S;	// S : nombre de sommets
 	int B;	// B : Nombre de bord
 	struct Bord* Bord; //Graph représenté par un ensemble de bord
-}Graph;
+}Graph;*/
 
 typedef struct Data {
 	int haut;
@@ -19,14 +19,14 @@ typedef struct Data {
 	int bas;
 	int gauche;
 }Data;
-
+/*
 typedef struct subset {
 	int parent;
 	int rang;	//à noter que rang != hauteur
 	struct Bord* Bord;
 	struct Data* data;
 	char dataRenvoye[];
-}subset;
+}subset;*/
 
 typedef struct Tab {
 	struct Data* data;
@@ -34,7 +34,7 @@ typedef struct Tab {
 	int passage;
 	char lettreRenvoye[];
 }Tab;
-
+/*
 Graph* createGraph(int S, int B);
 
 //Fonction qui trouve la racine d'un élément i
@@ -45,16 +45,18 @@ int find(subset *subsets, int i, Graph* graph);
 void Union(subset *subsets, int xracine, int yracine);
 
 //Vérifie si le graph contient un cycle ou pas
-int isCycle(Graph* graph);
+int isCycle(Graph* graph);*/
 /*
 int PremierPavéDeElseIf(int U, int V, int nombreSommets);
 int DeuxièmePavéDeElseIf(subset* subsets, int nombreSommets);
 //Algorithme de Kruskal
 Graph* Kruskal(Graph* graph, int nombreSommets);*/
 
-int Labyrinthe(int cote, Tab* tab, int piege, int teleporteur);
+int Labyrinthe(int cote, Tab* tab);
 //affichage dans le format souhaité
-void affichageDeSesGrandsMorts(Graph* graph);
+void affichageDeSesGrandsMorts(Tab* tab, int cote);
+int labyrinthe1if(int tmp, Tab* tab, int cote, int posinitial);
+int TranscriptionPourJavaScript(Tab* tab, int cote);
 
 /*Début Pile*/
 typedef struct StackElement
@@ -72,3 +74,18 @@ int top_stack(Stack st);
 int stack_length(Stack st);
 Stack clear_stack(Stack st);
 /*Fin Pile*/
+
+/*Téléporteurs*/
+typedef struct Teleporteur_Pos {
+	int x;
+	int y;
+}Teleporteur_Pos;
+
+typedef struct Teleporteurs_Pair {
+	Teleporteur_Pos Teleporteur1;
+	Teleporteur_Pos Teleporteur2;
+}Teleporteurs_Pair;
+
+//génére les "quantites" téléporteurs dans le maze renvoie le tableau comportant les coordonnees des téléporteurs
+Teleporteurs_Pair* Generation_Teleporteurs(char* maze, int size, int quantites);
+/*Fin téléporteurs*/

@@ -163,8 +163,80 @@ Stack clear_stack(Stack st) {
 }
 /*Fin Pile*/
 
+/*Téléporteurs*/
+Teleporteurs_Pair* Generation_Teleporteurs(char* maze, int size, int quantites_pair) {
+	Teleporteur_Pos* Tab = malloc(sizeof(Teleporteur_Pos));
+	if (Tab == NULL)
+	{
+		printf("erreur allocation mémoire");
+	}
+	Teleporteur_Pos Teleporteur1 = { 0,0 };
+	Teleporteur_Pos Teleporteur2 = { 0,0 };
+	char* mur = maze;
+	int index = 0;
+	//place  toutes les dead end dans un tableau pour facilité le placement des futures téléporteurs
+	for (int x = 0; x < size; x++)
+	{
+		for (int y = 0; y < size; y++)
+		{
+			if ((x == 0 && y == 0) || (x == size - 1 && y == size - 1))
+			{
+				*(mur + (x * 10 + y) * 8) = 'a';
+			}
+			if (*(mur + (x * 10 + y) * 8) == 'l' || *(mur + (x * 10 + y) * 8) == 'm' || *(mur + (x * 10 + y) * 8) == 'n' || *(mur + (x * 10 + y) * 8) == 'o')
+			{
+				if ((Tab + index) == NULL)
+				{
+					Tab = (Teleporteur_Pos*)realloc(Tab, sizeof(Teleporteur_Pos) * 10);
+					if (Tab != NULL)
+					{
+						printf("allocation réussie");
+						(Tab + index)->x = x;
+						(Tab + index)->y = y;
+						index++;
+					}
+					else
+					{
+						printf("erreur allocation mémoire");
+					}
+				}
+				else
+				{
+					printf("pas besoin d'allocation");
+					(Tab + index)->x = x;
+					(Tab + index)->y = y;
+					printf(" Index :%d\n", index);
+					printf("Tab[%d].x = %d \n", index, (Tab + index)->x);
+					printf("Tab[%d].x = %d \n", index, (Tab + index)->y);
+
+					index++;
+				}
+			}
+			//printf("mur[%d][%d] = %c \n", x, y, *(mur + (x * 10 + y) * 8));
+		}
+	}
+	//boucles permettant de placer les téléporteurs les plus éloignés possible.
+	Teleporteurs_Pair* Tab2 = malloc(sizeof(Teleporteurs_Pair) * quantites_pair);
+	/*if (Tab2 == NULL)
+	{
+		printf("erreur allocation mémoire");
+	}*/
+	int index2 = index - 1;
+	for (int index1 = 0; index1 < quantites_pair; index1++)
+	{
+		(Tab2 + index1)->Teleporteur1.x = (Tab + index1)->x;
+		(Tab2 + index1)->Teleporteur1.y = (Tab + index1)->y;
+		(Tab2 + index1)->Teleporteur2.x = (Tab + index2)->x;
+		(Tab2 + index1)->Teleporteur2.y = (Tab + index2)->y;
+		index2--;
+
+	}
+	return Tab2;
+}
+/*Fin Téléporteurs*/
+
 /*Algorithme Kruskal*/
-Graph* createGraph(int S, int B) {
+/*Graph* createGraph(int S, int B) {
 	Graph* graph = (Graph*)malloc(sizeof(Graph));
 	if (graph != NULL) {
 		(graph->S) = S;
@@ -172,7 +244,7 @@ Graph* createGraph(int S, int B) {
 		graph->Bord = (Bord*)malloc(graph->B * sizeof(Bord));
 	}
 	return graph;
-}
+}*/
 
 
 /* Pseudo code fonction find
@@ -182,7 +254,7 @@ function Find(x)
 	return x.parent
 */
 //Fonction qui trouve la racine d'un élément i
-int find(subset * subsets, int i, int graph) {
+/*int find(subset* subsets, int i, int graph) {
 	// Trouve la racine et fait de la racine le parent de i
 	isCycle(graph);
 	if ( (subsets + i)->parent != NULL) {
@@ -191,12 +263,12 @@ int find(subset * subsets, int i, int graph) {
 		}
 	}
 	return (subsets+i)->parent;
-}
+}*/
 
 
 //Fonction qui unit 2 éléments à leurs racines
 //L'élément ayant le rang le plus faible est relié à la racine de l'élément ayant le rang le plus élevé
-void Union(subset * subsets, int xracine, int yracine) {
+/*void Union(subset* subsets, int xracine, int yracine) {
 	if ((subsets+xracine)->rang < (subsets+yracine)->rang) {
 		(subsets+xracine)->parent = yracine;
 		return;
@@ -210,8 +282,8 @@ void Union(subset * subsets, int xracine, int yracine) {
 		subsets[xracine].rang++;
 		return;
 	}
-}
-
+}*/
+/*
 //Vérifie si le graph contient un cycle ou pas
 int isCycle(Graph* graph) {
 	int S = graph->S;
@@ -232,7 +304,7 @@ int isCycle(Graph* graph) {
 		Union(subsets, x, y);
 	}
 	return 0;
-}
+}*/
 
 /*Algo Kruskal pseudo-code
 	graph <- NULL
@@ -506,7 +578,7 @@ void affichageDeSesGrandsMorts(Tab* tab, int cote) {
 			printf("]");
 		}
 		else {
-			printf("\"%d\", ", (tab+i)->lettreRenvoye);
+			printf("\"%d\", ", (tab+i)->lettreRenvoye[i]);
 		}
 	}
 }
@@ -726,8 +798,8 @@ int TranscriptionPourJavaScript(Tab* tab, int cote) {
 	}
 }
 
-int Labyrinthe(int cote, Tab* tab, int piege, int teleporteur) {
-	Tab* tab = (Tab*)malloc((cote^2) * sizeof(Tab));
+int Labyrinthe(int cote, Tab* tab) {
+	//Tab* tab = (Tab*)malloc((cote^2) * sizeof(Tab));
 	srand(time(NULL));
 	int tmp = 0;
 	int compteur = 0;
@@ -740,6 +812,7 @@ int Labyrinthe(int cote, Tab* tab, int piege, int teleporteur) {
 		int labyrinthe1if(tmp, tab, cote, posintial);
 		compteur++;
 	}
+	TranscriptionPourJavaScript(tab, cote);
 	return tab;
 }
 
@@ -748,7 +821,7 @@ int main() {
 	Tab* tab = (Tab*)malloc(sizeof (Tab));
 	int piege = 0;
 	int teleporteur = 0;
-	Labyrinthe(cote, tab, piege, teleporteur);
+	Labyrinthe(cote, tab);
 }
 
 //faire un tableau avec allocation dynamique des valeurs lorsque celui-ci est dépassé en taille
