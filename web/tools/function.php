@@ -29,7 +29,4 @@ if($functionName == 'generation')
     echo true; // true ou false.
 }
 
-
-
-
 ?>
