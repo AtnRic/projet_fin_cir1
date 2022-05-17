@@ -99,6 +99,70 @@ void triFusion(int i, int j, int tab[], int tmp[]) {
 }*/
 /*Fin tri Fusion*/
 
+/*Pile*/
+Stack new_stack(void) {
+	return NULL;
+}
+
+bool is_empty_stack(Stack st) {
+	if (st == NULL) return true;
+	return false;
+}
+
+Stack push_stack(Stack st, int x) {
+	StackElement* element;
+	element = malloc(sizeof(*element));
+	if (element == NULL) {
+		fprintf(stderr, "Probleme allocation dynamique.\n");
+		exit(EXIT_FAILURE);
+	}
+	element->value = x;
+	element->next = st;
+	return element;
+}
+
+Stack pop_stack(Stack st) {
+	StackElement* element;
+	if (is_empty_stack(st)) return new_stack();
+	element = st->next;
+	free(st);
+	return element;
+}
+
+void print_stack(Stack st) {
+	if (is_empty_stack(st)) {
+		printf("Rien a afficher, la Pile est vide.\n");
+		return;
+	}
+	while (!is_empty_stack(st)){
+	 	printf("[%d]\n", st->value);
+		st = st->next;
+	}
+}
+
+int top_stack(Stack st) {
+	if (is_empty_stack(st)) {
+		printf("Aucun sommet, la Pile est vide.\n");
+		exit(EXIT_FAILURE);
+	}
+	return st->value;
+}
+
+int stack_length(Stack st) {
+	int length = 0;
+	while (!is_empty_stack(st)) {
+		length++;
+		st = st->next;
+	}
+	return length;
+}
+
+Stack clear_stack(Stack st) {
+	while (!is_empty_stack(st)) st = pop_stack(st);
+	return new_stack();
+}
+/*Fin Pile*/
+
 /*Algorithme Kruskal*/
 Graph* createGraph(int S, int B) {
 	Graph* graph = (Graph*)malloc(sizeof(Graph));
@@ -118,11 +182,12 @@ function Find(x)
 	return x.parent
 */
 //Fonction qui trouve la racine d'un élément i
-int find(subset * subsets, int i) {
+int find(subset * subsets, int i, int graph) {
 	// Trouve la racine et fait de la racine le parent de i
-	if ( (subsets + i)->parent != NULL ) {
+	isCycle(graph);
+	if ( (subsets + i)->parent != NULL) {
 		if ((subsets + i)->parent != i) {
-			(subsets + i)->parent = find(subsets, subsets[i].parent);
+			(subsets + i)->parent = find(subsets, subsets[i].parent, graph);
 		}
 	}
 	return (subsets+i)->parent;
@@ -160,8 +225,8 @@ int isCycle(Graph* graph) {
 	}
 	// Parcours la totalité des sommets des bords et si les ensembles sont identiques alors il y a un cycle
 	for (int e = 0; e < B; ++e) {
-		int x = find(subsets, (graph->Bord+e)->racine);
-		int y = find(subsets, (graph->Bord+e)->dest);
+		int x = find(subsets, (graph->Bord+e)->racine, graph);
+		int y = find(subsets, (graph->Bord+e)->dest, graph);
 		if (x == y)
 			return 1;
 		Union(subsets, x, y);
@@ -213,22 +278,22 @@ int PremierPavéDeElseIf(int U, int V, int nombreSommets) {
 						V = U + 1;
 						break;
 					case 2:
-						V = U - sqrt(nombreSommets);
+						V = U - (int)sqrt(nombreSommets);
 						break;
 					}
 				}
 			}
-			else if (U >= nombreSommets - sqrt(nombreSommets)) {
+			else if (U >= nombreSommets - (int)sqrt(nombreSommets)) {
 				tmp = rand() % 3;
 				switch (tmp) {
 				case 0:
 					V = U - 1;
 					break;
 				case 1:
-					V = U + sqrt(nombreSommets);
+					V = U + (int)sqrt(nombreSommets);
 					break;
 				case 2:
-					V = U - sqrt(nombreSommets);
+					V = U - (int)sqrt(nombreSommets);
 					break;
 				}
 			}
@@ -239,22 +304,22 @@ int PremierPavéDeElseIf(int U, int V, int nombreSommets) {
 					V = U - 1;
 					break;
 				case 2:
-					V = U - sqrt(nombreSommets);
+					V = U - (int)sqrt(nombreSommets);
 					break;
 				}
 			}
 		}
-		else if ((U % (int)(sqrt(nombreSommets) + 1) != 1) && (U >= nombreSommets - sqrt(nombreSommets))) {
+		else if ((U % (int)(sqrt(nombreSommets) + 1) != 1) && (U >= nombreSommets - (int)sqrt(nombreSommets))) {
 			tmp = rand() % 3;
 			switch (tmp) {
 			case 0:
-				V = U + sqrt(nombreSommets);
+				V = U + (int)sqrt(nombreSommets);
 				break;
 			case 1:
 				V = U + 1;
 				break;
 			case 2:
-				V = U - sqrt(nombreSommets);
+				V = U - (int)sqrt(nombreSommets);
 				break;
 			}
 		}
@@ -262,27 +327,27 @@ int PremierPavéDeElseIf(int U, int V, int nombreSommets) {
 			tmp = rand() % 2;
 			switch (tmp) {
 			case 0:
-				V = U + sqrt(nombreSommets);
+				V = U + (int)sqrt(nombreSommets);
 				break;
 			case 1:
-				V = U - sqrt(nombreSommets);
+				V = U - (int)sqrt(nombreSommets);
 				break;
 			}
 		}
-		else if (U >= nombreSommets - sqrt(nombreSommets)) {
+		else if (U >= nombreSommets - (int)sqrt(nombreSommets)) {
 			tmp = rand() % 2;
 			switch (tmp) {
 			case 0:
 				V = U - 1;
 				break;
 			case 1:
-				V = U - sqrt(nombreSommets);
+				V = U - (int)sqrt(nombreSommets);
 				break;
 			}
 		}
-		else V = U - sqrt(nombreSommets);
+		else V = U - (int)sqrt(nombreSommets);
 	}
-	else if ((U % (int)(sqrt(nombreSommets) + 1) != 1) && (U % (int)(sqrt(nombreSommets) + 1) != 1) && (U >= nombreSommets - sqrt(nombreSommets))) {
+	else if ((U % (int)(sqrt(nombreSommets) + 1) != 1) && (U % (int)(sqrt(nombreSommets) + 1) != 1) && (U >= nombreSommets - (int)sqrt(nombreSommets))) {
 		tmp = rand() % 3;
 		switch (tmp) {
 		case 0:
@@ -292,7 +357,7 @@ int PremierPavéDeElseIf(int U, int V, int nombreSommets) {
 			V = U + 1;
 			break;
 		case 2:
-			V = U - sqrt(nombreSommets);
+			V = U - (int)sqrt(nombreSommets);
 			break;
 		}
 	}
@@ -303,29 +368,29 @@ int PremierPavéDeElseIf(int U, int V, int nombreSommets) {
 			V = U - 1;
 			break;
 		case 1:
-			V = U - sqrt(nombreSommets);
+			V = U - (int)sqrt(nombreSommets);
 			break;
 		}
 	}
-	else if ((U % (int)(sqrt(nombreSommets) + 1) != 1) && (U >= nombreSommets - sqrt(nombreSommets))) {
+	else if ((U % (int)(sqrt(nombreSommets) + 1) != 1) && (U >= nombreSommets - (int)sqrt(nombreSommets))) {
 		tmp = rand() % 2;
 		switch (tmp) {
 		case 0:
 			V = U + 1;
 			break;
 		case 1:
-			V = U - sqrt(nombreSommets);
+			V = U - (int)sqrt(nombreSommets);
 			break;
 		}
 	}
-	else if ((U >= nombreSommets - sqrt(nombreSommets)) && (U % (int)(sqrt(nombreSommets) + 1) != 1)) {
+	else if ((U >= nombreSommets - (int)sqrt(nombreSommets)) && (U % (int)(sqrt(nombreSommets) + 1) != 1)) {
 		tmp = rand() % 2;
 		switch (tmp) {
 		case 0:
 			V = U + 1;
 			break;
 		case 1:
-			V = U - sqrt(nombreSommets);
+			V = U - (int)sqrt(nombreSommets);
 			break;
 		}
 	}
@@ -333,6 +398,34 @@ int PremierPavéDeElseIf(int U, int V, int nombreSommets) {
 		return NULL;
 	}
 	return V;
+}
+int DeuxièmePavéDeElseIf(subset* subsets, int nombreSommets) {
+	for (int i = 0; i < nombreSommets; i++) {
+		if (subsets->data->haut == 1) {
+			if (subsets->data->droite == 1) {
+				if (subsets->data->bas == 1) {
+					if (subsets->data->gauche == 1) {
+						return NULL;
+					}
+					else subsets->dataRenvoye[i] = 'o';
+				}
+				else if (subsets->data->gauche == 1) subsets->dataRenvoye[i] = 'n';
+				else subsets->dataRenvoye[i] = 'h';
+			}
+			else if ((subsets->data->bas == 1) && (subsets->data->gauche == 1)) subsets->dataRenvoye[i] = 'm';
+			else if (subsets->data->bas == 1) subsets->dataRenvoye[i] = 'f';
+			else if (subsets->data->gauche == 1) subsets->dataRenvoye[i] = 'k';
+			else subsets->dataRenvoye[i] = 'b';
+		}
+		else if ((subsets->data->droite == 1) && (subsets->data->bas == 1) && (subsets->data->gauche == 1)) subsets->dataRenvoye[i] = 'l';
+		else if ((subsets->data->droite == 1) && (subsets->data->bas == 1)) subsets->dataRenvoye[i] = 'i';
+		else if ((subsets->data->bas == 1) && (subsets->data->gauche == 1)) subsets->dataRenvoye[i] = 'j';
+		else if ((subsets->data->droite == 1) && (subsets->data->gauche == 1)) subsets->dataRenvoye[i] = 'g';
+		else if (subsets->data->droite == 1) subsets->dataRenvoye[i] = 'c';
+		else if (subsets->data->bas == 1) subsets->dataRenvoye[i] = 'd';
+		else if (subsets->data->gauche == 1) subsets->dataRenvoye[i] = 'e';
+		else subsets->dataRenvoye[i] = 'a';
+	}
 }
 //Algorithme de Kruskal de génération et transcription
 Graph * Kruskal(Graph* graph, int nombreSommets) {
@@ -347,8 +440,8 @@ Graph * Kruskal(Graph* graph, int nombreSommets) {
 			(*(subsets + i)).data = (Data*)malloc(sizeof(Data));
 			(*(subsets + i)).Bord = (Bord*)malloc(sizeof(Bord));
 			srand(time(NULL));
-			graph = createGraph(i, V);
-			//graph = createGraph(i, U);
+			graph = createGraph(i, U);
+			//Graph* Graph = createGraph(i, V);
 			tab[i] = graph->Bord[i].weight = rand();
 			((subsets + i)->data)->haut = 1;
 			((subsets + i)->data)->droite = ((subsets + i)->data)->bas = ((subsets + i)->data)->gauche = 1;
@@ -360,21 +453,21 @@ Graph * Kruskal(Graph* graph, int nombreSommets) {
 	while(graph->S != nombreSommets) {
 		U = rand() % nombreSommets;
 		V = PremierPavéDeElseIf(U, V, nombreSommets);
-		if (find(subsets, U) != find(Subsets, V)) {
-				Union( subsets, find(subsets, U), find(Subsets, V));
+		if (find(subsets, U, graph) != find(Subsets, V, graph)) {
+				Union( subsets, find(subsets, U, graph), find(Subsets, V, graph));
 				if (U = V + 1) {
 					subsets->data->gauche = Subsets->data->droite = 0;
 				}
 				else if (U = V - 1) {
 					Subsets->data->gauche = subsets->data->droite = 0; 
 				}
-				else if (U = V + sqrt(nombreSommets)) Subsets->data->bas = subsets->data->haut = 0;
-				else if (U = V - sqrt(nombreSommets)) Subsets->data->haut = subsets->data->bas = 0;
+				else if (U = V + (int)sqrt(nombreSommets)) Subsets->data->bas = subsets->data->haut = 0;
+				else if (U = V - (int)sqrt(nombreSommets)) Subsets->data->haut = subsets->data->bas = 0;
 				graph->S++;
 		}
 	}
-	
-	for (int i = 0; i < nombreSommets; i++) {
+	DeuxièmePavéDeElseIf(subsets, nombreSommets);
+	/*for (int i = 0; i < nombreSommets; i++) {
 		if (subsets->data->haut == 1) {
 			if (subsets->data->droite == 1) {
 				if (subsets->data->bas == 1) {
@@ -399,7 +492,7 @@ Graph * Kruskal(Graph* graph, int nombreSommets) {
 		else if (subsets->data->bas == 1) subsets->dataRenvoye[i] = 'd';
 		else if (subsets->data ->gauche == 1) subsets->dataRenvoye[i] = 'e';
 		else subsets->dataRenvoye[i] = 'a';
-	}
+	}*/
 	return graph;
 }
 
@@ -414,6 +507,98 @@ void affichageDeSesGrandsMorts(Graph* graph) {
 		}
 		printf("\"%d\", ", (graph+i)->S);
 	}
+}
+
+int labyrinthe1if(int tmp, Tab* tab, int cote, int posinitial) {
+	int i = posinitial;
+	(tab + posinitial)->passage = 1;
+	if ((tab + (i - cote))->passage == 1 && (tab + (i + cote))->passage == 1 && (tab + (i - 1))->passage == 1) {
+
+	}
+	else if (i < cote || (tab + (i - cote))->passage == 1) {
+		if (i % cote == 1) {
+			tmp = rand() % 2;
+			switch (tmp) {
+			case 0: i += 1; (tab + i)->passage = 1; ((tab + i)->data)->gauche = 0; ((tab + (i-1))->data)->droite = 0; break;
+			case 1: i += cote; (tab + i)->passage = 1; ((tab + i)->data)->haut = 0; ((tab + (i-cote))->data)->bas = 0; break;
+			}
+		}
+		else if (i % cote == cote - 1) {
+				tmp = rand() % 2;
+				switch (tmp) {
+				case 0: i -= 1; (tab + i)->passage = 1; ((tab + i)->data)->droite = 0; ((tab + (i+1))->data)->gauche = 0; break;
+				case 1: i += cote; (tab + i)->passage = 1; ((tab + i)->data)->haut = 0; ((tab + (i-cote))->data)->bas = 0; break;
+				}
+		}
+		else {
+			tmp = rand() % 3;
+					switch (tmp){
+						case 0: i -= 1; (tab + i)->passage = 1; ((tab + i)->data)->droite = 0; ((tab + (i + 1))->data)->gauche = 0; break;
+						case 1: i += 1; (tab + i)->passage = 1; ((tab + i)->data)->gauche = 0; ((tab + (i - 1))->data)->droite = 0; break;
+						case 2: i += cote; (tab + i)->passage = 1; ((tab + i)->data)->haut = 0; ((tab + (i - cote))->data)->bas = 0; break;
+					}
+		}
+		
+	}
+	else if (i > cote ^ 2 - cote || (tab + (i + cote))->passage == 1) {
+		if (i % cote == 1) {
+			tmp = rand() % 2;
+			switch (tmp) {
+			case 0: i += 1; (tab + i)->passage = 1; ((tab + i)->data)->gauche = 0; ((tab + (i-1))->data)->droite = 0; break;
+			case 1: i -= cote; (tab + i)->passage = 1; ((tab + i)->data)->bas= 0; ((tab + (i-cote))->data)->haut = 0; break;
+			}
+		}
+		else if (i % cote == cote - 1) {
+			tmp = rand() % 2;
+			switch (tmp) {
+			case 0: i -= 1; (tab + i)->passage = 1; ((tab + i)->data)->droite = 0; ((tab + (i+1))->data)->gauche = 0;  break;
+			case 1: i -= cote; (tab + i)->passage = 1; ((tab + i)->data)->bas = 0; ((tab + (i - cote))->data)->haut = 0; break;
+			}
+		}
+		else {
+			tmp = rand() % 3;
+			switch (tmp) {
+			case 0: i -= 1; (tab + i)->passage = 1; ((tab + i)->data)->droite = 0; ((tab + (i + 1))->data)->gauche = 0; break;
+			case 1: i += 1; (tab + i)->passage = 1; ((tab + i)->data)->gauche = 0; ((tab + (i - 1))->data)->droite = 0; break;
+			case 2: i -= cote; (tab + i)->passage = 1; ((tab + i)->data)->bas = 0; ((tab + (i - cote))->data)->haut = 0; break;
+			}
+		}
+			
+	}
+	else if (i % cote == 1 || (tab + (i - 1))->passage == 1) {
+		tmp = rand() % 3;
+		switch (tmp) {
+		case 0: i -= cote; (tab + i)->passage = 1; ((tab + i)->data)->bas = 0; ((tab + (i - cote))->data)->haut = 0; break;
+		case 1: i += 1; (tab + i)->passage = 1; ((tab + i)->data)->gauche = 0; ((tab + (i - 1))->data)->droite = 0; break;
+		case 2: i += cote; (tab + i)->passage = 1; ((tab + i)->data)->haut = 0; ((tab + (i - cote))->data)->bas = 0; break;
+		}
+	}
+	else if (i % cote == cote - 1 || (tab + (i + 1))->passage == 1) {
+		tmp = rand() % 3;
+		switch (tmp) {
+		case 0: i -= 1; (tab + i)->passage = 1; ((tab + i)->data)->droite = 0; ((tab + (i + 1))->data)->gauche = 0; break;
+		case 1: i -= cote; (tab + i)->passage = 1; ((tab + i)->data)->bas = 0; ((tab + (i - cote))->data)->haut = 0; break;
+		case 2: i += cote; (tab + i)->passage = 1; ((tab + i)->data)->haut = 0; ((tab + (i - cote))->data)->bas = 0; break;
+		}
+	}
+	posinitial = i;
+}
+
+int Labyrinthe(Graph* graph, int cote, Tab* tab, int piege, int teleporteur) {
+	Tab* tab = (Tab*)malloc((cote^2) * sizeof(Tab));
+	srand(time(NULL));
+	int tmp = 0;
+	int compteur = 0;
+	for (int i = 0; i < cote ^ 2; i++) {
+		(*(tab + i)).data = (Data*)malloc(sizeof(Data));
+		((tab + i)->data)->haut = ((tab + i)->data)->bas = ((tab + i)->data)->gauche = ((tab + i)->data)->droite = 1;
+	}
+	int posintial = rand() % cote;
+	while (compteur != cote ^ 2) {
+		int labyrinthe1if(tmp, tab, cote, posintial);
+		compteur++;
+	}
+	
 }
 
 int main() {

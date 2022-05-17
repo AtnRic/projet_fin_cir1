@@ -1,23 +1,32 @@
 ﻿  main.c
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(123,37): warning C4047: '!=' : les niveaux d'indirection de 'int' et de 'void *' sont différents
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(216,13): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(228,12): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(231,12): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(242,12): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(251,11): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(257,11): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(265,11): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(268,11): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(279,11): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(283,14): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(295,10): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(306,10): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(317,10): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(328,10): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(333,14): warning C4047: 'return' : les niveaux d'indirection de 'int' et de 'void *' sont différents
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(349,10): warning C4244: 'fonction' : conversion de 'time_t' en 'unsigned int', perte possible de données
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(356,39): warning C4047: '=' : les niveaux d'indirection de 'int' et de 'subset *' sont différents
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(371,20): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(372,20): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(341,1): warning C4047: 'initialisation' : les niveaux d'indirection de 'int' et de 'void *' sont différents
-  algo_labyrinthe.vcxproj -> C:\MAMP\htdocs\Projet CIR1\c\Solution1\x64\Debug\algo_labyrinthe.exe
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(121,39): warning C4028: paramètre formel 3 différent de la déclaration
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(123,15): warning C4047: 'fonction' : les niveaux d'indirection de 'Graph *' et de 'int' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(123,10): warning C4024: 'isCycle' : types différents pour le paramètre formel et réel 1
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(124,36): warning C4047: '!=' : les niveaux d'indirection de 'int' et de 'void *' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(164,55): warning C4047: 'fonction' : les niveaux d'indirection de 'int' et de 'Graph *' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(164,50): warning C4024: 'find' : types différents pour le paramètre formel et réel 3
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(165,53): warning C4047: 'fonction' : les niveaux d'indirection de 'int' et de 'Graph *' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(165,48): warning C4024: 'find' : types différents pour le paramètre formel et réel 3
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(334,14): warning C4047: 'return' : les niveaux d'indirection de 'int' et de 'void *' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(344,18): warning C4047: 'return' : les niveaux d'indirection de 'int' et de 'void *' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(378,10): warning C4244: 'fonction' : conversion de 'time_t' en 'unsigned int', perte possible de données
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(385,39): warning C4047: '=' : les niveaux d'indirection de 'int' et de 'subset *' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(392,29): warning C4047: 'fonction' : les niveaux d'indirection de 'int' et de 'Graph *' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(392,24): warning C4024: 'find' : types différents pour le paramètre formel et réel 3
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(392,56): warning C4047: 'fonction' : les niveaux d'indirection de 'int' et de 'Graph *' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(392,51): warning C4024: 'find' : types différents pour le paramètre formel et réel 3
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(393,43): warning C4047: 'fonction' : les niveaux d'indirection de 'int' et de 'Graph *' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(393,38): warning C4024: 'find' : types différents pour le paramètre formel et réel 3
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(393,68): warning C4047: 'fonction' : les niveaux d'indirection de 'int' et de 'Graph *' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(393,63): warning C4024: 'find' : types différents pour le paramètre formel et réel 3
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(370,1): warning C4047: 'initialisation' : les niveaux d'indirection de 'int' et de 'void *' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(451,79): warning C4554: '^' : vérifiez si la priorité des opérateurs n'est pas une cause possible d'erreur ; utilisez des parenthèses pour rendre les priorités plus claires
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(451,83): error C2059: erreur de syntaxe : ')'
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(462,3): error C2059: erreur de syntaxe : 'else'
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(469,3): error C2059: erreur de syntaxe : 'else'
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(478,2): error C2059: erreur de syntaxe : '}'
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(504,2): error C2059: erreur de syntaxe : 'else'
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(512,2): error C2059: erreur de syntaxe : 'else'
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(520,16): error C2065: 'i' : identificateur non déclaré
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(520,16): error C2099: l'initialiseur n'est pas une constante
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(521,1): error C2059: erreur de syntaxe : '}'
