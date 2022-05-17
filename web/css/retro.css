@@ -12,12 +12,11 @@
 
 .two{
     position: relative;
-
     z-index: 2;
     background-image: url("../images/retro/retro.png");
-    background-size: contain;
+    background-size: cover;
     background-color: transparent;
-    background-position: bottom;
+    background-position: bottom center;
     background-repeat: no-repeat;
 }
 
@@ -58,9 +57,11 @@ body{
 
 .global{
     position: absolute;
-    margin: auto;
-    top: 295px;
-    right: 65px;
+    /*top: 50%;*/
+    right: 50%;
+    transform: translateX(calc(50% + 140px));
+    top: 285px;
+
     background: none;
 }
 
