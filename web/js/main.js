@@ -550,11 +550,12 @@ const container = document.getElementById("container");
 let rows = document.getElementsByClassName("gridRow");
 let cells = document.getElementsByClassName("cell");
 
-var list = [new Garde(0, 0)];
+var list = [new Garde(0, 0)]; // Méthode de création de la liste des gardes.
 
-CreateGrid(20, labyrinthe, 14);
+Launch(20, labyrinthe, 14, list);
 
-function CreateGrid(size, tab, spawnCellId) {
+// Création d'une grid avec spawn du joueur et des gardes.
+function Launch(size, tab, spawnCellId, gardList) {
   //#region ROWS
   makeRows(size);
   cellNum = size;
@@ -724,18 +725,18 @@ function CreateGrid(size, tab, spawnCellId) {
 
   //#endregion
 
-  //#region PLAYER
-  GenerationGarde(list);
-  //#endregion PLAYER
-
   //#region GARDE
+  GenerationGarde(gardList);
+  //#endregion
 
+  //#region PLAYER
   setTimeout(function () {
     SpawnPlayer(spawnCellId);
   }, 3000);
   //#endregion
 }
 
+// Génération du joueur.
 function SpawnPlayer(cellId) {
   var PlayerPos = cellId;
   var PlayerPosElement = document.getElementById(cellId);
@@ -870,10 +871,12 @@ function SpawnPlayer(cellId) {
   });
 }
 
+// Génération d'un random.
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
 
+// Animation d'arrivée des murs.
 function LabAnim(attClass) {
   anime({
     targets: "." + attClass,
@@ -886,6 +889,7 @@ function LabAnim(attClass) {
   });
 }
 
+// Mouvement du joueur.
 function PlayerAnim(indentX, indentY) {
   anime({
     targets: "#player",
@@ -897,6 +901,7 @@ function PlayerAnim(indentX, indentY) {
   });
 }
 
+// Création des lignes.
 function makeRows(rowNum) {
   for (r = 0; r < rowNum; r++) {
     let row = document.createElement("tr");
@@ -905,6 +910,7 @@ function makeRows(rowNum) {
   }
 }
 
+// Création des murs.
 function AppendImage(mediaPath, cell, speClass) {
   cell.classList.add(speClass);
   let newImg = document.createElement("img");
@@ -914,6 +920,7 @@ function AppendImage(mediaPath, cell, speClass) {
   return newImg;
 }
 
+// Fonction d'appel d'une fonction PHP.
 function PHP_Function(fileName, functionName, Awaiting, Arguments) {
   $.ajax({
     type: "POST",
@@ -939,7 +946,7 @@ function Garde(id, pos) {
   this.id = id;
   this.pos = pos;
 }
-
+// Génération des gardes avec une liste de garde.
 function GenerationGarde(gardeList) {
   var ListGarde = [];
   for (i = 0; i < gardeList.length; i++) {
@@ -976,6 +983,7 @@ function GenerationGarde(gardeList) {
   }
 }
 
+// Mouvement d'un garde dans une certaine position.
 function MoveGarde(gardeId, posIndent, indentX, indentY) {
   let X;
   let box = document.getElementById("1");
@@ -1019,6 +1027,7 @@ function MoveGarde(gardeId, posIndent, indentX, indentY) {
 }
 
 let Solved = false;
+// Envoyer la liste de cases qui composent le chemin du solveur.
 function Solveur(tab) {
   if (!Solved) {
     Solved = true;
