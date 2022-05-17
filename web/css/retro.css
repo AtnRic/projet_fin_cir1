@@ -57,9 +57,8 @@ body{
 
 .global{
     position: absolute;
-    /*top: 50%;*/
     right: 50%;
-    transform: translateX(calc(50% + 140px));
+    transform: translateX(calc(50% + 134px));
     top: 285px;
 
     background: none;
@@ -114,18 +113,3 @@ table, tr, td{
     }
 }
 
-@media screen and (max-width: 800px) {
-    .global { display:block;
-        width: 600px;height: 600px;
-        margin: calc(50vh - 300px) auto auto;
-    }
-
-}
-
-@media screen and (max-width: 600px) {
-    .global { display:block;
-        width: 400px;height: 400px;
-        margin: calc(50vh - 200px) auto auto;
-    }
-
-}
