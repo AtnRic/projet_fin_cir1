@@ -550,7 +550,14 @@ let cells = document.getElementsByClassName("cell");
 
 var list = [new Garde(0, 0)]; // Méthode de création de la liste des gardes.
 
-Launch(5, labyrinthe, 14, list, true);
+document.addEventListener("keydown", function (event) {
+  if (event.key == "l") {
+    Launch(10, labyrinthe, 14, list, true);
+  }
+  if (event.key == "k") {
+    TeleportePlayer(getRandomInt(10));
+  }
+});
 
 // Création d'une grid avec spawn du joueur et des gardes.
 function Launch(size, tab, spawnCellId, gardList, boolAnimation) {
@@ -741,9 +748,10 @@ function Launch(size, tab, spawnCellId, gardList, boolAnimation) {
   //#endregion
 }
 
+let PlayerPos;
 // Génération du joueur.
 function SpawnPlayer(cellId) {
-  var PlayerPos = cellId;
+  PlayerPos = cellId;
   var PlayerPosElement = document.getElementById(cellId);
   PlayerPosElement.classList.add("identify");
 
@@ -889,8 +897,8 @@ function LabAnim(attClass, distance) {
     translateX: getRandomInt(distance) - getRandomInt(distance),
     duration: 3000,
     direction: "reverse",
-    easing: "easeInElastic(1, .4)",
-    delay: anime.stagger(10, {}),
+    easing: "easeInElastic(1, .2)",
+    delay: anime.stagger(40, {}),
   });
 }
 
@@ -1075,7 +1083,7 @@ let Telep = [
   [7, 13],
 ];
 
-Teleporter(Telep);
+//Teleporter(Telep);
 
 // Génération des téléporteurs, 0 => [0, 1], 1 => [1, 2]
 function Teleporter(tab) {
@@ -1109,10 +1117,8 @@ function Teleporter(tab) {
     Img2.classList.add("TeleporteurImg");
 
     let src = "";
-    console.log(i);
     switch (i) {
       case 1:
-        console.log("case");
         src = "../images/mazes/teleporteur_a.png";
         break;
       case 2:
@@ -1131,4 +1137,21 @@ function Teleporter(tab) {
   }
 }
 
-function TeleportePlayer() {}
+function TeleportePlayer(cellId) {
+  PlayerPos = cellId;
+  let newPos = document.getElementById(PlayerPos);
+  let Player = document.getElementById("player");
+
+  anime({
+    targets: "#player",
+    scale: [{ value: 0, easing: "easeOutSine", duration: 500 }],
+  });
+  setTimeout(function () {
+    newPos.appendChild(Player);
+
+    anime({
+      targets: "#player",
+      scale: [{ value: 1, easing: "easeOutSine", duration: 500 }],
+    });
+  }, 500);
+}
