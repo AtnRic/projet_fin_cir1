@@ -32,6 +32,7 @@ typedef struct Tab {
 	struct Data* data;
 	int idcase;
 	int passage;
+	char lettreRenvoye[];
 }Tab;
 
 Graph* createGraph(int S, int B);

@@ -7,8 +7,20 @@ C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(228,55): warning C
 C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(228,50): warning C4024: 'find' : types différents pour le paramètre formel et réel 3
 C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(229,53): warning C4047: 'fonction' : les niveaux d'indirection de 'int' et de 'Graph *' sont différents
 C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(229,48): warning C4024: 'find' : types différents pour le paramètre formel et réel 3
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(544,31): warning C4554: '^' : vérifiez si la priorité des opérateurs n'est pas une cause possible d'erreur ; utilisez des parenthèses pour rendre les priorités plus claires
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(589,11): error C2082: redéfinition du paramètre formel 'tab'
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(590,8): warning C4244: 'fonction' : conversion de 'time_t' en 'unsigned int', perte possible de données
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(593,30): warning C4554: '^' : vérifiez si la priorité des opérateurs n'est pas une cause possible d'erreur ; utilisez des parenthèses pour rendre les priorités plus claires
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(598,29): warning C4554: '^' : vérifiez si la priorité des opérateurs n'est pas une cause possible d'erreur ; utilisez des parenthèses pour rendre les priorités plus claires
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(592,29): warning C4554: '^' : vérifiez si la priorité des opérateurs n'est pas une cause possible d'erreur ; utilisez des parenthèses pour rendre les priorités plus claires
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(593,49): warning C4047: 'fonction' : les niveaux d'indirection de 'Stack' et de 'Stack *' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(593,46): warning C4024: 'pop_stack' : types différents pour le paramètre formel et réel 1
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(593,50): warning C4047: 'fonction' : les niveaux d'indirection de 'int' et de 'Stack' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(593,36): warning C4024: 'labyrinthe1if' : types différents pour le paramètre formel et réel 4
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(596,41): warning C4013: 'push_Stack' non défini(e) ; extern retournant int pris par défaut
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(599,33): warning C4554: '^' : vérifiez si la priorité des opérateurs n'est pas une cause possible d'erreur ; utilisez des parenthèses pour rendre les priorités plus claires
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(610,56): warning C4554: '^' : vérifiez si la priorité des opérateurs n'est pas une cause possible d'erreur ; utilisez des parenthèses pour rendre les priorités plus claires
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(620,32): warning C4554: '^' : vérifiez si la priorité des opérateurs n'est pas une cause possible d'erreur ; utilisez des parenthèses pour rendre les priorités plus claires
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(637,56): warning C4554: '^' : vérifiez si la priorité des opérateurs n'est pas une cause possible d'erreur ; utilisez des parenthèses pour rendre les priorités plus claires
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(640,55): warning C4554: '^' : vérifiez si la priorité des opérateurs n'est pas une cause possible d'erreur ; utilisez des parenthèses pour rendre les priorités plus claires
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(647,32): warning C4554: '^' : vérifiez si la priorité des opérateurs n'est pas une cause possible d'erreur ; utilisez des parenthèses pour rendre les priorités plus claires
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(677,31): warning C4554: '^' : vérifiez si la priorité des opérateurs n'est pas une cause possible d'erreur ; utilisez des parenthèses pour rendre les priorités plus claires
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(699,11): error C2082: redéfinition du paramètre formel 'tab'
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(700,8): warning C4244: 'fonction' : conversion de 'time_t' en 'unsigned int', perte possible de données
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(703,30): warning C4554: '^' : vérifiez si la priorité des opérateurs n'est pas une cause possible d'erreur ; utilisez des parenthèses pour rendre les priorités plus claires
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(708,29): warning C4554: '^' : vérifiez si la priorité des opérateurs n'est pas une cause possible d'erreur ; utilisez des parenthèses pour rendre les priorités plus claires

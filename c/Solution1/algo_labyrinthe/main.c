@@ -496,16 +496,18 @@ Graph * Kruskal(Graph* graph, int nombreSommets) {
 	return graph;
 }*/
 
-void affichageDeSesGrandsMorts(Graph* graph) {
-	printf("[");
-	for (int i = 0; i < graph->S; i++) {
-		if ((i % (int)sqrt(graph->S) == 0) && i != graph->S) {
+void affichageDeSesGrandsMorts(Tab* tab, int cote) {
+	printf("[ ");
+	for (int i = 0; i < cote^2; i++) {
+		if ((i % cote == 0) && i != cote^2) {
 			printf("], [");
 		}
-		else if (i == graph->S) {
+		else if (i == cote^2) {
 			printf("]");
 		}
-		printf("\"%d\", ", (graph+i)->S);
+		else {
+			printf("\"%d\", ", (tab+i)->lettreRenvoye);
+		}
 	}
 }
 
@@ -513,7 +515,7 @@ int labyrinthe1if(int tmp, Tab* tab, int cote, int posinitial) {
 	Stack* GPS = (Stack*)malloc(sizeof GPS);
 	int i = posinitial;
 	(tab + posinitial)->passage = 1;
-	if ((tab + (i - cote))->passage == 1 && (tab + (i + cote))->passage == 1 && (tab + (i - 1))->passage == 1) {
+	/*if ((tab + (i - cote))->passage == 1 && (tab + (i + cote))->passage == 1 && (tab + (i - 1))->passage == 1) {
 
 	}
 	else if (i < cote || (tab + (i - cote))->passage == 1) {
@@ -585,7 +587,7 @@ int labyrinthe1if(int tmp, Tab* tab, int cote, int posinitial) {
 		case 2: i += cote; (tab + i)->passage = 1; push_Stack(GPS, i - cote); ((tab + i)->data)->haut = 0; ((tab + (i - cote))->data)->bas = 0; break;
 		}
 	}
-	posinitial = i;
+	posinitial = i;*/
 	if (i < cote || (tab + (i - cote))->passage == 1) {
 		if (i % cote == 1 || (tab + (i - 1))->passage == 1) {
 			if (i % cote == cote - 1 || (tab + (i + 1))->passage == 1) {
@@ -674,13 +676,55 @@ int labyrinthe1if(int tmp, Tab* tab, int cote, int posinitial) {
 		case 2: i += cote; (tab + i)->passage = 1; push_Stack(GPS, i - cote); ((tab + i)->data)->haut = 0; ((tab + (i - cote))->data)->bas = 0; break;
 		}
 	}
-	else if (i > cote ^ 2 - cote)
+	else if (i > cote ^ 2 - cote || (tab + (i + cote))->passage == 1) {
+		tmp = rand() % 3;
+		switch (tmp) {
+		case 0: i += 1; (tab + i)->passage = 1; push_Stack(GPS, i - 1); ((tab + i)->data)->gauche = 0; ((tab + (i - 1))->data)->droite = 0; break;
+		case 1: i -= cote; (tab + i)->passage = 1; push_Stack(GPS, i + cote); ((tab + i)->data)->bas = 0; ((tab + (i - cote))->data)->haut = 0; break;
+		case 2: i -= 1; (tab + i)->passage = 1; push_Stack(GPS, i + 1); ((tab + i)->data)->droite = 0; ((tab + (i + 1))->data)->gauche = 0; break;
+		}
+	}
+	else {
+		tmp = rand() % 4;
+		switch (tmp) {
+		case 0: i += 1; (tab + i)->passage = 1; push_Stack(GPS, i - 1); ((tab + i)->data)->gauche = 0; ((tab + (i - 1))->data)->droite = 0; break;
+		case 1: i -= cote; (tab + i)->passage = 1; push_Stack(GPS, i + cote); ((tab + i)->data)->bas = 0; ((tab + (i - cote))->data)->haut = 0; break;
+		case 2: i -= 1; (tab + i)->passage = 1; push_Stack(GPS, i + 1); ((tab + i)->data)->droite = 0; ((tab + (i + 1))->data)->gauche = 0; break;
+		case 3: i += cote; (tab + i)->passage = 1; push_Stack(GPS, i - cote); ((tab + i)->data)->haut = 0; ((tab + (i - cote))->data)->bas = 0; break;
+		}
+	}
+	posinitial = i;
 }
-/*tmp = rand() % 2;
-			switch (tmp) {
-			case 0: i += 1; (tab + i)->passage = 1; push_Stack(GPS, i-1); ((tab + i)->data)->gauche = 0; ((tab + (i - 1))->data)->droite = 0;  break;
-			case 1: i += cote; (tab + i)->passage = 1; push_Stack(GPS, i - cote); ((tab + i)->data)->haut = 0; ((tab + (i - cote))->data)->bas = 0; break;
-			}*/
+
+int TranscriptionPourJavaScript(Tab* tab, int cote) {
+	for (int i = 0; i < cote^2; i++) {
+		if ((tab+i)->data->haut == 1) {
+			if ((tab + i)->data->droite == 1) {
+				if ((tab + i)->data->bas == 1) {
+					if ((tab + i)->data->gauche == 1) {
+						printf("Il y a une erreur");
+						return EXIT_FAILURE;
+					}
+					else (tab+i)->lettreRenvoye[i] = 'o';
+				}
+				else if ((tab + i)->data->gauche == 1) (tab + i)->lettreRenvoye[i] = 'n';
+				else (tab + i)->lettreRenvoye[i] = 'h';
+			}
+			else if (((tab + i)->data->bas == 1) && ((tab + i)->data->gauche == 1)) (tab + i)->lettreRenvoye[i] = 'm';
+			else if ((tab + i)->data->bas == 1) (tab + i)->lettreRenvoye[i] = 'f';
+			else if ((tab + i)->data->gauche == 1) (tab + i)->lettreRenvoye[i] = 'k';
+			else (tab + i)->lettreRenvoye[i] = 'b';
+		}
+		else if (((tab + i)->data->droite == 1) && ((tab + i)->data->bas == 1) && ((tab + i)->data->gauche == 1)) (tab + i)->lettreRenvoye[i] = 'l';
+		else if (((tab + i)->data->droite == 1) && ((tab + i)->data->bas == 1)) (tab + i)->lettreRenvoye[i] = 'i';
+		else if (((tab + i)->data->bas == 1) && ((tab + i)->data->gauche == 1)) (tab + i)->lettreRenvoye[i] = 'j';
+		else if (((tab + i)->data->droite == 1) && ((tab + i)->data->gauche == 1)) (tab + i)->lettreRenvoye[i] = 'g';
+		else if ((tab + i)->data->droite == 1) (tab + i)->lettreRenvoye[i] = 'c';
+		else if ((tab + i)->data->bas == 1) (tab + i)->lettreRenvoye[i] = 'd';
+		else if ((tab + i)->data->gauche == 1) (tab + i)->lettreRenvoye[i] = 'e';
+		else (tab + i)->lettreRenvoye[i] = 'a';
+	}
+}
 
 int Labyrinthe(int cote, Tab* tab, int piege, int teleporteur) {
 	Tab* tab = (Tab*)malloc((cote^2) * sizeof(Tab));
@@ -696,15 +740,15 @@ int Labyrinthe(int cote, Tab* tab, int piege, int teleporteur) {
 		int labyrinthe1if(tmp, tab, cote, posintial);
 		compteur++;
 	}
-	
+	return tab;
 }
 
 int main() {
-	/*int S = 10;
-	int B = 10;
-	Graph* graph = createGraph(S, B);
-	Kruskal(graph, S);
-	affichageDeSesGrandsMorts(graph);*/
+	int cote = 12;
+	Tab* tab = (Tab*)malloc(sizeof (Tab));
+	int piege = 0;
+	int teleporteur = 0;
+	Labyrinthe(cote, tab, piege, teleporteur);
 }
 
 //faire un tableau avec allocation dynamique des valeurs lorsque celui-ci est dépassé en taille
