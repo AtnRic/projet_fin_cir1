@@ -1,7 +1,5 @@
 *{
     background-color: #D4DAED;
-    background-size: auto;
-    background-position: right bottom;
 }
 
 .sline {
@@ -14,12 +12,13 @@
 
 .two{
     position: relative;
-    top: 0;
-    right: 0;
+
     z-index: 2;
     background-image: url("../images/retro/retro.png");
-    background-size: cover;
+    background-size: contain;
     background-color: transparent;
+    background-position: bottom;
+    background-repeat: no-repeat;
 }
 
 table {width: 55%; height: 55%; border: 5px black solid;}
