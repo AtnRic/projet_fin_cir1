@@ -45,13 +45,13 @@ void Union(subset *subsets, int xracine, int yracine);
 
 //Vérifie si le graph contient un cycle ou pas
 int isCycle(Graph* graph);
-
+/*
 int PremierPavéDeElseIf(int U, int V, int nombreSommets);
 int DeuxièmePavéDeElseIf(subset* subsets, int nombreSommets);
 //Algorithme de Kruskal
-Graph* Kruskal(Graph* graph, int nombreSommets);
+Graph* Kruskal(Graph* graph, int nombreSommets);*/
 
-int Labyrinthe(Graph* graph, int cote, Tab* tab, int piege, int teleporteur);
+int Labyrinthe(int cote, Tab* tab, int piege, int teleporteur);
 //affichage dans le format souhaité
 void affichageDeSesGrandsMorts(Graph* graph);
 

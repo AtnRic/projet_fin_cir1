@@ -245,7 +245,7 @@ int isCycle(Graph* graph) {
 			UNION(u, v)
 	retourner E
 */
-
+/*
 int PremierPavéDeElseIf(int U, int V, int nombreSommets) {
 	int tmp;
 	if (U > (int)sqrt(nombreSommets)) { //U n'est pas sur les bords du tableau donc toutes possibilités possibles
@@ -492,9 +492,9 @@ Graph * Kruskal(Graph* graph, int nombreSommets) {
 		else if (subsets->data->bas == 1) subsets->dataRenvoye[i] = 'd';
 		else if (subsets->data ->gauche == 1) subsets->dataRenvoye[i] = 'e';
 		else subsets->dataRenvoye[i] = 'a';
-	}*/
+	}
 	return graph;
-}
+}*/
 
 void affichageDeSesGrandsMorts(Graph* graph) {
 	printf("[");
@@ -510,32 +510,36 @@ void affichageDeSesGrandsMorts(Graph* graph) {
 }
 
 int labyrinthe1if(int tmp, Tab* tab, int cote, int posinitial) {
+	Stack* GPS = (Stack*)malloc(sizeof GPS);
 	int i = posinitial;
 	(tab + posinitial)->passage = 1;
 	if ((tab + (i - cote))->passage == 1 && (tab + (i + cote))->passage == 1 && (tab + (i - 1))->passage == 1) {
 
 	}
 	else if (i < cote || (tab + (i - cote))->passage == 1) {
-		if (i % cote == 1) {
+		if (i % cote == 1 || (tab + (i - 1))->passage == 1) {
+			if (i % cote == cote - 1) {
+
+			}
 			tmp = rand() % 2;
 			switch (tmp) {
-			case 0: i += 1; (tab + i)->passage = 1; ((tab + i)->data)->gauche = 0; ((tab + (i-1))->data)->droite = 0; break;
-			case 1: i += cote; (tab + i)->passage = 1; ((tab + i)->data)->haut = 0; ((tab + (i-cote))->data)->bas = 0; break;
+			case 0: i += 1; (tab + i)->passage = 1; push_Stack(GPS, i-1); ((tab + i)->data)->gauche = 0; ((tab + (i - 1))->data)->droite = 0;  break;
+			case 1: i += cote; (tab + i)->passage = 1; push_Stack(GPS, i - cote); ((tab + i)->data)->haut = 0; ((tab + (i - cote))->data)->bas = 0; break;
 			}
 		}
 		else if (i % cote == cote - 1) {
 				tmp = rand() % 2;
 				switch (tmp) {
-				case 0: i -= 1; (tab + i)->passage = 1; ((tab + i)->data)->droite = 0; ((tab + (i+1))->data)->gauche = 0; break;
-				case 1: i += cote; (tab + i)->passage = 1; ((tab + i)->data)->haut = 0; ((tab + (i-cote))->data)->bas = 0; break;
+				case 0: i -= 1; (tab + i)->passage = 1; push_Stack(GPS, i +1); ((tab + i)->data)->droite = 0; ((tab + (i+1))->data)->gauche = 0; break;
+				case 1: i += cote; (tab + i)->passage = 1; push_Stack(GPS, i - cote); ((tab + i)->data)->haut = 0; ((tab + (i-cote))->data)->bas = 0; break;
 				}
 		}
 		else {
 			tmp = rand() % 3;
 					switch (tmp){
-						case 0: i -= 1; (tab + i)->passage = 1; ((tab + i)->data)->droite = 0; ((tab + (i + 1))->data)->gauche = 0; break;
-						case 1: i += 1; (tab + i)->passage = 1; ((tab + i)->data)->gauche = 0; ((tab + (i - 1))->data)->droite = 0; break;
-						case 2: i += cote; (tab + i)->passage = 1; ((tab + i)->data)->haut = 0; ((tab + (i - cote))->data)->bas = 0; break;
+						case 0: i -= 1; (tab + i)->passage = 1; push_Stack(GPS, i +1); ((tab + i)->data)->droite = 0; ((tab + (i + 1))->data)->gauche = 0; break;
+						case 1: i += 1; (tab + i)->passage = 1; push_Stack(GPS, i -1); ((tab + i)->data)->gauche = 0; ((tab + (i - 1))->data)->droite = 0; break;
+						case 2: i += cote; (tab + i)->passage = 1; push_Stack(GPS, i - cote); ((tab + i)->data)->haut = 0; ((tab + (i - cote))->data)->bas = 0; break;
 					}
 		}
 		
@@ -544,23 +548,23 @@ int labyrinthe1if(int tmp, Tab* tab, int cote, int posinitial) {
 		if (i % cote == 1) {
 			tmp = rand() % 2;
 			switch (tmp) {
-			case 0: i += 1; (tab + i)->passage = 1; ((tab + i)->data)->gauche = 0; ((tab + (i-1))->data)->droite = 0; break;
-			case 1: i -= cote; (tab + i)->passage = 1; ((tab + i)->data)->bas= 0; ((tab + (i-cote))->data)->haut = 0; break;
+			case 0: i += 1; (tab + i)->passage = 1; push_Stack(GPS, i -1); ((tab + i)->data)->gauche = 0; ((tab + (i-1))->data)->droite = 0; break;
+			case 1: i -= cote; (tab + i)->passage = 1; push_Stack(GPS, i + cote); ((tab + i)->data)->bas= 0; ((tab + (i-cote))->data)->haut = 0; break;
 			}
 		}
 		else if (i % cote == cote - 1) {
 			tmp = rand() % 2;
 			switch (tmp) {
-			case 0: i -= 1; (tab + i)->passage = 1; ((tab + i)->data)->droite = 0; ((tab + (i+1))->data)->gauche = 0;  break;
-			case 1: i -= cote; (tab + i)->passage = 1; ((tab + i)->data)->bas = 0; ((tab + (i - cote))->data)->haut = 0; break;
+			case 0: i -= 1; (tab + i)->passage = 1; push_Stack(GPS, i + 1); ((tab + i)->data)->droite = 0; ((tab + (i+1))->data)->gauche = 0;  break;
+			case 1: i -= cote; (tab + i)->passage = 1; push_Stack(GPS, i + cote); ((tab + i)->data)->bas = 0; ((tab + (i - cote))->data)->haut = 0; break;
 			}
 		}
 		else {
 			tmp = rand() % 3;
 			switch (tmp) {
-			case 0: i -= 1; (tab + i)->passage = 1; ((tab + i)->data)->droite = 0; ((tab + (i + 1))->data)->gauche = 0; break;
-			case 1: i += 1; (tab + i)->passage = 1; ((tab + i)->data)->gauche = 0; ((tab + (i - 1))->data)->droite = 0; break;
-			case 2: i -= cote; (tab + i)->passage = 1; ((tab + i)->data)->bas = 0; ((tab + (i - cote))->data)->haut = 0; break;
+			case 0: i -= 1; (tab + i)->passage = 1; push_Stack(GPS, i + 1); ((tab + i)->data)->droite = 0; ((tab + (i + 1))->data)->gauche = 0; break;
+			case 1: i += 1; (tab + i)->passage = 1; push_Stack(GPS, i - 1); ((tab + i)->data)->gauche = 0; ((tab + (i - 1))->data)->droite = 0; break;
+			case 2: i -= cote; (tab + i)->passage = 1; push_Stack(GPS, i + cote); ((tab + i)->data)->bas = 0; ((tab + (i - cote))->data)->haut = 0; break;
 			}
 		}
 			
@@ -568,23 +572,80 @@ int labyrinthe1if(int tmp, Tab* tab, int cote, int posinitial) {
 	else if (i % cote == 1 || (tab + (i - 1))->passage == 1) {
 		tmp = rand() % 3;
 		switch (tmp) {
-		case 0: i -= cote; (tab + i)->passage = 1; ((tab + i)->data)->bas = 0; ((tab + (i - cote))->data)->haut = 0; break;
-		case 1: i += 1; (tab + i)->passage = 1; ((tab + i)->data)->gauche = 0; ((tab + (i - 1))->data)->droite = 0; break;
-		case 2: i += cote; (tab + i)->passage = 1; ((tab + i)->data)->haut = 0; ((tab + (i - cote))->data)->bas = 0; break;
+		case 0: i -= cote; (tab + i)->passage = 1; push_Stack(GPS, i + cote); (tab + i)->data)->bas = 0; ((tab + (i - cote))->data)->haut = 0; break;
+		case 1: i += 1; (tab + i)->passage = 1; push_Stack(GPS, -1); ((tab + i)->data)->gauche = 0; ((tab + (i - 1))->data)->droite = 0; break;
+		case 2: i += cote; (tab + i)->passage = 1; push_Stack(GPS, i - cote); ((tab + i)->data)->haut = 0; ((tab + (i - cote))->data)->bas = 0; break;
 		}
 	}
 	else if (i % cote == cote - 1 || (tab + (i + 1))->passage == 1) {
 		tmp = rand() % 3;
 		switch (tmp) {
-		case 0: i -= 1; (tab + i)->passage = 1; ((tab + i)->data)->droite = 0; ((tab + (i + 1))->data)->gauche = 0; break;
-		case 1: i -= cote; (tab + i)->passage = 1; ((tab + i)->data)->bas = 0; ((tab + (i - cote))->data)->haut = 0; break;
-		case 2: i += cote; (tab + i)->passage = 1; ((tab + i)->data)->haut = 0; ((tab + (i - cote))->data)->bas = 0; break;
+		case 0: i -= 1; (tab + i)->passage = 1; push_Stack(GPS, i + 1); ((tab + i)->data)->droite = 0; ((tab + (i + 1))->data)->gauche = 0; break;
+		case 1: i -= cote; (tab + i)->passage = 1; push_Stack(GPS, i + cote); ((tab + i)->data)->bas = 0; ((tab + (i - cote))->data)->haut = 0; break;
+		case 2: i += cote; (tab + i)->passage = 1; push_Stack(GPS, i - cote); ((tab + i)->data)->haut = 0; ((tab + (i - cote))->data)->bas = 0; break;
 		}
 	}
 	posinitial = i;
-}
+	if (i < cote || (tab + (i - cote))->passage == 1) {
+		if (i % cote == 1 || (tab + (i - 1))->passage == 1) {
+			if (i % cote == cote - 1 || (tab + (i + 1))->passage == 1) {
+				if (i > cote ^ 2 - cote || (tab + (i + cote))->passage == 1) {
+					labyrinthe1if(tmp, tab, cote, pop_stack(GPS));
+				}
+				else {
+					i += cote; (tab + i)->passage = 1; push_Stack(GPS, i - cote); ((tab + i)->data)->haut = 0; ((tab + (i - cote))->data)->bas = 0;
+				}
+			}
+			else if (i > cote ^ 2 - cote || (tab + (i + cote))->passage == 1) {
+				i += 1; (tab + i)->passage = 1; push_Stack(GPS, i - 1); ((tab + i)->data)->gauche = 0; ((tab + (i - 1))->data)->droite = 0;
+			}
+			else {
+				tmp = rand() % 2;
+				switch (tmp) {
+				case 0: i += 1; (tab + i)->passage = 1; push_Stack(GPS, i - 1); ((tab + i)->data)->gauche = 0; ((tab + (i - 1))->data)->droite = 0;  break;
+				case 1: i += cote; (tab + i)->passage = 1; push_Stack(GPS, i - cote); ((tab + i)->data)->haut = 0; ((tab + (i - cote))->data)->bas = 0; break;
+				}
+			}
+		}
+		else if ((i % cote == cote - 1 && i > cote ^ 2 - cote) || ((tab + (i + 1))->passage == 1 && (tab + (i + cote))->passage == 1)) {
+			i -= 1; (tab + i)->passage = 1; push_Stack(GPS, i + 1); ((tab + i)->data)->droite = 0; ((tab + (i + 1))->data)->gauche = 0;
+		}
+		else if (i % cote == cote - 1 || (tab + (i + 1))->passage == 1) {
+			tmp = rand() % 2;
+			switch (tmp) {
+			case 0: i -= 1; (tab + i)->passage = 1; push_Stack(GPS, i + 1); ((tab + i)->data)->droite = 0; ((tab + (i + 1))->data)->gauche = 0; break;
+			case 1: i += cote; (tab + i)->passage = 1; push_Stack(GPS, i - cote); ((tab + i)->data)->haut = 0; ((tab + (i - cote))->data)->bas = 0; break;
+			}
+		}
+		else if (i > cote ^ 2 - cote || (tab + (i + cote))->passage == 1) {
+			tmp = rand() % 2;
+			switch (tmp) {
+			case 0: i -= 1; (tab + i)->passage = 1; push_Stack(GPS, i + 1); ((tab + i)->data)->droite = 0; ((tab + (i + 1))->data)->gauche = 0; break;
+			case 1: i += 1; (tab + i)->passage = 1; push_Stack(GPS, i - 1); ((tab + i)->data)->gauche = 0; ((tab + (i - 1))->data)->droite = 0;  break;
+			}
+		}
+		else {
+			tmp = rand() % 3;
+			switch (tmp) {
+			case 0: i -= 1; (tab + i)->passage = 1; push_Stack(GPS, i + 1); ((tab + i)->data)->droite = 0; ((tab + (i + 1))->data)->gauche = 0; break;
+			case 1: i += 1; (tab + i)->passage = 1; push_Stack(GPS, i - 1); ((tab + i)->data)->gauche = 0; ((tab + (i - 1))->data)->droite = 0; break;
+			case 2: i += cote; (tab + i)->passage = 1; push_Stack(GPS, i - cote); ((tab + i)->data)->haut = 0; ((tab + (i - cote))->data)->bas = 0; break;
+			}
+		}
 
-int Labyrinthe(Graph* graph, int cote, Tab* tab, int piege, int teleporteur) {
+	}
+	else if ((i % cote == cote - 1 && i > cote ^ 2 - cote && i % cote == 1) || ((tab + (i + 1))->passage == 1 && (tab + (i - 1))->passage == 1 && (tab + (i + cote))->passage == 1)) {
+		i -= cote; (tab + i)->passage = 1; push_Stack(GPS, i + cote); ((tab + i)->data)->bas = 0; ((tab + (i - cote))->data)->haut = 0;
+	}
+	else if ()
+}
+/*tmp = rand() % 2;
+			switch (tmp) {
+			case 0: i += 1; (tab + i)->passage = 1; push_Stack(GPS, i-1); ((tab + i)->data)->gauche = 0; ((tab + (i - 1))->data)->droite = 0;  break;
+			case 1: i += cote; (tab + i)->passage = 1; push_Stack(GPS, i - cote); ((tab + i)->data)->haut = 0; ((tab + (i - cote))->data)->bas = 0; break;
+			}*/
+
+int Labyrinthe(int cote, Tab* tab, int piege, int teleporteur) {
 	Tab* tab = (Tab*)malloc((cote^2) * sizeof(Tab));
 	srand(time(NULL));
 	int tmp = 0;
@@ -602,11 +663,11 @@ int Labyrinthe(Graph* graph, int cote, Tab* tab, int piege, int teleporteur) {
 }
 
 int main() {
-	int S = 10;
+	/*int S = 10;
 	int B = 10;
 	Graph* graph = createGraph(S, B);
 	Kruskal(graph, S);
-	affichageDeSesGrandsMorts(graph);
+	affichageDeSesGrandsMorts(graph);*/
 }
 
 //faire un tableau avec allocation dynamique des valeurs lorsque celui-ci est dépassé en taille
