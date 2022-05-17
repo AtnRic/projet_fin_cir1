@@ -1068,3 +1068,67 @@ function Solveur(tab) {
     }
   }
 }
+
+let Telep = [
+  [1, 10],
+  [6, 12],
+  [7, 13],
+];
+
+Teleporter(Telep);
+
+// Génération des téléporteurs, 0 => [0, 1], 1 => [1, 2]
+function Teleporter(tab) {
+  for (i = 0; i < tab.length; i++) {
+    let Cell1 = document.getElementById(tab[i][0]);
+    let Cell2 = document.getElementById(tab[i][1]);
+
+    const Div1 = document.createElement("div");
+    const Div2 = document.createElement("div");
+
+    let box = document.getElementById("1");
+    let width = box.offsetWidth;
+    let height = box.offsetHeight;
+
+    Div1.style.width = width + "px";
+    Div1.style.height = height + "px";
+    Div2.style.width = width + "px";
+    Div2.style.height = height + "px";
+
+    const Img1 = document.createElement("img");
+    const Img2 = document.createElement("img");
+
+    Cell1.appendChild(Div1);
+    Div1.appendChild(Img1);
+    Cell2.appendChild(Div2);
+    Div2.appendChild(Img2);
+
+    Div1.classList.add("Teleporteur");
+    Div2.classList.add("Teleporteur");
+    Img1.classList.add("TeleporteurImg");
+    Img2.classList.add("TeleporteurImg");
+
+    let src = "";
+    console.log(i);
+    switch (i) {
+      case 1:
+        console.log("case");
+        src = "../images/mazes/teleporteur_a.png";
+        break;
+      case 2:
+        src = "../images/mazes/teleporteur_b.png";
+        break;
+      case 3:
+        src = "../images/mazes/teleporteur_c.png";
+        break;
+      case 0:
+        src = "../images/mazes/teleporteur_d.png";
+        break;
+    }
+
+    Img1.src = src;
+    Img2.src = src;
+  }
+}
+
+function TeleportePlayer() {}
