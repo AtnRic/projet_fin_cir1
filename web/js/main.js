@@ -529,8 +529,8 @@ var Space = {
     "../images/mazes/space_maze_border.png",
     "../images/mazes/space_maze_border.png",
   ],
-  Pl: "../images/heros/jungle_hero_gauche_sprite.png",
-  Pr: "../images/heros/jungle_hero_droite_sprite.png",
+  Pl: "../images/heros/pac_hero_droite.png",
+  Pr: "../images/heros/pac_hero_droite.png",
 };
 
 let Ambiance = Space;
@@ -1002,4 +1002,30 @@ function MoveGarde(gardeId, posIndent, indentX, indentY) {
     direction: "reverse",
     duration: 150,
   });
+}
+
+Solveur([1, 2, 3]);
+
+function Solveur(tab) {
+  for (i = 0; i < tab.length; i++) {
+    let Cell = document.getElementById(tab[i]);
+    const Div = document.createElement("div");
+
+    let box = document.getElementById("1");
+    let width = box.offsetWidth;
+    let height = box.offsetHeight;
+
+    Div.style.width = width + "px";
+    Div.style.height = height + "px";
+
+    const Img = document.createElement("img");
+
+    Cell.appendChild(Div);
+    Div.appendChild(Img);
+
+    Div.classList.add("solveur");
+    Img.classList.add("solveur");
+
+    Img.src = "../images/solveur/point.png";
+  }
 }
