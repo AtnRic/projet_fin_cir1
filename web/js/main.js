@@ -529,8 +529,8 @@ var Space = {
     "../images/mazes/space_maze_border.png",
     "../images/mazes/space_maze_border.png",
   ],
-  Pl: "../images/heros/pac_hero_droite.png",
-  Pr: "../images/heros/pac_hero_droite.png",
+  Pl: "../images/heros/unknown.png",
+  Pr: "../images/heros/unknown.png",
 };
 
 let Ambiance = Space;
@@ -552,7 +552,7 @@ let cells = document.getElementsByClassName("cell");
 
 var list = [new Garde(0, 0)];
 
-CreateGrid(8, labyrinthe, 14);
+CreateGrid(7, labyrinthe, 14);
 
 function CreateGrid(size, tab, spawnCellId) {
   //#region ROWS
@@ -779,8 +779,9 @@ function SpawnPlayer(cellId) {
         loop: false,
       });
       MoveGarde(0, 1, -height, 0);
-      /* 
+
       if (event.key == "p") {
+        /*
         console.log("anime");
         anime({
           targets: [".t1", ".t2", ".t3", ".t4"],
@@ -809,8 +810,9 @@ function SpawnPlayer(cellId) {
           }),
           delay: anime.stagger(200, { grid: [14, 5], from: "center" }),
           easing: "easeInOutQuad",
-        });
-      } */
+        });*/
+        Solveur([1, 2, 3, 4, 5, 6, 14, 22, 30, 38]);
+      }
 
       if (event.key == "ArrowDown") {
         PHP_Function("../tools/function.php", "Down", function Handle(output) {
@@ -946,11 +948,11 @@ function GenerationGarde(gardeList) {
 
   for (i = 0; i < gardeList.length; i++) {
     var Cell = document.getElementById(gardeList[i].pos);
+
     const GardeDiv = document.createElement("div");
     const GardeImg = document.createElement("img");
     Cell.appendChild(GardeDiv);
     let box = document.getElementById("1");
-
     let width = box.offsetWidth;
     let height = box.offsetHeight;
     GardeDiv.style.width = width / 2 + "px";
@@ -960,7 +962,7 @@ function GenerationGarde(gardeList) {
     GardeDiv.classList.add("Garde");
     GardeImg.classList.add("GardeImg");
     GardeImg.id = "G_ui" + gardeList[i].id;
-    GardeImg.src = "../images/gardes/jungle_guard_droite_sprite.png";
+    GardeImg.src = "../images/heros/unknown.png";
     GardeDiv.appendChild(GardeImg);
     anime({
       targets: "#G_div" + gardeList[i].id,
@@ -979,7 +981,7 @@ function MoveGarde(gardeId, posIndent, indentX, indentY) {
   let box = document.getElementById("1");
   let width = box.offsetWidth;
   let height = box.offsetHeight;
-  let GardeImg = document.getElementById("G_ui" + gardeId);
+  X = parseFloat(width) / 2;
 
   for (i = 0; i < list.length; i++) {
     if (list[i].id == gardeId) {
@@ -991,9 +993,13 @@ function MoveGarde(gardeId, posIndent, indentX, indentY) {
       Garde.style.height = height + "px";
     }
   }
-
-  let W = GardeImg.width;
-
+  anime({
+    targets: "#G_ui" + gardeId,
+    translateX: [X, -(7.5 * X)],
+    easing: "steps(8)",
+    duration: 500,
+    loop: false,
+  });
   anime({
     targets: "#G_div" + gardeId,
     translateX: indentX,
@@ -1004,28 +1010,39 @@ function MoveGarde(gardeId, posIndent, indentX, indentY) {
   });
 }
 
-Solveur([1, 2, 3]);
-
+let Solved = false;
 function Solveur(tab) {
-  for (i = 0; i < tab.length; i++) {
-    let Cell = document.getElementById(tab[i]);
-    const Div = document.createElement("div");
+  if (!Solved) {
+    Solved = true;
+    for (i = 0; i < tab.length; i++) {
+      let Cell = document.getElementById(tab[i]);
+      const Div = document.createElement("div");
 
-    let box = document.getElementById("1");
-    let width = box.offsetWidth;
-    let height = box.offsetHeight;
+      let box = document.getElementById("1");
+      let width = box.offsetWidth;
+      let height = box.offsetHeight;
 
-    Div.style.width = width + "px";
-    Div.style.height = height + "px";
+      Div.style.width = width + "px";
+      Div.style.height = height + "px";
 
-    const Img = document.createElement("img");
+      const Img = document.createElement("img");
 
-    Cell.appendChild(Div);
-    Div.appendChild(Img);
+      Cell.appendChild(Div);
+      Div.appendChild(Img);
 
-    Div.classList.add("solveur");
-    Img.classList.add("solveur");
+      Div.classList.add("Solveur");
+      Img.classList.add("SolveurImg");
 
-    Img.src = "../images/solveur/point.png";
+      Img.src = "../images/solveur/point.png";
+      anime({
+        targets: ".SolveurImg",
+        scale: [
+          { value: 0, easing: "easeOutSine", duration: 500 },
+          { value: 1, easing: "easeInOutQuad", duration: 1200 },
+        ],
+        loop: true,
+        delay: anime.stagger(200, { grid: [14, 5], from: "center" }),
+      });
+    }
   }
 }
