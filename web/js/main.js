@@ -484,31 +484,6 @@ var Jungle = {
   Pl: "../images/heros/jungle_hero_gauche_sprite.png",
   Pr: "../images/heros/jungle_hero_droite_sprite.png",
 };
-
-var Retro = {
-  W1: [
-    "../images/mazes/retro_maze_one.png",
-    "../images/mazes/retro_maze_one.png",
-    "../images/mazes/retro_maze_one.png",
-    "../images/mazes/retro_maze_one.png",
-  ],
-  W2: [
-    "../images/mazes/retro_maze_two.png",
-    "../images/mazes/retro_maze_two.png",
-    "../images/mazes/retro_maze_two.png",
-    "../images/mazes/retro_maze_two.png",
-  ],
-  W3: ["../images/mazes/retro_maze_three.png"],
-  W4: ["../images/mazes/retro_maze_four.png"],
-  B: [
-    "../images/mazes/retro_maze_border.png",
-    "../images/mazes/retro_maze_border.png",
-    "../images/mazes/retro_maze_border.png",
-  ],
-  Pl: "../images/heros/jungle_hero_gauche_sprite.png",
-  Pr: "../images/heros/jungle_hero_droite_sprite.png",
-};
-
 var Space = {
   W1: [
     "../images/mazes/space_maze_one_a.png",
@@ -529,11 +504,36 @@ var Space = {
     "../images/mazes/space_maze_border.png",
     "../images/mazes/space_maze_border.png",
   ],
-  Pl: "../images/heros/jungle_hero_gauche_sprite.png",
-  Pr: "../images/heros/jungle_hero_droite_sprite.png",
+  Pl: "../images/heros/unknown.png",
+  Pr: "../images/heros/unknown.png",
+};
+var Retro = {
+  W1: [
+    "../images/mazes/pac_maze_one.png",
+    "../images/mazes/pac_maze_one.png",
+    "../images/mazes/pac_maze_one.png",
+    "../images/mazes/pac_maze_one.png",
+  ],
+  W2: [
+    "../images/mazes/pac_maze_two.png",
+    "../images/mazes/pac_maze_two.png",
+    "../images/mazes/pac_maze_two.png",
+    "../images/mazes/pac_maze_two.png",
+  ],
+  W3: ["../images/mazes/pac_maze_three.png"],
+  W4: ["../images/mazes/pac_maze_four.png"],
+  B: [
+    "../images/mazes/pac_maze_border.png",
+    "../images/mazes/pac_maze_border.png",
+    "../images/mazes/pac_maze_border.png",
+  ],
+  Pl: "../images/heros/pac_hero_droite.png",
+  Pr: "../images/heros/pac_hero_droite.png",
+  Gr: "../images/gardes/retro_gard_right.png",
+  Gl: "../images/gardes/retro_gard_right.png",
 };
 
-let Ambiance = Space;
+let Ambiance = Retro;
 
 function SetAmbiance(AmbianceName) {
   switch (AmbianceName) {
@@ -552,7 +552,7 @@ let cells = document.getElementsByClassName("cell");
 
 var list = [new Garde(0, 0)];
 
-CreateGrid(8, labyrinthe, 14);
+CreateGrid(20, labyrinthe, 14);
 
 function CreateGrid(size, tab, spawnCellId) {
   //#region ROWS
@@ -725,13 +725,15 @@ function CreateGrid(size, tab, spawnCellId) {
   //#endregion
 
   //#region PLAYER
+  GenerationGarde(list);
+  //#endregion PLAYER
+
+  //#region GARDE
+
   setTimeout(function () {
     SpawnPlayer(spawnCellId);
-  }, 2000);
-  //#endregion PLAYER
-  setTimeout(function () {
-    GenerationGarde(list);
   }, 3000);
+  //#endregion
 }
 
 function SpawnPlayer(cellId) {
@@ -776,8 +778,41 @@ function SpawnPlayer(cellId) {
         duration: 500,
         loop: false,
       });
-
       MoveGarde(0, 1, -height, 0);
+
+      if (event.key == "p") {
+        /*
+        console.log("anime");
+        anime({
+          targets: [".t1", ".t2", ".t3", ".t4"],
+          scale: [
+            { value: 0.1, easing: "easeOutSine", duration: 500 },
+            { value: 1, easing: "easeInOutQuad", duration: 1200 },
+          ],
+          delay: anime.stagger(200, { grid: [14, 5], from: "center" }),
+        });
+      anime({
+          targets: [".t1", ".t2", ".t3", ".t4"],
+          translateX: anime.stagger(10, {
+            grid: [14, 5],
+            from: "center",
+            axis: "x",
+          }),
+          translateY: anime.stagger(10, {
+            grid: [14, 5],
+            from: "center",
+            axis: "y",
+          }),
+          rotateZ: anime.stagger([0, 90], {
+            grid: [14, 5],
+            from: "center",
+            axis: "x",
+          }),
+          delay: anime.stagger(200, { grid: [14, 5], from: "center" }),
+          easing: "easeInOutQuad",
+        });*/
+        Solveur([1, 2, 3, 4, 5, 6, 14, 22, 30, 38]);
+      }
 
       if (event.key == "ArrowDown") {
         PHP_Function("../tools/function.php", "Down", function Handle(output) {
@@ -799,7 +834,6 @@ function SpawnPlayer(cellId) {
           }
         });
       }
-
       if (event.key == "ArrowLeft") {
         PHP_Function("../tools/function.php", "Left", function Handle(output) {
           if (output) {
@@ -835,6 +869,7 @@ function SpawnPlayer(cellId) {
     loop: true,
   });
 }
+
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
@@ -847,7 +882,7 @@ function LabAnim(attClass) {
     duration: 2000,
     direction: "reverse",
     easing: "easeInElastic(1, .4)",
-    delay: anime.stagger(100, {}),
+    delay: anime.stagger(10, {}),
   });
 }
 
@@ -913,11 +948,11 @@ function GenerationGarde(gardeList) {
 
   for (i = 0; i < gardeList.length; i++) {
     var Cell = document.getElementById(gardeList[i].pos);
+
     const GardeDiv = document.createElement("div");
     const GardeImg = document.createElement("img");
     Cell.appendChild(GardeDiv);
     let box = document.getElementById("1");
-
     let width = box.offsetWidth;
     let height = box.offsetHeight;
     GardeDiv.style.width = width / 2 + "px";
@@ -927,7 +962,7 @@ function GenerationGarde(gardeList) {
     GardeDiv.classList.add("Garde");
     GardeImg.classList.add("GardeImg");
     GardeImg.id = "G_ui" + gardeList[i].id;
-    GardeImg.src = "../images/gardes/jungle_guard_droite_sprite.png";
+    GardeImg.src = Ambiance.Gl;
     GardeDiv.appendChild(GardeImg);
     anime({
       targets: "#G_div" + gardeList[i].id,
@@ -946,22 +981,33 @@ function MoveGarde(gardeId, posIndent, indentX, indentY) {
   let box = document.getElementById("1");
   let width = box.offsetWidth;
   let height = box.offsetHeight;
-  let GardeImg = document.getElementById("G_ui" + gardeId);
+  X = parseFloat(width) / 2;
 
   for (i = 0; i < list.length; i++) {
     if (list[i].id == gardeId) {
       list[i].pos += posIndent;
       let newCell = document.getElementById(list[i].pos);
       let Garde = document.getElementById("G_div" + list[i].id);
+      let GardeImg = document.getElementById("G_div" + list[i].id);
+
+      if (indentX < 0) {
+        GardeImg.src = Ambiance.Gl;
+      } else {
+        GardeImg.src = Ambiance.Gr;
+      }
+
       newCell.appendChild(Garde);
-      console.log(GardeImg.width);
       Garde.style.width = width / 2 + "px";
       Garde.style.height = height + "px";
     }
   }
-
-  let W = GardeImg.width;
-
+  anime({
+    targets: "#G_ui" + gardeId,
+    translateX: [X, -(7.5 * X)],
+    easing: "steps(8)",
+    duration: 500,
+    loop: false,
+  });
   anime({
     targets: "#G_div" + gardeId,
     translateX: indentX,
@@ -970,4 +1016,41 @@ function MoveGarde(gardeId, posIndent, indentX, indentY) {
     direction: "reverse",
     duration: 150,
   });
+}
+
+let Solved = false;
+function Solveur(tab) {
+  if (!Solved) {
+    Solved = true;
+    for (i = 0; i < tab.length; i++) {
+      let Cell = document.getElementById(tab[i]);
+      const Div = document.createElement("div");
+
+      let box = document.getElementById("1");
+      let width = box.offsetWidth;
+      let height = box.offsetHeight;
+
+      Div.style.width = width + "px";
+      Div.style.height = height + "px";
+
+      const Img = document.createElement("img");
+
+      Cell.appendChild(Div);
+      Div.appendChild(Img);
+
+      Div.classList.add("Solveur");
+      Img.classList.add("SolveurImg");
+
+      Img.src = "../images/solveur/point.png";
+      anime({
+        targets: ".SolveurImg",
+        scale: [
+          { value: 0, easing: "easeOutSine", duration: 500 },
+          { value: 1, easing: "easeInOutQuad", duration: 1200 },
+        ],
+        loop: true,
+        delay: anime.stagger(200, { grid: [14, 5], from: "center" }),
+      });
+    }
+  }
 }

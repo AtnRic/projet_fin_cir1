@@ -60,7 +60,18 @@ body{
   top: 0;
   width: 100%;
   height: 100%;
+  background-image: none;
 }
+
+.Solveur
+{
+  position:absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-image: none;
+}
+
 
 .global{
   position: relative;
@@ -68,7 +79,7 @@ body{
   top: -83%;
 }
 
-#player {
+#player, .Garde {
   position:absolute;
   margin-left:25%;
   overflow: hidden;
@@ -84,14 +95,16 @@ body{
   background-image: none;
 }
 
-.Garde{  
-  margin-top: -30%;
-  margin-left: 20%;
-  position:absolute;
-  overflow: hidden;
-  z-index: 100;
+.SolveurImg
+{
+  width: auto;
+  height: 50%;
+  margin-top: 25%;
+  margin-left: 25%;
   background-image: none;
+
 }
+
 
 table, tr, td{
   padding: 0;

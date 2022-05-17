@@ -1,9 +1,6 @@
 <?php
 $functionName = $_POST['functionName'];
 
-echo true;
-
-
 if($functionName == 'Up')
 {
     // Appeler le C, peut-il se déplacer dans cette direction ?
@@ -26,9 +23,7 @@ if($functionName == 'Right')
 }
 if($functionName == 'generation')
 {
-
     // Appeler le C, lancement du jeu ?
     echo true; // true ou false.
 }
-
 ?>
