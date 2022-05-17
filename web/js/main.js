@@ -525,10 +525,10 @@ var Retro = {
     "../images/mazes/pac_maze_border.png",
     "../images/mazes/pac_maze_border.png",
   ],
-  Pl: "../images/heros/pac_hero_droite.png",
+  Pl: "../images/heros/pac_hero_gauche.png",
   Pr: "../images/heros/pac_hero_droite.png",
-  Gr: "../images/gardes/retro_gard_right.png",
-  Gl: "../images/gardes/retro_gard_right.png",
+  Gr: "../images/gardes/pac_guard_blue_droite.png",
+  Gl: "../images/gardes/pac_guard_blue_droite.png",
 };
 
 let Ambiance = Retro;
@@ -550,10 +550,10 @@ let cells = document.getElementsByClassName("cell");
 
 var list = [new Garde(0, 0)]; // Méthode de création de la liste des gardes.
 
-Launch(20, labyrinthe, 14, list);
+Launch(5, labyrinthe, 14, list, true);
 
 // Création d'une grid avec spawn du joueur et des gardes.
-function Launch(size, tab, spawnCellId, gardList) {
+function Launch(size, tab, spawnCellId, gardList, boolAnimation) {
   //#region ROWS
   makeRows(size);
   cellNum = size;
@@ -716,10 +716,17 @@ function Launch(size, tab, spawnCellId, gardList) {
   //#endregion
 
   //#region ANIMATION
-  LabAnim("t1");
-  LabAnim("t2");
-  LabAnim("t3");
-  LabAnim("t4");
+  if (boolAnimation) {
+    LabAnim("t1", 1500);
+    LabAnim("t2", 1500);
+    LabAnim("t3", 1500);
+    LabAnim("t4", 1500);
+  } else {
+    LabAnim("t1", 10);
+    LabAnim("t2", 10);
+    LabAnim("t3", 10);
+    LabAnim("t4", 10);
+  }
 
   //#endregion
 
@@ -875,12 +882,12 @@ function getRandomInt(max) {
 }
 
 // Animation d'arrivée des murs.
-function LabAnim(attClass) {
+function LabAnim(attClass, distance) {
   anime({
     targets: "." + attClass,
-    translateY: getRandomInt(3000) - getRandomInt(1500),
-    translateX: getRandomInt(3000) - getRandomInt(1500),
-    duration: 2000,
+    translateY: getRandomInt(distance) - getRandomInt(distance),
+    translateX: getRandomInt(distance) - getRandomInt(distance),
+    duration: 3000,
     direction: "reverse",
     easing: "easeInElastic(1, .4)",
     delay: anime.stagger(10, {}),
