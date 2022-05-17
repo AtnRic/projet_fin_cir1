@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>retro</title>
+    <title>Connexion</title>
     <link rel="stylesheet" type="text/css" href="../css/log.css">
 </head>
 <body>
@@ -17,18 +17,57 @@
 <div class="choose" id="choose">
     <h1>Choose your player :</h1>
     <div class="container players">
-        <div class="signin but">
-            <div class="tuile"></div>
-            <h3>Sign In</h3>
-        </div>
-        <div class="signup but">
-            <div class="tuile"></div>
-            <h3>Sign Up</h3>
-        </div>
-        <div class="without but">
-            <div class="tuile"></div>
-            <h3>Play without account</h3>
-        </div>
+        <a href="log.php?type=i#log">
+            <div class="signin but">
+                <div class="tuile"></div>
+                <h3>Sign In</h3>
+            </div>
+        </a>
+        <a href="log.php?type=u#log">
+            <div class="signup but">
+                <div class="tuile"></div>
+                <h3>Sign Up</h3>
+            </div>
+        </a>
+        <a href="log.php?type=w#log">
+            <div class="without but">
+                <div class="tuile"></div>
+                <h3>Play without account</h3>
+            </div>
+        </a>
+
     </div>
+</div>
+<div id="log">
+    <?php
+        $type = $_GET['type'];
+        if($type == 'i'){
+            echo "<h1>Sign in</h1>";
+            echo "<form action='' method='POST'>
+                <label for='pseudo'></label><input type='text' id='pseudo' name='pseudo' placeholder='nickname' autofocus required ><br>
+                <label for='mdpin'></label><input type='password' id='mdpin' name='mdpin' placeholder='password' required><br>
+                <label for='verifmdp'></label><input type='password' id='verifmdp' name='verifmdp' placeholder='password verification' required><br><br>
+                <input type='submit' class='sub' name='sub' value='Envoyer'>
+            </form>";
+        }
+        if($type == 'u'){
+            echo "<h1>Sign up</h1>";
+            echo "<form action='' method='POST'>
+                <label for='pseudo'></label><input type='text' id='pseudo' name='pseudo' placeholder='nickname' autofocus required ><br>
+                <label for='mdpin'></label><input type='password' id='mdpin' name='mdpin' placeholder='password' required><br>
+                <label for='verifmdp'></label><input type='password' id='verifmdp' name='verifmdp' placeholder='password verification' required><br><br>
+                <input type='submit' class='sub' name='sub' value='Envoyer'>
+            </form>";
+        }
+        if($type == 'w'){
+            echo "<h1>Play without account</h1>";
+            echo "<form action='' method='POST'>
+                <label for='pseudo'></label><input type='text' id='pseudo' name='pseudo' placeholder='nickname' autofocus required ><br>
+                <label for='mdpin'></label><input type='password' id='mdpin' name='mdpin' placeholder='password' required><br>
+                <label for='verifmdp'></label><input type='password' id='verifmdp' name='verifmdp' placeholder='password verificaion' required><br><br>
+                <input type='submit' class='sub' name='sub' value='Envoyer'>
+            </form>";
+        }
+    ?>
 </div>
 </body>
