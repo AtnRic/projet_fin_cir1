@@ -725,13 +725,15 @@ function CreateGrid(size, tab, spawnCellId) {
   //#endregion
 
   //#region PLAYER
+  GenerationGarde(list);
+  //#endregion PLAYER
+
+  //#region GARDE
+
   setTimeout(function () {
     SpawnPlayer(spawnCellId);
-  }, 2000);
-  //#endregion PLAYER
-  setTimeout(function () {
-    GenerationGarde(list);
   }, 3000);
+  //#endregion
 }
 
 function SpawnPlayer(cellId) {
@@ -776,8 +778,39 @@ function SpawnPlayer(cellId) {
         duration: 500,
         loop: false,
       });
-
       MoveGarde(0, 1, -height, 0);
+      /* 
+      if (event.key == "p") {
+        console.log("anime");
+        anime({
+          targets: [".t1", ".t2", ".t3", ".t4"],
+          scale: [
+            { value: 0.1, easing: "easeOutSine", duration: 500 },
+            { value: 1, easing: "easeInOutQuad", duration: 1200 },
+          ],
+          delay: anime.stagger(200, { grid: [14, 5], from: "center" }),
+        });
+      anime({
+          targets: [".t1", ".t2", ".t3", ".t4"],
+          translateX: anime.stagger(10, {
+            grid: [14, 5],
+            from: "center",
+            axis: "x",
+          }),
+          translateY: anime.stagger(10, {
+            grid: [14, 5],
+            from: "center",
+            axis: "y",
+          }),
+          rotateZ: anime.stagger([0, 90], {
+            grid: [14, 5],
+            from: "center",
+            axis: "x",
+          }),
+          delay: anime.stagger(200, { grid: [14, 5], from: "center" }),
+          easing: "easeInOutQuad",
+        });
+      } */
 
       if (event.key == "ArrowDown") {
         PHP_Function("../tools/function.php", "Down", function Handle(output) {
@@ -799,7 +832,6 @@ function SpawnPlayer(cellId) {
           }
         });
       }
-
       if (event.key == "ArrowLeft") {
         PHP_Function("../tools/function.php", "Left", function Handle(output) {
           if (output) {
@@ -835,6 +867,7 @@ function SpawnPlayer(cellId) {
     loop: true,
   });
 }
+
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
@@ -954,7 +987,6 @@ function MoveGarde(gardeId, posIndent, indentX, indentY) {
       let newCell = document.getElementById(list[i].pos);
       let Garde = document.getElementById("G_div" + list[i].id);
       newCell.appendChild(Garde);
-      console.log(GardeImg.width);
       Garde.style.width = width / 2 + "px";
       Garde.style.height = height + "px";
     }
