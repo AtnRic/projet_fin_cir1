@@ -23,10 +23,7 @@ if($functionName == 'Right')
 }
 if($functionName == 'generation')
 {
-    
     // Appeler le C, lancement du jeu ?
     echo true; // true ou false.
 }
-
-
 ?>
