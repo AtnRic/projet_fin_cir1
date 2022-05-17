@@ -484,31 +484,6 @@ var Jungle = {
   Pl: "../images/heros/jungle_hero_gauche_sprite.png",
   Pr: "../images/heros/jungle_hero_droite_sprite.png",
 };
-
-var Retro = {
-  W1: [
-    "../images/mazes/retro_maze_one.png",
-    "../images/mazes/retro_maze_one.png",
-    "../images/mazes/retro_maze_one.png",
-    "../images/mazes/retro_maze_one.png",
-  ],
-  W2: [
-    "../images/mazes/retro_maze_two.png",
-    "../images/mazes/retro_maze_two.png",
-    "../images/mazes/retro_maze_two.png",
-    "../images/mazes/retro_maze_two.png",
-  ],
-  W3: ["../images/mazes/retro_maze_three.png"],
-  W4: ["../images/mazes/retro_maze_four.png"],
-  B: [
-    "../images/mazes/retro_maze_border.png",
-    "../images/mazes/retro_maze_border.png",
-    "../images/mazes/retro_maze_border.png",
-  ],
-  Pl: "../images/heros/jungle_hero_gauche_sprite.png",
-  Pr: "../images/heros/jungle_hero_droite_sprite.png",
-};
-
 var Space = {
   W1: [
     "../images/mazes/space_maze_one_a.png",
@@ -532,8 +507,33 @@ var Space = {
   Pl: "../images/heros/unknown.png",
   Pr: "../images/heros/unknown.png",
 };
+var Retro = {
+  W1: [
+    "../images/mazes/pac_maze_one.png",
+    "../images/mazes/pac_maze_one.png",
+    "../images/mazes/pac_maze_one.png",
+    "../images/mazes/pac_maze_one.png",
+  ],
+  W2: [
+    "../images/mazes/pac_maze_two.png",
+    "../images/mazes/pac_maze_two.png",
+    "../images/mazes/pac_maze_two.png",
+    "../images/mazes/pac_maze_two.png",
+  ],
+  W3: ["../images/mazes/pac_maze_three.png"],
+  W4: ["../images/mazes/pac_maze_four.png"],
+  B: [
+    "../images/mazes/pac_maze_border.png",
+    "../images/mazes/pac_maze_border.png",
+    "../images/mazes/pac_maze_border.png",
+  ],
+  Pl: "../images/heros/pac_hero_droite.png",
+  Pr: "../images/heros/pac_hero_droite.png",
+  Gr: "../images/gardes/retro_gard_right.png",
+  Gl: "../images/gardes/retro_gard_right.png",
+};
 
-let Ambiance = Space;
+let Ambiance = Retro;
 
 function SetAmbiance(AmbianceName) {
   switch (AmbianceName) {
@@ -552,7 +552,7 @@ let cells = document.getElementsByClassName("cell");
 
 var list = [new Garde(0, 0)];
 
-CreateGrid(7, labyrinthe, 14);
+CreateGrid(20, labyrinthe, 14);
 
 function CreateGrid(size, tab, spawnCellId) {
   //#region ROWS
@@ -882,7 +882,7 @@ function LabAnim(attClass) {
     duration: 2000,
     direction: "reverse",
     easing: "easeInElastic(1, .4)",
-    delay: anime.stagger(100, {}),
+    delay: anime.stagger(10, {}),
   });
 }
 
@@ -962,7 +962,7 @@ function GenerationGarde(gardeList) {
     GardeDiv.classList.add("Garde");
     GardeImg.classList.add("GardeImg");
     GardeImg.id = "G_ui" + gardeList[i].id;
-    GardeImg.src = "../images/heros/unknown.png";
+    GardeImg.src = Ambiance.Gl;
     GardeDiv.appendChild(GardeImg);
     anime({
       targets: "#G_div" + gardeList[i].id,
@@ -988,6 +988,14 @@ function MoveGarde(gardeId, posIndent, indentX, indentY) {
       list[i].pos += posIndent;
       let newCell = document.getElementById(list[i].pos);
       let Garde = document.getElementById("G_div" + list[i].id);
+      let GardeImg = document.getElementById("G_div" + list[i].id);
+
+      if (indentX < 0) {
+        GardeImg.src = Ambiance.Gl;
+      } else {
+        GardeImg.src = Ambiance.Gr;
+      }
+
       newCell.appendChild(Garde);
       Garde.style.width = width / 2 + "px";
       Garde.style.height = height + "px";
