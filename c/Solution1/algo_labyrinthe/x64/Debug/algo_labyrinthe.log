@@ -1,4 +1,14 @@
-﻿  tri.c
-  LINK : C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\x64\Debug\algo_labyrinthe.exe introuvable ou non généré par la dernière édition de liens incrémentielle ; édition de liens complète en cours
-tri.obj : error LNK2005: main déjà défini(e) dans main.obj
-C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\x64\Debug\algo_labyrinthe.exe : fatal error LNK1169: un ou plusieurs symboles définis à différentes reprises ont été rencontrés
+﻿  main.c
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(185,39): warning C4028: paramètre formel 3 différent de la déclaration
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(187,15): warning C4047: 'fonction' : les niveaux d'indirection de 'Graph *' et de 'int' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(187,10): warning C4024: 'isCycle' : types différents pour le paramètre formel et réel 1
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(188,36): warning C4047: '!=' : les niveaux d'indirection de 'int' et de 'void *' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(228,55): warning C4047: 'fonction' : les niveaux d'indirection de 'int' et de 'Graph *' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(228,50): warning C4024: 'find' : types différents pour le paramètre formel et réel 3
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(229,53): warning C4047: 'fonction' : les niveaux d'indirection de 'int' et de 'Graph *' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(229,48): warning C4024: 'find' : types différents pour le paramètre formel et réel 3
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(544,31): warning C4554: '^' : vérifiez si la priorité des opérateurs n'est pas une cause possible d'erreur ; utilisez des parenthèses pour rendre les priorités plus claires
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(589,11): error C2082: redéfinition du paramètre formel 'tab'
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(590,8): warning C4244: 'fonction' : conversion de 'time_t' en 'unsigned int', perte possible de données
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(593,30): warning C4554: '^' : vérifiez si la priorité des opérateurs n'est pas une cause possible d'erreur ; utilisez des parenthèses pour rendre les priorités plus claires
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(598,29): warning C4554: '^' : vérifiez si la priorité des opérateurs n'est pas une cause possible d'erreur ; utilisez des parenthèses pour rendre les priorités plus claires
