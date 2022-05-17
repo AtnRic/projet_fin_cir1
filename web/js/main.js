@@ -459,8 +459,6 @@ var correspondance = {
   o: [1, 1, 1, 0],
 };
 
-var ListGuarde;
-
 var Jungle = {
   W1: [
     "../images/mazes/jungle_maze_one_a.png",
