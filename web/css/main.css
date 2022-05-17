@@ -54,12 +54,13 @@ body{
   background-size: cover;
 }
 
-.walls
+.walls, .solveur
 {
   position:absolute;
   top: 0;
   width: 100%;
   height: 100%;
+  background-image: none;
 }
 
 .global{
@@ -92,6 +93,7 @@ body{
   z-index: 100;
   background-image: none;
 }
+
 
 table, tr, td{
   padding: 0;
