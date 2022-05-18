@@ -35,7 +35,6 @@
                 <h3>Play without account</h3>
             </div>
         </a>
-
     </div>
 </div>
 <div id="log">
