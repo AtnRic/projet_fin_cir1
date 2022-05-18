@@ -1,7 +1,12 @@
 *{
     background-color: #D4DAED;
 }
+.global{
+    background-color: black;
+}
+.container{
 
+}
 .sline {
     position: relative;
     text-align: center;
@@ -13,11 +18,20 @@
 .two{
     position: relative;
     z-index: 2;
-    background-image: url("../images/retro/retro.png");
+    background-image: url("../images/retro/loading.png");
     background-size: cover;
     background-color: transparent;
     background-position: bottom center;
     background-repeat: no-repeat;
+    animation: made 3s forwards;
+}
+@keyframes made {
+    99% {
+        background-image: url("../images/retro/loading.png");
+    }
+    100% {
+        background-image: url("../images/retro/retro.png");
+    }
 }
 
 table {width: 55%; height: 55%; border: 5px black solid;}
@@ -45,6 +59,8 @@ body{
     background-color: #9e9e9e;
     position: absolute;
     margin: 0;
+    border-width: 150px 300px;
+    border-color: black;
 }
 
 .walls
