@@ -63,7 +63,7 @@ typedef struct StackElement
 {
 	int value;
 	struct StackElement* next;
-}StackElement, * Stack;
+}StackElement, *Stack;
 
 Stack new_stack(void);
 bool is_empty_stack(Stack st);

@@ -1,26 +1,108 @@
 ﻿  main.c
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(573,28): warning C4554: '^' : vérifiez si la priorité des opérateurs n'est pas une cause possible d'erreur ; utilisez des parenthèses pour rendre les priorités plus claires
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(574,37): warning C4554: '^' : vérifiez si la priorité des opérateurs n'est pas une cause possible d'erreur ; utilisez des parenthèses pour rendre les priorités plus claires
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(577,23): warning C4554: '^' : vérifiez si la priorité des opérateurs n'est pas une cause possible d'erreur ; utilisez des parenthèses pour rendre les priorités plus claires
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(666,29): warning C4554: '^' : vérifiez si la priorité des opérateurs n'est pas une cause possible d'erreur ; utilisez des parenthèses pour rendre les priorités plus claires
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(667,49): warning C4047: 'fonction' : les niveaux d'indirection de 'Stack' et de 'Stack *' sont différents
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(667,46): warning C4024: 'pop_stack' : types différents pour le paramètre formel et réel 1
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(667,50): warning C4047: 'fonction' : les niveaux d'indirection de 'int' et de 'Stack' sont différents
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(667,36): warning C4024: 'labyrinthe1if' : types différents pour le paramètre formel et réel 4
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(670,41): warning C4013: 'push_Stack' non défini(e) ; extern retournant int pris par défaut
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(673,33): warning C4554: '^' : vérifiez si la priorité des opérateurs n'est pas une cause possible d'erreur ; utilisez des parenthèses pour rendre les priorités plus claires
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(684,56): warning C4554: '^' : vérifiez si la priorité des opérateurs n'est pas une cause possible d'erreur ; utilisez des parenthèses pour rendre les priorités plus claires
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(694,32): warning C4554: '^' : vérifiez si la priorité des opérateurs n'est pas une cause possible d'erreur ; utilisez des parenthèses pour rendre les priorités plus claires
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(711,56): warning C4554: '^' : vérifiez si la priorité des opérateurs n'est pas une cause possible d'erreur ; utilisez des parenthèses pour rendre les priorités plus claires
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(714,55): warning C4554: '^' : vérifiez si la priorité des opérateurs n'est pas une cause possible d'erreur ; utilisez des parenthèses pour rendre les priorités plus claires
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(721,32): warning C4554: '^' : vérifiez si la priorité des opérateurs n'est pas une cause possible d'erreur ; utilisez des parenthèses pour rendre les priorités plus claires
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(751,31): warning C4554: '^' : vérifiez si la priorité des opérateurs n'est pas une cause possible d'erreur ; utilisez des parenthèses pour rendre les priorités plus claires
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(772,28): warning C4554: '^' : vérifiez si la priorité des opérateurs n'est pas une cause possible d'erreur ; utilisez des parenthèses pour rendre les priorités plus claires
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(803,8): warning C4244: 'fonction' : conversion de 'time_t' en 'unsigned int', perte possible de données
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(806,30): warning C4554: '^' : vérifiez si la priorité des opérateurs n'est pas une cause possible d'erreur ; utilisez des parenthèses pour rendre les priorités plus claires
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(811,29): warning C4554: '^' : vérifiez si la priorité des opérateurs n'est pas une cause possible d'erreur ; utilisez des parenthèses pour rendre les priorités plus claires
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(816,12): warning C4047: 'return' : les niveaux d'indirection de 'int' et de 'Tab *' sont différents
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(769): warning C4716: 'labyrinthe1if' : doit retourner une valeur
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(799): warning C4715: 'TranscriptionPourJavaScript' : les chemins de contrôle ne retournent pas tous une valeur
-main.obj : error LNK2019: symbole externe non résolu push_Stack référencé dans la fonction labyrinthe1if
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\x64\Debug\algo_labyrinthe.exe : fatal error LNK1120: 1 externes non résolus
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(586,76): warning C4029: la déclaration de la liste de paramètres formels est différente de la définition
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(594,25): warning C4047: 'fonction' : les niveaux d'indirection de 'Stack' et de 'Stack *' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(594,22): warning C4024: 'pop_stack' : types différents pour le paramètre formel et réel 1
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(594,26): warning C4047: '=' : les niveaux d'indirection de 'Stack *' et de 'Stack' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(595,32): warning C4047: 'fonction' : les niveaux d'indirection de 'Stack' et de 'Stack *' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(595,29): warning C4024: 'top_stack' : types différents pour le paramètre formel et réel 1
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(599,61): warning C4047: 'fonction' : les niveaux d'indirection de 'Stack' et de 'Stack *' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(599,58): warning C4024: 'push_stack' : types différents pour le paramètre formel et réel 1
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(599,72): warning C4047: '=' : les niveaux d'indirection de 'Stack *' et de 'Stack' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(603,57): warning C4047: 'fonction' : les niveaux d'indirection de 'Stack' et de 'Stack *' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(603,54): warning C4024: 'push_stack' : types différents pour le paramètre formel et réel 1
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(603,65): warning C4047: '=' : les niveaux d'indirection de 'Stack *' et de 'Stack' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(608,65): warning C4047: 'fonction' : les niveaux d'indirection de 'Stack' et de 'Stack *' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(608,62): warning C4024: 'push_stack' : types différents pour le paramètre formel et réel 1
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(608,73): warning C4047: '=' : les niveaux d'indirection de 'Stack *' et de 'Stack' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(609,68): warning C4047: 'fonction' : les niveaux d'indirection de 'Stack' et de 'Stack *' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(609,65): warning C4024: 'push_stack' : types différents pour le paramètre formel et réel 1
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(609,79): warning C4047: '=' : les niveaux d'indirection de 'Stack *' et de 'Stack' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(614,56): warning C4047: 'fonction' : les niveaux d'indirection de 'Stack' et de 'Stack *' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(614,53): warning C4024: 'push_stack' : types différents pour le paramètre formel et réel 1
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(614,64): warning C4047: '=' : les niveaux d'indirection de 'Stack *' et de 'Stack' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(619,64): warning C4047: 'fonction' : les niveaux d'indirection de 'Stack' et de 'Stack *' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(619,61): warning C4024: 'push_stack' : types différents pour le paramètre formel et réel 1
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(619,72): warning C4047: '=' : les niveaux d'indirection de 'Stack *' et de 'Stack' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(620,67): warning C4047: 'fonction' : les niveaux d'indirection de 'Stack' et de 'Stack *' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(620,64): warning C4024: 'push_stack' : types différents pour le paramètre formel et réel 1
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(620,78): warning C4047: '=' : les niveaux d'indirection de 'Stack *' et de 'Stack' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(626,64): warning C4047: 'fonction' : les niveaux d'indirection de 'Stack' et de 'Stack *' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(626,61): warning C4024: 'push_stack' : types différents pour le paramètre formel et réel 1
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(626,72): warning C4047: '=' : les niveaux d'indirection de 'Stack *' et de 'Stack' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(627,64): warning C4047: 'fonction' : les niveaux d'indirection de 'Stack' et de 'Stack *' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(627,61): warning C4024: 'push_stack' : types différents pour le paramètre formel et réel 1
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(627,72): warning C4047: '=' : les niveaux d'indirection de 'Stack *' et de 'Stack' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(633,64): warning C4047: 'fonction' : les niveaux d'indirection de 'Stack' et de 'Stack *' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(633,61): warning C4024: 'push_stack' : types différents pour le paramètre formel et réel 1
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(633,72): warning C4047: '=' : les niveaux d'indirection de 'Stack *' et de 'Stack' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(634,64): warning C4047: 'fonction' : les niveaux d'indirection de 'Stack' et de 'Stack *' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(634,61): warning C4024: 'push_stack' : types différents pour le paramètre formel et réel 1
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(634,72): warning C4047: '=' : les niveaux d'indirection de 'Stack *' et de 'Stack' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(635,67): warning C4047: 'fonction' : les niveaux d'indirection de 'Stack' et de 'Stack *' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(635,64): warning C4024: 'push_stack' : types différents pour le paramètre formel et réel 1
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(635,78): warning C4047: '=' : les niveaux d'indirection de 'Stack *' et de 'Stack' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(641,58): warning C4047: 'fonction' : les niveaux d'indirection de 'Stack' et de 'Stack *' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(641,55): warning C4024: 'push_stack' : types différents pour le paramètre formel et réel 1
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(641,69): warning C4047: '=' : les niveaux d'indirection de 'Stack *' et de 'Stack' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(646,63): warning C4047: 'fonction' : les niveaux d'indirection de 'Stack' et de 'Stack *' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(646,60): warning C4024: 'push_stack' : types différents pour le paramètre formel et réel 1
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(646,71): warning C4047: '=' : les niveaux d'indirection de 'Stack *' et de 'Stack' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(647,66): warning C4047: 'fonction' : les niveaux d'indirection de 'Stack' et de 'Stack *' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(647,63): warning C4024: 'push_stack' : types différents pour le paramètre formel et réel 1
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(647,77): warning C4047: '=' : les niveaux d'indirection de 'Stack *' et de 'Stack' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(653,63): warning C4047: 'fonction' : les niveaux d'indirection de 'Stack' et de 'Stack *' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(653,60): warning C4024: 'push_stack' : types différents pour le paramètre formel et réel 1
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(653,71): warning C4047: '=' : les niveaux d'indirection de 'Stack *' et de 'Stack' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(654,66): warning C4047: 'fonction' : les niveaux d'indirection de 'Stack' et de 'Stack *' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(654,63): warning C4024: 'push_stack' : types différents pour le paramètre formel et réel 1
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(654,77): warning C4047: '=' : les niveaux d'indirection de 'Stack *' et de 'Stack' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(660,63): warning C4047: 'fonction' : les niveaux d'indirection de 'Stack' et de 'Stack *' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(660,60): warning C4024: 'push_stack' : types différents pour le paramètre formel et réel 1
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(660,71): warning C4047: '=' : les niveaux d'indirection de 'Stack *' et de 'Stack' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(661,63): warning C4047: 'fonction' : les niveaux d'indirection de 'Stack' et de 'Stack *' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(661,60): warning C4024: 'push_stack' : types différents pour le paramètre formel et réel 1
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(661,71): warning C4047: '=' : les niveaux d'indirection de 'Stack *' et de 'Stack' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(667,63): warning C4047: 'fonction' : les niveaux d'indirection de 'Stack' et de 'Stack *' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(667,60): warning C4024: 'push_stack' : types différents pour le paramètre formel et réel 1
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(667,71): warning C4047: '=' : les niveaux d'indirection de 'Stack *' et de 'Stack' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(668,66): warning C4047: 'fonction' : les niveaux d'indirection de 'Stack' et de 'Stack *' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(668,63): warning C4024: 'push_stack' : types différents pour le paramètre formel et réel 1
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(668,77): warning C4047: '=' : les niveaux d'indirection de 'Stack *' et de 'Stack' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(669,66): warning C4047: 'fonction' : les niveaux d'indirection de 'Stack' et de 'Stack *' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(669,63): warning C4024: 'push_stack' : types différents pour le paramètre formel et réel 1
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(669,77): warning C4047: '=' : les niveaux d'indirection de 'Stack *' et de 'Stack' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(675,63): warning C4047: 'fonction' : les niveaux d'indirection de 'Stack' et de 'Stack *' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(675,60): warning C4024: 'push_stack' : types différents pour le paramètre formel et réel 1
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(675,71): warning C4047: '=' : les niveaux d'indirection de 'Stack *' et de 'Stack' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(676,66): warning C4047: 'fonction' : les niveaux d'indirection de 'Stack' et de 'Stack *' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(676,63): warning C4024: 'push_stack' : types différents pour le paramètre formel et réel 1
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(676,77): warning C4047: '=' : les niveaux d'indirection de 'Stack *' et de 'Stack' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(677,66): warning C4047: 'fonction' : les niveaux d'indirection de 'Stack' et de 'Stack *' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(677,63): warning C4024: 'push_stack' : types différents pour le paramètre formel et réel 1
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(677,77): warning C4047: '=' : les niveaux d'indirection de 'Stack *' et de 'Stack' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(683,63): warning C4047: 'fonction' : les niveaux d'indirection de 'Stack' et de 'Stack *' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(683,60): warning C4024: 'push_stack' : types différents pour le paramètre formel et réel 1
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(683,71): warning C4047: '=' : les niveaux d'indirection de 'Stack *' et de 'Stack' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(684,66): warning C4047: 'fonction' : les niveaux d'indirection de 'Stack' et de 'Stack *' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(684,63): warning C4024: 'push_stack' : types différents pour le paramètre formel et réel 1
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(684,77): warning C4047: '=' : les niveaux d'indirection de 'Stack *' et de 'Stack' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(685,63): warning C4047: 'fonction' : les niveaux d'indirection de 'Stack' et de 'Stack *' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(685,60): warning C4024: 'push_stack' : types différents pour le paramètre formel et réel 1
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(685,71): warning C4047: '=' : les niveaux d'indirection de 'Stack *' et de 'Stack' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(691,63): warning C4047: 'fonction' : les niveaux d'indirection de 'Stack' et de 'Stack *' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(691,60): warning C4024: 'push_stack' : types différents pour le paramètre formel et réel 1
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(691,71): warning C4047: '=' : les niveaux d'indirection de 'Stack *' et de 'Stack' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(692,66): warning C4047: 'fonction' : les niveaux d'indirection de 'Stack' et de 'Stack *' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(692,63): warning C4024: 'push_stack' : types différents pour le paramètre formel et réel 1
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(692,77): warning C4047: '=' : les niveaux d'indirection de 'Stack *' et de 'Stack' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(693,63): warning C4047: 'fonction' : les niveaux d'indirection de 'Stack' et de 'Stack *' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(693,60): warning C4024: 'push_stack' : types différents pour le paramètre formel et réel 1
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(693,71): warning C4047: '=' : les niveaux d'indirection de 'Stack *' et de 'Stack' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(694,66): warning C4047: 'fonction' : les niveaux d'indirection de 'Stack' et de 'Stack *' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(694,63): warning C4024: 'push_stack' : types différents pour le paramètre formel et réel 1
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(694,77): warning C4047: '=' : les niveaux d'indirection de 'Stack *' et de 'Stack' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(732,8): warning C4244: 'fonction' : conversion de 'time_t' en 'unsigned int', perte possible de données
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(750,12): warning C4047: 'return' : les niveaux d'indirection de 'int' et de 'Tab *' sont différents
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(728): warning C4715: 'TranscriptionPourJavaScript' : les chemins de contrôle ne retournent pas tous une valeur
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(698): warning C4716: 'labyrinthe1if' : doit retourner une valeur
+  algo_labyrinthe.vcxproj -> C:\MAMP\htdocs\Projet CIR1\c\Solution1\x64\Debug\algo_labyrinthe.exe
