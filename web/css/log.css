@@ -22,8 +22,6 @@ html, body{
 h1, p{
     color: white;
     text-align: center;
-
-
 }
 #press::before{
     content: ">>> ";
@@ -123,9 +121,18 @@ form #guest div{
 .signin, .signup, .without{
     display: block;
     max-width: 210px;
-
 }
-
+.signin .tuile:hover{
+    background-image: url("../images/front/retro_gif.gif");
+    background-position: center;
+    background-size: contain;
+}
+.signup .tuile:hover{
+    background-image: url("../images/front/jungle_gif.gif");
+}
+.without .tuile:hover{
+    background-image: url("../images/front/space_gif.gif");
+}
 #log{
     width: 98vw;
     height: 100vh;
