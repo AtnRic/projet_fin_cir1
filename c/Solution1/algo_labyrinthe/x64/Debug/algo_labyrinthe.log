@@ -1,5 +1,4 @@
 ﻿  main.c
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(586,76): warning C4029: la déclaration de la liste de paramètres formels est différente de la définition
 C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(594,25): warning C4047: 'fonction' : les niveaux d'indirection de 'Stack' et de 'Stack *' sont différents
 C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(594,22): warning C4024: 'pop_stack' : types différents pour le paramètre formel et réel 1
 C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(594,26): warning C4047: '=' : les niveaux d'indirection de 'Stack *' et de 'Stack' sont différents
@@ -101,8 +100,8 @@ C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(693,71): warning C
 C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(694,66): warning C4047: 'fonction' : les niveaux d'indirection de 'Stack' et de 'Stack *' sont différents
 C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(694,63): warning C4024: 'push_stack' : types différents pour le paramètre formel et réel 1
 C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(694,77): warning C4047: '=' : les niveaux d'indirection de 'Stack *' et de 'Stack' sont différents
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(732,8): warning C4244: 'fonction' : conversion de 'time_t' en 'unsigned int', perte possible de données
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(750,12): warning C4047: 'return' : les niveaux d'indirection de 'int' et de 'Tab *' sont différents
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(728): warning C4715: 'TranscriptionPourJavaScript' : les chemins de contrôle ne retournent pas tous une valeur
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(707,26): warning C4098: 'TranscriptionPourJavaScript' : fonction 'void' retournant une valeur
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(733,8): warning C4244: 'fonction' : conversion de 'time_t' en 'unsigned int', perte possible de données
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(751,12): warning C4047: 'return' : les niveaux d'indirection de 'int' et de 'Tab *' sont différents
 C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(698): warning C4716: 'labyrinthe1if' : doit retourner une valeur
   algo_labyrinthe.vcxproj -> C:\MAMP\htdocs\Projet CIR1\c\Solution1\x64\Debug\algo_labyrinthe.exe

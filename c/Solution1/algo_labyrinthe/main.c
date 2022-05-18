@@ -697,7 +697,7 @@ int labyrinthe1if(int tmp, Tab* tab, int cote, int posinitial, Stack* GPS) {
 	posinitial = i;
 }
 
-int TranscriptionPourJavaScript(Tab* tab, int cote) {
+void TranscriptionPourJavaScript(Tab* tab, int cote) {
 	for (int i = 0; i < pow(cote, 2); i++) {
 		if (((tab+i)->data)->haut == 1) {
 			if (((tab + i)->data)->droite == 1) {
@@ -725,6 +725,7 @@ int TranscriptionPourJavaScript(Tab* tab, int cote) {
 		else if ((tab + i)->data->gauche == 1) (tab + i)->lettreRenvoye[i] = 'e';
 		else (tab + i)->lettreRenvoye[i] = 'a';
 	}
+	return;
 }
 
 int Labyrinthe(int cote, Tab* tab) {

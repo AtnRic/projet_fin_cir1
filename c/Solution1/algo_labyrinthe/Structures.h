@@ -55,8 +55,8 @@ Graph* Kruskal(Graph* graph, int nombreSommets);*/
 int Labyrinthe(int cote, Tab* tab);
 //affichage dans le format souhaité
 void affichageDeSesGrandsMorts(Tab* tab, int cote);
-int labyrinthe1if(int tmp, Tab* tab, int cote, int posinitial);
-int TranscriptionPourJavaScript(Tab* tab, int cote);
+//int labyrinthe1if(int tmp, Tab* tab, int cote, int posinitial, Stack* GPS);
+void TranscriptionPourJavaScript(Tab* tab, int cote);
 
 /*Début Pile*/
 typedef struct StackElement
