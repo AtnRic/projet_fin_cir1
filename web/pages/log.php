@@ -31,7 +31,9 @@
         </a>
         <a href="log.php?type=w#log">
             <div class="without but">
-                <div class="tuile"></div>
+                <div class="tuile">
+                    <div class="hero"></div>
+                </div>
                 <h3>Play without account</h3>
             </div>
         </a>

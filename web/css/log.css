@@ -4,7 +4,7 @@
 }
 
 *{
-    font-family: "8-Bit Font";
+    font-family: "8-bit HUD", serif;
     background-color: black;
     overflow: hidden;
 }
@@ -123,16 +123,39 @@ form #guest div{
     display: block;
     max-width: 210px;
 }
-.signin .tuile:hover{
-    background-image: url("../images/front/retro_gif.gif");
+.signin .tuile{
+    background-image: url("../images/front/retro_hero_static.png");
     background-position: center;
-    background-size: contain;
+    background-size: 70%;
+    margin: auto;
+    align-items: center;
+    background-repeat: no-repeat;
+}
+.signup .tuile{
+    background-image: url("../images/front/jungle_hero_static.png");
+    background-position: center;
+    background-size: 70%;
+    margin: auto;
+    align-items: center;
+    background-repeat: no-repeat;
+}
+.without .tuile{
+    background-image: url("../images/front/space_hero_static.png");
+    background-position: center;
+    background-size: 80%;
+    margin: auto;
+    align-items: center;
+    background-repeat: no-repeat;
+}
+.signin .tuile:hover{
+    background-image: url("../images/front/pacman.gif");
 }
 .signup .tuile:hover{
-    background-image: url("../images/front/jungle_gif.gif");
+    background-image: url("../images/front/jungle.gif");
 }
 .without .tuile:hover{
-    background-image: url("../images/front/space_gif.gif");
+    background-image: url("../images/front/space_hero_gif.gif");
+    background-size: 95%;
 }
 #log{
     width: 98vw;
