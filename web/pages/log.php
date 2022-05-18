@@ -61,7 +61,7 @@
             </form>";
         }
         if($type == 'w'){
-            echo "<h1>Play without account</h1>";
+            echo "<h1 id='title'>Play without account</h1>";
             echo "<form class='formulaires' action='' method='POST'>
                 <div id='guest'>
                     <h3>Warning</h3>
