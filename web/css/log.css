@@ -123,12 +123,12 @@ form #guest div{
     display: block;
     max-width: 210px;
 }
-.signin .tuile{
+.login .tuile{
     background-image: url("../images/front/retro_hero_static.png");
     background-position: center;
-    background-size: 70%;
+    /*background-size: 70%;
     margin: auto;
-    align-items: center;
+    align-items: center;*/
     background-repeat: no-repeat;
 }
 .signup .tuile{
@@ -147,15 +147,15 @@ form #guest div{
     align-items: center;
     background-repeat: no-repeat;
 }
-.signin .tuile:hover{
-    background-image: url("../images/front/pacman.gif");
+.login .tuile:hover{
+    background-image: url("../images/front/retro_hero_gif.gif");
 }
 .signup .tuile:hover{
     background-image: url("../images/front/jungle.gif");
 }
 .without .tuile:hover{
     background-image: url("../images/front/space_hero_gif.gif");
-    background-size: 95%;
+    
 }
 #log{
     width: 98vw;
