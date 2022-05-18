@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="press">
-    <h1 id="name">Tartaros fantasy</h1>
+    <h1 id="name">Maze'ltov</h1>
     <a href="#choose">
         <h1 id="press">PRESS START</h1>
     </a>
