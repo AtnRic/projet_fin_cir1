@@ -552,7 +552,7 @@ var list = [new Garde(0, 0)]; // Méthode de création de la liste des gardes.
 
 document.addEventListener("keydown", function (event) {
   if (event.key == "l") {
-    Launch(10, labyrinthe, 14, list, true);
+    Launch(10, labyrinthe, 14, list, false);
   }
   if (event.key == "k") {
     TeleportePlayer(getRandomInt(10));
