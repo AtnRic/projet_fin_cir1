@@ -1,5 +1,10 @@
+@font-face {
+	font-family: "8-Bit Font";
+	src: url('../images/font/8-BIT WONDER.TTF');
+}
+
 *{
-    font-family: "8-bit HUD", serif;
+    font-family: "8-Bit Font";
     background-color: black;
     overflow: hidden;
 }
@@ -91,7 +96,19 @@ h1, p{
     font-style: italic;
 }
 
+a{
+    text-decoration: none;
+}
 
+#guest{
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+form #guest div{
+    width: 40%;
+}
 
 .tuile{
     margin: 0 auto;
