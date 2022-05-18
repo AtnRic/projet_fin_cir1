@@ -108,6 +108,7 @@ a{
 
 form #guest div{
     width: 40%;
+    margin: auto;
 }
 
 .tuile{
@@ -118,7 +119,7 @@ form #guest div{
     background-color: white;
 }
 
-.signin, .signup, .without{
+.login, .signup, .without{
     display: block;
     max-width: 210px;
 }
