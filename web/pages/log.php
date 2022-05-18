@@ -46,8 +46,8 @@
         if($type == 'i'){
             echo "<h1>Login</h1>";
             echo "<form class='formulaires' action='' method='POST'>
-                <label for='pseudo'></label><input type='text' id='pseudo' name='pseudo' placeholder='nickname' autofocus required ><br>
-                <label for='mdpin'></label><input type='password' id='mdpin' name='mdpin' placeholder='password' required><br><br>
+                <label for='login'></label><input type='text' id='login' name='login' placeholder='nickname' autofocus required ><br>
+                <label for='mdpco'></label><input type='password' id='mdpco' name='mdpco' placeholder='password' required><br><br>
                 <input type='submit' class='sub' name='sub' value='Envoyer'>
             </form>";
         }
@@ -67,8 +67,8 @@
                     <h3>Warning</h3>
                     <div>if you play without account you will not be able to access level creation mode and your profile will be deleted at the end of your session</div><br>
                 </div>
-                <label for='pseudo'></label><input type='text' id='pseudo' name='pseudo' placeholder='nickname' autofocus required ><br>
-                <input type='submit' class='sub' name='sub' value='Envoyer'>
+                <label for='login'></label><input type='text' id='login' name='anonymes' placeholder='nickname' autofocus required /><br>
+                <input type='submit' class='sub' name='subanonymes' value='Send'/>
             </form>";
         }
     ?>
@@ -270,3 +270,26 @@ if ($count == 2) {
     header('Location: ' . $newURL);
     die();
 }
+
+//anonymes
+if (isset($_POST["subanonymes"])) {
+    if (empty($_POST['anonymes'])) {
+        echo Console("Pseudo anonyme empty.");
+
+        echo "<style>
+                    .formulaires #login{
+                        outline: none;
+                        border-style: solid;
+                        border-radius: 5px;
+                        border-width: 2px;
+                        border-color:red;
+                    }
+                    </style>";
+    } else {
+        $_SESSION["pseudo"] = $_POST['anonymes'];
+        $newURL = "home.php";
+        header('Location: ' . $newURL);
+    }
+}
+
+?>
