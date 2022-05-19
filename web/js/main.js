@@ -530,7 +530,6 @@ var Retro = {
   Gr: "../images/gardes/pac_guard_blue_droite.png",
   Gl: "../images/gardes/pac_guard_blue_droite.png",
 };
-
 let Ambiance = Retro;
 
 function SetAmbiance(AmbianceName) {
