@@ -40,7 +40,6 @@ var correspondance = {
   m : [1, 0, 1, 1] ,
   n : [1, 1, 0, 1] ,
   o : [1, 1, 1, 0] ,
-  p : [1, 1, 1, 1] ,
 };
 console.log(labyrinthe[3][1]);*/
 
@@ -546,12 +545,56 @@ char* letter(Lab* L) {
 /*Fin algo labyrinthe*/
 
 /*Gardes*/
-Garde* ApparitionGardes(char* maze, int size, int quantites_pair) {
-
+Garde* ApparitionGardes(char* maze, int cote, int Quantite_Garde) {
+	srand(time(NULL));
+	Garde* garde;
+	int modulo = pow(cote, 2);
+	for (int i = 0; i < Quantite_Garde; i++) {
+		(garde + i) = (Garde*)malloc(sizeof(Garde));
+		(garde + i)->Id = i;
+		(garde + i)->position = rand() % modulo;
+		while ((garde + i)->position == 0 || (garde + i)->position == pow(cote, 2)) {
+			(garde + i)->position = rand() % modulo;
+		}
+	}
+	return;
 }
 
-void MouvementGardes(char* maze, int size, Garde* garde) {
-
+void MouvementGardes(char* maze, int size, Garde* garde, int Quantite_Garde) {
+	int tmp;
+	int count;
+	srand(time(NULL));
+	for (int i = 0; i < Quantite_Garde; i++) {
+		if (maze[(garde + i)->position] == 'b' || maze[(garde + i)->position] == 'f' || maze[(garde + i)->position] == 'h' || maze[(garde + i)->position] == 'k' || maze[(garde + i)->position] == 'm' || maze[(garde + i)->position] == 'n' || maze[(garde + i)->position] == 'o')
+			(garde + i)->t = false;
+		else {
+			(garde + i)->t = true;
+			count += 1;
+		}
+			
+		if (maze[(garde + i)->position] == 'c' || maze[(garde + i)->position] == 'g' || maze[(garde + i)->position] == 'h' || maze[(garde + i)->position] == 'i' || maze[(garde + i)->position] == 'l' || maze[(garde + i)->position] == 'n' || maze[(garde + i)->position] == 'o')
+			(garde + i)->r = false;
+		else {
+			(garde + i)->r = true;
+			count += 1;
+		}
+			
+		if (maze[(garde + i)->position] == 'd' || maze[(garde + i)->position] == 'f' || maze[(garde + i)->position] == 'i' || maze[(garde + i)->position] == 'j' || maze[(garde + i)->position] == 'l' || maze[(garde + i)->position] == 'm' || maze[(garde + i)->position] == 'o')
+			(garde + i)->d = false;
+		else {
+			(garde + i)->d = true;
+			count += 1;
+		}
+			
+		if (maze[(garde + i)->position] == 'e' || maze[(garde + i)->position] == 'g' || maze[(garde + i)->position] == 'j' || maze[(garde + i)->position] == 'k' || maze[(garde + i)->position] == 'l' || maze[(garde + i)->position] == 'm' || maze[(garde + i)->position] == 'n')
+			(garde + i)->l = false;
+		else {
+			(garde + i)->l = true;
+			count += 1;
+		}
+			
+		tmp = rand() % count;
+	}
 }
 /*Fin Gardes*/
 

@@ -57,13 +57,14 @@ typedef struct Garde {
 	/* Direction dans laquelle le garde va se déplacer */
 
 	bool t;     //top
-	bool d;  //down
-	bool r;  //right
+	bool d;		//down
+	bool r;		//right
 	bool l;     //left
 
 	int move; //nombre de case avant de toucher le mur en face et de devoir faire demi-tour
+	int position; //position initiale du garde
 }Garde;
 
 Garde* ApparitionGardes(char* maze, int size, int quantites_pair);
-void MouvementGardes(char* maze, int size, Garde* garde);
+void MouvementGardes(char* maze, int size, Garde* garde, int Quantite_Garde);
 /*Fin gardes*/
