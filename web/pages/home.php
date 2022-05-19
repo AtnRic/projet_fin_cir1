@@ -49,6 +49,22 @@ require '../tools/_main_tools.php';
             <h3 class="name">The amazing Spider-man</h3>
             <p class="level">Medium</p>
         </div>
+        <a href="#craft" class=""></a>
+    </section>
+    <section id="craft">   
+        <form action="" method="post" id="formulaire">
+            <input type="range" min="10" max="51" value="25" name="dimension" id="dimension">
+            <span class="rangeslider__tooltip" id ="range-tooltip"></span> 
+            <label for="dimension">Dimension :</label>
+            <br>
+            <input type="range" min="0" max="10" value="5" name="garde" id="garde">
+            <span class="rangeslider__tooltip" id ="range-tooltip"></span> 
+            <label for="garde">Nombre de garde : </label>
+            <br>
+            <input type="range" min="0" max="10" value="5" name="portal" id="portal">
+            <span class="rangeslider__tooltip" id ="range-tooltip"></span> 
+            <label for="portal">Nombre de portails : </label>
+        </form>
     </section>
     <div class="title">
         <h1>Welcome to Maze'ltov</h1>
