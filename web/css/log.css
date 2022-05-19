@@ -62,7 +62,7 @@ h1, p{
 
 .container{
     position: absolute;
-    top: 50%;
+    top: 40%;
     right: 50%;
     transform: translateX(50%) translateY(170%);
     display: flex;
@@ -71,6 +71,7 @@ h1, p{
     width: 98vw;
     justify-content: space-evenly;
 }
+
 
 .center {
     position: absolute;
@@ -188,6 +189,9 @@ input{
     #press{
         margin-top: 10%;
     }
+    #log{
+        padding-top: 0%;
+    }
 }
 
 @media screen and (max-width: 690px) {
@@ -205,7 +209,7 @@ input{
     }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 425px) {
     #logoimage{
         margin-top: 50px;
     }
