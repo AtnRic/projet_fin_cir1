@@ -557,9 +557,9 @@ let rows = document.getElementsByClassName("gridRow");
 let cells = document.getElementsByClassName("cell");
 var list = [new Garde(0, 0)]; // Méthode de création de la liste des gardes.
 
-function PHP_Start() {
+function PHP_Start(anime) {
   PHP_Function("../tools/function.php", "generation", function Handle(output) {
-    Launch(Math.sqrt(output.length), Array.from(output), 0, list, true);
+    Launch(Math.sqrt(output.length), Array.from(output), 0, list, anime);
   });
 }
 
@@ -739,10 +739,10 @@ function Launch(size, tab, spawnCellId, gardList, boolAnimation) {
     LabAnim("t3", 1500);
     LabAnim("t4", 1500);
   } else {
-    LabAnim("t1", 10);
-    LabAnim("t2", 10);
-    LabAnim("t3", 10);
-    LabAnim("t4", 10);
+    LabAnim("t1", 1);
+    LabAnim("t2", 1);
+    LabAnim("t3", 1);
+    LabAnim("t4", 1);
   }
 
   //#endregion
