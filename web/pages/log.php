@@ -11,7 +11,7 @@
     <h1 id="name">Maze'ltov</h1>
     <img src="../images/front/log2.png" alt="Logo" id="logoimage">
     <a href="#choose">
-        <h1 id="press"> >>> PRESS START <<<</h1>
+        <h1 id="press">PRESS START</h1>
     </a>
 
 </div>
