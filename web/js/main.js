@@ -530,7 +530,7 @@ var Retro = {
   Gr: "../images/gardes/pac_guard_blue_droite.png",
   Gl: "../images/gardes/pac_guard_blue_droite.png",
 };
-let Ambiance = Retro;
+let Ambiance = Jungle;
 
 function SetAmbiance(AmbianceName) {
   switch (AmbianceName) {
@@ -548,6 +548,15 @@ let rows = document.getElementsByClassName("gridRow");
 let cells = document.getElementsByClassName("cell");
 
 var list = [new Garde(0, 0)]; // Méthode de création de la liste des gardes.
+
+PHP_Start(10);
+
+function PHP_Start() {
+  PHP_Function("../tools/function.php", "generation", function Handle(output) {
+    //console.log(output);
+    Launch(Math.sqrt(output.length), Array.from(output), 0, list, true);
+  });
+}
 
 document.addEventListener("keydown", function (event) {
   if (event.key == "l") {
@@ -575,7 +584,7 @@ function Launch(size, tab, spawnCellId, gardList, boolAnimation) {
       newCell.appendChild(newCellp).className = "absolute";
       newCell.id = i + j * cellNum;
       //newCellp.innerHTML = tab[j][i];
-      switch (tab[j][i]) {
+      switch (tab[j * rows.length + i]) {
         case "a":
           AppendImage(Ambiance.W4[0], newCell, "t1");
           break;
@@ -897,7 +906,7 @@ function LabAnim(attClass, distance) {
     duration: 3000,
     direction: "reverse",
     easing: "easeInElastic(1, .2)",
-    delay: anime.stagger(40, {}),
+    delay: anime.stagger(10, {}),
   });
 }
 
