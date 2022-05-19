@@ -18,7 +18,7 @@
 
 <div class="choose" id="choose">
     <h1>Choose your player :</h1>
-    <div class="container players">
+    <div class="container">
         <a href="log.php?type=i#log">
             <div class="login but">
                 <div class="tuile"></div>
