@@ -157,7 +157,7 @@ form #guest div{
 }
 .without .tuile:hover{
     background-image: url("../images/front/space_hero_gif.gif");
-    
+    background-size: 90%;
 }
 #log{
     width: 98vw;
