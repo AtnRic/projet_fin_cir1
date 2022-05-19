@@ -12,23 +12,15 @@ html, body{
     scroll-behavior: smooth;
 }
 .press{
-    width: 98vw;
+    width: 100vw;
     height: 100vh;
-    background-image: url("../images/front/log.png");
-    background-position: center;
-    background-size: cover;
-    z-index: 0;
+    text-align: center;
 }
 h1, p{
     color: white;
     text-align: center;
 }
-#press::before{
-    content: ">>> ";
-}
-#press::after{
-    content: " <<<";
-}
+
 #press {
     animation: blinker 1.5s step-end infinite;
 }
@@ -39,20 +31,17 @@ h1, p{
     }
 }
 
+#logoimage{
+    width: 25%;
+    margin-top:5%;
+}
+
 #press{
-    position: absolute;
-    bottom: 50px;
-    right: 50%;
-    transform: translateX(50%);
+    text-align: center;
+    margin-top:5px;
 }
 #press:hover{
     text-decoration: underline;
-}
-#name{
-    position: absolute;
-    top: 50px;
-    right: 50%;
-    transform: translateX(50%);
 }
 
 .choose{
@@ -99,8 +88,6 @@ h1, p{
 a{
     text-decoration: none;
 }
-
-
 
 #guest{
     display: block;
@@ -186,9 +173,27 @@ input{
     font-style: italic;
 }
 
-@media screen and (min-width: 800px) {
-    .container {
-      margin: 1em 2em;
+@media screen and (max-width: 800px) {
+    #logoimage{
+        margin-top: 20% ;
+    }
+    #press{
+        margin-top: 10%;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    #logoimage{
+        display: none;
+    }
+    #press{
+        margin-top: 50%;
+    }
+    #press::before{
+        content: none;
+    }
+    #press::after{
+        content: none;
     }
 }
 
