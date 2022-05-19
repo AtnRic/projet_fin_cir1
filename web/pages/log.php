@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <title>Connexion</title>
     <link rel="stylesheet" type="text/css" href="../css/log.css">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
 </head>
 <body>
 <div class="press">
     <h1 id="name">Maze'ltov</h1>
+    <img src="../images/front/log2.png" alt="Logo" id="logoimage">
     <a href="#choose">
-        <h1 id="press">PRESS START</h1>
+        <h1 id="press"> >>> PRESS START <<<</h1>
     </a>
 
 </div>

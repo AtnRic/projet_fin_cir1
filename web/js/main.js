@@ -481,6 +481,8 @@ var Jungle = {
   ],
   Pl: "../images/heros/jungle_hero_gauche_sprite.png",
   Pr: "../images/heros/jungle_hero_droite_sprite.png",
+  Gl: "../images/gardes/jungle_guard_droite.png",
+  Gr: "../images/gardes/jungle_guard_gauche.png",
 };
 var Space = {
   W1: [
@@ -502,8 +504,10 @@ var Space = {
     "../images/mazes/space_maze_border.png",
     "../images/mazes/space_maze_border.png",
   ],
-  Pl: "../images/heros/unknown.png",
-  Pr: "../images/heros/unknown.png",
+  Pl: "../images/heros/space_hero_gauche.png",
+  Pr: "../images/heros/space_hero_droite.png",
+  Gr: "../images/gardes/space_guard_droite.png",
+  Gl: "../images/gardes/space_guard_gauche.png",
 };
 var Retro = {
   W1: [
@@ -528,31 +532,38 @@ var Retro = {
   Pl: "../images/heros/pac_hero_gauche.png",
   Pr: "../images/heros/pac_hero_droite.png",
   Gr: "../images/gardes/pac_guard_blue_droite.png",
-  Gl: "../images/gardes/pac_guard_blue_droite.png",
+  Gl: "../images/gardes/pac_guard_blue_gauche.png",
 };
-let Ambiance = Retro;
 
 function SetAmbiance(AmbianceName) {
   switch (AmbianceName) {
     case "Jungle":
+      console.warn("A:\n JUNGLE.");
       Ambiance = Jungle;
+      break;
     case "Retro":
+      console.warn("A:\n RETRO.");
       Ambiance = Retro;
+      break;
     case "Space":
+      console.warn("A:\n SPACE.");
       Ambiance = Space;
+      break;
   }
 }
 
 const container = document.getElementById("container");
 let rows = document.getElementsByClassName("gridRow");
 let cells = document.getElementsByClassName("cell");
-
 var list = [new Garde(0, 0)]; // Méthode de création de la liste des gardes.
 
+function PHP_Start(anime) {
+  PHP_Function("../tools/function.php", "generation", function Handle(output) {
+    Launch(Math.sqrt(output.length), Array.from(output), 0, list, anime);
+  });
+}
+
 document.addEventListener("keydown", function (event) {
-  if (event.key == "l") {
-    Launch(10, labyrinthe, 14, list, false);
-  }
   if (event.key == "k") {
     TeleportePlayer(getRandomInt(10));
   }
@@ -575,7 +586,7 @@ function Launch(size, tab, spawnCellId, gardList, boolAnimation) {
       newCell.appendChild(newCellp).className = "absolute";
       newCell.id = i + j * cellNum;
       //newCellp.innerHTML = tab[j][i];
-      switch (tab[j][i]) {
+      switch (tab[j * rows.length + i]) {
         case "a":
           AppendImage(Ambiance.W4[0], newCell, "t1");
           break;
@@ -728,10 +739,10 @@ function Launch(size, tab, spawnCellId, gardList, boolAnimation) {
     LabAnim("t3", 1500);
     LabAnim("t4", 1500);
   } else {
-    LabAnim("t1", 10);
-    LabAnim("t2", 10);
-    LabAnim("t3", 10);
-    LabAnim("t4", 10);
+    LabAnim("t1", 1);
+    LabAnim("t2", 1);
+    LabAnim("t3", 1);
+    LabAnim("t4", 1);
   }
 
   //#endregion
@@ -897,7 +908,7 @@ function LabAnim(attClass, distance) {
     duration: 3000,
     direction: "reverse",
     easing: "easeInElastic(1, .2)",
-    delay: anime.stagger(40, {}),
+    delay: anime.stagger(10, {}),
   });
 }
 
