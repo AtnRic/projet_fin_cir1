@@ -1,17 +1,18 @@
-.main {
-    width: 400px;
-    margin: auto;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-label{
-    display: block;
-    margin-bottom: 2.5em;
-    font-size: 13px;
-    font-weight: bold;
+.title{
+  text-align: center;
+}
+.range {
+  width: 400px;
+  margin: auto;
+  position: absolute;
+  top:25%;  
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.range>button{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 html, body {
