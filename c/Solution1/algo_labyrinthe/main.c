@@ -1,11 +1,16 @@
 ﻿#include <stdlib.h>
 #include <stdio.h>
+#include <time.h>
+#include <locale.h>
+#include <stdbool.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <time.h>
+#include <locale.h>
 #include <stdbool.h>
 #include <string.h>
 #include <math.h>
-#include <time.h>
-#include "Structures.h"
-#define MAXSIZE 123
+#include "structures.h"
 
 
 //Ce qui doit être obtenu
@@ -73,98 +78,403 @@ void triFusion(int i, int j, int tab[], int tmp[]) {
 		tab[c] = tmp[c];
 	}
 }
-/*int main() {
-	int  nbr, u;
-	nbr = 100000000;
-	int* tab = (int*)malloc(nbr * sizeof(int));
-	int* tmp = (int*)malloc(nbr * sizeof(int));
-	if (tab != NULL && tmp != NULL) {
-		srand(time(NULL));
-
-		for (int i = 0; i <= nbr; i++) {
-			float v = (float)((float)rand() / (float)RAND_MAX);
-			u = v * 100.0;
-			(*(tab + i)) = u;
-
-		}
-	}
-	triFusion(0, nbr - 1, tab, tmp);
-
-	printf("\n Tableau trie : ");
-	for (int j = 0; j < nbr; j++) {
-		//printf(" %4d", tab[j]);
-	}
-	printf("\n");
-	return 0;
-}*/
 /*Fin tri Fusion*/
 
-/*Pile*/
-Stack new_stack(void) {
-	return NULL;
+/*Algo labyrinthe*/
+int NearCase(Lab* L, int index) {
+	printf("INDEX %d - L:%d R:%d T:%d D:%d\n", index, Left(L, index), Right(L, index), Top(L, index), Down(L, index));
+	return 0;
 }
 
-bool is_empty_stack(Stack st) {
-	if (st == NULL) return true;
-	return false;
-}
-
-Stack push_stack(Stack st, int x) {
-	StackElement* element;
-	element = malloc(sizeof(*element));
-	if (element == NULL) {
-		fprintf(stderr, "Probleme allocation dynamique.\n");
-		exit(EXIT_FAILURE);
+Free* NewFree(int max) {
+	Free* F = (Free*)malloc(sizeof(Free));
+	if (F != NULL) {
+		F->List = (int*)malloc(sizeof(int*) * max);
+		F->Size = 0;
 	}
-	element->value = x;
-	element->next = st;
-	return element;
+	return F;
 }
 
-Stack pop_stack(Stack st) {
-	StackElement* element;
-	if (is_empty_stack(st)) return new_stack();
-	element = st->next;
-	free(st);
-	return element;
-}
-
-void print_stack(Stack st) {
-	if (is_empty_stack(st)) {
-		printf("Rien a afficher, la Pile est vide.\n");
-		return;
+Lab* NewLab(int size) {
+	Lab* N = (Lab*)malloc(sizeof(Lab));
+	if (N != NULL) {
+		(N->tab) = (Cell*)malloc(sizeof(Cell) * size * size);
+		if (N->tab == NULL) {
+			printf("Erreur d'initialisation du labyrinthe. {1}");
+		}
+		else {
+			for (int i = 0; i < size * size; i++) {
+				(N->tab + i)->d = true;
+				(N->tab + i)->l = true;
+				(N->tab + i)->r = true;
+				(N->tab + i)->t = true;
+				(N->tab + i)->used = false;
+			}
+		}
+		N->size = size;
+		return N;
 	}
-	while (!is_empty_stack(st)){
-	 	printf("[%d]\n", st->value);
-		st = st->next;
+	else {
+		printf("Erreur d'initialisation du labyrinthe. {2}");
+	}
+	return N;
+}
+
+int Launch(Lab* L) {
+	if (L == NULL) {
+		printf("Labyrinthe vide.");
+		return 0;
+	}
+	Cell* origin = L->tab;
+	return EXIT_SUCCESS;
+}
+
+int tryPath(Lab* L, int index, Free* F) {
+	char wall = r_CaseNear(L, index);
+	//printf("%d(%c)-", index, (L->tab+index)->used ? 'y' : 'n');
+	if (!Isolate(L, index)) {
+		printf("%d ", index);
+		(*(F->List + F->Size)) = index;
+		F->Size++;
+	}
+	switch (wall) {
+	case 'l':
+		(L->tab + index)->used = true;
+		DelWall(L, index, 'l');
+		if (Left(L, index) != -1) {
+			//printf("\nNext(%c)\n", (L->tab + Left(L, index))->used ? 'y' : 'n');
+			return tryPath(L, Left(L, index), F);
+		}
+	case 'r':
+		(L->tab + index)->used = true;
+		DelWall(L, index, 'r');
+		if (Right(L, index) != -1) {
+			//printf("\nNext(%c)\n", (L->tab + Right(L, index))->used ? 'y' : 'n');
+			return tryPath(L, Right(L, index), F);
+		}
+	case 't':
+		(L->tab + index)->used = true;
+		DelWall(L, index, 't');
+		if (Top(L, index) != -1) {
+			//printf("\nNext(%c)\n", (L->tab + Top(L, index))->used ? 'y' : 'n');
+			return tryPath(L, Top(L, index), F);
+		}
+	case 'd':
+		(L->tab + index)->used = true;
+		DelWall(L, index, 'd');
+		if (Down(L, index) != -1) {
+			//printf("\nNext(%c)\n", (L->tab + Down(L, index))->used ? 'y' : 'n');
+			return tryPath(L, Down(L, index), F);
+		}
+	case 'n':
+		(L->tab + index)->used = true;
+	}
+	if (F->Size != 0) {
+
+		printf("\033[1m\033[32m");
+		printf("END\n");
+		printf("\033[0m");
+	}
+	for (int i = 0; i < F->Size; i++) {
+		Free* G = NewFree(1000);
+		tryPath(L, (*(F->List + i)), G);
+	}
+	free(F);
+	return 0;
+}
+
+char r_CaseNear(Lab* L, int index) {
+	int R = ceilf(((float)rand() / (float)RAND_MAX) * 4.0);
+	switch (R) {
+
+	case 1:
+		if (Right(L, index) != -1)
+		{
+			return 'r';
+		}
+		else
+		{
+			if (!Isolate(L, index))
+			{
+				return r_CaseNear(L, index);
+			}
+			else
+			{
+				break;
+			}
+		}
+		break;
+	case 2:
+		if (Top(L, index) != -1)
+		{
+			return 't';
+		}
+		else
+		{
+			if (!Isolate(L, index))
+			{
+				return r_CaseNear(L, index);
+			}
+			else
+			{
+				break;
+			}
+		}
+		break;
+	case 3:
+		if (Down(L, index) != -1)
+		{
+			return 'd';
+		}
+		else
+		{
+			if (!Isolate(L, index))
+			{
+				return r_CaseNear(L, index);
+			}
+			else
+			{
+				break;
+			}
+		}
+		break;
+	case 4:
+		if (Left(L, index) != -1)
+		{
+			return 'l';
+		}
+		else
+		{
+			if (!Isolate(L, index))
+			{
+				return r_CaseNear(L, index);
+			}
+			else
+			{
+				break;
+			}
+		}
+		break;
+	}
+	return 'n';
+}
+
+bool Isolate(Lab* L, int index) {
+	if (Right(L, index) == -1 && Left(L, index) == -1 && Top(L, index) == -1 && Down(L, index) == -1) {
+		//printf("%d Isolated %d %d %d %d\n", index, Right(L, index), Left(L, index), Top(L, index), Down(L, index));
+		return true;
+	}
+	else {
+		//printf("%d Not isolated%d %d %d %d\n", index, Right(L, index), Left(L, index), Top(L, index), Down(L, index));
+		return false;
 	}
 }
 
-int top_stack(Stack st) {
-	if (is_empty_stack(st)) {
-		printf("Aucun sommet, la Pile est vide.\n");
-		exit(EXIT_FAILURE);
+
+int Left(Lab* L, int index) {
+	printf("\033[1m\033[31m");
+	int size = L->size;
+	Cell* origin = L->tab;
+	if ((index % size) == 0) {
+		//printf("Left %d : NULL\n", index);
+		return -1;
 	}
-	return st->value;
+	if (((origin + index - 1)->used)) {
+		//printf("Left %d : USED\n", index);
+		return -1;
+	}
+	else {
+		if (index - 1 > L->size * L->size) {
+			//printf("\nIndex problem %d\n", index - 1);
+		}
+		return (index - 1);
+	}	printf("\033[0m");
 }
 
-int stack_length(Stack st) {
-	int length = 0;
-	while (!is_empty_stack(st)) {
-		length++;
-		st = st->next;
+int Right(Lab* L, int index) {
+	printf("\033[1m\033[31m");
+	int size = L->size;
+	Cell* origin = L->tab;
+	if ((index + 1) % size == 0) {
+		//printf("Right %d : NULL\n", index);
+		return -1;
 	}
-	return length;
+
+	if (((origin + index + 1)->used)) {
+		//printf("Right %d : %c : USED\n", index+1, ((origin + index + 1)->used) ? 'y':'n');
+		return -1;
+	}
+	else {
+		if (index + 1 > L->size * L->size) {
+			//printf("\nIndex problem %d\n", index + 1);
+		}
+		return (index + 1);
+	}	printf("\033[0m");
 }
 
-Stack clear_stack(Stack st) {
-	while (!is_empty_stack(st)) st = pop_stack(st);
-	return new_stack();
+int Top(Lab* L, int index) {
+	printf("\033[1m\033[31m");
+	int size = L->size;
+	Cell* origin = L->tab;
+	if (index < size) {
+		//printf("Top %d : NULL\n", index);
+		return -1;
+	}
+	if (((origin + index - size)->used)) {
+		//printf("Top %d : USED\n", index);
+		return -1;
+	}
+	else {
+		if (index - size > L->size * L->size) {
+			//printf("\nIndex problem %d\n", index - size);
+		}
+		return (index - size);
+	}	printf("\033[0m");
 }
-/*Fin Pile*/
+
+int Down(Lab* L, int index) {
+	printf("\033[1m\033[31m");
+	int size = L->size;
+	Cell* origin = L->tab;
+
+	if (index >= ((size * size) - size)) {
+		//printf("Bottom %d : NULL\n", index);
+		return -1;
+	}
+	if (((origin + index + size)->used)) {
+		return -1;
+	}
+	else {
+		if (index + size > L->size * L->size) {
+			//printf("\nIndex problem %d\n", index + size);
+		}
+		return (index + size);
+	}
+	printf("\033[0m");
+}
+
+// wall = t, d, l, r
+int DelWall(Lab* L, int index, char wall) {
+
+
+	if (L == NULL || index == -1 || index >= (L->size * L->size)) {
+		printf("Error");
+		return -1;
+	}
+	if ((L->tab + index) == NULL) {
+		printf("Error");
+		return -1;
+	}
+
+	switch (wall)
+	{
+	case 'l':
+		(L->tab + index)->l = false;
+		if (Left(L, index) != -1)
+		{
+			(L->tab + Left(L, index))->r = false;
+		}
+		else {
+			printf("null1");
+		}
+		break;
+	case 'r':
+		(L->tab + index)->r = false;
+		if (Right(L, index) != -1)
+		{
+			(L->tab + Right(L, index))->l = false;
+		}
+		else {
+			printf("null2");
+		}
+		break;
+	case 't':
+		(L->tab + index)->t = false;
+		if (Top(L, index) != -1)
+		{
+			(L->tab + Top(L, index))->d = false;;
+		}
+		else {
+			printf("null3");
+		}
+		break;
+	case 'd':
+		(L->tab + index)->d = false;
+		if (Down(L, index) != -1)
+		{
+			(L->tab + Down(L, index))->t = false;
+		}
+		else {
+			printf("null4");
+		}
+		break;
+	}
+	return 1;
+}
+
+int show(Lab* L) {
+	printf("\nLabyrinthe * Taille : %d : \n", L->size);
+	for (int i = 0; i < L->size * L->size; i++)
+	{
+		if ((L->tab + i)->t == 0 || (L->tab + i)->r == 0 || (L->tab + i)->l == 0 || (L->tab + i)->d == 0) {
+			printf("\033[31m");
+		}
+		else {
+			printf("\033[32m");
+		}
+		//printf("Cell %d : t%d, d%d, l%d, r%d\n", i, (L->tab + i)->t, (L->tab + i)->d, (L->tab + i)->l, (L->tab + i)->r);
+	}
+	printf("\033[0m");
+	for (int w = 0; w < L->size; w++) {
+		for (int i = 0; i < L->size; i++) {
+			int index = (L->size * w + i);
+			if ((L->tab + index)->t == 1) {
+				printf("----");
+			}
+			if ((L->tab + index)->t == 0) {
+
+				printf("    ");
+			}
+		}
+		printf("\n");
+		for (int i = 0; i < L->size; i++) {
+			int index = (L->size * w + i);
+			if ((L->tab + index)->l == 1 && (L->tab + index)->r == 1) {
+				printf("|%c |", (L->tab + index)->used ? ' ' : '0');
+				//printf("|    |");
+			}
+			else if ((L->tab + index)->l == 0 && (L->tab + index)->r == 1) {
+				//printf("     |");
+				printf(" %c |", (L->tab + index)->used ? ' ' : '0');
+			}
+			else if ((L->tab + index)->l == 1 && (L->tab + index)->r == 0) {
+				//printf("|     ");
+				printf("| %c ", (L->tab + index)->used ? ' ' : '0');
+			}
+			else if ((L->tab + index)->l == 0 && (L->tab + index)->r == 0) {
+				//printf("      ");
+				printf(" %c  ", (L->tab + index)->used ? ' ' : '0');
+			}
+		}
+		printf("\n");
+		if (w == L->size - 1) {
+			for (int i = 0; i < L->size; i++) {
+				int index = (L->size * w + i);
+				if ((L->tab + index)->d == 1) {
+					printf("----");
+				}
+				else {
+					printf("    ");
+				}
+			}
+		}
+	}
+	return EXIT_SUCCESS;
+}
+/*Fin algo labyrinthe*/
 
 /*Téléporteurs*/
-/*Teleporteurs_Pair* Generation_Teleporteurs(char* maze, int size, int quantites_pair) {
+Teleporteurs_Pair* Generation_Teleporteurs(char* maze, int size, int quantites_pair) {
 	Teleporteur_Pos* Tab = malloc(sizeof(Teleporteur_Pos));
 	if (Tab == NULL)
 	{
@@ -216,12 +526,12 @@ Stack clear_stack(Stack st) {
 		}
 	}
 	//boucles permettant de placer les téléporteurs les plus éloignés possible.
-	Teleporteurs_Pair* Tab2 = malloc(sizeof(Teleporteurs_Pair) * quantites_pair);*/
+	Teleporteurs_Pair* Tab2 = malloc(sizeof(Teleporteurs_Pair) * quantites_pair);
 	/*if (Tab2 == NULL)
 	{
 		printf("erreur allocation mémoire");
 	}*/
-	/*int index2 = index - 1;
+	int index2 = index - 1;
 	for (int index1 = 0; index1 < quantites_pair; index1++)
 	{
 		(Tab2 + index1)->Teleporteur1.x = (Tab + index1)->x;
@@ -232,531 +542,15 @@ Stack clear_stack(Stack st) {
 
 	}
 	return Tab2;
-}*/
+}
 /*Fin Téléporteurs*/
 
-/*Algorithme Kruskal*/
-/*Graph* createGraph(int S, int B) {
-	Graph* graph = (Graph*)malloc(sizeof(Graph));
-	if (graph != NULL) {
-		(graph->S) = S;
-		(graph->B) = B;
-		graph->Bord = (Bord*)malloc(graph->B * sizeof(Bord));
-	}
-	return graph;
-}*/
-
-
-/* Pseudo code fonction find
-function Find(x)
-	if x.parent != x
-		x.parent : = Find(x.parent)
-	return x.parent
-*/
-//Fonction qui trouve la racine d'un élément i
-/*int find(subset* subsets, int i, int graph) {
-	// Trouve la racine et fait de la racine le parent de i
-	isCycle(graph);
-	if ( (subsets + i)->parent != NULL) {
-		if ((subsets + i)->parent != i) {
-			(subsets + i)->parent = find(subsets, subsets[i].parent, graph);
-		}
-	}
-	return (subsets+i)->parent;
-}*/
-
-
-//Fonction qui unit 2 éléments à leurs racines
-//L'élément ayant le rang le plus faible est relié à la racine de l'élément ayant le rang le plus élevé
-/*void Union(subset* subsets, int xracine, int yracine) {
-	if ((subsets+xracine)->rang < (subsets+yracine)->rang) {
-		(subsets+xracine)->parent = yracine;
-		return;
-	}
-	else if ((subsets+xracine)->rang > (subsets+yracine)->rang) {
-		(subsets+yracine)->parent = xracine;
-		return;
-	}
-	else { //cas où les rang sont égaux, faire rang+1
-		subsets[yracine].parent = xracine;
-		subsets[xracine].rang++;
-		return;
-	}
-}*/
-/*
-//Vérifie si le graph contient un cycle ou pas
-int isCycle(Graph* graph) {
-	int S = graph->S;
-	int B = graph->B;
-	subset* subsets = (subset*)malloc(S * sizeof(subset));
-	if (subsets != NULL) {
-		for (int v = 0; v < S; ++v) {
-			(subsets + v)->parent = v;
-			(subsets + v)->rang = 0;
-		}
-	}
-	// Parcours la totalité des sommets des bords et si les ensembles sont identiques alors il y a un cycle
-	for (int e = 0; e < B; ++e) {
-		int x = find(subsets, (graph->Bord+e)->racine, graph);
-		int y = find(subsets, (graph->Bord+e)->dest, graph);
-		if (x == y)
-			return 1;
-		Union(subsets, x, y);
-	}
-	return 0;
-}*/
-
-/*Algo Kruskal pseudo-code
-	graph <- NULL
-	pour chaque sommet v appartenant S[G]
-		faire CRÉER - ENSEMBLE(v)
-	trier les arêtes de A par ordre croissant de poids w
-	pour chaque arête(u, v) appartenant A pris par ordre de poids croissant
-		faire si TROUVER - ENSEMBLE(u) != TROUVER - ENSEMBLE(v)
-			alors graph <- graph Union{ (u, v) }
-			UNION(u, v)
-	retourner E
-*/
-/*
-int PremierPavéDeElseIf(int U, int V, int nombreSommets) {
-	int tmp;
-	if (U > (int)sqrt(nombreSommets)) { //U n'est pas sur les bords du tableau donc toutes possibilités possibles
-		if (U % (int)(sqrt(nombreSommets) + 1) != 1) {
-			if (U % (int)(sqrt(nombreSommets) + 1) != 1) {
-				if (U >= nombreSommets - sqrt(nombreSommets)) {
-					tmp = rand() % 4;
-					switch (tmp) {
-					case 0:
-						V = U - 1;
-						break;
-					case 1:
-						V = U + 1;
-						break;
-					case 2:
-						V = U - (int)sqrt(nombreSommets);
-						break;
-					case 3:
-						V = U + (int)sqrt(nombreSommets);
-						break;
-					}
-				}
-				else {
-					tmp = rand() % 3;
-					switch (tmp) {
-					case 0:
-						V = U - 1;
-						break;
-					case 1:
-						V = U + 1;
-						break;
-					case 2:
-						V = U - (int)sqrt(nombreSommets);
-						break;
-					}
-				}
-			}
-			else if (U >= nombreSommets - (int)sqrt(nombreSommets)) {
-				tmp = rand() % 3;
-				switch (tmp) {
-				case 0:
-					V = U - 1;
-					break;
-				case 1:
-					V = U + (int)sqrt(nombreSommets);
-					break;
-				case 2:
-					V = U - (int)sqrt(nombreSommets);
-					break;
-				}
-			}
-			else {
-				tmp = rand() % 2;
-				switch (tmp) {
-				case 0:
-					V = U - 1;
-					break;
-				case 2:
-					V = U - (int)sqrt(nombreSommets);
-					break;
-				}
-			}
-		}
-		else if ((U % (int)(sqrt(nombreSommets) + 1) != 1) && (U >= nombreSommets - (int)sqrt(nombreSommets))) {
-			tmp = rand() % 3;
-			switch (tmp) {
-			case 0:
-				V = U + (int)sqrt(nombreSommets);
-				break;
-			case 1:
-				V = U + 1;
-				break;
-			case 2:
-				V = U - (int)sqrt(nombreSommets);
-				break;
-			}
-		}
-		else if (U % (int)(sqrt(nombreSommets) + 1) != 1) {
-			tmp = rand() % 2;
-			switch (tmp) {
-			case 0:
-				V = U + (int)sqrt(nombreSommets);
-				break;
-			case 1:
-				V = U - (int)sqrt(nombreSommets);
-				break;
-			}
-		}
-		else if (U >= nombreSommets - (int)sqrt(nombreSommets)) {
-			tmp = rand() % 2;
-			switch (tmp) {
-			case 0:
-				V = U - 1;
-				break;
-			case 1:
-				V = U - (int)sqrt(nombreSommets);
-				break;
-			}
-		}
-		else V = U - (int)sqrt(nombreSommets);
-	}
-	else if ((U % (int)(sqrt(nombreSommets) + 1) != 1) && (U % (int)(sqrt(nombreSommets) + 1) != 1) && (U >= nombreSommets - (int)sqrt(nombreSommets))) {
-		tmp = rand() % 3;
-		switch (tmp) {
-		case 0:
-			V = U - 1;
-			break;
-		case 1:
-			V = U + 1;
-			break;
-		case 2:
-			V = U - (int)sqrt(nombreSommets);
-			break;
-		}
-	}
-	else if ((U % (int)(sqrt(nombreSommets) + 1) != 1) && (U % (int)(sqrt(nombreSommets) + 1) != 1)) {
-		tmp = rand() % 2;
-		switch (tmp) {
-		case 0:
-			V = U - 1;
-			break;
-		case 1:
-			V = U - (int)sqrt(nombreSommets);
-			break;
-		}
-	}
-	else if ((U % (int)(sqrt(nombreSommets) + 1) != 1) && (U >= nombreSommets - (int)sqrt(nombreSommets))) {
-		tmp = rand() % 2;
-		switch (tmp) {
-		case 0:
-			V = U + 1;
-			break;
-		case 1:
-			V = U - (int)sqrt(nombreSommets);
-			break;
-		}
-	}
-	else if ((U >= nombreSommets - (int)sqrt(nombreSommets)) && (U % (int)(sqrt(nombreSommets) + 1) != 1)) {
-		tmp = rand() % 2;
-		switch (tmp) {
-		case 0:
-			V = U + 1;
-			break;
-		case 1:
-			V = U - (int)sqrt(nombreSommets);
-			break;
-		}
-	}
-	else {
-		return NULL;
-	}
-	return V;
-}
-int DeuxièmePavéDeElseIf(subset* subsets, int nombreSommets) {
-	for (int i = 0; i < nombreSommets; i++) {
-		if (subsets->data->haut == 1) {
-			if (subsets->data->droite == 1) {
-				if (subsets->data->bas == 1) {
-					if (subsets->data->gauche == 1) {
-						return NULL;
-					}
-					else subsets->dataRenvoye[i] = 'o';
-				}
-				else if (subsets->data->gauche == 1) subsets->dataRenvoye[i] = 'n';
-				else subsets->dataRenvoye[i] = 'h';
-			}
-			else if ((subsets->data->bas == 1) && (subsets->data->gauche == 1)) subsets->dataRenvoye[i] = 'm';
-			else if (subsets->data->bas == 1) subsets->dataRenvoye[i] = 'f';
-			else if (subsets->data->gauche == 1) subsets->dataRenvoye[i] = 'k';
-			else subsets->dataRenvoye[i] = 'b';
-		}
-		else if ((subsets->data->droite == 1) && (subsets->data->bas == 1) && (subsets->data->gauche == 1)) subsets->dataRenvoye[i] = 'l';
-		else if ((subsets->data->droite == 1) && (subsets->data->bas == 1)) subsets->dataRenvoye[i] = 'i';
-		else if ((subsets->data->bas == 1) && (subsets->data->gauche == 1)) subsets->dataRenvoye[i] = 'j';
-		else if ((subsets->data->droite == 1) && (subsets->data->gauche == 1)) subsets->dataRenvoye[i] = 'g';
-		else if (subsets->data->droite == 1) subsets->dataRenvoye[i] = 'c';
-		else if (subsets->data->bas == 1) subsets->dataRenvoye[i] = 'd';
-		else if (subsets->data->gauche == 1) subsets->dataRenvoye[i] = 'e';
-		else subsets->dataRenvoye[i] = 'a';
-	}
-}
-//Algorithme de Kruskal de génération et transcription
-Graph * Kruskal(Graph* graph, int nombreSommets) {
-	int U = nombreSommets;
-	int V = nombreSommets;
-	int tmp = NULL;
-	int tab[MAXSIZE];
-	subset* subsets = (subset*)malloc(U * sizeof(subset));
-	subset* Subsets = (subset*)malloc(V * sizeof(subset));
-	for (int i = 0; i < nombreSommets; ++i) {
-		if ((subsets + i) != NULL) {
-			(*(subsets + i)).data = (Data*)malloc(sizeof(Data));
-			(*(subsets + i)).Bord = (Bord*)malloc(sizeof(Bord));
-			srand(time(NULL));
-			graph = createGraph(i, U);
-			//Graph* Graph = createGraph(i, V);
-			tab[i] = graph->Bord[i].weight = rand();
-			((subsets + i)->data)->haut = 1;
-			((subsets + i)->data)->droite = ((subsets + i)->data)->bas = ((subsets + i)->data)->gauche = 1;
-			//Subsets[i]->data.haut = Subsets[i]->data.droite = Subsets[i]->data.bas = Subsets[i]->data.gauche = 1;
-			(subsets + i)->parent = subsets + i;
-		}
-	}
-	//Tri par fusion 
-	while(graph->S != nombreSommets) {
-		U = rand() % nombreSommets;
-		V = PremierPavéDeElseIf(U, V, nombreSommets);
-		if (find(subsets, U, graph) != find(Subsets, V, graph)) {
-				Union( subsets, find(subsets, U, graph), find(Subsets, V, graph));
-				if (U = V + 1) {
-					subsets->data->gauche = Subsets->data->droite = 0;
-				}
-				else if (U = V - 1) {
-					Subsets->data->gauche = subsets->data->droite = 0; 
-				}
-				else if (U = V + (int)sqrt(nombreSommets)) Subsets->data->bas = subsets->data->haut = 0;
-				else if (U = V - (int)sqrt(nombreSommets)) Subsets->data->haut = subsets->data->bas = 0;
-				graph->S++;
-		}
-	}
-	DeuxièmePavéDeElseIf(subsets, nombreSommets);
-	/*for (int i = 0; i < nombreSommets; i++) {
-		if (subsets->data->haut == 1) {
-			if (subsets->data->droite == 1) {
-				if (subsets->data->bas == 1) {
-					if (subsets->data->gauche == 1) {
-						return NULL;
-					}
-					else subsets->dataRenvoye[i] = 'o';
-				}
-				else if (subsets->data->gauche == 1) subsets->dataRenvoye[i] = 'n';
-				else subsets->dataRenvoye[i] = 'h';
-			}
-			else if ((subsets->data->bas == 1) && (subsets->data->gauche == 1)) subsets->dataRenvoye[i] = 'm';
-			else if (subsets->data->bas == 1) subsets->dataRenvoye[i] = 'f';
-			else if (subsets->data->gauche == 1) subsets->dataRenvoye[i] = 'k';
-			else subsets->dataRenvoye[i] = 'b';
-		}
-		else if ((subsets->data->droite == 1) && (subsets->data->bas == 1) && (subsets->data->gauche == 1)) subsets->dataRenvoye[i] = 'l';
-		else if ((subsets->data->droite == 1) && (subsets->data->bas == 1)) subsets->dataRenvoye[i] = 'i';
-		else if ((subsets->data->bas == 1) && (subsets->data->gauche == 1)) subsets->dataRenvoye[i] = 'j';
-		else if ((subsets->data->droite == 1) && (subsets->data->gauche == 1)) subsets->dataRenvoye[i] = 'g';
-		else if (subsets->data->droite == 1) subsets->dataRenvoye[i] = 'c';
-		else if (subsets->data->bas == 1) subsets->dataRenvoye[i] = 'd';
-		else if (subsets->data ->gauche == 1) subsets->dataRenvoye[i] = 'e';
-		else subsets->dataRenvoye[i] = 'a';
-	}
-	return graph;
-}*/
-
-void affichageDeSesGrandsMorts(Tab* tab, int cote) {
-	printf("[ ");
-	for (int i = 0; i < pow(cote, 2); i++) {
-		if ((i % cote == 0) && i != pow(cote, 2)) {
-			printf("], [");
-		}
-		else if (i == pow(cote, 2)) {
-			printf("\"%c\"]", (tab+i)->lettreRenvoye[i]);
-		}
-		else {
-			printf("\"%c\", ", (tab+i)->lettreRenvoye[i]);
-		}
-	}
-}
-
-int labyrinthe1if(int tmp, Tab* tab, int cote, int posinitial, Stack* GPS) {
-	//Stack* GPS = (Stack*)malloc(sizeof GPS);
-	int i = posinitial;
-	(tab + posinitial)->passage = 1;
-	if (i < cote || (tab + (i - cote))->passage == 1) {
-		if (i % cote == 1 || (tab + (i - 1))->passage == 1) {
-			if (i % cote == cote - 1 || (tab + (i + 1))->passage == 1) {
-				if (i > pow(cote, 2) - cote || (tab + (i + cote))->passage == 1) {
-					GPS = pop_stack(GPS);
-					posinitial = top_stack(GPS);
-					labyrinthe1if(tmp, tab, cote, posinitial, GPS);
-				}
-				else {
-					i += cote; (tab + i)->passage = 1; GPS = push_stack(GPS, i - cote); ((tab + i)->data)->haut = 0; ((tab + (i - cote))->data)->bas = 0;
-				}
-			}
-			else if (i > pow(cote, 2) - cote || (tab + (i + cote))->passage == 1) {
-				i += 1; (tab + i)->passage = 1; GPS = push_stack(GPS, i - 1); ((tab + i)->data)->gauche = 0; ((tab + (i - 1))->data)->droite = 0;
-			}
-			else {
-				tmp = rand() % 2;
-				switch (tmp) {
-				case 0: i += 1; (tab + i)->passage = 1; GPS = push_stack(GPS, i - 1); ((tab + i)->data)->gauche = 0; ((tab + (i - 1))->data)->droite = 0;  break;
-				case 1: i += cote; (tab + i)->passage = 1; GPS = push_stack(GPS, i - cote); ((tab + i)->data)->haut = 0; ((tab + (i - cote))->data)->bas = 0; break;
-				}
-			}
-		}
-		else if ((i % cote == cote - 1 && i > pow(cote, 2) - cote) || ((tab + (i + 1))->passage == 1 && (tab + (i + cote))->passage == 1)) {
-			i -= 1; (tab + i)->passage = 1; GPS = push_stack(GPS, i + 1); ((tab + i)->data)->droite = 0; ((tab + (i + 1))->data)->gauche = 0;
-		}
-		else if (i % cote == cote - 1 || (tab + (i + 1))->passage == 1) {
-			tmp = rand() % 2;
-			switch (tmp) {
-			case 0: i -= 1; (tab + i)->passage = 1; GPS = push_stack(GPS, i + 1); ((tab + i)->data)->droite = 0; ((tab + (i + 1))->data)->gauche = 0; break;
-			case 1: i += cote; (tab + i)->passage = 1; GPS = push_stack(GPS, i - cote); ((tab + i)->data)->haut = 0; ((tab + (i - cote))->data)->bas = 0; break;
-			}
-		}
-		else if (i > pow(cote, 2) - cote || (tab + (i + cote))->passage == 1) {
-			tmp = rand() % 2;
-			switch (tmp) {
-			case 0: i -= 1; (tab + i)->passage = 1; GPS = push_stack(GPS, i + 1); ((tab + i)->data)->droite = 0; ((tab + (i + 1))->data)->gauche = 0; break;
-			case 1: i += 1; (tab + i)->passage = 1; GPS = push_stack(GPS, i - 1); ((tab + i)->data)->gauche = 0; ((tab + (i - 1))->data)->droite = 0;  break;
-			}
-		}
-		else {
-			tmp = rand() % 3;
-			switch (tmp) {
-			case 0: i -= 1; (tab + i)->passage = 1; GPS = push_stack(GPS, i + 1); ((tab + i)->data)->droite = 0; ((tab + (i + 1))->data)->gauche = 0; break;
-			case 1: i += 1; (tab + i)->passage = 1; GPS = push_stack(GPS, i - 1); ((tab + i)->data)->gauche = 0; ((tab + (i - 1))->data)->droite = 0; break;
-			case 2: i += cote; (tab + i)->passage = 1; GPS = push_stack(GPS, i - cote); ((tab + i)->data)->haut = 0; ((tab + (i - cote))->data)->bas = 0; break;
-			}
-		}
-
-	}
-	else if ((i % cote == cote - 1 && i > pow(cote, 2) - cote && i % cote == 1) || ((tab + (i + 1))->passage == 1 && (tab + (i - 1))->passage == 1 && (tab + (i + cote))->passage == 1)) {
-		i -= cote; (tab + i)->passage = 1; GPS = push_stack(GPS, i + cote); ((tab + i)->data)->bas = 0; ((tab + (i - cote))->data)->haut = 0;
-	}
-	else if ((i % cote == cote - 1 && i > pow(cote, 2) - cote) || ((tab + (i + 1))->passage == 1 && (tab + (i + cote))->passage == 1)) {
-		tmp = rand() % 2;
-		switch (tmp) {
-		case 0: i += 1; (tab + i)->passage = 1; GPS = push_stack(GPS, i - 1); ((tab + i)->data)->gauche = 0; ((tab + (i - 1))->data)->droite = 0; break;
-		case 1: i -= cote; (tab + i)->passage = 1; GPS = push_stack(GPS, i + cote); ((tab + i)->data)->bas = 0; ((tab + (i - cote))->data)->haut = 0; break;
-		}
-	}
-	else if ((i > pow(cote, 2) - cote && i % cote == 1) || ((tab + (i + cote))->passage == 1 && (tab + (i - 1))->passage == 1)) {
-		tmp = rand() % 2;
-		switch (tmp) {
-		case 0: i -= 1; (tab + i)->passage = 1; GPS = push_stack(GPS, i + 1); ((tab + i)->data)->droite = 0; ((tab + (i + 1))->data)->gauche = 0; break;
-		case 1: i -= cote; (tab + i)->passage = 1; GPS = push_stack(GPS, i + cote); ((tab + i)->data)->bas = 0; ((tab + (i - cote))->data)->haut = 0; break;
-		}
-	}
-	else if ((i % cote == cote - 1 && i % cote == 1)||((tab + (i + 1))->passage == 1 && (tab + (i - 1))->passage == 1)) {
-		tmp = rand() % 2;
-		switch (tmp) {
-		case 0: i += 1; (tab + i)->passage = 1; GPS = push_stack(GPS, i - 1); ((tab + i)->data)->gauche = 0; ((tab + (i - 1))->data)->droite = 0; break;
-		case 1: i -= 1; (tab + i)->passage = 1; GPS = push_stack(GPS, i + 1); ((tab + i)->data)->droite = 0; ((tab + (i + 1))->data)->gauche = 0; break;
-		}
-	}
-	else if (i % cote == cote - 1 || (tab + (i + 1))->passage == 1){
-		tmp = rand() % 3;
-		switch (tmp) {
-		case 0: i -= 1; (tab + i)->passage = 1; GPS = push_stack(GPS, i + 1); ((tab + i)->data)->droite = 0; ((tab + (i + 1))->data)->gauche = 0; break;
-		case 1: i -= cote; (tab + i)->passage = 1; GPS = push_stack(GPS, i + cote); ((tab + i)->data)->bas = 0; ((tab + (i - cote))->data)->haut = 0; break;
-		case 2: i += cote; (tab + i)->passage = 1; GPS = push_stack(GPS, i - cote); ((tab + i)->data)->haut = 0; ((tab + (i - cote))->data)->bas = 0; break;
-		}
-	}
-	else if (i % cote == 1 || (tab + (i - 1))->passage == 1) {
-		tmp = rand() % 3;
-		switch (tmp) {
-		case 0: i += 1; (tab + i)->passage = 1; GPS = push_stack(GPS, i - 1); ((tab + i)->data)->gauche = 0; ((tab + (i - 1))->data)->droite = 0; break;
-		case 1: i -= cote; (tab + i)->passage = 1; GPS = push_stack(GPS, i + cote); ((tab + i)->data)->bas = 0; ((tab + (i - cote))->data)->haut = 0; break;
-		case 2: i += cote; (tab + i)->passage = 1; GPS = push_stack(GPS, i - cote); ((tab + i)->data)->haut = 0; ((tab + (i - cote))->data)->bas = 0; break;
-		}
-	}
-	else if (i > pow(cote, 2) - cote || (tab + (i + cote))->passage == 1) {
-		tmp = rand() % 3;
-		switch (tmp) {
-		case 0: i += 1; (tab + i)->passage = 1; GPS = push_stack(GPS, i - 1); ((tab + i)->data)->gauche = 0; ((tab + (i - 1))->data)->droite = 0; break;
-		case 1: i -= cote; (tab + i)->passage = 1; GPS = push_stack(GPS, i + cote); ((tab + i)->data)->bas = 0; ((tab + (i - cote))->data)->haut = 0; break;
-		case 2: i -= 1; (tab + i)->passage = 1; GPS = push_stack(GPS, i + 1); ((tab + i)->data)->droite = 0; ((tab + (i + 1))->data)->gauche = 0; break;
-		}
-	}
-	else {
-		tmp = rand() % 4;
-		switch (tmp) {
-		case 0: i += 1; (tab + i)->passage = 1; GPS = push_stack(GPS, i - 1); ((tab + i)->data)->gauche = 0; ((tab + (i - 1))->data)->droite = 0; break;
-		case 1: i -= cote; (tab + i)->passage = 1; GPS = push_stack(GPS, i + cote); ((tab + i)->data)->bas = 0; ((tab + (i - cote))->data)->haut = 0; break;
-		case 2: i -= 1; (tab + i)->passage = 1; GPS = push_stack(GPS, i + 1); ((tab + i)->data)->droite = 0; ((tab + (i + 1))->data)->gauche = 0; break;
-		case 3: i += cote; (tab + i)->passage = 1; GPS = push_stack(GPS, i - cote); ((tab + i)->data)->haut = 0; ((tab + (i - cote))->data)->bas = 0; break;
-		}
-	}
-	posinitial = i;
-}
-
-void TranscriptionPourJavaScript(Tab* tab, int cote) {
-	for (int i = 0; i < pow(cote, 2); i++) {
-		if (((tab+i)->data)->haut == 1) {
-			if (((tab + i)->data)->droite == 1) {
-				if (((tab + i)->data)->bas == 1) {
-					if (((tab + i)->data)->gauche == 1) {
-						printf("Il y a une erreur");
-						return EXIT_FAILURE;
-					}
-					else (tab+i)->lettreRenvoye[i] = 'o';
-				}
-				else if ((tab + i)->data->gauche == 1) (tab + i)->lettreRenvoye[i] = 'n';
-				else (tab + i)->lettreRenvoye[i] = 'h';
-			}
-			else if (((tab + i)->data->bas == 1) && ((tab + i)->data->gauche == 1)) (tab + i)->lettreRenvoye[i] = 'm';
-			else if ((tab + i)->data->bas == 1) (tab + i)->lettreRenvoye[i] = 'f';
-			else if ((tab + i)->data->gauche == 1) (tab + i)->lettreRenvoye[i] = 'k';
-			else (tab + i)->lettreRenvoye[i] = 'b';
-		}
-		else if (((tab + i)->data->droite == 1) && ((tab + i)->data->bas == 1) && ((tab + i)->data->gauche == 1)) (tab + i)->lettreRenvoye[i] = 'l';
-		else if (((tab + i)->data->droite == 1) && ((tab + i)->data->bas == 1)) (tab + i)->lettreRenvoye[i] = 'i';
-		else if (((tab + i)->data->bas == 1) && ((tab + i)->data->gauche == 1)) (tab + i)->lettreRenvoye[i] = 'j';
-		else if (((tab + i)->data->droite == 1) && ((tab + i)->data->gauche == 1)) (tab + i)->lettreRenvoye[i] = 'g';
-		else if ((tab + i)->data->droite == 1) (tab + i)->lettreRenvoye[i] = 'c';
-		else if ((tab + i)->data->bas == 1) (tab + i)->lettreRenvoye[i] = 'd';
-		else if ((tab + i)->data->gauche == 1) (tab + i)->lettreRenvoye[i] = 'e';
-		else (tab + i)->lettreRenvoye[i] = 'a';
-	}
-	return;
-}
-
-int Labyrinthe(int cote, Tab* tab) {
-	//Tab* tab = (Tab*)malloc((pow(cote, 2) * sizeof(Tab));
-	srand(time(NULL));
-	int tmp = 0;
-	int compteur = 0;
-	for (int i = 0; i < pow(cote, 2); i++) {
-		(tab+i)->data = (Data*)malloc(sizeof(Data));
-		(*(tab + i)->data).haut = 1;
-		(*(tab + i)->data).bas = 1;
-		(*(tab + i)->data).gauche = 1;
-		(*(tab + i)->data).droite = 1;
-	}
-	int posintial = rand() % cote;
-	Stack GPS = new_stack();
-
-	while (compteur != pow(cote, 2)) {
-		int labyrinthe1if(tmp, tab, cote, posintial);
-		compteur++;
-	}
-	TranscriptionPourJavaScript(tab, cote);
-	return tab;
-}
 
 int main() {
-	int cote = 12;
-	Tab* tab = (Tab*)malloc(sizeof (Tab));
-	int piege = 0;
-	int teleporteur = 0;
-	Labyrinthe(cote, tab);
+	srand(time(NULL));
+	Lab* newl = NewLab(40);
+	Free* P = NewFree(100);
+	int o = tryPath(newl, 0, P);
+	show(newl);
 }
 
-//faire un tableau avec allocation dynamique des valeurs lorsque celui-ci est dépassé en taille
