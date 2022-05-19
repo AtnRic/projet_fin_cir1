@@ -32,6 +32,7 @@ int tryPath(Lab* L, int index, Free* F);
 Lab* NewLab(int size);
 int show(Lab* L);
 Free* NewFree(int max);
+char* letter(Lab* L);
 /*Fin algo labyrinthe*/
 
 /*Téléporteurs*/
