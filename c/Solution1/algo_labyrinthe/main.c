@@ -476,68 +476,74 @@ char* letter(Lab* L) {
 	char* c = (char*)malloc(sizeof(char) * L->size * L->size);
 	if (c != NULL) {
 		for (int i = 0; i < L->size * L->size; i++) {
-			if ((i % L->size) == 0) {
-				printf("\n");
+			if ((i % L->size) == 0 && i != 0 && i != L->size) {
+				printf("},\n{");
+			}
+			if (i == 0) {
+				printf("{{");
+			}
+			if (i == pow(L->size,2)) {
+				printf("}};");
 			}
 			if (!(*(L->tab + i)).t && !(*(L->tab + i)).r && !(*(L->tab + i)).d && !(*(L->tab + i)).l) {
 				(*(c + i)) = 'a';
-				printf("a");
+				printf("\"a\", ");
 			}
 			if ((*(L->tab + i)).t && !(*(L->tab + i)).r && !(*(L->tab + i)).d && !(*(L->tab + i)).l) {
 				(*(c + i)) = 'b';
-				printf("b");
+				printf("\"b\", ");
 			}
 			if (!(*(L->tab + i)).t && (*(L->tab + i)).r && !(*(L->tab + i)).d && !(*(L->tab + i)).l) {
 				(*(c + i)) = 'c';
-				printf("c");
+				printf("\"c\", ");
 			}
 			if (!(*(L->tab + i)).t && !(*(L->tab + i)).r && (*(L->tab + i)).d && !(*(L->tab + i)).l) {
 				(*(c + i)) = 'd';
-				printf("d");
+				printf("\"d\", ");
 			}
 			if (!(*(L->tab + i)).t && !(*(L->tab + i)).r && !(*(L->tab + i)).d && (*(L->tab + i)).l) {
 				(*(c + i)) = 'e';
-				printf("e");
+				printf("\"e\", ");
 			}
 			if ((*(L->tab + i)).t && !(*(L->tab + i)).r && (*(L->tab + i)).d && !(*(L->tab + i)).l) {
 				(*(c + i)) = 'f';
-				printf("f");
+				printf("\"f\", ");
 			}
 			if (!(*(L->tab + i)).t && (*(L->tab + i)).r && !(*(L->tab + i)).d && (*(L->tab + i)).l) {
 				(*(c + i)) = 'g';
-				printf("g");
+				printf("\"g\", ");
 			}
 			if ((*(L->tab + i)).t && (*(L->tab + i)).r && !(*(L->tab + i)).d && !(*(L->tab + i)).l) {
 				(*(c + i)) = 'h';
-				printf("h");
+				printf("\"h\", ");
 			}
 			if (!(*(L->tab + i)).t && (*(L->tab + i)).r && (*(L->tab + i)).d && !(*(L->tab + i)).l) {
 				(*(c + i)) = 'i';
-				printf("i");
+				printf("\"i\", ");
 			}
 			if (!(*(L->tab + i)).t && !(*(L->tab + i)).r && (*(L->tab + i)).d && (*(L->tab + i)).l) {
 				(*(c + i)) = 'j';
-				printf("j");
+				printf("\"j\", ");
 			}
 			if ((*(L->tab + i)).t && !(*(L->tab + i)).r && !(*(L->tab + i)).d && (*(L->tab + i)).l) {
 				(*(c + i)) = 'k';
-				printf("k");
+				printf("\"k\", ");
 			}
 			if (!(*(L->tab + i)).t && (*(L->tab + i)).r && (*(L->tab + i)).d && (*(L->tab + i)).l) {
 				(*(c + i)) = 'l';
-				printf("l");
+				printf("\"l\", ");
 			}
 			if ((*(L->tab + i)).t && !(*(L->tab + i)).r && (*(L->tab + i)).d && (*(L->tab + i)).l) {
 				(*(c + i)) = 'm';
-				printf("m");
+				printf("\"m\", ");
 			}
 			if ((*(L->tab + i)).t && (*(L->tab + i)).r && !(*(L->tab + i)).d && (*(L->tab + i)).l) {
 				(*(c + i)) = 'n';
-				printf("n");
+				printf("\"n\", ");
 			}
 			if ((*(L->tab + i)).t && (*(L->tab + i)).r && (*(L->tab + i)).d && !(*(L->tab + i)).l) {
 				(*(c + i)) = 'o';
-				printf("o");
+				printf("\"o\", ");
 			}
 		}
 	}
@@ -621,10 +627,10 @@ Teleporteurs_Pair* Generation_Teleporteurs(char* maze, int size, int quantites_p
 int main() {
 	srand(time(NULL));
 	Lab* newl = NewLab(40);
-	//char* tab = letter(newl);
-	//Generation_Teleporteurs(tab, 40, 3);
+	Generation_Teleporteurs(letter(newl), 40, 3);
 	Free* P = NewFree(100);
 	int o = tryPath(newl, 0, P);
-	show(newl);
+	//show(newl);
+	letter(newl);
 }
 
