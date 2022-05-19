@@ -7,6 +7,10 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     overflow-x: hidden;
 }
@@ -343,6 +347,7 @@ section {
 }
 
 #mario {
+    scroll-behavior: smooth;
     background: linear-gradient(#2e457b, #4d76d0);
     overflow-x: hidden;
 }
