@@ -514,3 +514,21 @@ section {
     height: 15vw;
     background: url(../images/accueil/mario-cloud.png) center center / cover no-repeat;
 }
+
+
+/* Page de choix de niveaux */
+
+
+#formulaire {
+    position: absolute;
+    top: 250vh;
+    left: 50%;
+    width: 100%;
+    transform: translateY(-50%) transl;
+}
+
+#formulaire ~ input {
+    width: 100%;
+    text-align: center;
+    align-items: center;
+}
