@@ -49,3 +49,21 @@ typedef struct Teleporteurs_Pair {
 //génére les "quantites" téléporteurs dans le maze renvoie le tableau comportant les coordonnees des téléporteurs
 Teleporteurs_Pair* Generation_Teleporteurs(char* maze, int size, int quantites);
 /*Fin téléporteurs*/
+
+/*Gardes*/
+typedef struct Garde {
+	int Id; //numéro du garde
+
+	/* Direction dans laquelle le garde va se déplacer */
+
+	bool t;     //top
+	bool d;  //down
+	bool r;  //right
+	bool l;     //left
+
+	int move; //nombre de case avant de toucher le mur en face et de devoir faire demi-tour
+}Garde;
+
+Garde* ApparitionGardes(char* maze, int size, int quantites_pair);
+void MouvementGardes(char* maze, int size, Garde* garde);
+/*Fin gardes*/

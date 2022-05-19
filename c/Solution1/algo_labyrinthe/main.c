@@ -477,73 +477,67 @@ char* letter(Lab* L) {
 	if (c != NULL) {
 		for (int i = 0; i < L->size * L->size; i++) {
 			if ((i % L->size) == 0 && i != 0 && i != L->size) {
-				printf("},\n{");
-			}
-			if (i == 0) {
-				printf("{{");
-			}
-			if (i == pow(L->size,2)) {
-				printf("}};");
+				printf("\n");
 			}
 			if (!(*(L->tab + i)).t && !(*(L->tab + i)).r && !(*(L->tab + i)).d && !(*(L->tab + i)).l) {
 				(*(c + i)) = 'a';
-				printf("\"a\", ");
+				printf("a");
 			}
 			if ((*(L->tab + i)).t && !(*(L->tab + i)).r && !(*(L->tab + i)).d && !(*(L->tab + i)).l) {
 				(*(c + i)) = 'b';
-				printf("\"b\", ");
+				printf("b");
 			}
 			if (!(*(L->tab + i)).t && (*(L->tab + i)).r && !(*(L->tab + i)).d && !(*(L->tab + i)).l) {
 				(*(c + i)) = 'c';
-				printf("\"c\", ");
+				printf("c");
 			}
 			if (!(*(L->tab + i)).t && !(*(L->tab + i)).r && (*(L->tab + i)).d && !(*(L->tab + i)).l) {
 				(*(c + i)) = 'd';
-				printf("\"d\", ");
+				printf("d");
 			}
 			if (!(*(L->tab + i)).t && !(*(L->tab + i)).r && !(*(L->tab + i)).d && (*(L->tab + i)).l) {
 				(*(c + i)) = 'e';
-				printf("\"e\", ");
+				printf("e");
 			}
 			if ((*(L->tab + i)).t && !(*(L->tab + i)).r && (*(L->tab + i)).d && !(*(L->tab + i)).l) {
 				(*(c + i)) = 'f';
-				printf("\"f\", ");
+				printf("f");
 			}
 			if (!(*(L->tab + i)).t && (*(L->tab + i)).r && !(*(L->tab + i)).d && (*(L->tab + i)).l) {
 				(*(c + i)) = 'g';
-				printf("\"g\", ");
+				printf("g");
 			}
 			if ((*(L->tab + i)).t && (*(L->tab + i)).r && !(*(L->tab + i)).d && !(*(L->tab + i)).l) {
 				(*(c + i)) = 'h';
-				printf("\"h\", ");
+				printf("h");
 			}
 			if (!(*(L->tab + i)).t && (*(L->tab + i)).r && (*(L->tab + i)).d && !(*(L->tab + i)).l) {
 				(*(c + i)) = 'i';
-				printf("\"i\", ");
+				printf("i");
 			}
 			if (!(*(L->tab + i)).t && !(*(L->tab + i)).r && (*(L->tab + i)).d && (*(L->tab + i)).l) {
 				(*(c + i)) = 'j';
-				printf("\"j\", ");
+				printf("j");
 			}
 			if ((*(L->tab + i)).t && !(*(L->tab + i)).r && !(*(L->tab + i)).d && (*(L->tab + i)).l) {
 				(*(c + i)) = 'k';
-				printf("\"k\", ");
+				printf("k");
 			}
 			if (!(*(L->tab + i)).t && (*(L->tab + i)).r && (*(L->tab + i)).d && (*(L->tab + i)).l) {
 				(*(c + i)) = 'l';
-				printf("\"l\", ");
+				printf("l");
 			}
 			if ((*(L->tab + i)).t && !(*(L->tab + i)).r && (*(L->tab + i)).d && (*(L->tab + i)).l) {
 				(*(c + i)) = 'm';
-				printf("\"m\", ");
+				printf("m");
 			}
 			if ((*(L->tab + i)).t && (*(L->tab + i)).r && !(*(L->tab + i)).d && (*(L->tab + i)).l) {
 				(*(c + i)) = 'n';
-				printf("\"n\", ");
+				printf("n");
 			}
 			if ((*(L->tab + i)).t && (*(L->tab + i)).r && (*(L->tab + i)).d && !(*(L->tab + i)).l) {
 				(*(c + i)) = 'o';
-				printf("\"o\", ");
+				printf("o");
 			}
 		}
 	}
@@ -551,8 +545,20 @@ char* letter(Lab* L) {
 }
 /*Fin algo labyrinthe*/
 
+/*Gardes*/
+Garde* ApparitionGardes(char* maze, int size, int quantites_pair) {
+
+}
+
+void MouvementGardes(char* maze, int size, Garde* garde) {
+
+}
+/*Fin Gardes*/
+
 /*Téléporteurs*/
 Teleporteurs_Pair* Generation_Teleporteurs(char* maze, int size, int quantites_pair) {
+	int casevecteur1;
+	int casevecteur2;
 	Teleporteur_Pos* Tab = malloc(sizeof(Teleporteur_Pos));
 	if (Tab == NULL)
 	{
@@ -578,7 +584,7 @@ Teleporteurs_Pair* Generation_Teleporteurs(char* maze, int size, int quantites_p
 					Tab = (Teleporteur_Pos*)realloc(Tab, sizeof(Teleporteur_Pos) * 10);
 					if (Tab != NULL)
 					{
-						printf("allocation réussie");
+						//printf("allocation réussie");
 						(Tab + index)->x = x;
 						(Tab + index)->y = y;
 						index++;
@@ -590,12 +596,12 @@ Teleporteurs_Pair* Generation_Teleporteurs(char* maze, int size, int quantites_p
 				}
 				else
 				{
-					printf("pas besoin d'allocation");
+					//printf("pas besoin d'allocation");
 					(Tab + index)->x = x;
 					(Tab + index)->y = y;
-					printf(" Index :%d\n", index);
+					/*printf(" Index :%d\n", index);
 					printf("Tab[%d].x = %d \n", index, (Tab + index)->x);
-					printf("Tab[%d].x = %d \n", index, (Tab + index)->y);
+					printf("Tab[%d].x = %d \n", index, (Tab + index)->y);*/
 
 					index++;
 				}
@@ -619,6 +625,13 @@ Teleporteurs_Pair* Generation_Teleporteurs(char* maze, int size, int quantites_p
 		index2--;
 
 	}
+	printf("\n");
+	for (int o = 0; o < quantites_pair; o++)
+	{
+		casevecteur1 = (Tab2 + o)->Teleporteur1.y * size + (Tab2 + o)->Teleporteur1.x;
+		casevecteur2 = (Tab2 + o)->Teleporteur2.y * size + (Tab2 + o)->Teleporteur2.x;
+		printf("[%d, %d]\n", casevecteur1, casevecteur2);
+	}
 	return Tab2;
 }
 /*Fin Téléporteurs*/
@@ -627,10 +640,10 @@ Teleporteurs_Pair* Generation_Teleporteurs(char* maze, int size, int quantites_p
 int main() {
 	srand(time(NULL));
 	Lab* newl = NewLab(40);
-	Generation_Teleporteurs(letter(newl), 40, 3);
 	Free* P = NewFree(100);
 	int o = tryPath(newl, 0, P);
 	//show(newl);
 	letter(newl);
+	Generation_Teleporteurs(letter(newl), 40, 3);
 }
 

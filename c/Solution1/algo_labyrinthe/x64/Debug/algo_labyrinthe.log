@@ -1,5 +1,6 @@
 ﻿  main.c
 C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(187,50): warning C4244: 'fonction' : conversion de 'double' en 'float', perte possible de données
 C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(187,10): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(628,8): warning C4244: 'fonction' : conversion de 'time_t' en 'unsigned int', perte possible de données
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(641,8): warning C4244: 'fonction' : conversion de 'time_t' en 'unsigned int', perte possible de données
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(551): warning C4716: 'ApparitionGardes' : doit retourner une valeur
   algo_labyrinthe.vcxproj -> C:\MAMP\htdocs\Projet CIR1\c\Solution1\x64\Debug\algo_labyrinthe.exe
