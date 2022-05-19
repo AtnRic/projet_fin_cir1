@@ -159,6 +159,8 @@ int DrawTrajGuard(LinkedListGuard* list, LinkedElemGuard* newItem) {
 	return EXIT_SUCCESS;
 }
 
+int 
+
 /*-----------fin----------------------*/
 
 int main() {
