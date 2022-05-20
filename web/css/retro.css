@@ -3,12 +3,14 @@
     background-size: auto;
     background-position: right bottom;
 }
+body::after{
+    position:absolute; width:0; height:0; overflow:hidden; z-index:-1; /*hide images*/
+    background-image:url(../images/retro/retro.png);   /*load images*/
+}
 .global{
     background-color: black;
 }
-.container{
 
-}
 .sline {
     position: relative;
     text-align: center;
@@ -23,11 +25,12 @@
     right: 0;
     z-index: 2;
     background-image: url("../images/retro/loading.png");
+
     background-size: cover;
     background-color: transparent;
     background-position: bottom center;
     background-repeat: no-repeat;
-    animation: made 3s forwards;
+    animation: made 2s forwards;
 }
 @keyframes made {
     99% {
@@ -38,7 +41,7 @@
     }
 }
 
-table {width: 55%; height: 55%; border: 5px black solid;}
+table {width: 55%; height: 55%; border: none}
 
 body{
     overflow: hidden;
@@ -112,6 +115,10 @@ body{
 table, tr, td{
     padding: 0;
     border-spacing: 0;
+}
+td img{
+    height: fit-content;
+    width: fit-content;
 }
 
 

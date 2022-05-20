@@ -559,6 +559,9 @@ var list = [new Garde(0, 0)]; // Méthode de création de la liste des gardes.
 
 function PHP_Start(anime) {
   PHP_Function("../tools/function.php", "generation", function Handle(output) {
+    if(output.length == 0){
+      location.reload();
+    }
     Launch(Math.sqrt(output.length), Array.from(output), 0, list, anime);
   });
 }
@@ -572,6 +575,7 @@ document.addEventListener("keydown", function (event) {
 // Création d'une grid avec spawn du joueur et des gardes.
 function Launch(size, tab, spawnCellId, gardList, boolAnimation) {
   //#region ROWS
+  console.log("Size: " + size);
   makeRows(size);
   cellNum = size;
   //#endregion
@@ -732,7 +736,8 @@ function Launch(size, tab, spawnCellId, gardList, boolAnimation) {
   }
   //#endregion
 
-  //#region ANIMATION
+  //#region ANIMATION*/
+
   if (boolAnimation) {
     LabAnim("t1", 1500);
     LabAnim("t2", 1500);
