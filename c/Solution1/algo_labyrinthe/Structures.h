@@ -21,19 +21,6 @@ typedef struct Free {
 	int Size;
 }Free;
 
-int Right(Lab* L, int index);
-int Left(Lab* L, int index);
-int Top(Lab* L, int index);
-int Down(Lab* L, int index);
-bool Isolate(Lab* L, int index);
-int DelWall(Lab* L, int index, char wall);
-char r_CaseNear(Lab* L, int index);
-int tryPath(Lab* L, int index, Free* F);
-Lab* NewLab(int size);
-int show(Lab* L);
-Free* NewFree(int max);
-char* letter(Lab* L);
-/*Fin algo labyrinthe*/
 
 /*Téléporteurs*/
 typedef struct Teleporteur_Pos {
@@ -45,6 +32,27 @@ typedef struct Teleporteurs_Pair {
 	Teleporteur_Pos Teleporteur1;
 	Teleporteur_Pos Teleporteur2;
 }Teleporteurs_Pair;
+
+
+
+
+
+
+int Right(Lab* L, int index);
+int Left(Lab* L, int index);
+int Top(Lab* L, int index);
+int Down(Lab* L, int index);
+bool Isolate(Lab* L, int index);
+int DelWall(Lab* L, int index, char wall);
+char r_CaseNear(Lab* L, int index);
+int tryPath(Lab* L, int index, Free* F);
+Lab* NewLab(int size);
+
+Free* NewFree(int max);
+char* letter(Lab* L);
+/*Fin algo labyrinthe*/
+
+
 
 //génére les "quantites" téléporteurs dans le maze renvoie le tableau comportant les coordonnees des téléporteurs
 Teleporteurs_Pair* Generation_Teleporteurs(char* maze, int size, int quantites);
@@ -67,3 +75,24 @@ typedef struct Garde {
 Garde* ApparitionGardes(char* maze, int size, int quantites_pair);
 void MouvementGardes(char* maze, int size, Garde* garde);
 /*Fin gardes*/
+
+
+typedef struct Path {
+	int* cells;
+	int pathSize;
+	//Teleporteurs_Pair* tps;
+	//int tpSize;
+}Path;
+
+bool Contains(Path* actual, int index);
+Path* newPath();
+Path* clone(Path* base);
+Path* Solve(Lab* L, Teleporteurs_Pair* pairs, int nbTpPair);
+Path* PathIt(Lab* Lab, Teleporteurs_Pair* pairs, int nbTpPair, Path* actual, int index);
+int Check(Teleporteurs_Pair* pair, int nbTpPair, int labSize, int index);
+int show(Lab* L, Path* P); 
+int printPath(Path* P);
+int wLeft(Lab* L, int index);
+int wRight(Lab* L, int index);
+int wTop(Lab* L, int index);
+int wDown(Lab* L, int index);
