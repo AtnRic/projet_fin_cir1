@@ -25,7 +25,6 @@ body::after{
     right: 0;
     z-index: 2;
     background-image: url("../images/retro/loading.png");
-
     background-size: cover;
     background-color: transparent;
     background-position: bottom center;
@@ -41,7 +40,6 @@ body::after{
     }
 }
 
-table {width: 55%; height: 55%; border: none}
 
 body{
     overflow: hidden;
@@ -66,25 +64,38 @@ body{
     background-color: #9e9e9e;
     position: absolute;
     margin: 0;
-    border-width: 150px 300px;
     border-color: black;
 }
-
-.walls
-{
+.walls {
     position:absolute;
     top: 0;
-    width: 100%;
-    height: 100%;
+    /*width: 100%;
+    height: 100%;*/
 }
-
 .global{
     position: absolute;
-    right: 50%;
-    transform: translateX(calc(50% + 134px));
-    top: 285px;
-
-    background: none;
+    top: 26.6vh;
+    height: 58vh;
+    width: 70vh;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.container, table{
+    border: none;
+    background-color: #9e9e9e;
+    position: absolute;
+    height: 43.5vh;
+    width: 43.5vh;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+.global, td, .container, table, tr{
+    background-image: none;
+}
+td{
+    border: none;
+    border-collapse: collapse;
 }
 
 #player {
@@ -116,19 +127,22 @@ table, tr, td{
     padding: 0;
     border-spacing: 0;
 }
-td img{
-    height: fit-content;
-    width: fit-content;
+.walls{
+    height: 105%;/*pour éviter traits blancs*/
+    width: 105%;
 }
 
 
 .identify{
     background-color:yellow;
 }
-
-@media screen and (min-width: 1600px) {
-    .global { display:block;
-        width: 700px;height: 700px;
+/*
+@media screen and (min-width: 1600px) or (min-height: 800px) {
+    .global {
+        top: 295px;
+        transform: translateX(calc(50% + 150px));
+        display:block;
+        width: 760px;height: 760px;
         margin: calc(50vh - 450px) auto auto;
     }
 }
@@ -139,4 +153,4 @@ td img{
         margin: calc(50vh - 400px) auto auto;
     }
 }
-
+*/
