@@ -45,11 +45,11 @@ h1, p{
 }
 
 #press::before{
-    content: ">>>";
+    content: ">>> ";
 }
 
 #press::after{
-    content: "<<<";
+    content: " <<<";
 }
 
 .choose{
@@ -194,7 +194,7 @@ input{
     }
 }
 
-@media screen and (max-width: 690px) {
+@media screen and (max-width: 720px) {
     #logoimage{
         margin-top: 50px;
     }
