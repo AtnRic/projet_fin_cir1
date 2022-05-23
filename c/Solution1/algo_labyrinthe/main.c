@@ -1110,41 +1110,31 @@ int Check(Teleporteurs_Pair* pair, int nbTpPair, int labSize, int index) {
 	return 0;
 }
 
-/*Fichier lecture*/
-void readFile(char* filename) {
-	int returnCode;
-	int count;
-
-	FILE* stream;
-	errno_t err;
-
-	err = fopen_s(&stream, filename, "r");
-	if (err == 0)
-		printf("Le fichier 'file.txt' est ouvert\n");
-	else
-		printf("Le fichier 'file.txt' n'est pas ouvert\n");
-
-	fseek(stream, 0, SEEK_SET);
-
-	char buffer[2] = { 0 };
-	fread_s(buffer, 2 * sizeof(char), sizeof(char), 2, stream);
-	buffer[1] = '\0';
-	printf("%s", buffer);
-
-	if (stream) {
-		err = fclose(stream);
-		if (err == 0)
-			printf("\nLe fichier 'file.txt' est ferme\n");
-		else
-			printf("\nLe fichier 'file.txt' n'est pas ferme\n");
+int mouvementHero(int posHero, Cell* cell) {
+	if (posHero == ) { // border
 	}
+	else if (posHero == ) { // 3 walls
+
+	}
+	else if (posHero == ) { // 2 walls
+
+	}
+	else if (posHero == ) { // 1 wall
+
+	}
+	else if (posHero == ) { // 0 wall
+
+	}
+	else {
+		return -1;
+	}
+	return;
 }
-/*Fin fichier lecture*/
 
 int main() {
 	Garde* garde = (Garde*)malloc(sizeof(Garde));
 	srand(time(NULL));
-	Lab* newl = NewLab(50);
+	Lab* newl = NewLab(5);
 	Free* P = NewFree(100);
 	int o = tryPath(newl, 0, P);
 	//show(newl);

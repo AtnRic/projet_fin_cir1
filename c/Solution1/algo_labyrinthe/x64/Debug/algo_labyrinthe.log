@@ -1,10 +1,6 @@
 ﻿  main.c
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(185,50): warning C4244: 'fonction' : conversion de 'double' en 'float', perte possible de données
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(185,10): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(559,8): warning C4244: 'fonction' : conversion de 'time_t' en 'unsigned int', perte possible de données
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(562,15): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(621,8): warning C4244: 'fonction' : conversion de 'time_t' en 'unsigned int', perte possible de données
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(1115,8): warning C4244: 'fonction' : conversion de 'time_t' en 'unsigned int', perte possible de données
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(572): warning C4715: 'ApparitionGardes' : les chemins de contrôle ne retournent pas tous une valeur
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(1088): warning C4715: 'PathIt' : les chemins de contrôle ne retournent pas tous une valeur
-  algo_labyrinthe.vcxproj -> C:\MAMP\htdocs\Projet CIR1\c\Solution1\x64\Debug\algo_labyrinthe.exe
+C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(185,50): warning C4244: 'fonction' : conversion de 'double' en 'float', perte possible de données
+C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(185,10): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
+C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(922,8): warning C4244: 'fonction' : conversion de 'time_t' en 'unsigned int', perte possible de données
+C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(892): warning C4715: 'PathIt' : les chemins de contrôle ne retournent pas tous une valeur
+  algo_labyrinthe.vcxproj -> C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\x64\Debug\algo_labyrinthe.exe

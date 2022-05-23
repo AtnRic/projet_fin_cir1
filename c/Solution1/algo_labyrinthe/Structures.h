@@ -107,3 +107,4 @@ int wLeft(Lab* L, int index);
 int wRight(Lab* L, int index);
 int wTop(Lab* L, int index);
 int wDown(Lab* L, int index);
+int mouvementHero(int posHero);
