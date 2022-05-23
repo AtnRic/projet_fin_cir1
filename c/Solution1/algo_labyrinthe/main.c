@@ -1148,7 +1148,7 @@ bool verifGauche(char posHero) {
 }
 
 int main() {
-	/*
+	
 	Garde* garde = (Garde*)malloc(sizeof(Garde));
 	srand(time(NULL));
 	Lab* newl = NewLab(5);
@@ -1171,7 +1171,7 @@ int main() {
 	return EXIT_SUCCESS;
 
 	//printPath(S);
-	*/
+	
 
 
 	if (verifDroite("a") == true) {
