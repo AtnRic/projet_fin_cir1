@@ -914,9 +914,30 @@ int Check(Teleporteurs_Pair* pair, int nbTpPair, int labSize, int index) {
 	return 0;
 }
 
+int mouvementHero(int posHero, Cell* cell) {
+	if (posHero == ) { // border
+	}
+	else if (posHero == ) { // 3 walls
+
+	}
+	else if (posHero == ) { // 2 walls
+
+	}
+	else if (posHero == ) { // 1 wall
+
+	}
+	else if (posHero == ) { // 0 wall
+
+	}
+	else {
+		return -1;
+	}
+	return;
+}
+
 int main() {
 	srand(time(NULL));
-	Lab* newl = NewLab(50);
+	Lab* newl = NewLab(5);
 	Free* P = NewFree(100);
 	int o = tryPath(newl, 0, P);
 
