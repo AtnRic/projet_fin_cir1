@@ -97,9 +97,9 @@ void readFile(char* filename) {
 
 	fseek(stream, 0, SEEK_SET);
 
-	char buffer[2] = { 0 };
-	fread_s(buffer, 2 * sizeof(char), sizeof(char), 2, stream);
-	buffer[1] = '\0';
+	char buffer[25] = { 0 };
+	fread_s(buffer, 25 * sizeof(char), sizeof(char), 25, stream);
+	buffer[24] = '\0';
 	printf("%s", buffer);
 
 	if (stream) {
@@ -1180,37 +1180,37 @@ bool verifGauche(char posHero) {
 
 int main() {
 	
-	Garde* garde = (Garde*)malloc(sizeof(Garde));
-	srand(time(NULL));
-	Lab* newl = NewLab(5);
-	Free* P = NewFree(100);
-	int o = tryPath(newl, 0, P);
-	//show(newl);
-	letter(newl);
-	//Generation_Teleporteurs(letter(newl), 40, 3);
-	ApparitionGardes(letter(newl), 40, 3);
-	ChoixMouvementGardes(letter(newl), 40, garde, 3);
-	MouvementGardes(letter(newl), 40, garde, 3);
-	 
-
+	//Garde* garde = (Garde*)malloc(sizeof(Garde));
+	//srand(time(NULL));
+	//Lab* newl = NewLab(5);
+	//Free* P = NewFree(100);
+	//int o = tryPath(newl, 0, P);
+	////show(newl);
 	//letter(newl);
-	Teleporteurs_Pair* pairs = NULL;
-	Path* S = Solve(newl, pairs, 3);
-	show(newl, S);
-	printf("TAILLE : %d \n", S->pathSize);
-	printPath(S);
-	return EXIT_SUCCESS;
+	////Generation_Teleporteurs(letter(newl), 40, 3);
+	//ApparitionGardes(letter(newl), 40, 3);
+	//ChoixMouvementGardes(letter(newl), 40, garde, 3);
+	//MouvementGardes(letter(newl), 40, garde, 3);
+	// 
+
+	////letter(newl);
+	//Teleporteurs_Pair* pairs = NULL;
+	//Path* S = Solve(newl, pairs, 3);
+	//show(newl, S);
+	//printf("TAILLE : %d \n", S->pathSize);
+	//printPath(S);
+	//return EXIT_SUCCESS;
 
 	//printPath(S);
+	readFile("CaCLC.csv");
 	
 
-
-	if (verifDroite("a") == true) {
+	/*if (verifDroite("a") == true) {
 		printf("Pas de mur");
 	}
 	else {
 		printf("Mur");
-	}
+	}*/
 }
 
 
