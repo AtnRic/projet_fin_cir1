@@ -559,10 +559,13 @@ var list = [new Garde(0, 0)]; // Méthode de création de la liste des gardes.
 
 function PHP_Start(anime) {
   PHP_Function("../tools/function.php", "generation", function Handle(output) {
-    if(output.length == 0){
-      location.reload();
-    }
-    Launch(Math.sqrt(output.length), Array.from(output), 0, list, anime);
+    console.log("Sortie du C : " + output);
+
+    newOut = output.split(";");
+
+    console.log("Sortie du split : " + newOut[0] + " SECOND :" + newOut[1]);
+
+    Launch(Math.sqrt(newOut[0].length), Array.from(newOut[0]), 0, list, anime);
   });
 }
 
@@ -573,7 +576,7 @@ document.addEventListener("keydown", function (event) {
 });
 
 // Création d'une grid avec spawn du joueur et des gardes.
-function Launch(size, tab, spawnCellId, gardList, boolAnimation) {
+function Launch(size, tab, spawnCellId, gardList, boolAnimation, solver) {
   //#region ROWS
   console.log("Size: " + size);
   makeRows(size);
@@ -758,14 +761,14 @@ function Launch(size, tab, spawnCellId, gardList, boolAnimation) {
 
   //#region PLAYER
   setTimeout(function () {
-    SpawnPlayer(spawnCellId);
+    SpawnPlayer(spawnCellId, solver);
   }, 3000);
   //#endregion
 }
 
 let PlayerPos;
 // Génération du joueur.
-function SpawnPlayer(cellId) {
+function SpawnPlayer(cellId, solver) {
   PlayerPos = cellId;
   var PlayerPosElement = document.getElementById(cellId);
   PlayerPosElement.classList.add("identify");
@@ -840,7 +843,7 @@ function SpawnPlayer(cellId) {
           delay: anime.stagger(200, { grid: [14, 5], from: "center" }),
           easing: "easeInOutQuad",
         });*/
-        Solveur([1, 2, 3, 4, 5, 6, 14, 22, 30, 38]);
+        Solveur(solver);
       }
 
       if (event.key == "ArrowDown") {
@@ -960,7 +963,7 @@ function PHP_Function(fileName, functionName, Awaiting, Arguments) {
     },
     success: function (data) {
       Awaiting(data);
-      console.log(data);
+      //console.log(data);
       return data;
     },
     error: function (data) {
