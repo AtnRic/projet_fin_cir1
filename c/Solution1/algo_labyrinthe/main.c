@@ -1127,6 +1127,7 @@ bool Contains(Path* actual, int index) {
 	}
 	return false;
 }
+
 int Check(Teleporteurs_Pair* pair, int nbTpPair, int labSize, int index) {
 	
 	for (int i = 0; i < nbTpPair; i++) {
@@ -1142,44 +1143,44 @@ int Check(Teleporteurs_Pair* pair, int nbTpPair, int labSize, int index) {
 	return 0;
 }
 
-bool verifHaut(char posHero) {
+bool verifHaut(char* posHero) {
 	if (posHero == "a" || posHero == "c" || posHero == "d" || posHero == "e" || posHero == "g" || posHero == "i" || posHero == "j" || posHero == "l") {
-		return true; // Pas de mur
+		return true;
 	}
 	else {
-		return false; // mur
+		return false;
 	}
 }
 
-bool verifDroite(char posHero) {
+bool verifDroite(char* posHero) {
 	if (posHero == "a" || posHero == "b" || posHero == "d" || posHero == "e" || posHero == "f" || posHero == "j" || posHero == "k" || posHero == "m") {
-		return true; // Pas de mur
+		return true;
 	}
 	else {
-		return false; // mur
+		return false;
 	}
 }
 
-bool verifBas(char posHero) {
+bool verifBas(char* posHero) {
 	if (posHero == "a" || posHero == "b" || posHero == "c" || posHero == "e" || posHero == "g" || posHero == "h" || posHero == "k" || posHero == "n") {
-		return true; // Pas de mur
+		return true;
 	}
 	else {
-		return false; // mur
+		printf("%s", "pas ok");
+		return false;
 	}
 }
 
-bool verifGauche(char posHero) {
+bool verifGauche(char* posHero) {
 	if (posHero == "a" || posHero == "b" || posHero == "c" || posHero == "d" || posHero == "f" || posHero == "h" || posHero == "i" || posHero == "o") {
-		return true; // Pas de mur
+		return true;
 	}
 	else {
-		return false; // mur
+		return false;
 	}
 }
 
 int main() {
-	
 	Garde* garde = (Garde*)malloc(sizeof(Garde));
 	srand(time(NULL));
 	Lab* newl = NewLab(5);
@@ -1202,15 +1203,6 @@ int main() {
 	return EXIT_SUCCESS;
 
 	//printPath(S);
-	
-
-
-	if (verifDroite("a") == true) {
-		printf("Pas de mur");
-	}
-	else {
-		printf("Mur");
-	}
 }
 
 
