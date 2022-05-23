@@ -25,7 +25,7 @@ if($functionName == 'generation')
 {
     $output = "";
     $var = 0;
-    exec('solve.exe', $output, $var);
+    exec('main20n.exe', $output, $var);
     // Appeler le C, lancement du jeu ?
     $out = "";
     for($i = 0; $i < count($output); $i++){

@@ -559,15 +559,27 @@ var list = [new Garde(0, 0)]; // Méthode de création de la liste des gardes.
 
 function PHP_Start(anime) {
   PHP_Function("../tools/function.php", "generation", function Handle(output) {
-    console.log("Sortie du C : " + output);
+    //console.log("Sortie du C : " + output);
 
     newOut = output.split(";");
 
-    console.log("Sortie du split : " + newOut[0] + " SECOND :" + newOut[1]);
+    //console.log(newOut[1]);
+
+    solveOut = newOut[1].split(",");
+
+    //console.log(solveOut);
+
     if (output.length == 0) {
       location.reload();
     }
-    Launch(Math.sqrt(newOut[0].length), Array.from(newOut[0]), 0, list, anime);
+    Launch(
+      Math.sqrt(newOut[0].length),
+      Array.from(newOut[0]),
+      0,
+      list,
+      anime,
+      solveOut
+    );
   });
 }
 
@@ -1076,22 +1088,32 @@ function Solveur(tab) {
       Div.style.height = height + "px";
 
       const Img = document.createElement("img");
-
+      //console.log(tab[i]);
       Cell.appendChild(Div);
       Div.appendChild(Img);
 
       Div.classList.add("Solveur");
       Img.classList.add("SolveurImg");
-
+      Img.classList.add("s" + i);
       Img.src = "../images/solveur/point.png";
       anime({
-        targets: ".SolveurImg",
+        targets: ".s" + i,
         scale: [
-          { value: 0, easing: "easeOutSine", duration: 500 },
+          { value: 0, easing: "easeOutSine", duration: 500 + i * 75 },
           { value: 1, easing: "easeInOutQuad", duration: 1200 },
+          { value: 0, easing: "easeOutSine", duration: 500 + i * 75 },
         ],
-        loop: true,
-        delay: anime.stagger(200, { grid: [14, 5], from: "center" }),
+      });
+    }
+  } else {
+    for (i = 0; i < tab.length; i++) {
+      anime({
+        targets: ".s" + i,
+        scale: [
+          { value: 0, easing: "easeOutSine", duration: 500 + i * 75 },
+          { value: 1, easing: "easeInOutQuad", duration: 1200 },
+          { value: 0, easing: "easeOutSine", duration: 500 + i * 75 },
+        ],
       });
     }
   }
