@@ -40,6 +40,7 @@ var correspondance = {
   m : [1, 0, 1, 1] ,
   n : [1, 1, 0, 1] ,
   o : [1, 1, 1, 0] ,
+  p : [1, 1, 1, 1] ,
 };
 console.log(labyrinthe[3][1]);*/
 
@@ -127,7 +128,6 @@ int Launch(Lab* L) {
 	Cell* origin = L->tab;
 	return EXIT_SUCCESS;
 }
-
 int tryPath(Lab* L, int index, Free* F) {
 	char wall = r_CaseNear(L, index);
 	//printf("%d(%c)-", index, (L->tab+index)->used ? 'y' : 'n');
@@ -181,7 +181,6 @@ int tryPath(Lab* L, int index, Free* F) {
 	free(F);
 	return 0;
 }
-
 char r_CaseNear(Lab* L, int index) {
 	int R = ceilf(((float)rand() / (float)RAND_MAX) * 4.0);
 	switch (R) {
@@ -257,7 +256,6 @@ char r_CaseNear(Lab* L, int index) {
 	}
 	return 'n';
 }
-
 bool Isolate(Lab* L, int index) {
 	if (Right(L, index) == -1 && Left(L, index) == -1 && Top(L, index) == -1 && Down(L, index) == -1) {
 		//printf("%d Isolated %d %d %d %d\n", index, Right(L, index), Left(L, index), Top(L, index), Down(L, index));
@@ -268,8 +266,6 @@ bool Isolate(Lab* L, int index) {
 		return false;
 	}
 }
-
-
 int Left(Lab* L, int index) {
 	printf("\033[1m\033[31m");
 	int size = L->size;
@@ -289,7 +285,6 @@ int Left(Lab* L, int index) {
 		return (index - 1);
 	}	printf("\033[0m");
 }
-
 int Right(Lab* L, int index) {
 	printf("\033[1m\033[31m");
 	int size = L->size;
@@ -310,7 +305,6 @@ int Right(Lab* L, int index) {
 		return (index + 1);
 	}	printf("\033[0m");
 }
-
 int Top(Lab* L, int index) {
 	printf("\033[1m\033[31m");
 	int size = L->size;
@@ -330,7 +324,6 @@ int Top(Lab* L, int index) {
 		return (index - size);
 	}	printf("\033[0m");
 }
-
 int Down(Lab* L, int index) {
 	printf("\033[1m\033[31m");
 	int size = L->size;
@@ -410,60 +403,77 @@ int DelWall(Lab* L, int index, char wall) {
 	}
 	return 1;
 }
-
-int show(Lab* L) {
+int show(Lab* L, Path* P) {
 	printf("\nLabyrinthe * Taille : %d : \n", L->size);
-	for (int i = 0; i < L->size * L->size; i++)
-	{
-		if ((L->tab + i)->t == 0 || (L->tab + i)->r == 0 || (L->tab + i)->l == 0 || (L->tab + i)->d == 0) {
-			printf("\033[31m");
-		}
-		else {
-			printf("\033[32m");
-		}
-		//printf("Cell %d : t%d, d%d, l%d, r%d\n", i, (L->tab + i)->t, (L->tab + i)->d, (L->tab + i)->l, (L->tab + i)->r);
-	}
+	//for (int i = 0; i < L->size * L->size; i++)
+	//{
+	//	if ((L->tab + i)->t == 0 || (L->tab + i)->r == 0 || (L->tab + i)->l == 0 || (L->tab + i)->d == 0) {
+	//		printf("\033[31m");
+	//	}
+	//	else {
+	//		printf("\033[32m");
+	//	}
+	//	//printf("Cell %d : t%d, d%d, l%d, r%d\n", i, (L->tab + i)->t, (L->tab + i)->d, (L->tab + i)->l, (L->tab + i)->r);
+	//}
+
 	printf("\033[0m");
 	for (int w = 0; w < L->size; w++) {
 		for (int i = 0; i < L->size; i++) {
 			int index = (L->size * w + i);
+			if (Contains(P, index)) {
+				printf("\033[1m\033[32m");
+			}
+			else {
+				printf("\033[0m");
+			}
 			if ((L->tab + index)->t == 1) {
-				printf("----");
+				printf("-----");
 			}
 			if ((L->tab + index)->t == 0) {
 
-				printf("    ");
+				printf("     ");
 			}
 		}
 		printf("\n");
 		for (int i = 0; i < L->size; i++) {
 			int index = (L->size * w + i);
+			char p = ' ';
+			if (Contains(P, index)) {
+				printf("\033[1m\033[32m");
+				p = 'x';
+			}
+			else {
+				printf("\033[0m");
+				p = ' ';
+			}
 			if ((L->tab + index)->l == 1 && (L->tab + index)->r == 1) {
-				printf("|%c |", (L->tab + index)->used ? ' ' : '0');
-				//printf("|    |");
+				printf("| %c |", p);
 			}
 			else if ((L->tab + index)->l == 0 && (L->tab + index)->r == 1) {
-				//printf("     |");
-				printf(" %c |", (L->tab + index)->used ? ' ' : '0');
+				printf("  %c |", p);
 			}
 			else if ((L->tab + index)->l == 1 && (L->tab + index)->r == 0) {
-				//printf("|     ");
-				printf("| %c ", (L->tab + index)->used ? ' ' : '0');
+				printf("| %c  ", p);
 			}
 			else if ((L->tab + index)->l == 0 && (L->tab + index)->r == 0) {
-				//printf("      ");
-				printf(" %c  ", (L->tab + index)->used ? ' ' : '0');
+				printf("  %c  ", p);
 			}
 		}
 		printf("\n");
 		if (w == L->size - 1) {
 			for (int i = 0; i < L->size; i++) {
 				int index = (L->size * w + i);
-				if ((L->tab + index)->d == 1) {
-					printf("----");
+				if (Contains(P, index)) {
+					printf("\033[1m\033[32m");
 				}
 				else {
-					printf("    ");
+					printf("\033[0m");
+				}
+				if ((L->tab + index)->d == 1) {
+					printf("-----");
+				}
+				else {
+					printf("     ");
 				}
 			}
 		}
@@ -552,13 +562,57 @@ Garde* ApparitionGardes(char* maze, int cote, int Quantite_Garde) {
 	int modulo = pow(cote, 2);
 	for (int i = 0; i < Quantite_Garde; i++) {
 		//Garde* (garde + i) = (Garde*)malloc(sizeof(Garde));
-		(garde + i)->Id = i+1;
+		(garde + i)->Id = i + 1;
 		(garde + i)->position = rand() % modulo;
 		while ((garde + i)->position == 0 || (garde + i)->position == pow(cote, 2)) {
 			(garde + i)->position = rand() % modulo;
 		}
 		printf("\nGarde %d : %d", (garde + i)->Id, (garde + i)->position);
 	}
+}
+
+void top(char* maze, int cote, Garde* garde, int i) {
+	if (maze[(garde + i)->position] != 'b' && maze[(garde + i)->position] != 'f' && maze[(garde + i)->position] != 'h' && maze[(garde + i)->position] != 'k' && maze[(garde + i)->position] != 'm' && maze[(garde + i)->position] != 'n' && maze[(garde + i)->position] != 'o') {
+		(garde + i)->position -= cote;
+		printf("\nNew Garde %d : %d", (garde + i)->Id, (garde + i)->position);
+		(garde+i)->choix = 1;
+	}
+	else {
+		bottom(maze, cote, garde, i);
+	}
+	return;
+}
+
+void bottom(char* maze, int cote, Garde* garde, int i) {
+	if (maze[(garde + i)->position] != 'd' && maze[(garde + i)->position] != 'f' && maze[(garde + i)->position] != 'i' && maze[(garde + i)->position] != 'j' && maze[(garde + i)->position] != 'l' && maze[(garde + i)->position] != 'm' && maze[(garde + i)->position] != 'o') {
+		(garde + i)->position += cote;
+		printf("\nNew Garde %d : %d", (garde + i)->Id, (garde + i)->position);
+		(garde+i)->choix = 2;
+	}
+	else {
+		top(maze, cote, garde, i);
+	}
+	return;
+}
+
+void right(char* maze, int cote, Garde* garde, int i) {
+	if (maze[(garde + i)->position] != 'c' && maze[(garde + i)->position] != 'g' && maze[(garde + i)->position] != 'h' && maze[(garde + i)->position] != 'i' && maze[(garde + i)->position] != 'l' && maze[(garde + i)->position] != 'n' && maze[(garde + i)->position] != 'o') {
+		(garde + i)->position += 1;
+		printf("\nNew Garde %d : %d", (garde + i)->Id, (garde + i)->position);
+		(garde+i)->choix = 3;
+	}
+	else left(maze, cote, garde, i);
+	return;
+}
+
+void left(char* maze, int cote, Garde* garde, int i) {
+	if (maze[(garde + i)->position] != 'e' && maze[(garde + i)->position] != 'g' && maze[(garde + i)->position] != 'j' && maze[(garde + i)->position] != 'k' && maze[(garde + i)->position] != 'l' && maze[(garde + i)->position] != 'm' && maze[(garde + i)->position] != 'n') {
+		(garde + i)->position -= 1;
+		printf("\nNew Garde %d : %d", (garde + i)->Id, (garde + i)->position);
+		(garde+i)->choix = 4;
+	}
+	else right(maze, cote, garde, i);
+	return;
 }
 
 void ChoixMouvementGardes(char* maze, int size, Garde* garde, int Quantite_Garde) {
@@ -692,49 +746,7 @@ void ChoixMouvementGardes(char* maze, int size, Garde* garde, int Quantite_Garde
 	return;
 }
 
-void top(char* maze, int cote, Garde* garde, int i) {
-	if (maze[(garde + i)->position] != 'b' && maze[(garde + i)->position] != 'f' && maze[(garde + i)->position] != 'h' && maze[(garde + i)->position] != 'k' && maze[(garde + i)->position] != 'm' && maze[(garde + i)->position] != 'n' && maze[(garde + i)->position] != 'o') {
-		(garde + i)->position -= cote;
-		printf("\nNew Garde %d : %d", (garde + i)->Id, (garde + i)->position);
-		(garde+i)->choix = 1;
-	}
-	else {
-		bottom(maze, cote, garde, i);
-	}
-	return;
-}
 
-void bottom(char* maze, int cote, Garde* garde, int i) {
-	if (maze[(garde + i)->position] != 'd' && maze[(garde + i)->position] != 'f' && maze[(garde + i)->position] != 'i' && maze[(garde + i)->position] != 'j' && maze[(garde + i)->position] != 'l' && maze[(garde + i)->position] != 'm' && maze[(garde + i)->position] != 'o') {
-		(garde + i)->position += cote;
-		printf("\nNew Garde %d : %d", (garde + i)->Id, (garde + i)->position);
-		(garde+i)->choix = 2;
-	}
-	else {
-		top(maze, cote, garde, i);
-	}
-	return;
-}
-
-void right(char* maze, int cote, Garde* garde, int i) {
-	if (maze[(garde + i)->position] != 'c' && maze[(garde + i)->position] != 'g' && maze[(garde + i)->position] != 'h' && maze[(garde + i)->position] != 'i' && maze[(garde + i)->position] != 'l' && maze[(garde + i)->position] != 'n' && maze[(garde + i)->position] != 'o') {
-		(garde + i)->position += 1;
-		printf("\nNew Garde %d : %d", (garde + i)->Id, (garde + i)->position);
-		(garde+i)->choix = 3;
-	}
-	else left(maze, cote, garde, i);
-	return;
-}
-
-void left(char* maze, int cote, Garde* garde, int i) {
-	if (maze[(garde + i)->position] != 'e' && maze[(garde + i)->position] != 'g' && maze[(garde + i)->position] != 'j' && maze[(garde + i)->position] != 'k' && maze[(garde + i)->position] != 'l' && maze[(garde + i)->position] != 'm' && maze[(garde + i)->position] != 'n') {
-		(garde + i)->position -= 1;
-		printf("\nNew Garde %d : %d", (garde + i)->Id, (garde + i)->position);
-		(garde+i)->choix = 4;
-	}
-	else right(maze, cote, garde, i);
-	return;
-}
 
 void MouvementGardes(char* maze, int cote, Garde* garde, int Quantite_Garde) {
 	for (int i = 0; i < Quantite_Garde; i++) {
@@ -749,7 +761,7 @@ void MouvementGardes(char* maze, int cote, Garde* garde, int Quantite_Garde) {
 /*Fin Gardes*/
 
 /*Téléporteurs*/
-Teleporteurs_Pair* Generation_Teleporteurs(char* maze, int size, int quantites_pair) {
+Teleporteurs_Pair * Generation_Teleporteurs(char* maze, int size, int quantites_pair) {
 	int casevecteur1;
 	int casevecteur2;
 	Teleporteur_Pos* Tab = malloc(sizeof(Teleporteur_Pos));
@@ -774,9 +786,13 @@ Teleporteurs_Pair* Generation_Teleporteurs(char* maze, int size, int quantites_p
 			{
 				if ((Tab + index) == NULL)
 				{
-					Tab = (Teleporteur_Pos*)realloc(Tab, sizeof(Teleporteur_Pos) * 10);
+
 					if (Tab != NULL)
-					{
+					{	
+						Teleporteur_Pos* R = (Teleporteur_Pos*)realloc(Tab, sizeof(Teleporteur_Pos) * 10);
+						if (R != NULL) {
+							Tab = R;
+						}
 						//printf("allocation réussie");
 						(Tab + index)->x = x;
 						(Tab + index)->y = y;
@@ -811,29 +827,293 @@ Teleporteurs_Pair* Generation_Teleporteurs(char* maze, int size, int quantites_p
 	int index2 = index - 1;
 	for (int index1 = 0; index1 < quantites_pair; index1++)
 	{
-		(Tab2 + index1)->Teleporteur1.x = (Tab + index1)->x;
-		(Tab2 + index1)->Teleporteur1.y = (Tab + index1)->y;
-		(Tab2 + index1)->Teleporteur2.x = (Tab + index2)->x;
-		(Tab2 + index1)->Teleporteur2.y = (Tab + index2)->y;
-		index2--;
-
+		if (Tab2 != NULL && Tab != NULL)
+		{
+			(Tab2 + index1)->Teleporteur1.x = (Tab + index1)->x;
+			(Tab2 + index1)->Teleporteur1.y = (Tab + index1)->y;
+			(Tab2 + index1)->Teleporteur2.x = (Tab + index2)->x;
+			(Tab2 + index1)->Teleporteur2.y = (Tab + index2)->y;
+			index2--;
+		}
 	}
 	printf("\n");
 	for (int o = 0; o < quantites_pair; o++)
 	{
-		casevecteur1 = (Tab2 + o)->Teleporteur1.y * size + (Tab2 + o)->Teleporteur1.x;
-		casevecteur2 = (Tab2 + o)->Teleporteur2.y * size + (Tab2 + o)->Teleporteur2.x;
-		printf("[%d, %d]\n", casevecteur1, casevecteur2);
+		if (Tab2 != NULL) {
+			casevecteur1 = (Tab2 + o)->Teleporteur1.y * size + (Tab2 + o)->Teleporteur1.x;
+			casevecteur2 = (Tab2 + o)->Teleporteur2.y * size + (Tab2 + o)->Teleporteur2.x;
+			printf("[%d, %d]\n", casevecteur1, casevecteur2);
+		}
 	}
 	return Tab2;
 }
 /*Fin Téléporteurs*/
 
+int printPath(Path* P) {
+	printf("\033[1m\033[31m");
+	printf("\n");
+	printf("Path size : %d | ", P->pathSize);
+	for (int i = 0; i < P->pathSize; i++) {
+		printf("%d->", (*(P->cells + i)));
+	}
+	printf(" | END\n");
+	printf("\033[0m");
+	printf("\n");
+	return 0;
+}
+
+int wLeft(Lab* L, int index) {
+	int size = L->size;
+	Cell* origin = L->tab;
+	if ((index % size) == 0 && index != 0) {
+		//printf("Left %d : NULL\n", index);
+		return -1;
+	}
+	else {
+		if (index - 1 > L->size * L->size) {
+			//printf("\nIndex problem %d\n", index - 1);
+		}		
+		if (((origin + index)->l) == false) {
+			//printf("(l-ok)");
+			return (index - 1);
+		}
+		else {
+			//printf("Mur à gauche");
+			return -1;
+		}
+	}
+}
+int wRight(Lab* L, int index) {
+	int size = L->size;
+	Cell* origin = L->tab;
+	if ((index + 1) % size == 0) {
+		//printf("Right %d : NULL\n", index);
+		return -1;
+	}
+	else {
+		if (index + 1 > L->size * L->size) {
+			//printf("\nIndex problem %d\n", index + 1);
+		}
+		if (((origin + index)->r) == false) {
+			//printf("Aucun à droite");
+			return (index + 1);
+		}
+		else {
+			return -1;
+			//printf("Mur à droite");
+		}
+	}
+}
+int wTop(Lab* L, int index) {
+	int size = L->size;
+	Cell* origin = L->tab;
+	if (index < size) {
+		//printf("Top %d : NULL\n", index);
+		return -1;
+	}
+	else {
+		if (index - size > L->size * L->size) {
+			//printf("\nIndex problem %d\n", index - size);
+		}
+		if (((origin + index)->t) == false) {
+			//printf("Aucun au dessus");
+			return (index - size);
+		}
+		else {
+			//printf("Mur au dessus");
+			return -1;
+		}
+	}	
+}
+int wDown(Lab* L, int index) {
+	printf("\033[1m\033[31m");
+	int size = L->size;
+	Cell* origin = L->tab;
+
+	if (index >= ((size * size) - size)) {
+		//printf("Bottom %d : NULL\n", index);
+		return -1;
+	}
+	else {
+		if (index + size > L->size * L->size) {
+			//printf("\nIndex problem %d\n", index + size);
+		}		
+		if (((origin + index)->d) == false) {
+			//printf("Aucun en dessous");
+			return (index + size);
+		}
+		else {
+			//printf("Mur en dessous");
+			return -1;
+		}
+	}
+	printf("\033[0m");
+}
+
+Path* newPath() 
+{
+	Path* p = (Path*)malloc(sizeof(Path));
+	if (p != NULL) {
+		p->cells = (int*)malloc(sizeof(int) * 300);
+		//p->tps = (Teleporteurs_Pair*)malloc(sizeof(Teleporteurs_Pair) * 300);
+		p->pathSize = 0;
+		//p->tpSize = 0;
+	}
+	return p;
+}
+Path* clone(Path* basic) 
+{
+	Path* p = (Path*)malloc(sizeof(Path));
+	if (p != NULL) {
+		p->cells = (int*)malloc(sizeof(int) * 300);
+		//p->tps = (Teleporteurs_Pair*)malloc(sizeof(Teleporteurs_Pair) * 300);
+		p->pathSize = 0;
+		//p->tpSize = 0;
+		for (int i = 0; i < basic->pathSize; i++) {
+			if (p->cells != NULL) {
+				(*(p->cells + i)) = (*(basic->cells + i));
+			}
+		}
+		/*for (int i = 0; i < basic->tpSize; i++) {
+			if (p->tps != NULL) {
+				(*(p->tps + i)) = (*(basic->tps + i));
+			}
+		}
+		p->tpSize = basic->tpSize;*/
+		p->pathSize = basic->pathSize;
+	}
+	return p;
+}
+Path* Solve(Lab* L, Teleporteurs_Pair* pairs, int nbTpPair) {
+	Cell* origin = L->tab;
+	Path* P = newPath(100);
+	return PathIt(L, pairs, nbTpPair, P, 0);
+}
+Path* PathIt(Lab* Lab, Teleporteurs_Pair* pairs, int nbTpPair, Path* actual, int index) {
+	if ((index + 1) == Lab->size * Lab->size) {
+		(*(actual->cells + actual->pathSize)) = index;
+		actual->pathSize++;
+		printf("\nLast case call. %d \n", actual->pathSize);
+		printPath(actual);
+		return actual;
+	}
+	if (index != -1) {
+		(*(actual->cells + actual->pathSize)) = index;
+		actual->pathSize++;
+		Path* R = NULL;
+		Path* L = NULL;
+		Path* T = NULL;
+		Path* D = NULL;
+
+		if (!Contains(actual, wRight(Lab, index))) {
+			R = PathIt(Lab, pairs, nbTpPair, clone(actual), wRight(Lab, index));
+			if (R != NULL) {
+				
+			}
+		}
+		if (!Contains(actual, wLeft(Lab, index))) {
+			L = PathIt(Lab, pairs, nbTpPair, clone(actual), wLeft(Lab, index));
+		}
+		if (!Contains(actual, wTop(Lab, index))) {
+			T = PathIt(Lab, pairs, nbTpPair, clone(actual), wTop(Lab, index));
+		}
+		if (!Contains(actual, wDown(Lab, index))) {
+			D = PathIt(Lab, pairs, nbTpPair, clone(actual), wDown(Lab, index));
+		}
+
+
+		if (D == NULL && R == NULL && T == NULL && L == NULL) {
+			//printf("NULL");
+			return NULL;
+		}
+		else {
+			if (R != NULL) {
+				return R;
+			}
+			if (L != NULL) {
+				return L;
+			}
+			if (T != NULL) {
+				return T;
+			}
+			if (D != NULL) {
+				return D;
+			}
+		}
+		//else {
+		//	Path* F = (Path*)malloc(sizeof(Path) * 4);
+		//	Path* Smaller = (Path*)malloc(sizeof(Path));
+		//	if (F != NULL) {
+		//		if (R != NULL && R->pathSize >= 0) {
+		//			(*(F)) = (*R);
+		//			printf(" P%d ", (F->pathSize));
+		//			printf(" P%d ", (R->pathSize));
+		//			Smaller = R;
+		//		}
+		//		if (L != NULL && L->pathSize >= 0) {
+		//			(*(F + 1)) = (*L);
+		//			printf(" P%d ", (F->pathSize));
+		//			printf(" P%d ", (L->pathSize));
+		//			Smaller = L;
+		//		}
+		//		if (T != NULL && T->pathSize >= 0) {
+		//			(*(F + 2)) = (*T);
+		//			printf(" P%d ", (F->pathSize));
+		//			printf(" P%d ", (T->pathSize));
+		//			Smaller = T;
+		//		}
+		//		if (D != NULL && D->pathSize >= 0) {
+		//			(*(F + 3)) = (*D);
+		//			printf(" P%d ", (F->pathSize));
+		//			printf(" P%d ", (D->pathSize));
+		//			Smaller = D;
+		//		}
+		//		for (int i = 0; i < 4; i++) {
+		//			if ((F + i) != NULL && Smaller != NULL) {
+		//				if (((F + i)->pathSize) < (Smaller->pathSize)) {
+		//					Smaller = (F + i);
+		//				}
+		//			}
+		//		}
+		//	}
+		//	if (Smaller != NULL) {
+		//		printPath(Smaller);
+		//	}
+		//	return Smaller;
+		//}
+	}
+	else {
+		return NULL;
+	}
+}
+
+bool Contains(Path* actual, int index) {
+	for (int i = 0; i < actual->pathSize; i++) {
+		if ((*(actual->cells + i)) == index) {
+			return true;
+		}
+	}
+	return false;
+}
+int Check(Teleporteurs_Pair* pair, int nbTpPair, int labSize, int index) {
+	
+	for (int i = 0; i < nbTpPair; i++) {
+		Teleporteur_Pos p1 = (pair + i)->Teleporteur1;
+		Teleporteur_Pos p2 = (pair + i)->Teleporteur2;
+		if (p1.x + (p2.y * labSize) == index) {
+			// tp.
+		}
+		else {
+			// no tp.
+		}
+	}
+	return 0;
+}
 
 int main() {
 	Garde* garde = (Garde*)malloc(sizeof(Garde));
 	srand(time(NULL));
-	Lab* newl = NewLab(40);
+	Lab* newl = NewLab(50);
 	Free* P = NewFree(100);
 	int o = tryPath(newl, 0, P);
 	//show(newl);
@@ -842,5 +1122,17 @@ int main() {
 	ApparitionGardes(letter(newl), 40, 3);
 	ChoixMouvementGardes(letter(newl), 40, garde, 3);
 	MouvementGardes(letter(newl), 40, garde, 3);
+
+
+	//letter(newl);
+	Teleporteurs_Pair* pairs = NULL;
+	Path* S = Solve(newl, pairs, 3);
+	show(newl, S);
+	printf("TAILLE : %d \n", S->pathSize);
+	printPath(S);
+	return EXIT_SUCCESS;
+
+	//printPath(S);
 }
+
 

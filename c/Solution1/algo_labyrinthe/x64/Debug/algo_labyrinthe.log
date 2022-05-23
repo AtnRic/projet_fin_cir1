@@ -1,1 +1,6 @@
-﻿  algo_labyrinthe.vcxproj -> C:\MAMP\htdocs\Projet CIR1\c\Solution1\x64\Debug\algo_labyrinthe.exe
+﻿  main.c
+C:\MAMP\htdocs\projet cir1\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(185,50): warning C4244: 'fonction' : conversion de 'double' en 'float', perte possible de données
+C:\MAMP\htdocs\projet cir1\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(185,15): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
+C:\MAMP\htdocs\projet cir1\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(918,12): warning C4244: 'fonction' : conversion de 'time_t' en 'unsigned int', perte possible de données
+C:\MAMP\htdocs\projet cir1\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(892): warning C4715: 'PathIt' : les chemins de contrôle ne retournent pas tous une valeur
+  algo_labyrinthe.vcxproj -> C:\MAMP\htdocs\projet cir1\projet_fin_cir1\c\Solution1\x64\Debug\algo_labyrinthe.exe
