@@ -70,10 +70,17 @@ typedef struct Garde {
 	bool l;     //left
 
 	int move; //nombre de case avant de toucher le mur en face et de devoir faire demi-tour
+	int choix;
+	int position;
 }Garde;
 
-Garde* ApparitionGardes(char* maze, int size, int quantites_pair);
-void MouvementGardes(char* maze, int size, Garde* garde);
+Garde* ApparitionGardes(char* maze, int cote, int Quantite_Garde);
+void ChoixMouvementGardes(char* maze, int size, Garde* garde, int Quantite_Garde);
+void MouvementGardes(char* maze, int cote, Garde* garde, int Quantite_Garde);
+void top(char* maze, int cote, Garde* garde, int i);
+void bottom(char* maze, int cote, Garde* garde, int i);
+void right(char* maze, int cote, Garde* garde, int i);
+void left(char* maze, int cote, Garde* garde, int i);
 /*Fin gardes*/
 
 
