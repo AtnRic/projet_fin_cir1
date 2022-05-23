@@ -22,4 +22,7 @@
   <ItemGroup>
     <None Include="fic_data.csv" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="file.txt" />
+  </ItemGroup>
 </Project>
