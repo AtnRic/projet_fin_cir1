@@ -97,9 +97,9 @@ void readFile(char* filename) {
 
 	fseek(stream, 0, SEEK_SET);
 
-	char buffer[2] = { 0 };
-	fread_s(buffer, 2 * sizeof(char), sizeof(char), 2, stream);
-	buffer[1] = '\0';
+	char buffer[25] = { 0 };
+	fread_s(buffer, 25 * sizeof(char), sizeof(char), 25, stream);
+	buffer[24] = '\0';
 	printf("%s", buffer);
 
 	if (stream) {
@@ -1127,7 +1127,6 @@ bool Contains(Path* actual, int index) {
 	}
 	return false;
 }
-
 int Check(Teleporteurs_Pair* pair, int nbTpPair, int labSize, int index) {
 	
 	for (int i = 0; i < nbTpPair; i++) {
@@ -1145,64 +1144,73 @@ int Check(Teleporteurs_Pair* pair, int nbTpPair, int labSize, int index) {
 
 bool verifHaut(char* posHero) {
 	if (posHero == "a" || posHero == "c" || posHero == "d" || posHero == "e" || posHero == "g" || posHero == "i" || posHero == "j" || posHero == "l") {
-		return true;
+		return true; // Pas de mur
 	}
 	else {
-		return false;
+		return false; // mur
 	}
 }
 
 bool verifDroite(char* posHero) {
 	if (posHero == "a" || posHero == "b" || posHero == "d" || posHero == "e" || posHero == "f" || posHero == "j" || posHero == "k" || posHero == "m") {
-		return true;
+		return true; // Pas de mur
 	}
 	else {
-		return false;
+		return false; // mur
 	}
 }
 
 bool verifBas(char* posHero) {
 	if (posHero == "a" || posHero == "b" || posHero == "c" || posHero == "e" || posHero == "g" || posHero == "h" || posHero == "k" || posHero == "n") {
-		return true;
+		return true; // Pas de mur
 	}
 	else {
-		printf("%s", "pas ok");
-		return false;
+		return false; // mur
 	}
 }
 
 bool verifGauche(char* posHero) {
 	if (posHero == "a" || posHero == "b" || posHero == "c" || posHero == "d" || posHero == "f" || posHero == "h" || posHero == "i" || posHero == "o") {
-		return true;
+		return true; // Pas de mur
 	}
 	else {
-		return false;
+		return false; // mur
 	}
 }
 
 int main() {
-	Garde* garde = (Garde*)malloc(sizeof(Garde));
-	srand(time(NULL));
-	Lab* newl = NewLab(5);
-	Free* P = NewFree(100);
-	int o = tryPath(newl, 0, P);
-	//show(newl);
-	letter(newl);
-	//Generation_Teleporteurs(letter(newl), 40, 3);
-	ApparitionGardes(letter(newl), 40, 3);
-	ChoixMouvementGardes(letter(newl), 40, garde, 3);
-	MouvementGardes(letter(newl), 40, garde, 3);
-	 
-
+	
+	//Garde* garde = (Garde*)malloc(sizeof(Garde));
+	//srand(time(NULL));
+	//Lab* newl = NewLab(5);
+	//Free* P = NewFree(100);
+	//int o = tryPath(newl, 0, P);
+	////show(newl);
 	//letter(newl);
-	Teleporteurs_Pair* pairs = NULL;
-	Path* S = Solve(newl, pairs, 3);
-	show(newl, S);
-	printf("TAILLE : %d \n", S->pathSize);
-	printPath(S);
-	return EXIT_SUCCESS;
+	////Generation_Teleporteurs(letter(newl), 40, 3);
+	//ApparitionGardes(letter(newl), 40, 3);
+	//ChoixMouvementGardes(letter(newl), 40, garde, 3);
+	//MouvementGardes(letter(newl), 40, garde, 3);
+	// 
+
+	////letter(newl);
+	//Teleporteurs_Pair* pairs = NULL;
+	//Path* S = Solve(newl, pairs, 3);
+	//show(newl, S);
+	//printf("TAILLE : %d \n", S->pathSize);
+	//printPath(S);
+	//return EXIT_SUCCESS;
 
 	//printPath(S);
+	readFile("CaCLC.csv");
+	
+
+	if (verifHaut("e")) {
+		printf("Pas de mur");
+	}
+	else {
+		printf("Mur");
+	}
 }
 
 
