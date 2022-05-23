@@ -7,6 +7,10 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     overflow-x: hidden;
 }
@@ -311,7 +315,7 @@ body {
     border: none;
     border-radius: 2vh;
     transform: translateX(-50%);
-    background: url(../images/accueil/but-mario.png) center bottom / cover no-repeat;
+    background: url(../images/accueil/but-mario.jpg) center bottom / cover no-repeat;
     transition: all 0.1s ease;
     text-decoration: none;
     font-size: 4vh;
@@ -343,6 +347,7 @@ section {
 }
 
 #mario {
+    scroll-behavior: smooth;
     background: linear-gradient(#2e457b, #4d76d0);
     overflow-x: hidden;
 }
@@ -509,3 +514,101 @@ section {
     height: 15vw;
     background: url(../images/accueil/mario-cloud.png) center center / cover no-repeat;
 }
+
+
+/* Espace */
+
+#space {
+    background: url(../images/accueil/space-bg.png) center center / cover;
+    /* background: black; */
+}
+
+
+.orbite_earth {
+    position: absolute;
+
+    top: 250vh;
+    left: 50%;
+
+    width: 70vh;
+    height: 70vh;
+
+    border: none;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+
+    animation-name: orbite;
+    animation-duration: 15s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+
+    background: none;
+}
+
+@keyframes orbite {
+    from {transform: translate(-50%, -50%) rotate(0deg);}
+    to {transform: translate(-50%, -50%) rotate(360deg);}
+}
+
+.orbite_earth::after {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 15vh;
+    height: 15vh;
+    background: url(../images/accueil/earth.png) center center / cover no-repeat;
+    /* background: red; */
+}
+
+.orbite_mars {
+    position: absolute;
+
+    top: 250vh;
+    left: 50%;
+
+    width: 90vh;
+    height: 90vh;
+
+    border: none;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+
+    animation-name: orbite;
+    animation-duration: 18s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+
+    overflow: hidden;
+
+    background: blue;
+}
+
+.orbite_mars::after {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 10vh;
+    height: 10vh;
+    background: url(../images/accueil/mars.png) center center / cover no-repeat;
+}
+
+
+/* #earth {
+    position: absolute;
+
+    top: 220vh;
+    left: 100vw;
+
+    width: 10vw;
+    height: 10vw;
+
+    animation-name: earth;
+    animation: 8s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes earth {
+    
+} */

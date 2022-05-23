@@ -11,14 +11,14 @@
     <h1 id="name">Maze'ltov</h1>
     <img src="../images/front/log2.png" alt="Logo" id="logoimage">
     <a href="#choose">
-        <h1 id="press"> >>> PRESS START <<<</h1>
+        <h1 id="press">PRESS START</h1>
     </a>
 
 </div>
 
 <div class="choose" id="choose">
     <h1>Choose your player :</h1>
-    <div class="container players">
+    <div class="container">
         <a href="log.php?type=i#log">
             <div class="login but">
                 <div class="tuile"></div>

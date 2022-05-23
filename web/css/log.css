@@ -33,15 +33,23 @@ h1, p{
 
 #logoimage{
     width: 25%;
-    margin-top:5%;
+    margin-top:50px;
 }
 
 #press{
     text-align: center;
-    margin-top:5px;
+    margin-top: 10%;
 }
 #press:hover{
     text-decoration: underline;
+}
+
+#press::before{
+    content: ">>> ";
+}
+
+#press::after{
+    content: " <<<";
 }
 
 .choose{
@@ -54,15 +62,16 @@ h1, p{
 
 .container{
     position: absolute;
-    top: 50%;
+    top: 40%;
     right: 50%;
-    transform: translateX(50%) translateY(150%);
+    transform: translateX(50%) translateY(170%);
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     width: 98vw;
     justify-content: space-evenly;
 }
+
 
 .center {
     position: absolute;
@@ -156,7 +165,7 @@ form{
     text-align: center;
     color: white;
     top: 0;
-    transform: translateY(10%);
+    transform: translateY(0%);
 }
 input{
     margin: 10px;
@@ -175,19 +184,22 @@ input{
 
 @media screen and (max-width: 800px) {
     #logoimage{
-        margin-top: 20% ;
+        margin-top: 50px ;
     }
     #press{
         margin-top: 10%;
     }
+    #log{
+        padding-top: 0%;
+    }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 720px) {
     #logoimage{
-        display: none;
+        margin-top: 50px;
     }
     #press{
-        margin-top: 50%;
+        margin-top: 20px;
     }
     #press::before{
         content: none;
@@ -197,3 +209,17 @@ input{
     }
 }
 
+@media screen and (max-width: 425px) {
+    #logoimage{
+        margin-top: 50px;
+    }
+    #press{
+        margin-top: 35px;
+    }
+    #press::before{
+        content: none;
+    }
+    #press::after{
+        content: none;
+    }
+}

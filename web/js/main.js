@@ -564,7 +564,9 @@ function PHP_Start(anime) {
     newOut = output.split(";");
 
     console.log("Sortie du split : " + newOut[0] + " SECOND :" + newOut[1]);
-
+    if (output.length == 0) {
+      location.reload();
+    }
     Launch(Math.sqrt(newOut[0].length), Array.from(newOut[0]), 0, list, anime);
   });
 }
@@ -578,6 +580,7 @@ document.addEventListener("keydown", function (event) {
 // Création d'une grid avec spawn du joueur et des gardes.
 function Launch(size, tab, spawnCellId, gardList, boolAnimation, solver) {
   //#region ROWS
+  console.log("Size: " + size);
   makeRows(size);
   cellNum = size;
   //#endregion
@@ -738,7 +741,8 @@ function Launch(size, tab, spawnCellId, gardList, boolAnimation, solver) {
   }
   //#endregion
 
-  //#region ANIMATION
+  //#region ANIMATION*/
+
   if (boolAnimation) {
     LabAnim("t1", 1500);
     LabAnim("t2", 1500);
