@@ -1,4 +1,5 @@
 ﻿  main.c
+<<<<<<< algo-labyrinthe
 C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(101,23): warning C4047: '=' : les niveaux d'indirection de 'char *' et de 'int' sont différents
 C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(102,9): warning C4477: 'printf' : la chaîne de format '%c' nécessite un argument de type 'int', mais l'argument variadique 1 est de type 'char *'
 C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(102,9): warning C4313: 'printf' : '%c' dans la chaîne de format est en conflit avec l'argument 1 de type 'char *'.
@@ -18,3 +19,14 @@ C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(121
 C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(604): warning C4715: 'ApparitionGardes' : les chemins de contrôle ne retournent pas tous une valeur
 C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1120): warning C4715: 'PathIt' : les chemins de contrôle ne retournent pas tous une valeur
   algo_labyrinthe.vcxproj -> C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\x64\Debug\algo_labyrinthe.exe
+=======
+C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(185,50): warning C4244: 'fonction' : conversion de 'double' en 'float', perte possible de données
+C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(185,10): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
+C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(559,8): warning C4244: 'fonction' : conversion de 'time_t' en 'unsigned int', perte possible de données
+C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(562,15): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
+C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(621,8): warning C4244: 'fonction' : conversion de 'time_t' en 'unsigned int', perte possible de données
+C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1113,44): warning C4029: la déclaration de la liste de paramètres formels est différente de la définition
+C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1114,17): error C2059: erreur de syntaxe : ')'
+C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1131,2): error C2059: erreur de syntaxe : 'return'
+C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1132,1): error C2059: erreur de syntaxe : '}'
+>>>>>>> génération des tp
