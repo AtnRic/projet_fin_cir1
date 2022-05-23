@@ -81,6 +81,37 @@ void triFusion(int i, int j, int tab[], int tmp[]) {
 }
 /*Fin tri Fusion*/
 
+/*Fichier*/
+void readFile(char* filename) {
+	int returnCode;
+	int count;
+
+	FILE* stream;// , * stream2;
+	errno_t err;
+
+	err = fopen_s(&stream, filename, "r");
+	if (err == 0)
+		printf("Le fichier 'file.txt' est ouvert\n");
+	else
+		printf("Le fichier 'file.txt' n'est pas ouvert\n");
+
+	fseek(stream, 0, SEEK_SET);
+
+	char buffer[2] = { 0 };
+	fread_s(buffer, 2 * sizeof(char), sizeof(char), 2, stream);
+	buffer[1] = '\0';
+	printf("%s", buffer);
+
+	if (stream) {
+		err = fclose(stream);
+		if (err == 0)
+			printf("\nLe fichier 'file.txt' est ferme\n");
+		else
+			printf("\nLe fichier 'file.txt' n'est pas ferme\n");
+	}
+}
+/*Fin fichier*/
+
 /*Algo labyrinthe*/
 int NearCase(Lab* L, int index) {
 	printf("INDEX %d - L:%d R:%d T:%d D:%d\n", index, Left(L, index), Right(L, index), Top(L, index), Down(L, index));
