@@ -1,6 +1,47 @@
 ﻿  main.c
-C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(185,50): warning C4244: 'fonction' : conversion de 'double' en 'float', perte possible de données
-C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(185,10): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
-C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(922,8): warning C4244: 'fonction' : conversion de 'time_t' en 'unsigned int', perte possible de données
-C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(892): warning C4715: 'PathIt' : les chemins de contrôle ne retournent pas tous une valeur
+C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(186,50): warning C4244: 'fonction' : conversion de 'double' en 'float', perte possible de données
+C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(186,10): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
+C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(560,8): warning C4244: 'fonction' : conversion de 'time_t' en 'unsigned int', perte possible de données
+C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(563,15): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
+C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(622,8): warning C4244: 'fonction' : conversion de 'time_t' en 'unsigned int', perte possible de données
+C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1114,21): warning C4028: paramètre formel 1 différent de la déclaration
+C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1115,21): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'char [2]' sont différents
+C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1115,39): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'char [2]' sont différents
+C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1115,57): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'char [2]' sont différents
+C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1115,75): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'char [2]' sont différents
+C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1115,93): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'char [2]' sont différents
+C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1115,111): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'char [2]' sont différents
+C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1115,129): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'char [2]' sont différents
+C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1115,146): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'char [2]' sont différents
+C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1123,23): warning C4028: paramètre formel 1 différent de la déclaration
+C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1124,21): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'char [2]' sont différents
+C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1124,39): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'char [2]' sont différents
+C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1124,57): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'char [2]' sont différents
+C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1124,75): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'char [2]' sont différents
+C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1124,93): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'char [2]' sont différents
+C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1124,111): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'char [2]' sont différents
+C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1124,129): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'char [2]' sont différents
+C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1124,146): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'char [2]' sont différents
+C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1132,20): warning C4028: paramètre formel 1 différent de la déclaration
+C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1133,21): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'char [2]' sont différents
+C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1133,39): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'char [2]' sont différents
+C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1133,57): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'char [2]' sont différents
+C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1133,75): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'char [2]' sont différents
+C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1133,93): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'char [2]' sont différents
+C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1133,111): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'char [2]' sont différents
+C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1133,129): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'char [2]' sont différents
+C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1133,146): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'char [2]' sont différents
+C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1141,23): warning C4028: paramètre formel 1 différent de la déclaration
+C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1142,21): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'char [2]' sont différents
+C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1142,39): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'char [2]' sont différents
+C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1142,57): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'char [2]' sont différents
+C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1142,75): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'char [2]' sont différents
+C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1142,93): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'char [2]' sont différents
+C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1142,111): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'char [2]' sont différents
+C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1142,129): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'char [2]' sont différents
+C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1142,146): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'char [2]' sont différents
+C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1177,21): warning C4047: 'fonction' : les niveaux d'indirection de 'char' et de 'char [2]' sont différents
+C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1177,18): warning C4024: 'verifDroite' : types différents pour le paramètre formel et réel 1
+C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(573): warning C4715: 'ApparitionGardes' : les chemins de contrôle ne retournent pas tous une valeur
+C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1089): warning C4715: 'PathIt' : les chemins de contrôle ne retournent pas tous une valeur
   algo_labyrinthe.vcxproj -> C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\x64\Debug\algo_labyrinthe.exe

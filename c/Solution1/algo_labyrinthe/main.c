@@ -25,6 +25,7 @@
 		["j", "f", "f", "f", "f", "i", "j", "d", "o", "l"],
 ];
 var correspondance = {
+  //   h  d  b  g
   a : [0, 0, 0, 0] ,
   b : [1, 0, 0, 0] ,
   c : [0, 1, 0, 0] ,
@@ -1110,28 +1111,44 @@ int Check(Teleporteurs_Pair* pair, int nbTpPair, int labSize, int index) {
 	return 0;
 }
 
-int mouvementHero(int posHero, Cell* cell) {
-	if (posHero == ) { // border
-	}
-	else if (posHero == ) { // 3 walls
-
-	}
-	else if (posHero == ) { // 2 walls
-
-	}
-	else if (posHero == ) { // 1 wall
-
-	}
-	else if (posHero == ) { // 0 wall
-
+bool verifHaut(char posHero) {
+	if (posHero == "a" || posHero == "c" || posHero == "d" || posHero == "e" || posHero == "g" || posHero == "i" || posHero == "j" || posHero == "l") {
+		return true; // Pas de mur
 	}
 	else {
-		return -1;
+		return false; // mur
 	}
-	return;
+}
+
+bool verifDroite(char posHero) {
+	if (posHero == "a" || posHero == "b" || posHero == "d" || posHero == "e" || posHero == "f" || posHero == "j" || posHero == "k" || posHero == "m") {
+		return true; // Pas de mur
+	}
+	else {
+		return false; // mur
+	}
+}
+
+bool verifBas(char posHero) {
+	if (posHero == "a" || posHero == "b" || posHero == "c" || posHero == "e" || posHero == "g" || posHero == "h" || posHero == "k" || posHero == "n") {
+		return true; // Pas de mur
+	}
+	else {
+		return false; // mur
+	}
+}
+
+bool verifGauche(char posHero) {
+	if (posHero == "a" || posHero == "b" || posHero == "c" || posHero == "d" || posHero == "f" || posHero == "h" || posHero == "i" || posHero == "o") {
+		return true; // Pas de mur
+	}
+	else {
+		return false; // mur
+	}
 }
 
 int main() {
+	/*
 	Garde* garde = (Garde*)malloc(sizeof(Garde));
 	srand(time(NULL));
 	Lab* newl = NewLab(5);
@@ -1143,7 +1160,7 @@ int main() {
 	ApparitionGardes(letter(newl), 40, 3);
 	ChoixMouvementGardes(letter(newl), 40, garde, 3);
 	MouvementGardes(letter(newl), 40, garde, 3);
-
+	 
 
 	//letter(newl);
 	Teleporteurs_Pair* pairs = NULL;
@@ -1154,6 +1171,15 @@ int main() {
 	return EXIT_SUCCESS;
 
 	//printPath(S);
+	*/
+
+
+	if (verifDroite("a") == true) {
+		printf("Pas de mur");
+	}
+	else {
+		printf("Mur");
+	}
 }
 
 
