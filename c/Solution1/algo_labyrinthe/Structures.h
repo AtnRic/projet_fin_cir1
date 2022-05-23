@@ -83,6 +83,10 @@ void right(char* maze, int cote, Garde* garde, int i);
 void left(char* maze, int cote, Garde* garde, int i);
 /*Fin gardes*/
 
+/*Fichier lecture*/
+void readFile(char* filename);
+/*Fin fichier lecture*/
+
 
 typedef struct Path {
 	int* cells;

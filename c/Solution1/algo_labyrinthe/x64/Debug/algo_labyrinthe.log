@@ -3,13 +3,8 @@ C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(185,50): warning C
 C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(185,10): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
 C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(559,8): warning C4244: 'fonction' : conversion de 'time_t' en 'unsigned int', perte possible de données
 C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(562,15): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(577,8): warning C4244: 'fonction' : conversion de 'time_t' en 'unsigned int', perte possible de données
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(613,15): warning C4013: 'bottom' non défini(e) ; extern retournant int pris par défaut
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(614,15): warning C4013: 'top' non défini(e) ; extern retournant int pris par défaut
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(615,15): warning C4013: 'right' non défini(e) ; extern retournant int pris par défaut
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(616,15): warning C4013: 'left' non défini(e) ; extern retournant int pris par défaut
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(705,6): error C2371: 'top' : redéfinition ; types de base différents
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(717,6): error C2371: 'bottom' : redéfinition ; types de base différents
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(729,6): error C2371: 'right' : redéfinition ; types de base différents
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(739,6): error C2371: 'left' : redéfinition ; types de base différents
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(1113,8): warning C4244: 'fonction' : conversion de 'time_t' en 'unsigned int', perte possible de données
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(621,8): warning C4244: 'fonction' : conversion de 'time_t' en 'unsigned int', perte possible de données
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(1115,8): warning C4244: 'fonction' : conversion de 'time_t' en 'unsigned int', perte possible de données
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(572): warning C4715: 'ApparitionGardes' : les chemins de contrôle ne retournent pas tous une valeur
+C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(1088): warning C4715: 'PathIt' : les chemins de contrôle ne retournent pas tous une valeur
+  algo_labyrinthe.vcxproj -> C:\MAMP\htdocs\Projet CIR1\c\Solution1\x64\Debug\algo_labyrinthe.exe

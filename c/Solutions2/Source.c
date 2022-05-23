@@ -1,60 +1,60 @@
 #include <stdio.h>
-#include <stdlib.h>
+#include <string.h>
+#include <time.h>
 
-void main(void)
-{
-    FILE* fic;
-    char ligne[81];
-    char* ptr_chaine; // pointeur pour balayer les sous-chaînes obtenues
-    short int num_ligne = 1;
-    short int data_entier;
-    double data_reel;
-    char data_chaine[11];
-    //----------------------- ouverture du fichier de données CSV ------------------------------
-    fic = fopen_s("fic_data.csv", "rt");
-    errno_t erCode = fopen_s(&fic, "fic_data.csv", "rt");
-    if (fic == NULL)
-    {
-        printf("Ouverture fichier impossible !");
-        exit(0);
+
+void readFile(char* filename) {
+    int returnCode;
+    int count;
+
+    FILE* stream;// , * stream2;
+    errno_t err;
+
+    err = fopen_s(&stream, filename, "r");
+    if (err == 0)
+        printf("Le fichier 'file.txt' est ouvert\n");
+    else
+        printf("Le fichier 'file.txt' n'est pas ouvert\n");
+
+    fseek(stream, 0, SEEK_SET);
+
+    char buffer[2] = {0};
+    fread_s(buffer, 2 * sizeof(char), sizeof(char), 2, stream);
+    buffer[1] = '\0';
+    printf("%s", buffer);
+
+    if (stream){
+        err = fclose(stream);
+        if (err == 0) 
+            printf("\nLe fichier 'file.txt' est ferme\n");
+        else 
+            printf("\nLe fichier 'file.txt' n'est pas ferme\n");
     }
-    //----------------------- lecture du fichier de données CSV ------------------------------
-    // on lit une ligne après l'autre jusqu'�  la fin du fichier
-    while (fgets(ligne, 81, fic) != NULL)
-    {
-        printf("\n Ligne %2hd :", num_ligne);
-        num_ligne++;
-        ptr_chaine = strtok(ligne, ";"); // appel d'initialisation de strtok. Séparateur = ';'
-        /* on lit une cellule (colonne) après l'autre jusqu'�  la fin de la ligne. Notez que si les cellules contenaient
-        des données de même type, on pourrait écrire une boucle while(ptr_chaine!=NULL){} */
-        // cellule 1 :
-        if (sscanf_s(ptr_chaine, "%s", data_chaine) != 1) // verif. de la validité des données
-        {
-            puts("\nPb de lecture cellule 1 (chaine) !");
-            data_chaine[0] = 0;
-        }
-        ptr_chaine = strtok(NULL, ";"); // remplace le prochain séparateur trouvé par 0,
-// puis renvoie l'adresse de la chaîne ainsi obtenue. Séparateur = ';'
-// cellule 2 :
-        if (sscanf_s(ptr_chaine, "%hd", &data_entier) != 1)
-        {
-            puts("\nPb de lecture cellule 2 (entier)!");
-            data_entier = -11111;
-        }
-        ptr_chaine = strtok(NULL, ";"); // remplace le prochain séparateur trouvé par 0
-// cellule 3 :
-        ptr_chaine = strtok(NULL, ";"); // on saute la cellule 3 supposée sans intérêt
-// cellule 4 :
-        if (sscanf_s(ptr_chaine, "%lf", &data_reel) != 1)
-        {
-            puts("\nPb de lecture cellule 4 (reel)!");
-            data_reel = -111.111;
-        }
-        ptr_chaine = strtok(NULL, ";"); // non indispensable ici
-// affichages :
-        printf("\n\t cellule 1 (chaine): %11s ", data_chaine);
-        printf("\n\t cellule 2 (entier): %11hd", data_entier);
-        printf("\n\t cellule 4 (reel) : %11.3lf", data_reel);
-    }
-    fclose(fic);
+}   
+
+int main() {
+	//FILE* fp;
+	//FILE* fp1;
+	//char buffer[100];
+
+	///* Open file for both reading and writing */
+	////fp = fopen_s("file.txt", "w+");
+	//fp1 = fopen_s(&fp, "file.txt", "r");
+
+	///* Write data to the file */
+	////fwrite(c, strlen(c) + 1, 1, fp1);
+
+	///* Seek to the beginning of the file */
+	////fseek(fp1, 0, SEEK_SET);
+
+	///* Read and display data */
+	//fread(buffer, 13, 1, fp1);
+	//printf("%s\n", buffer);
+	//fclose(fp1);
+
+	//return(0);
+    char* filename = "file.txt";
+    readFile(filename);
+
+    return 0;
 }
