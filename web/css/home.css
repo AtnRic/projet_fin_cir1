@@ -194,7 +194,7 @@ body {
 
 #top-palm {
     position: absolute;
-    top: 0vh;
+    top: 0;
     right: 60vh;
     max-height: 25vh;
     animation-name: bottom-right-leaf;
@@ -265,7 +265,7 @@ body {
 #jungle-but::after {
     position: absolute;
     content: "";
-    top: 0%;
+    top: 0;
     left: 50%;
     width: 10vw;
     height: 10vw;
@@ -276,7 +276,7 @@ body {
 }
 
 #jungle-but:hover {
-    box-shadow: 0px 1vh 2vh black;
+    box-shadow: 0 1vh 2vh black;
     transform: translateX(-50%) translateY(-1vh);
     filter: grayscale(0%);
 }
@@ -379,7 +379,7 @@ section {
 #but-mar::after {
     position: absolute;
     content: "";
-    top: 0%;
+    top: 0;
     left: 50%;
     width: 10vw;
     height: 10vw;
@@ -608,188 +608,4 @@ section {
     animation-iteration-count: infinite;
     animation-duration: 10s;
     /* animation-timing-function: linear; */
-}
-
-@keyframes iss {
-    0% {
-        top: 220vh;
-        left: 75vw;
-    }
-    50%{
-        top: 225h;
-        left: 70vw;
-        transform: scale(1.15);
-    }
-    100% {
-        top: 220vh;
-        left: 75vw;
-    }
-}
-
-.star1 {
-    position: absolute;
-    top: 220vh;
-    left: 10vw;
-
-    width: 25vw;
-    height: 25vw;
-    overflow: hidden;
-}
-
-.star1::after {
-    position: absolute;
-    content: "";
-    top: 0vw;
-    left: 0vw;
-    width: 10vw;
-    height: 0.5vh;
-    border: none;
-    /* filter: blur(50%); */
-    border-radius: 50px;
-
-    transform: rotate(45deg) translateX(-50%) ;
-    background-color: white;
-
-    animation-name: star;
-    animation-duration: 2s;
-    animation-iteration-count: infinite;
-}
-
-@keyframes star {
-    0% {
-        top: -6vh;
-        left: -8vw;
-        transform: rotate(45deg);
-        opacity: 1;
-    }
-    50% {
-        top: 25vw;
-        left: 25vw;
-        transform: rotate(45deg);
-    }
-    96% {
-        top: 25vw;
-        left: 25vw;
-        transform: rotate(45deg);
-        opacity: 1;
-    }
-    97% {
-        top: 25vw;
-        left: 25vw;
-        transform: rotate(45deg);
-        opacity: 0;
-    }
-    99% {
-        top: -6vh;
-        left: -8vw;
-        transform: rotate(45deg);
-        opacity: 0;
-    }
-}
-
-.star2 {
-    position: absolute;
-    top: 240vh;
-    left: 50vw;
-
-    width: 25vw;
-    height: 25vw;
-    overflow: hidden;
-    /* background: red; */
-}
-
-.star2::after {
-    position: absolute;
-    content: "";
-    top: 0vw;
-    left: 0vw;
-    width: 10vw;
-    height: 0.5vh;
-    border: none;
-    filter: blur(2px);
-    border-radius: 50px;
-
-    transform: rotate(45deg) translateX(-50%) ;
-    background-color: white;
-
-    animation-name: star2;
-    animation-duration: 5s;
-    animation-iteration-count: infinite;
-}
-
-@keyframes star2 {
-    0% {
-        top: -6vh;
-        left: -8vw;
-        transform: rotate(45deg);
-        opacity: 1;
-    }
-    20% {
-        top: 25vw;
-        left: 25vw;
-        transform: rotate(45deg);
-    }
-    96% {
-        top: 25vw;
-        left: 25vw;
-        transform: rotate(45deg);
-        opacity: 1;
-    }
-    97% {
-        top: 25vw;
-        left: 25vw;
-        transform: rotate(45deg);
-        opacity: 0;
-    }
-    99% {
-        top: -6vh;
-        left: -8vw;
-        transform: rotate(45deg);
-        opacity: 0;
-    }
-}
-
-
-.star3 {
-    position: absolute;
-    top: 220vh;
-    left: 70vw;
-
-    width: 25vw;
-    height: 25vw;
-    overflow: hidden;
-    /* background: red; */
-}
-
-.star3::after {
-    position: absolute;
-    content: "";
-    top: 0vw;
-    left: 0vw;
-    width: 10vw;
-    height: 0.5vh;
-    border: none;
-    filter: blur(2px);
-    border-radius: 50px;
-
-    transform: rotate(45deg) translateX(-50%) ;
-    background-color: white;
-
-    animation-name: star;
-    animation-duration: 3s;
-    animation-iteration-count: infinite;
-}
-
-.ufo {
-    position: absolute;
-    top: 275vh;
-    left: 5vw;
-
-    /* height: 5vw; */
-    /* width: 15vw; */
-
-    height: 85px;
-    width: 200px;
-
-    background: url(../images/accueil/ufo2.gif) center center / cover no-repeat;
 }
