@@ -127,8 +127,8 @@ table, tr, td{
     border-spacing: 0;
 }
 .walls{
-    height: 103%;/*pour éviter traits blancs*/
-    width: 103%;
+    height: 104%;/*pour éviter traits blancs*/
+    width: 104%;
 }
 
 
