@@ -84,7 +84,7 @@ void left(char* maze, int cote, Garde* garde, int i);
 /*Fin gardes*/
 
 /*Fichier lecture*/
-void readFile(char* filename);
+int readFile(char* filename);
 /*Fin fichier lecture*/
 
 
