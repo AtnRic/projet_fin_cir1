@@ -1,2 +1,7 @@
 ﻿  main.c
-  algo_labyrinthe.vcxproj -> C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\x64\Debug\algo_labyrinthe.exe
+C:\MAMP\htdocs\projet cir1\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(201,12): warning C4244: 'fonction' : conversion de 'time_t' en 'unsigned int', perte possible de données
+C:\MAMP\htdocs\projet cir1\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(355,50): warning C4244: 'fonction' : conversion de 'double' en 'float', perte possible de données
+C:\MAMP\htdocs\projet cir1\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(355,15): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
+C:\MAMP\htdocs\projet cir1\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1173,12): warning C4244: 'fonction' : conversion de 'time_t' en 'unsigned int', perte possible de données
+C:\MAMP\htdocs\projet cir1\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(846): warning C4716: 'printTp' : doit retourner une valeur
+  algo_labyrinthe.vcxproj -> C:\MAMP\htdocs\projet cir1\projet_fin_cir1\c\Solution1\x64\Debug\algo_labyrinthe.exe
