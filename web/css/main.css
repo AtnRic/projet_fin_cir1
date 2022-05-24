@@ -155,37 +155,43 @@ background-color:yellow;
 }
 
 @media screen and (max-width: 800px) {
-  .global { display:block;
-    width: 600px;height: 600px;
+  .global {
+    display: block;
+    width: 600px;
+    height: 600px;
     margin: calc(50vh - 300px) auto auto;
   }
-
+}
 @media screen and (min-width: 1000px) {
-  .global { display:block;
-    width: 600px;height: 600px;
+  .global {
+    display: block;
+    width: 600px;
+    height: 600px;
     /*margin: calc(50vh - 450px) auto auto;*/
   }
 }
 
 @media screen and (max-width: 1000px) {
-  .global { display:block;
-    width: 800px;height: 800px;
+  .global {
+    display: block;
+    width: 800px;
+    height: 800px;
     margin: calc(50vh - 400px) auto auto;
   }
 }
-
 @media screen and (max-width: 800px) {
-  .global { display:block;
-    width: 600px;height: 600px;
+  .global {
+    display: block;
+    width: 600px;
+    height: 600px;
     margin: calc(50vh - 300px) auto auto;
   }
-
 }
-
 @media screen and (max-width: 600px) {
-  .global { display:block;
-    width: 400px;height: 400px;
+  .global {
+    display: block;
+    width: 400px;
+    height: 400px;
     margin: calc(50vh - 200px) auto auto;
   }
-
-}}
+}
