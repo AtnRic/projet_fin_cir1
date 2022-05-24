@@ -594,12 +594,202 @@ section {
     background: url(../images/accueil/mars.png) center center / cover no-repeat;
 }
 
-.iss {
+#iss {
     position: absolute;
-    top: 250vh;
+    top: 220vh;
+    left: 75vw;
 
-    height: 20vh;
-    width: 40vh;
 
-    background: url(../images/accueil/ISS.png) center center / cover no-repeat;
+    height: 15vh;
+    width: 25vh;
+    /* background-color: red; */
+    background: url(../images/accueil/ISS2.png) center center / cover;
+    animation-name: iss;
+    animation-iteration-count: infinite;
+    animation-duration: 10s;
+    /* animation-timing-function: linear; */
+}
+
+@keyframes iss {
+    0% {
+        top: 220vh;
+        left: 75vw;
+    }
+    50%{
+        top: 225h;
+        left: 70vw;
+        transform: scale(1.15);
+    }
+    100% {
+        top: 220vh;
+        left: 75vw;
+    }
+}
+
+.star1 {
+    position: absolute;
+    top: 220vh;
+    left: 10vw;
+
+    width: 25vw;
+    height: 25vw;
+    overflow: hidden;
+}
+
+.star1::after {
+    position: absolute;
+    content: "";
+    top: 0vw;
+    left: 0vw;
+    width: 10vw;
+    height: 0.5vh;
+    border: none;
+    /* filter: blur(50%); */
+    border-radius: 50px;
+
+    transform: rotate(45deg) translateX(-50%) ;
+    background-color: white;
+
+    animation-name: star;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes star {
+    0% {
+        top: -6vh;
+        left: -8vw;
+        transform: rotate(45deg);
+        opacity: 1;
+    }
+    50% {
+        top: 25vw;
+        left: 25vw;
+        transform: rotate(45deg);
+    }
+    96% {
+        top: 25vw;
+        left: 25vw;
+        transform: rotate(45deg);
+        opacity: 1;
+    }
+    97% {
+        top: 25vw;
+        left: 25vw;
+        transform: rotate(45deg);
+        opacity: 0;
+    }
+    99% {
+        top: -6vh;
+        left: -8vw;
+        transform: rotate(45deg);
+        opacity: 0;
+    }
+}
+
+.star2 {
+    position: absolute;
+    top: 240vh;
+    left: 50vw;
+
+    width: 25vw;
+    height: 25vw;
+    overflow: hidden;
+    /* background: red; */
+}
+
+.star2::after {
+    position: absolute;
+    content: "";
+    top: 0vw;
+    left: 0vw;
+    width: 10vw;
+    height: 0.5vh;
+    border: none;
+    filter: blur(2px);
+    border-radius: 50px;
+
+    transform: rotate(45deg) translateX(-50%) ;
+    background-color: white;
+
+    animation-name: star2;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes star2 {
+    0% {
+        top: -6vh;
+        left: -8vw;
+        transform: rotate(45deg);
+        opacity: 1;
+    }
+    20% {
+        top: 25vw;
+        left: 25vw;
+        transform: rotate(45deg);
+    }
+    96% {
+        top: 25vw;
+        left: 25vw;
+        transform: rotate(45deg);
+        opacity: 1;
+    }
+    97% {
+        top: 25vw;
+        left: 25vw;
+        transform: rotate(45deg);
+        opacity: 0;
+    }
+    99% {
+        top: -6vh;
+        left: -8vw;
+        transform: rotate(45deg);
+        opacity: 0;
+    }
+}
+
+
+.star3 {
+    position: absolute;
+    top: 220vh;
+    left: 70vw;
+
+    width: 25vw;
+    height: 25vw;
+    overflow: hidden;
+    /* background: red; */
+}
+
+.star3::after {
+    position: absolute;
+    content: "";
+    top: 0vw;
+    left: 0vw;
+    width: 10vw;
+    height: 0.5vh;
+    border: none;
+    filter: blur(2px);
+    border-radius: 50px;
+
+    transform: rotate(45deg) translateX(-50%) ;
+    background-color: white;
+
+    animation-name: star;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+}
+
+.ufo {
+    position: absolute;
+    top: 275vh;
+    left: 5vw;
+
+    /* height: 5vw; */
+    /* width: 15vw; */
+
+    height: 85px;
+    width: 200px;
+
+    background: url(../images/accueil/ufo2.gif) center center / cover no-repeat;
 }
