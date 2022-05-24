@@ -20,11 +20,8 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Structures.h">
+    <ClInclude Include="header.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="CaCLC.csv" />
   </ItemGroup>
 </Project>
