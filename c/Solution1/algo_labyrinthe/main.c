@@ -91,25 +91,28 @@ int readFile(char* filename) {
 	errno_t err;
 
 	err = fopen_s(&stream, filename, "r+");
+	printf("==================================\n");
 	if (err == 0)
-		printf("Le fichier 'file.txt' est ouvert\n");
+		printf("Ouverture fichier %s : [OK]\n", filename);
 	else
-		printf("Le fichier 'file.txt' n'est pas ouvert\n");
+		printf("Ouverture fichier %s : [ECHEC]\n", filename);
 
 	fseek(stream, 0, SEEK_SET);
 
 	char* value;
 	value = fgetc(stream);
-	printf("%c", value);
+	printf("Valeur : %c\n", value);
 
 
 	if (stream) {
 		err = fclose(stream);
 		if (err == 0)
-			printf("\nLe fichier 'file.txt' est ferme\n");
+			printf("Fermeture fichier %s : [OK]\n", filename);
 		else
-			printf("\nLe fichier 'file.txt' n'est pas ferme\n");
+			printf("Fermeture fichier %s : [ECHEC]\n", filename);
 	}
+	printf("==================================\n");
+	printf("\n");
 	return value;
 }
 /*Fin fichier*/
@@ -1184,7 +1187,10 @@ void infoPositionHero() {
 	/* Récupère la valeur de la position de héros dans le fichier CaCLC.csv */
 	char* posHero = readFile("CaCLC.csv");
 	//printf("Valeur : %c", posHero);
-
+	printf("==========================\n");
+	printf("INFORMATION POSITION HEROS\n");
+	printf("--------------------------\n");
+	printf("Case du heros : %c\n", posHero);
 	if (verifHaut(posHero)) {
 		printf("Haut : pas de mur\n");
 	}
@@ -1209,6 +1215,8 @@ void infoPositionHero() {
 	else {
 		printf("Gauche : mur\n");
 	}
+	printf("==========================\n");
+	printf("\n");
 }
 
 
