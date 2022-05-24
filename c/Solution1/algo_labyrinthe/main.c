@@ -97,9 +97,10 @@ int readFile(char* filename) {
 
 	fseek(stream, 0, SEEK_SET);
 
-	char* value = "";
+	char value;
 	value = fgetc(stream);
 	printf("%c", value);
+
 
 	if (stream) {
 		err = fclose(stream);
@@ -1211,28 +1212,28 @@ int main() {
 	/* Récupère la valeur de la position de héros dans le fichier CaCLC.csv  */
 	char* posHero = readFile("CaCLC.csv");
 	if (verifHaut(posHero)) {
-		printf("Haut : pas de mur");
+		printf("Haut : pas de mur\n");
 	}
 	else {
-		printf("Haut :mur");
+		printf("Haut : mur\n");
 	}
 	if (verifDroite(posHero)) {
-		printf("Droite : pas de mur");
+		printf("Droite : pas de mur\n");
 	}
 	else {
-		printf("Droite : mur");
+		printf("Droite : mur\n");
 	}
 	if (verifBas(posHero)) {
-		printf("Bas : pas de mur");
+		printf("Bas : pas de mur\n");
 	}
 	else {
-		printf("Bas : mur");
+		printf("Bas : mur\n");
 	}
 	if (verifGauche(posHero)) {
-		printf("Gauche : pas de mur");
+		printf("Gauche : pas de mur\n");
 	}
 	else {
-		printf("Gauche :mur");
+		printf("Gauche : mur\n");
 	}
 }
 
