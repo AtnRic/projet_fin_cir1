@@ -1187,9 +1187,7 @@ void infoPositionHero() {
 	/* Récupère la valeur de la position de héros dans le fichier CaCLC.csv */
 	char* posHero = readFile("CaCLC.csv");
 	//printf("Valeur : %c", posHero);
-	printf("==========================\n");
-	printf("INFORMATION POSITION HEROS\n");
-	printf("--------------------------\n");
+	printf("=================\n");
 	printf("Case du heros : %c\n", posHero);
 	if (verifHaut(posHero)) {
 		printf("Haut : pas de mur\n");
@@ -1215,7 +1213,7 @@ void infoPositionHero() {
 	else {
 		printf("Gauche : mur\n");
 	}
-	printf("==========================\n");
+	printf("=================\n");
 	printf("\n");
 }
 

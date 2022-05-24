@@ -10,8 +10,8 @@ C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(222
 C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(596,8): warning C4244: 'fonction' : conversion de 'time_t' en 'unsigned int', perte possible de données
 C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(599,15): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
 C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(658,8): warning C4244: 'fonction' : conversion de 'time_t' en 'unsigned int', perte possible de données
-C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1193,9): warning C4477: 'printf' : la chaîne de format '%c' nécessite un argument de type 'int', mais l'argument variadique 1 est de type 'char *'
-C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1193,9): warning C4313: 'printf' : '%c' dans la chaîne de format est en conflit avec l'argument 1 de type 'char *'.
+C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1191,9): warning C4477: 'printf' : la chaîne de format '%c' nécessite un argument de type 'int', mais l'argument variadique 1 est de type 'char *'
+C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1191,9): warning C4313: 'printf' : '%c' dans la chaîne de format est en conflit avec l'argument 1 de type 'char *'.
 C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1188,1): warning C4047: 'initialisation' : les niveaux d'indirection de 'char *' et de 'int' sont différents
 C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(609): warning C4715: 'ApparitionGardes' : les chemins de contrôle ne retournent pas tous une valeur
 C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1125): warning C4715: 'PathIt' : les chemins de contrôle ne retournent pas tous une valeur
