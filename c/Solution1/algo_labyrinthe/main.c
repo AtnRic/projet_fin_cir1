@@ -83,39 +83,57 @@ void triFusion(int i, int j, int tab[], int tmp[]) {
 /*Fin tri Fusion*/
 
 /*Fichier*/
-int readFile(char* filename) {
-	int returnCode;
-	int count;
-
-	FILE* stream;// , * stream2;
+int readFile(char* filename, int tableau[]) {
+	FILE* stream;
 	errno_t err;
+	//int tableau[2] = { 0 };
 
-	err = fopen_s(&stream, filename, "r+");
-	printf("==================================\n");
+	err = fopen_s(&stream, filename, "r");
 	if (err == 0)
-		printf("Ouverture fichier %s : [OK]\n", filename);
+		printf("Le fichier 'file.txt' est ouvert\n");
 	else
-		printf("Ouverture fichier %s : [ECHEC]\n", filename);
+		printf("Le fichier 'file.txt' n'est pas ouvert\n");
+	if (stream == NULL) {
+		printf("\nstream pas OK");
+		return -1;
+	}
+	else printf("\nstream ok");
 
 	fseek(stream, 0, SEEK_SET);
 
-	char* value;
+	/*char* value;
 	value = fgetc(stream);
-	printf("Valeur : %c\n", value);
-
+	printf("%c", value);*/
+	if (stream != NULL) {
+		for (int i = 0; i < 2; i++) {
+			fscanf_s(stream, "%d", &tableau[i]);
+			printf("\ntableau %d : %d", i, tableau[i]);
+		}
+	}
 
 	if (stream) {
 		err = fclose(stream);
-		if (err == 0)
-			printf("Fermeture fichier %s : [OK]\n", filename);
-		else
-			printf("Fermeture fichier %s : [ECHEC]\n", filename);
+		if (err == 0) {
+			printf("\nLe fichier 'file.txt' est ferme\n");
+			return 1;
+		}
+			
+		else {
+			printf("\nLe fichier 'file.txt' n'est pas ferme\n");
+			return -1;
+		}
 	}
-	printf("==================================\n");
-	printf("\n");
-	return value;
+	return 1;
 }
 /*Fin fichier*/
+
+/*Conversion position renvoyée par le fichier csv en lettre*/
+char RechercheLettre(char* letter, int LaPosition) {
+	char LaPositionLettre;
+	LaPositionLettre = (letter + LaPosition);
+	return LaPositionLettre;
+}
+/*Fin Conversion position renvoyée par le fichier csv en lettre*/
 
 /*Algo labyrinthe*/
 int NearCase(Lab* L, int index) {
@@ -1147,8 +1165,8 @@ int Check(Teleporteurs_Pair* pair, int nbTpPair, int labSize, int index) {
 	return 0;
 }
 
-bool verifHaut(char* posHero) {
-	if (posHero == "a" || posHero == "c" || posHero == "d" || posHero == "e" || posHero == "g" || posHero == "i" || posHero == "j" || posHero == "l") {
+bool verifHaut(char posHero) {
+	if (posHero == 'a' || posHero == 'c' || posHero == 'd' || posHero == 'e' || posHero == 'g' || posHero == 'i' || posHero == 'j' || posHero == 'l') {
 		return true; // Pas de mur
 	}
 	else {
@@ -1156,8 +1174,8 @@ bool verifHaut(char* posHero) {
 	}
 }
 
-bool verifDroite(char* posHero) {
-	if (posHero == "a" || posHero == "b" || posHero == "d" || posHero == "e" || posHero == "f" || posHero == "j" || posHero == "k" || posHero == "m") {
+bool verifDroite(char posHero) {
+	if (posHero == 'a' || posHero == 'b' || posHero == 'd' || posHero == 'e' || posHero == 'f' || posHero == 'j' || posHero == 'k' || posHero == 'm') {
 		return true; // Pas de mur
 	}
 	else {
@@ -1165,8 +1183,8 @@ bool verifDroite(char* posHero) {
 	}
 }
 
-bool verifBas(char* posHero) {
-	if (posHero == "a" || posHero == "b" || posHero == "c" || posHero == "e" || posHero == "g" || posHero == "h" || posHero == "k" || posHero == "n") {
+bool verifBas(char posHero) {
+	if (posHero == 'a' || posHero == 'b' || posHero == 'c' || posHero == 'e' || posHero == 'g' || posHero == 'h' || posHero == 'k' || posHero == 'n') {
 		return true; // Pas de mur
 	}
 	else {
@@ -1174,8 +1192,8 @@ bool verifBas(char* posHero) {
 	}
 }
 
-bool verifGauche(char* posHero) {
-	if (posHero == "a" || posHero == "b" || posHero == "c" || posHero == "d" || posHero == "f" || posHero == "h" || posHero == "i" || posHero == "o") {
+bool verifGauche(char posHero) {
+	if (posHero == 'a' || posHero == 'b' || posHero == 'c' || posHero == 'd' || posHero == 'f' || posHero == 'h' || posHero == 'i' || posHero == 'o') {
 		return true; // Pas de mur
 	}
 	else {
@@ -1185,10 +1203,10 @@ bool verifGauche(char* posHero) {
 
 void infoPositionHero() {
 	/* Récupère la valeur de la position de héros dans le fichier CaCLC.csv */
-	char* posHero = readFile("CaCLC.csv");
+	//char* posHero = readFile("CaCLC.csv");
 	//printf("Valeur : %c", posHero);
-	printf("=================\n");
-	printf("Case du heros : %c\n", posHero);
+	char* posHero = "a";
+
 	if (verifHaut(posHero)) {
 		printf("Haut : pas de mur\n");
 	}
@@ -1213,21 +1231,19 @@ void infoPositionHero() {
 	else {
 		printf("Gauche : mur\n");
 	}
-	printf("=================\n");
-	printf("\n");
 }
 
 
 int main() {
-	
+
 	//Garde* garde = (Garde*)malloc(sizeof(Garde));
 	//srand(time(NULL));
-	//Lab* newl = NewLab(5);
-	//Free* P = NewFree(100);
-	//int o = tryPath(newl, 0, P);
+	Lab* newl = NewLab(40);
+	Free* P = NewFree(100);
+	int o = tryPath(newl, 0, P);
 	////show(newl);
-	//letter(newl);
-	////Generation_Teleporteurs(letter(newl), 40, 3);
+	letter(newl);
+	//Generation_Teleporteurs(letter(newl), 40, 3);
 	//ApparitionGardes(letter(newl), 40, 3);
 	//ChoixMouvementGardes(letter(newl), 40, garde, 3);
 	//MouvementGardes(letter(newl), 40, garde, 3);
@@ -1242,9 +1258,50 @@ int main() {
 	//return EXIT_SUCCESS;
 
 	//printPath(S);
+	int tableau[2] = { 0 };
+	readFile("CaCLC.csv", tableau);
+	
+	for (int i = 0; i < 2; i++) {
+		printf("\nValeur : %d\n", tableau[i]);
+	}
+	int OneDirection = tableau[0];
+	int ClaPosition = tableau[1];
+	printf("\ndir : %d", OneDirection);
+	printf("\nposition : %d", ClaPosition);
+	printf("\n");
+	char LettrePosition = RechercheLettre(letter(newl), ClaPosition);
+	printf("\nLettre Position : %c\n", LettrePosition);
+	
+	/* Récupère la valeur de la position de héros dans le fichier CaCLC.csv  */
+	//char* posHero = readFile("CaCLC.csv");
+	if (verifHaut(LettrePosition)) {
+		printf("Haut \t: \tpas de mur\n");
+	}
+	else {
+		printf("Haut \t: \tmur\n");
+	}
+	if (verifDroite(LettrePosition)) {
+		printf("Droite \t: \tpas de mur\n");
+	}
+	else {
+		printf("Droite \t: \tmur\n");
+	}
+	if (verifBas(LettrePosition)) {
+		printf("Bas \t: \tpas de mur\n");
+	}
+	else {
+		printf("Bas \t: \tmur\n");
+	}
+	if (verifGauche(LettrePosition)) {
+		printf("Gauche \t: \tpas de mur\n");
+	}
+	else {
+		printf("Gauche \t: \tmur\n");
+	}
 	//readFile("CaCLC.csv");
 
-	infoPositionHero();
+	//infoPositionHero();
+	return EXIT_SUCCESS;
 }
 
 

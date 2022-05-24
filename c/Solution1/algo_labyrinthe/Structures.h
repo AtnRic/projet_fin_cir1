@@ -84,10 +84,12 @@ void left(char* maze, int cote, Garde* garde, int i);
 /*Fin gardes*/
 
 /*Fichier lecture*/
-int readFile(char* filename);
+int readFile(char* filename, int tableau[]);
 /*Fin fichier lecture*/
 
-
+/*Conversion position renvoyée par le fichier csv en lettre*/
+char RechercheLettre(char* letter, int LaPosition);
+/*Fin Conversion position renvoyée par le fichier csv en lettre*/
 typedef struct Path {
 	int* cells;
 	int pathSize;
