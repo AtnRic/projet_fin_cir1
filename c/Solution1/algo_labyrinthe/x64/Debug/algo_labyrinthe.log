@@ -1,32 +1,20 @@
 ﻿  main.c
-<<<<<<< algo-labyrinthe
-C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(101,23): warning C4047: '=' : les niveaux d'indirection de 'char *' et de 'int' sont différents
-C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(102,9): warning C4477: 'printf' : la chaîne de format '%c' nécessite un argument de type 'int', mais l'argument variadique 1 est de type 'char *'
-C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(102,9): warning C4313: 'printf' : '%c' dans la chaîne de format est en conflit avec l'argument 1 de type 'char *'.
-C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(111,14): warning C4047: 'return' : les niveaux d'indirection de 'int' et de 'char *' sont différents
-C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(86,6): warning C4101: 'returnCode' : variable locale non référencée
-C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(87,6): warning C4101: 'count' : variable locale non référencée
-C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(217,50): warning C4244: 'fonction' : conversion de 'double' en 'float', perte possible de données
-C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(217,10): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
-C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(591,8): warning C4244: 'fonction' : conversion de 'time_t' en 'unsigned int', perte possible de données
-C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(594,15): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
-C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(653,8): warning C4244: 'fonction' : conversion de 'time_t' en 'unsigned int', perte possible de données
-C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1145,22): warning C4028: paramètre formel 1 différent de la déclaration
-C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1154,24): warning C4028: paramètre formel 1 différent de la déclaration
-C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1163,21): warning C4028: paramètre formel 1 différent de la déclaration
-C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1172,24): warning C4028: paramètre formel 1 différent de la déclaration
-C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1212,1): warning C4047: 'initialisation' : les niveaux d'indirection de 'char *' et de 'int' sont différents
-C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(604): warning C4715: 'ApparitionGardes' : les chemins de contrôle ne retournent pas tous une valeur
-C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1120): warning C4715: 'PathIt' : les chemins de contrôle ne retournent pas tous une valeur
-  algo_labyrinthe.vcxproj -> C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\x64\Debug\algo_labyrinthe.exe
-=======
-C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(185,50): warning C4244: 'fonction' : conversion de 'double' en 'float', perte possible de données
-C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(185,10): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
-C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(559,8): warning C4244: 'fonction' : conversion de 'time_t' en 'unsigned int', perte possible de données
-C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(562,15): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
-C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(621,8): warning C4244: 'fonction' : conversion de 'time_t' en 'unsigned int', perte possible de données
-C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1113,44): warning C4029: la déclaration de la liste de paramètres formels est différente de la définition
-C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1114,17): error C2059: erreur de syntaxe : ')'
-C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1131,2): error C2059: erreur de syntaxe : 'return'
-C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1132,1): error C2059: erreur de syntaxe : '}'
->>>>>>> génération des tp
+C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(102,23): warning C4047: '=' : les niveaux d'indirection de 'char *' et de 'int' sont différents
+C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(103,9): warning C4477: 'printf' : la chaîne de format '%c' nécessite un argument de type 'int', mais l'argument variadique 1 est de type 'char *'
+C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(103,9): warning C4313: 'printf' : '%c' dans la chaîne de format est en conflit avec l'argument 1 de type 'char *'.
+C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(112,14): warning C4047: 'return' : les niveaux d'indirection de 'int' et de 'char *' sont différents
+C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(87,6): warning C4101: 'returnCode' : variable locale non référencée
+C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(88,6): warning C4101: 'count' : variable locale non référencée
+C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(218,50): warning C4244: 'fonction' : conversion de 'double' en 'float', perte possible de données
+C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(218,10): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
+C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(592,8): warning C4244: 'fonction' : conversion de 'time_t' en 'unsigned int', perte possible de données
+C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(595,15): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
+C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(654,8): warning C4244: 'fonction' : conversion de 'time_t' en 'unsigned int', perte possible de données
+C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1146,22): warning C4028: paramètre formel 1 différent de la déclaration
+C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1155,24): warning C4028: paramètre formel 1 différent de la déclaration
+C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1164,21): warning C4028: paramètre formel 1 différent de la déclaration
+C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1173,24): warning C4028: paramètre formel 1 différent de la déclaration
+C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1213,1): warning C4047: 'initialisation' : les niveaux d'indirection de 'char *' et de 'int' sont différents
+C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(605): warning C4715: 'ApparitionGardes' : les chemins de contrôle ne retournent pas tous une valeur
+C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1121): warning C4715: 'PathIt' : les chemins de contrôle ne retournent pas tous une valeur
+  algo_labyrinthe.vcxproj -> C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\x64\Debug\algo_labyrinthe.exe
