@@ -84,10 +84,7 @@ void triFusion(int i, int j, int tab[], int tmp[]) {
 
 /*Fichier*/
 int readFile(char* filename) {
-	int returnCode;
-	int count;
-
-	FILE* stream;// , * stream2;
+	FILE* stream;
 	errno_t err;
 
 	err = fopen_s(&stream, filename, "r");
@@ -1203,14 +1200,14 @@ int main() {
 	//return EXIT_SUCCESS;
 
 	//printPath(S);
-	//readFile("CaCLC.csv");
+	readFile("CaCLC.csv");
 	
 	
-	//char posHero = readFile("CaCLC.csv");
-	//printf("Valeur : %c", posHero);
+	char posHero = readFile("CaCLC.csv");
+	printf("Valeur : %c", posHero);
 	
 	/* Récupère la valeur de la position de héros dans le fichier CaCLC.csv  */
-	char* posHero = readFile("CaCLC.csv");
+	/*char* posHero = readFile("CaCLC.csv");
 	if (verifHaut(posHero)) {
 		printf("Haut : pas de mur");
 	}
@@ -1234,7 +1231,7 @@ int main() {
 	}
 	else {
 		printf("Gauche :mur");
-	}
+	}*/
 }
 
 
