@@ -98,7 +98,7 @@ int readFile(char* filename) {
 
 	fseek(stream, 0, SEEK_SET);
 
-	char value;
+	char* value;
 	value = fgetc(stream);
 	printf("%c", value);
 
@@ -1180,6 +1180,39 @@ bool verifGauche(char* posHero) {
 	}
 }
 
+void infoPositionHero() {
+	/* Récupère la valeur de la position de héros dans le fichier CaCLC.csv */
+	//char* posHero = readFile("CaCLC.csv");
+	//printf("Valeur : %c", posHero);
+	char* posHero = "a";
+
+	if (verifHaut(posHero)) {
+		printf("Haut : pas de mur\n");
+	}
+	else {
+		printf("Haut : mur\n");
+	}
+	if (verifDroite(posHero)) {
+		printf("Droite : pas de mur\n");
+	}
+	else {
+		printf("Droite : mur\n");
+	}
+	if (verifBas(posHero)) {
+		printf("Bas : pas de mur\n");
+	}
+	else {
+		printf("Bas : mur\n");
+	}
+	if (verifGauche(posHero)) {
+		printf("Gauche : pas de mur\n");
+	}
+	else {
+		printf("Gauche : mur\n");
+	}
+}
+
+
 int main() {
 	
 	//Garde* garde = (Garde*)malloc(sizeof(Garde));
@@ -1205,37 +1238,8 @@ int main() {
 
 	//printPath(S);
 	//readFile("CaCLC.csv");
-	
-	
-	//char posHero = readFile("CaCLC.csv");
-	//printf("Valeur : %c", posHero);
-	
-	/* Récupère la valeur de la position de héros dans le fichier CaCLC.csv  */
-	char* posHero = readFile("CaCLC.csv");
-	if (verifHaut(posHero)) {
-		printf("Haut : pas de mur\n");
-	}
-	else {
-		printf("Haut : mur\n");
-	}
-	if (verifDroite(posHero)) {
-		printf("Droite : pas de mur\n");
-	}
-	else {
-		printf("Droite : mur\n");
-	}
-	if (verifBas(posHero)) {
-		printf("Bas : pas de mur\n");
-	}
-	else {
-		printf("Bas : mur\n");
-	}
-	if (verifGauche(posHero)) {
-		printf("Gauche : pas de mur\n");
-	}
-	else {
-		printf("Gauche : mur\n");
-	}
+
+	infoPositionHero();
 }
 
 
