@@ -4,7 +4,6 @@
   background-position: bottom;
 }
 table {width: 90%; height: 90%; border: 5px black solid; }
-
 /*
 .t1{background-color: aquamarine;}
 .t2{background-color:blueviolet;}
@@ -18,6 +17,17 @@ body{
   width: 100vw;
   height: 100vh;
   margin: 0;
+}
+
+.walls, .Solveur, .Teleporteur
+{
+  position:absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-image: none;
+=======
+  top: 0;
 }
 
 .absolute{
@@ -45,29 +55,36 @@ body{
   left: 0;
   height: 100vh;
 }
-
+/*
+.one{
+  background-image: url("../images/front/gauche.png");
+  background-size: cover;
+}
+*/
 .two{
   position: relative;
+
   top: 0;
   right: 0;
   z-index: 2;
   background-image: url("../images/front/droite.png");
   background-size: cover;
+
+
 }
 
-.walls, .Solveur, .Teleporteur
+.walls
 {
   position:absolute;
   top: 0;
   width: 100%;
   height: 100%;
-  background-image: none;
 }
 
 .global{
   position: relative;
   margin: auto;
-  top: -83%;
+  top: -78%;
 }
 
 #player, .Garde {
@@ -93,9 +110,26 @@ body{
   margin-top: 25%;
   margin-left: 25%;
   background-image: none;
+=======
 }
 
+#player{
+  position:absolute;
+  margin-left:25%;
+  width: 40px;
+  height: 60px;
+  overflow: hidden;
+  margin-top: -50%;
+  z-index: 100;
+  background-image: none;
+}
 
+#playerimg
+{
+  width: auto;
+  height: 100%;
+  background-image: none;
+}
 
 table, tr, td{
   padding: 0;
@@ -107,16 +141,38 @@ table, tr, td{
 background-color:yellow;
 }
 
+<<<<<<< main
 @media screen and (min-width: 1600px) {
-  .global { display:block;
-    width: 700px;height: 700px;
+  .global {display:block;
+    width: 700px;
+    height: 700px;
     /*margin: calc(50vh - 450px) auto auto;*/
   }
 }
 
 @media screen and (max-width: 1600px) {
   .global { display:block;
-    width: 580px;height: 579px;
+    width: 580px;height: 580px;
+    margin: calc(50vh - 400px) auto auto;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .global { display:block;
+    width: 600px;height: 600px;
+    margin: calc(50vh - 300px) auto auto;
+  }
+=======
+@media screen and (min-width: 1000px) {
+  .global { display:block;
+    width: 600px;height: 600px;
+    /*margin: calc(50vh - 450px) auto auto;*/
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .global { display:block;
+    width: 800px;height: 800px;
     margin: calc(50vh - 400px) auto auto;
   }
 }

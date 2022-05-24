@@ -1,0 +1,23 @@
+.title{
+  text-align: center;
+}
+.range {
+  width: 400px;
+  margin: auto;
+  position: absolute;
+  top:25%;  
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.range>button{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+html, body {
+  font-family: Century Gothic,CenturyGothic,AppleGothic,sans-serif;
+  color: #404040;
+  height: 100%;
+  margin: 0;
+}
