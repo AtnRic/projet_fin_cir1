@@ -562,18 +562,26 @@ function PHP_Start(anime) {
     //console.log("Sortie du C : " + output);
 
     newOut = output.split(";");
-
-    //console.log(newOut[1]);
+    console.log(newOut[0]);
+    console.log(newOut[1]);
+    console.log(newOut[2]);
 
     solveOut = newOut[1].split(",");
+    tpOut = newOut[2].split(",");
 
-    //console.log(solveOut);
+    for (i = 0; i < tpOut.length; i++) {
+      tpOut[i] = tpOut[i].split(":").map(function (item) {
+        return parseInt(item, 10);
+      });
+    }
+
+    console.log(tpOut);
 
     if (output.length == 0) {
       location.reload();
     }
     Launch(
-      Math.sqrt(newOut[0].length),
+      Math.sqrt(newOut[0].length / 2),
       Array.from(newOut[0]),
       0,
       list,
@@ -590,7 +598,7 @@ document.addEventListener("keydown", function (event) {
 });
 
 // Création d'une grid avec spawn du joueur et des gardes.
-function Launch(size, tab, spawnCellId, gardList, boolAnimation, solver) {
+function Launch(size, tab, spawnCellId, gardList, boolAnimation, solver, tps) {
   //#region ROWS
   console.log("Size: " + size);
   makeRows(size);
