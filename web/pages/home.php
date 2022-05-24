@@ -52,9 +52,13 @@ require '../tools/_main_tools.php';
         <!-- <a href="#craft" class=""></a> -->
     </section>
     <section id="space">
+        <div class="star1"></div>
+        <div class="star2"></div>
+        <div class="star3"></div>
         <div class="orbite_earth"></div>
         <div class="orbite_mars"></div>
-        <div class="iss"></div>
+        <div id="iss"></div>
+        <div class="ufo"></div>
         <!-- <img src="../images/accueil/ISS.png" id="iss"> -->
         <!-- <img src="../images/accueil/earth.png" id="earth"> -->
     </section>
