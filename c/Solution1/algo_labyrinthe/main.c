@@ -90,7 +90,7 @@ int readFile(char* filename) {
 	FILE* stream;// , * stream2;
 	errno_t err;
 
-	err = fopen_s(&stream, filename, "r");
+	err = fopen_s(&stream, filename, "r+");
 	if (err == 0)
 		printf("Le fichier 'file.txt' est ouvert\n");
 	else
@@ -1182,9 +1182,8 @@ bool verifGauche(char* posHero) {
 
 void infoPositionHero() {
 	/* Récupère la valeur de la position de héros dans le fichier CaCLC.csv */
-	//char* posHero = readFile("CaCLC.csv");
+	char* posHero = readFile("CaCLC.csv");
 	//printf("Valeur : %c", posHero);
-	char* posHero = "a";
 
 	if (verifHaut(posHero)) {
 		printf("Haut : pas de mur\n");

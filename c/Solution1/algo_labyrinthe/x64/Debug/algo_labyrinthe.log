@@ -10,6 +10,7 @@ C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(219
 C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(593,8): warning C4244: 'fonction' : conversion de 'time_t' en 'unsigned int', perte possible de données
 C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(596,15): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
 C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(655,8): warning C4244: 'fonction' : conversion de 'time_t' en 'unsigned int', perte possible de données
+C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1185,1): warning C4047: 'initialisation' : les niveaux d'indirection de 'char *' et de 'int' sont différents
 C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(606): warning C4715: 'ApparitionGardes' : les chemins de contrôle ne retournent pas tous une valeur
 C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1122): warning C4715: 'PathIt' : les chemins de contrôle ne retournent pas tous une valeur
   algo_labyrinthe.vcxproj -> C:\MAMP\htdocs\Projet_fin\projet_fin_cir1\c\Solution1\x64\Debug\algo_labyrinthe.exe
