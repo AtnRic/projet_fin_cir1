@@ -12,23 +12,15 @@ html, body{
     scroll-behavior: smooth;
 }
 .press{
-    width: 98vw;
+    width: 100vw;
     height: 100vh;
-    background-image: url("../images/front/log.png");
-    background-position: center;
-    background-size: cover;
-    z-index: 0;
+    text-align: center;
 }
 h1, p{
     color: white;
     text-align: center;
 }
-#press::before{
-    content: ">>> ";
-}
-#press::after{
-    content: " <<<";
-}
+
 #press {
     animation: blinker 1.5s step-end infinite;
 }
@@ -39,20 +31,25 @@ h1, p{
     }
 }
 
+#logoimage{
+    width: 25%;
+    margin-top:50px;
+}
+
 #press{
-    position: absolute;
-    bottom: 50px;
-    right: 50%;
-    transform: translateX(50%);
+    text-align: center;
+    margin-top: 10%;
 }
 #press:hover{
     text-decoration: underline;
 }
-#name{
-    position: absolute;
-    top: 50px;
-    right: 50%;
-    transform: translateX(50%);
+
+#press::before{
+    content: ">>> ";
+}
+
+#press::after{
+    content: " <<<";
 }
 
 .choose{
@@ -65,15 +62,16 @@ h1, p{
 
 .container{
     position: absolute;
-    top: 50%;
+    top: 40%;
     right: 50%;
-    transform: translateX(50%) translateY(150%);
+    transform: translateX(50%) translateY(170%);
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     width: 98vw;
     justify-content: space-evenly;
 }
+
 
 .center {
     position: absolute;
@@ -99,8 +97,6 @@ h1, p{
 a{
     text-decoration: none;
 }
-
-
 
 #guest{
     display: block;
@@ -169,7 +165,7 @@ form{
     text-align: center;
     color: white;
     top: 0;
-    transform: translateY(10%);
+    transform: translateY(0%);
 }
 input{
     margin: 10px;
@@ -186,3 +182,44 @@ input{
     font-style: italic;
 }
 
+@media screen and (max-width: 800px) {
+    #logoimage{
+        margin-top: 50px ;
+    }
+    #press{
+        margin-top: 10%;
+    }
+    #log{
+        padding-top: 0%;
+    }
+}
+
+@media screen and (max-width: 720px) {
+    #logoimage{
+        margin-top: 50px;
+    }
+    #press{
+        margin-top: 20px;
+    }
+    #press::before{
+        content: none;
+    }
+    #press::after{
+        content: none;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    #logoimage{
+        margin-top: 50px;
+    }
+    #press{
+        margin-top: 35px;
+    }
+    #press::before{
+        content: none;
+    }
+    #press::after{
+        content: none;
+    }
+}

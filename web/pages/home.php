@@ -49,6 +49,18 @@ require '../tools/_main_tools.php';
             <h3 class="name">The amazing Spider-man</h3>
             <p class="level">Medium</p>
         </div>
+        <!-- <a href="#craft" class=""></a> -->
+    </section>
+    <section id="space">
+        <div class="star1"></div>
+        <div class="star2"></div>
+        <div class="star3"></div>
+        <div class="orbite_earth"></div>
+        <div class="orbite_mars"></div>
+        <div id="iss"></div>
+        <div class="ufo"></div>
+        <!-- <img src="../images/accueil/ISS.png" id="iss"> -->
+        <!-- <img src="../images/accueil/earth.png" id="earth"> -->
     </section>
     <div class="title">
         <h1>Welcome to Maze'ltov</h1>
