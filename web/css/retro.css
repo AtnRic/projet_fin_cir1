@@ -1,7 +1,5 @@
 *{
     background-color: #D4DAED;
-    background-size: auto;
-    background-position: right bottom;
 }
 body::after{
     position:absolute; width:0; height:0; overflow:hidden; z-index:-1; /*hide images*/
@@ -21,8 +19,6 @@ body::after{
 
 .two{
     position: relative;
-    top: 0;
-    right: 0;
     z-index: 2;
     background-image: url("../images/retro/loading.png");
     background-size: cover;
@@ -66,10 +62,29 @@ body{
     margin: 0;
     border-color: black;
 }
-.walls {
+.Solveur{
     position:absolute;
     top: 0;
+    width: 100%;
+    height: 100%;
+    background-image: none;
+    background-color: transparent;
 
+}
+.SolveurImg
+{
+    width: auto;
+    height: 50%;
+    margin-top: 25%;
+    margin-left: 25%;
+    border-radius: 50%;
+    background-image: none;
+}
+.walls{
+    position:absolute;
+    top: 0;
+    /*width: 100%;
+    height: 100%;*/
 }
 .global{
     position: absolute;
@@ -127,10 +142,9 @@ table, tr, td{
     border-spacing: 0;
 }
 .walls{
-    height: 104%;/*pour éviter traits blancs*/
-    width: 104%;
+    height: 105%;/*pour éviter traits blancs*/
+    width: 105%;
 }
-
 
 .identify{
     background-color:yellow;
@@ -145,7 +159,6 @@ table, tr, td{
         margin: calc(50vh - 450px) auto auto;
     }
 }
-
 @media screen and (max-width: 1600px) {
     .global { display:block;
         width: 580px;height: 579px;
