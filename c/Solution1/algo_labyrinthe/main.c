@@ -82,11 +82,8 @@ void triFusion(int i, int j, int tab[], int tmp[]) {
 /*Fin tri Fusion*/
 
 /*Fichier*/
-void readFile(char* filename) {
-	int returnCode;
-	int count;
-
-	FILE* stream;// , * stream2;
+char* readFile(char* filename) {
+	FILE* stream;
 	errno_t err;
 
 	err = fopen_s(&stream, filename, "r");
@@ -102,6 +99,8 @@ void readFile(char* filename) {
 	buffer[24] = '\0';
 	printf("%s", buffer);
 
+	char* LaBasilicStDeny = buffer[1];
+
 	if (stream) {
 		err = fclose(stream);
 		if (err == 0)
@@ -109,6 +108,7 @@ void readFile(char* filename) {
 		else
 			printf("\nLe fichier 'file.txt' n'est pas ferme\n");
 	}
+	return LaBasilicStDeny;
 }
 /*Fin fichier*/
 
@@ -1199,18 +1199,18 @@ int main() {
 	//show(newl, S);
 	//printf("TAILLE : %d \n", S->pathSize);
 	//printPath(S);
-	//return EXIT_SUCCESS;
 
 	//printPath(S);
-	readFile("CaCLC.csv");
 	
-
-	if (verifHaut("e")) {
+	char* p = readFile("CaCLC.csv");
+	printf("%c", *p);
+	if (verifBas(p)) {
 		printf("Pas de mur");
 	}
 	else {
 		printf("Mur");
 	}
+	return EXIT_SUCCESS;
 }
 
 
