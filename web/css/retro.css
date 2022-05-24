@@ -1,5 +1,7 @@
 *{
     background-color: #D4DAED;
+    background-size: auto;
+    background-position: right bottom;
 }
 body::after{
     position:absolute; width:0; height:0; overflow:hidden; z-index:-1; /*hide images*/
@@ -19,6 +21,8 @@ body::after{
 
 .two{
     position: relative;
+    top: 0;
+    right: 0;
     z-index: 2;
     background-image: url("../images/retro/loading.png");
     background-size: cover;

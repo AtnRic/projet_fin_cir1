@@ -139,16 +139,15 @@ background-color:yellow;
 }
 
 @media screen and (min-width: 1600px) {
-  .global {display:block;
-    width: 700px;
-    height: 700px;
+  .global { display:block;
+    width: 700px;height: 700px;
     /*margin: calc(50vh - 450px) auto auto;*/
   }
 }
 
 @media screen and (max-width: 1600px) {
   .global { display:block;
-    width: 580px;height: 580px;
+    width: 580px;height: 579px;
     margin: calc(50vh - 400px) auto auto;
   }
 }
