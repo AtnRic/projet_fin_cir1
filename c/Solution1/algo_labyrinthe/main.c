@@ -82,8 +82,11 @@ void triFusion(int i, int j, int tab[], int tmp[]) {
 /*Fin tri Fusion*/
 
 /*Fichier*/
-char* readFile(char* filename) {
-	FILE* stream;
+int readFile(char* filename) {
+	int returnCode;
+	int count;
+
+	FILE* stream;// , * stream2;
 	errno_t err;
 
 	err = fopen_s(&stream, filename, "r");
@@ -94,12 +97,9 @@ char* readFile(char* filename) {
 
 	fseek(stream, 0, SEEK_SET);
 
-	char buffer[25] = { 0 };
-	fread_s(buffer, 25 * sizeof(char), sizeof(char), 25, stream);
-	buffer[24] = '\0';
-	printf("%s", buffer);
-
-	char* LaBasilicStDeny = buffer[1];
+	char* value = "";
+	value = fgetc(stream);
+	printf("%c", value);
 
 	if (stream) {
 		err = fclose(stream);
@@ -108,7 +108,7 @@ char* readFile(char* filename) {
 		else
 			printf("\nLe fichier 'file.txt' n'est pas ferme\n");
 	}
-	return LaBasilicStDeny;
+	return value;
 }
 /*Fin fichier*/
 
@@ -1199,18 +1199,41 @@ int main() {
 	//show(newl, S);
 	//printf("TAILLE : %d \n", S->pathSize);
 	//printPath(S);
+	//return EXIT_SUCCESS;
 
 	//printPath(S);
+	//readFile("CaCLC.csv");
 	
-	char* p = readFile("CaCLC.csv");
-	printf("%c", *p);
-	if (verifBas(p)) {
-		printf("Pas de mur");
+	
+	//char posHero = readFile("CaCLC.csv");
+	//printf("Valeur : %c", posHero);
+	
+	/* Récupère la valeur de la position de héros dans le fichier CaCLC.csv  */
+	char* posHero = readFile("CaCLC.csv");
+	if (verifHaut(posHero)) {
+		printf("Haut : pas de mur");
 	}
 	else {
-		printf("Mur");
+		printf("Haut :mur");
 	}
-	return EXIT_SUCCESS;
+	if (verifDroite(posHero)) {
+		printf("Droite : pas de mur");
+	}
+	else {
+		printf("Droite : mur");
+	}
+	if (verifBas(posHero)) {
+		printf("Bas : pas de mur");
+	}
+	else {
+		printf("Bas : mur");
+	}
+	if (verifGauche(posHero)) {
+		printf("Gauche : pas de mur");
+	}
+	else {
+		printf("Gauche :mur");
+	}
 }
 
 
