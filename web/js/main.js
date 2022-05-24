@@ -586,7 +586,8 @@ function PHP_Start(anime) {
       0,
       list,
       anime,
-      solveOut
+      solveOut,
+      tpOut
     );
   });
 }
@@ -777,8 +778,9 @@ function Launch(size, tab, spawnCellId, gardList, boolAnimation, solver, tps) {
 
   //#endregion
 
-  //#region GARDE
+  //#region GARDE/TP
   GenerationGarde(gardList);
+  Teleporter(tps);
   //#endregion
 
   //#region PLAYER
@@ -1166,24 +1168,33 @@ function Teleporter(tab) {
     Img1.classList.add("TeleporteurImg");
     Img2.classList.add("TeleporteurImg");
 
-    let src = "";
+    let src1 = "";
+    let src2 = "";
     switch (i) {
       case 1:
-        src = "../images/mazes/teleporteur_a.png";
+        src1 = "../images/mazes/tp_blue_input.png";
+        src2 = "../images/mazes/tp_blue_output.png";
         break;
       case 2:
-        src = "../images/mazes/teleporteur_b.png";
+        src1 = "../images/mazes/tp_yellow_input.png";
+        src2 = "../images/mazes/tp_yellow_output.png";
         break;
       case 3:
-        src = "../images/mazes/teleporteur_c.png";
+        src1 = "../images/mazes/tp_orange_input.png";
+        src2 = "../images/mazes/tp_orange_output.png";
+        break;
+      case 4:
+        src1 = "../images/mazes/tp_green_input.png";
+        src2 = "../images/mazes/tp_green_output.png";
         break;
       case 0:
-        src = "../images/mazes/teleporteur_d.png";
+        src1 = "../images/mazes/tp_red_input.png";
+        src2 = "../images/mazes/tp_red_output.png";
         break;
     }
 
-    Img1.src = src;
-    Img2.src = src;
+    Img1.src = src1;
+    Img2.src = src2;
   }
 }
 
