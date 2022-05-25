@@ -62,6 +62,14 @@ body{
     margin: 0;
     border-color: black;
 }
+.Teleporteur{
+    position:absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-image: none;
+    background-color: transparent;
+}
 .Solveur{
     position:absolute;
     top: 0;
@@ -69,7 +77,6 @@ body{
     height: 100%;
     background-image: none;
     background-color: transparent;
-
 }
 .SolveurImg
 {
@@ -80,12 +87,13 @@ body{
     border-radius: 50%;
     background-image: none;
 }
-.walls{
-    position:absolute;
+.walls {
+    position: absolute;
     top: 0;
-    /*width: 100%;
-    height: 100%;*/
+    height: 103%;/*pour éviter traits blancs*/
+    width: 103%;
 }
+
 .global{
     position: absolute;
     top: 26.6vh;
@@ -104,14 +112,12 @@ body{
     top: 50%;
     transform: translateX(-50%) translateY(-50%);
 }
-.global, td, .container, table, tr{
-    background-image: none;
-}
+/*
 td{
     border: none;
     border-collapse: collapse;
 }
-
+*/
 #player {
     position:absolute;
     margin-left:25%;
@@ -121,11 +127,12 @@ td{
     background: none;
 }
 
-#playerimg, .GardeImg
+#playerimg, .GardeImg, .TeleporteurImg
 {
     width: auto;
     height: 100%;
-    background: none;
+    background-color: transparent;
+    background-image: none;
 }
 
 .Garde{
@@ -141,28 +148,8 @@ table, tr, td{
     padding: 0;
     border-spacing: 0;
 }
-.walls{
-    height: 105%;/*pour éviter traits blancs*/
-    width: 105%;
-}
+
 
 .identify{
     background-color:yellow;
 }
-/*
-@media screen and (min-width: 1600px) or (min-height: 800px) {
-    .global {
-        top: 295px;
-        transform: translateX(calc(50% + 150px));
-        display:block;
-        width: 760px;height: 760px;
-        margin: calc(50vh - 450px) auto auto;
-    }
-}
-@media screen and (max-width: 1600px) {
-    .global { display:block;
-        width: 580px;height: 579px;
-        margin: calc(50vh - 400px) auto auto;
-    }
-}
-*/
