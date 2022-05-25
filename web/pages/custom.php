@@ -17,9 +17,7 @@
 
       $path = './dataCustomMaze.csv';
       $file = fopen($path, 'w');
-
       fputcsv($file, $customMaze);
-
     }
   ?>
   <div class="title">
