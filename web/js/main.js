@@ -440,7 +440,6 @@ var labyrinthe = [
     "o",
   ],
 ];
-
 var correspondance = {
   a: [0, 0, 0, 0],
   b: [1, 0, 0, 0],
@@ -458,6 +457,11 @@ var correspondance = {
   n: [1, 1, 0, 1],
   o: [1, 1, 1, 0],
 };
+
+let WallDown = ["d", "f", "i", "j", "l", "m", "o"];
+let WallLeft = ["e", "g", "j", "k", "l", "m", "n"];
+let WallRight = ["c", "g", "h", "i", "l", "n", "o"];
+let WallTop = ["b", "f", "h", "k", "m", "n", "o"];
 
 var Jungle = {
   W1: [
@@ -592,14 +596,11 @@ function PHP_Start(anime) {
   });
 }
 
-document.addEventListener("keydown", function (event) {
-  if (event.key == "k") {
-    TeleportePlayer(getRandomInt(10));
-  }
-});
-
 // Création d'une grid avec spawn du joueur et des gardes.
 function Launch(size, tab, spawnCellId, gardList, boolAnimation, solver, tps) {
+  Labyrinthe = tab;
+  LabSize = size;
+
   //#region ROWS
   console.log("Size: " + size);
   makeRows(size);
@@ -790,13 +791,22 @@ function Launch(size, tab, spawnCellId, gardList, boolAnimation, solver, tps) {
   //#endregion
 }
 
+// Variables globales.
+let Labyrinthe;
 let PlayerPos;
+let LabSize;
+let TeleporterStart = [];
+let TpStruct;
+
 // Génération du joueur.
 function SpawnPlayer(cellId, solver) {
+  //#region Identification
   PlayerPos = cellId;
   var PlayerPosElement = document.getElementById(cellId);
   PlayerPosElement.classList.add("identify");
+  //#endregion
 
+  //#region Instantiation
   const Player = document.createElement("div");
   const PlayerImg = document.createElement("img");
   Player.appendChild(PlayerImg);
@@ -819,102 +829,102 @@ function SpawnPlayer(cellId, solver) {
     easing: "easeInElastic(1, .6)",
     direction: "reverse",
   });
+  //#endregion
+
+  //#region Input
   activate = false;
   document.addEventListener("keydown", function (event) {
     if (activate == false) {
-      activate = true;
       let box = document.getElementById("1");
-      let width = box.offsetWidth;
       let height = box.offsetHeight;
 
-      anime({
-        targets: "#playerimg",
-        translateX: [X, -(7.5 * X)],
-        easing: "steps(8)",
-        duration: 500,
-        loop: false,
-      });
-      MoveGarde(0, 1, -height, 0);
-
       if (event.key == "p") {
-        /*
-        console.log("anime");
-        anime({
-          targets: [".t1", ".t2", ".t3", ".t4"],
-          scale: [
-            { value: 0.1, easing: "easeOutSine", duration: 500 },
-            { value: 1, easing: "easeInOutQuad", duration: 1200 },
-          ],
-          delay: anime.stagger(200, { grid: [14, 5], from: "center" }),
-        });
-      anime({
-          targets: [".t1", ".t2", ".t3", ".t4"],
-          translateX: anime.stagger(10, {
-            grid: [14, 5],
-            from: "center",
-            axis: "x",
-          }),
-          translateY: anime.stagger(10, {
-            grid: [14, 5],
-            from: "center",
-            axis: "y",
-          }),
-          rotateZ: anime.stagger([0, 90], {
-            grid: [14, 5],
-            from: "center",
-            axis: "x",
-          }),
-          delay: anime.stagger(200, { grid: [14, 5], from: "center" }),
-          easing: "easeInOutQuad",
-        });*/
         Solveur(solver);
       }
-
       if (event.key == "ArrowDown") {
-        PHP_Function("../tools/function.php", "Down", function Handle(output) {
-          if (output) {
-            PlayerPos += cellNum;
-            let newPos = document.getElementById(PlayerPos);
-            newPos.appendChild(Player);
-            PlayerAnim(0, -height);
-          }
-        });
+        if (CanMove(PlayerPos, Labyrinthe, "d")) {
+          activate = true;
+          anime({
+            targets: "#playerimg",
+            translateX: [X, -(7.5 * X)],
+            easing: "steps(8)",
+            duration: 500,
+            loop: false,
+          });
+          MoveGarde(0, 1, -height, 0);
+          PlayerPos += cellNum;
+          let newPos = document.getElementById(PlayerPos);
+          newPos.appendChild(Player);
+          PlayerAnim(0, -height);
+        }
       }
       if (event.key == "ArrowUp") {
-        PHP_Function("../tools/function.php", "Up", function Handle(output) {
-          if (output) {
-            PlayerPos -= cellNum;
-            let newPos = document.getElementById(PlayerPos);
-            newPos.appendChild(Player);
-            PlayerAnim(0, height);
-          }
-        });
+        if (CanMove(PlayerPos, Labyrinthe, "t")) {
+          activate = true;
+          anime({
+            targets: "#playerimg",
+            translateX: [X, -(7.5 * X)],
+            easing: "steps(8)",
+            duration: 500,
+            loop: false,
+          });
+          MoveGarde(0, 1, -height, 0);
+          PlayerPos -= cellNum;
+          let newPos = document.getElementById(PlayerPos);
+          newPos.appendChild(Player);
+          PlayerAnim(0, height);
+        }
       }
       if (event.key == "ArrowLeft") {
-        PHP_Function("../tools/function.php", "Left", function Handle(output) {
-          if (output) {
-            PlayerPos -= 1;
-            let newPos = document.getElementById(PlayerPos);
-            PlayerImg.src = Ambiance.Pl;
-            newPos.appendChild(Player);
-            PlayerAnim(height, 0);
-          }
-        });
+        if (CanMove(PlayerPos, Labyrinthe, "l")) {
+          activate = true;
+          anime({
+            targets: "#playerimg",
+            translateX: [X, -(7.5 * X)],
+            easing: "steps(8)",
+            duration: 500,
+            loop: false,
+          });
+          MoveGarde(0, 1, -height, 0);
+          PlayerPos -= 1;
+          let newPos = document.getElementById(PlayerPos);
+          PlayerImg.src = Ambiance.Pl;
+          newPos.appendChild(Player);
+          PlayerAnim(height, 0);
+        }
       }
       if (event.key == "ArrowRight") {
-        PHP_Function("../tools/function.php", "Right", function Handle(output) {
-          if (output) {
-            PlayerPos += 1;
-            let newPos = document.getElementById(PlayerPos);
-            PlayerImg.src = Ambiance.Pr;
-            newPos.appendChild(Player);
-            PlayerAnim(-height, 0);
-          }
-        });
+        if (CanMove(PlayerPos, Labyrinthe, "r")) {
+          activate = true;
+          anime({
+            targets: "#playerimg",
+            translateX: [X, -(7.5 * X)],
+            easing: "steps(8)",
+            duration: 500,
+            loop: false,
+          });
+          MoveGarde(0, 1, -height, 0);
+          PlayerPos += 1;
+          let newPos = document.getElementById(PlayerPos);
+          PlayerImg.src = Ambiance.Pr;
+          newPos.appendChild(Player);
+          PlayerAnim(-height, 0);
+        }
       }
       setTimeout(function () {
-        activate = false;
-      }, 150);
+        if (TeleporterStart.includes(PlayerPos)) {
+          for (p = 0; p < TpStruct.length; p++) {
+            if (TpStruct[p][0] == PlayerPos) {
+              TeleportePlayer(TpStruct[p][1]);
+              setTimeout(function () {
+                activate = false;
+              }, 1000);
+            }
+          }
+        } else {
+          activate = false;
+        }
+      }, 250);
     }
   });
 
@@ -924,6 +934,48 @@ function SpawnPlayer(cellId, solver) {
     easing: "easeInOutQuad",
     loop: true,
   });
+  //#endregion
+}
+
+function CanMove(index, lab, direction) {
+  labTop = lab[index - Math.sqrt(lab.length / 2)];
+  indexTop = index - Math.sqrt(lab.length / 2);
+  labDown = lab[index + Math.sqrt(lab.length / 2)];
+  indexDown = index + Math.sqrt(lab.length / 2);
+  labRight = lab[index + 1];
+  indexRight = index + 1;
+  labLeft = lab[index - 1];
+  indexLeft = index - 1;
+
+  switch (direction) {
+    case "t":
+      if (WallDown.includes(labTop, 0)) return false;
+      else {
+        return true;
+      }
+      break;
+    case "d":
+      if (WallTop.includes(labDown, 0)) {
+        return false;
+      } else {
+        return true;
+      }
+      break;
+    case "r":
+      //if (indexTop < 0) return false;
+      if (WallLeft.includes(labRight, 0)) return false;
+      else {
+        return true;
+      }
+      break;
+    case "l":
+      //if (indexTop < 0) return false;
+      if (WallRight.includes(labLeft, 0)) return false;
+      else {
+        return true;
+      }
+      break;
+  }
 }
 
 // Génération d'un random.
@@ -1139,7 +1191,9 @@ let Telep = [
 
 // Génération des téléporteurs, 0 => [0, 1], 1 => [1, 2]
 function Teleporter(tab) {
+  TpStruct = tab;
   for (i = 0; i < tab.length; i++) {
+    TeleporterStart.push(tab[i][0]);
     let Cell1 = document.getElementById(tab[i][0]);
     let Cell2 = document.getElementById(tab[i][1]);
 
