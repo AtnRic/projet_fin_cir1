@@ -596,12 +596,6 @@ function PHP_Start(anime) {
   });
 }
 
-document.addEventListener("keydown", function (event) {
-  if (event.key == "k") {
-    TeleportePlayer(getRandomInt(10));
-  }
-});
-
 // Création d'une grid avec spawn du joueur et des gardes.
 function Launch(size, tab, spawnCellId, gardList, boolAnimation, solver, tps) {
   Labyrinthe = tab;
