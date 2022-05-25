@@ -510,8 +510,8 @@ var Space = {
   ],
   Pl: "../images/heros/space_hero_gauche.png",
   Pr: "../images/heros/space_hero_droite.png",
-  Gr: "../images/gardes/space_guard_droite.png",
-  Gl: "../images/gardes/space_guard_gauche.png",
+  Gr: "../images/gardes/space_guard_red_droite.png",
+  Gl: "../images/gardes/space_guard_red_gauche.png",
 };
 var Retro = {
   W1: [
