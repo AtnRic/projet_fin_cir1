@@ -46,6 +46,133 @@ var correspondance = {
 };
 console.log(labyrinthe[3][1]);*/
 
+/*Liste chainée double*/
+DoubleLinkedList* newDoubleLinkedList() {
+	DoubleLinkedList* tmp;
+	tmp = (DoubleLinkedList*)malloc(sizeof(DoubleLinkedList));
+	if (tmp != NULL) {
+		tmp->head = NULL;
+		tmp->tail = NULL;
+		tmp->size = 0;
+	}
+	return tmp;
+}
+DoubleLinkedListElem* NewDoubleLinkedListItem(int value) {
+	DoubleLinkedListElem* tmp;
+	tmp = (DoubleLinkedListElem*)malloc(sizeof(DoubleLinkedListElem));
+	if (tmp != NULL) {
+		tmp->data = value;
+		tmp->next = NULL;
+		tmp->previous = NULL;
+	}
+	return(tmp);
+}
+
+
+
+int DisplayDoubleList(DoubleLinkedList* list) {
+	if (list == NULL || list->head == NULL || list->tail == NULL) { return 0; }
+
+	DoubleLinkedListElem* courant = list->head;
+	while (courant != NULL) {
+		printf("%d ", courant->data);
+		courant = courant->next;
+	}
+	return 1;
+}
+int insertItemAtDoubleLinkedListTail(DoubleLinkedList* list, DoubleLinkedListElem* newItem) {
+	if (list == NULL)
+		return 0;
+	if (newItem == NULL || newItem->next != NULL || newItem->previous != NULL)
+		return 0;
+
+	if (list->tail == NULL) {
+		list->tail = newItem;
+		list->head = newItem;
+		list->size = 1;
+	}
+	else {
+		newItem->previous = list->tail;
+		list->tail->next = newItem;
+		list->tail = newItem;
+		list->size++;
+	}
+	return 1;
+}
+int getDoubleLinkedListSize(DoubleLinkedList* list) {
+	if (list != NULL) {
+		return list->size;
+	}
+	return -1;
+}
+int DeleteDoubleLinkedListItem(DoubleLinkedList* list, DoubleLinkedListElem* elem) {
+
+	// cas d'erreur
+	// La liste n'existe pas
+	if (list == NULL) return(0);
+	// liste vide ou anomalie
+	if ((list->head == NULL) || (list->tail == NULL)) return(0);
+	// anomalie sur la taille
+	if ((list->head == list->tail) && (list->size != 1)) return(0);
+	// pas d'élément dans la liste ou elem invalide
+	if ((list->size == 0) || (elem == NULL)) return(0);
+	// initialisation d'un pointeur sur l'élément courant
+	DoubleLinkedListElem* tmp = list->head;
+	//tmp->previous = NULL;
+
+
+		// l'élément est en tête et en queue, il y a donc 1 seul élément dans la liste
+	if ((elem == list->head) && (elem == list->tail)) {
+		list->head = NULL;
+		list->tail = NULL;
+		list->size = 0;
+		free(elem);
+		return(1);
+	}
+	// il est en tête, on supprime la tête
+	if (elem == list->head) {
+		list->head = elem->next;
+		list->size--;
+		free(elem);
+		return(1);
+	}
+	// Recherche du maillon dans le reste de la liste chaînée
+	while ((tmp != NULL) && (tmp != elem)) {
+		//tmp->previous = tmp;
+		tmp = tmp->next;
+	}
+	// s'il est en queue, on supprime la queue
+	if ((tmp == elem) && (tmp->next == NULL)) {
+		list->tail = elem->previous;
+		//tmp = NULL;
+		list->size--;
+		free(elem);
+		return(1);
+	}
+	if (tmp != NULL) {
+		// s'il est au milieu, on supprime l'élément
+		if ((tmp->previous != NULL) && (tmp == elem) && (tmp->next != NULL)) {
+			(elem->next)->previous = elem->previous;
+			(elem->previous)->next = elem->next;
+			list->size--;
+			free(elem);
+			return(1);
+		}
+		// l'élément recherché n'a pas été trouvé
+		return(0);
+	}
+	return 0;
+}
+
+DoubleLinkedListElem* getDoubleLinkedListElem(DoubleLinkedList* list, int pos) {
+	DoubleLinkedListElem* tmp = list->head;
+	for (int i = 1; i <= pos; i++) {
+		tmp = tmp->next;
+	}
+	return tmp;
+}
+/*Fin Liste chainée double*/
+
 /*Tri Fusion*/
 void triFusion(int i, int j, int tab[], int tmp[]) {
 	if (j <= i) { return; }
@@ -130,7 +257,7 @@ int readFile(char* filename, int tableau[]) {
 /*Conversion position renvoyée par le fichier csv en lettre*/
 char RechercheLettre(char* letter, int LaPosition) {
 	char LaPositionLettre;
-	LaPositionLettre = (letter + LaPosition);
+	LaPositionLettre = *(letter + LaPosition);
 	return LaPositionLettre;
 }
 /*Fin Conversion position renvoyée par le fichier csv en lettre*/
@@ -610,297 +737,310 @@ char* letter(Lab* L) {
 /*Fin algo labyrinthe*/
 
 /*Gardes*/
-Garde* ApparitionGardes(char* maze, int cote, int Quantite_Garde) {
+void ApparitionGardes(char* maze, int cote, int Quantite_Garde) {
 	srand(time(NULL));
-	Garde* garde = (Garde*)malloc(sizeof(Garde));
-	if (garde == NULL) return NULL;
-	int modulo = pow(cote, 2);
-	for (int i = 0; i < Quantite_Garde; i++) {
-		//Garde* (garde + i) = (Garde*)malloc(sizeof(Garde));
-		(garde + i)->Id = i + 1;
-		(garde + i)->position = rand() % modulo;
-		while ((garde + i)->position == 0 || (garde + i)->position == pow(cote, 2)) {
-			(garde + i)->position = rand() % modulo;
+	Garde* garde = (Garde*)malloc(Quantite_Garde*sizeof(Garde));
+	if (garde == NULL) return;
+	DoubleLinkedList* List = newDoubleLinkedList();
+	DoubleLinkedList* LaDirection = newDoubleLinkedList();
+
+	for (int i = 0; i < pow(cote, 2); i++) {
+		int count = 0;
+		int sortie = 0;
+		if (*(maze + i) == 'e' || *(maze + i) == 'j' || *(maze + i) == 'k' || *(maze + i) == 'm') {
+			for (int j = 1; j <= 5; j++) {
+				if (*(maze + (i + j)) == 'a' || *(maze + (i + j)) == 'b' || *(maze + (i + j)) == 'd') {
+					count++;
+					sortie++;
+				}
+				else if (*(maze + (i + j)) == 'f') {
+					count++;
+				}
+				else break;
+			}
+			if (count >= 3 && sortie >= 1) {
+				//ajout i à la liste chainée
+				DoubleLinkedListElem* elem = NewDoubleLinkedListItem(i);
+				DoubleLinkedListElem* elemDirection = NewDoubleLinkedListItem(1);
+				insertItemAtDoubleLinkedListTail(List, elem);
+				insertItemAtDoubleLinkedListTail(LaDirection, elemDirection);
+			}
 		}
-		printf("\nGarde %d : %d", (garde + i)->Id, (garde + i)->position);
-	}
-}
-
-void top(char* maze, int cote, Garde* garde, int i) {
-	if (maze[(garde + i)->position] != 'b' && maze[(garde + i)->position] != 'f' && maze[(garde + i)->position] != 'h' && maze[(garde + i)->position] != 'k' && maze[(garde + i)->position] != 'm' && maze[(garde + i)->position] != 'n' && maze[(garde + i)->position] != 'o') {
-		(garde + i)->position -= cote;
-		printf("\nNew Garde %d : %d", (garde + i)->Id, (garde + i)->position);
-		(garde+i)->choix = 1;
-	}
-	else {
-		bottom(maze, cote, garde, i);
-	}
-	return;
-}
-
-void bottom(char* maze, int cote, Garde* garde, int i) {
-	if (maze[(garde + i)->position] != 'd' && maze[(garde + i)->position] != 'f' && maze[(garde + i)->position] != 'i' && maze[(garde + i)->position] != 'j' && maze[(garde + i)->position] != 'l' && maze[(garde + i)->position] != 'm' && maze[(garde + i)->position] != 'o') {
-		(garde + i)->position += cote;
-		printf("\nNew Garde %d : %d", (garde + i)->Id, (garde + i)->position);
-		(garde+i)->choix = 2;
-	}
-	else {
-		top(maze, cote, garde, i);
-	}
-	return;
-}
-
-void right(char* maze, int cote, Garde* garde, int i) {
-	if (maze[(garde + i)->position] != 'c' && maze[(garde + i)->position] != 'g' && maze[(garde + i)->position] != 'h' && maze[(garde + i)->position] != 'i' && maze[(garde + i)->position] != 'l' && maze[(garde + i)->position] != 'n' && maze[(garde + i)->position] != 'o') {
-		(garde + i)->position += 1;
-		printf("\nNew Garde %d : %d", (garde + i)->Id, (garde + i)->position);
-		(garde+i)->choix = 3;
-	}
-	else left(maze, cote, garde, i);
-	return;
-}
-
-void left(char* maze, int cote, Garde* garde, int i) {
-	if (maze[(garde + i)->position] != 'e' && maze[(garde + i)->position] != 'g' && maze[(garde + i)->position] != 'j' && maze[(garde + i)->position] != 'k' && maze[(garde + i)->position] != 'l' && maze[(garde + i)->position] != 'm' && maze[(garde + i)->position] != 'n') {
-		(garde + i)->position -= 1;
-		printf("\nNew Garde %d : %d", (garde + i)->Id, (garde + i)->position);
-		(garde+i)->choix = 4;
-	}
-	else right(maze, cote, garde, i);
-	return;
-}
-
-void ChoixMouvementGardes(char* maze, int size, Garde* garde, int Quantite_Garde) {
-	int tmp = 0;
-	int count = 0;
-	srand(time(NULL));
-	for (int i = 0; i < Quantite_Garde; i++) {
 		count = 0;
-		if (maze[(garde + i)->position] == 'b' || maze[(garde + i)->position] == 'f' || maze[(garde + i)->position] == 'h' || maze[(garde + i)->position] == 'k' || maze[(garde + i)->position] == 'm' || maze[(garde + i)->position] == 'n' || maze[(garde + i)->position] == 'o')
-			(garde + i)->t = false;
-		else {
-			(garde + i)->t = true;
-			count += 1;
-		}
-			
-		if (maze[(garde + i)->position] == 'c' || maze[(garde + i)->position] == 'g' || maze[(garde + i)->position] == 'h' || maze[(garde + i)->position] == 'i' || maze[(garde + i)->position] == 'l' || maze[(garde + i)->position] == 'n' || maze[(garde + i)->position] == 'o')
-			(garde + i)->r = false;
-		else {
-			(garde + i)->r = true;
-			count += 1;
-		}
-			
-		if (maze[(garde + i)->position] == 'd' || maze[(garde + i)->position] == 'f' || maze[(garde + i)->position] == 'i' || maze[(garde + i)->position] == 'j' || maze[(garde + i)->position] == 'l' || maze[(garde + i)->position] == 'm' || maze[(garde + i)->position] == 'o')
-			(garde + i)->d = false;
-		else {
-			(garde + i)->d = true;
-			count += 1;
-		}
-			
-		if (maze[(garde + i)->position] == 'e' || maze[(garde + i)->position] == 'g' || maze[(garde + i)->position] == 'j' || maze[(garde + i)->position] == 'k' || maze[(garde + i)->position] == 'l' || maze[(garde + i)->position] == 'm' || maze[(garde + i)->position] == 'n')
-			(garde + i)->l = false;
-		else {
-			(garde + i)->l = true;
-			count += 1;
-		}
-		tmp = rand() % count;
-		if ((garde + i)->d == true) {
-			if ((garde + i)->r == true) {
-				if ((garde + i)->t == true) {
-					if ((garde + i)->l == true) {
-						switch (tmp) {
-						case 0: bottom(maze, size, garde, i); break;
-						case 1: top(maze, size, garde, i); break;
-						case 2: right(maze, size, garde, i); break;
-						case 3: left(maze, size, garde, i); break;
-						}
-					}
-					else {
-						switch (tmp) {
-						case 0: bottom(maze, size, garde, i); break;
-						case 1: top(maze, size, garde, i); break;
-						case 2: right(maze, size, garde, i); break;
-						}
-					}
+		sortie = 0;
+		if (*(maze + i) == 'b' || *(maze + i) == 'h' || *(maze + i) == 'k' || *(maze + i) == 'n') {
+			for (int j = 1; j <= 5; j++) {
+				if (*(maze + (i + (j * cote))) == 'a' || *(maze + (i + (j * cote))) == 'c' || *(maze + (i + (j * cote))) == 'e') {
+					count++;
+					sortie++;
 				}
-				else if ((garde + i)->l == true) {
-					switch (tmp) {
-					case 0: bottom(maze, size, garde, i); break;
-					case 1: left(maze, size, garde, i); break;
-					case 2: right(maze, size, garde, i); break;
-					}
+				else if (*(maze + (i + (j * cote))) == 'g') {
+					count++;
 				}
-				else {
-					switch (tmp) {
-					case 0: bottom(maze, size, garde, i); break;
-					case 2: right(maze, size, garde, i); break;
-					}
-				}
+				else break;
 			}
-			else if ((garde + i)->t == true && (garde + i)->l == true) {
-				switch (tmp) {
-				case 0: bottom(maze, size, garde, i); break;
-				case 1: left(maze, size, garde, i); break;
-				case 2: top(maze, size, garde, i); break;
-				}
-			}
-			else if ((garde + i)->t == true) {
-				switch (tmp) {
-				case 0: bottom(maze, size, garde, i); break;
-				case 1: top(maze, size, garde, i); break;
-				}
-			}
-			else if ((garde + i)->l == true) {
-				switch (tmp) {
-				case 0: bottom(maze, size, garde, i); break;
-				case 1: left(maze, size, garde, i); break;
-				}
-			}
-			else {
-				bottom(maze, size, garde, i);
+			if (count >= 3 && sortie >= 1) {
+				//ajout i à la liste chainée
+				DoubleLinkedListElem* elem = NewDoubleLinkedListItem(i);
+				DoubleLinkedListElem* elemDirection = NewDoubleLinkedListItem(2);
+				insertItemAtDoubleLinkedListTail(List, elem);
+				insertItemAtDoubleLinkedListTail(LaDirection, elemDirection);
 			}
 		}
-		else if ((garde + i)->r == true && (garde + i)->t == true && (garde + i)->l == true) {
-			switch (tmp) {
-			case 0: right(maze, size, garde, i); break;
-			case 1: left(maze, size, garde, i); break;
-			case 2: top(maze, size, garde, i); break;
-			}
-		}
-		else if ((garde + i)->r == true && (garde + i)->t == true) {
-			switch (tmp) {
-			case 0: right(maze, size, garde, i); break;
-			case 1: top(maze, size, garde, i); break;
-			}
-		}
-		else if ((garde + i)->t == true && (garde + i)->l == true) {
-			switch (tmp) {
-			case 0: left(maze, size, garde, i); break;
-			case 1: top(maze, size, garde, i); break;
-			}
-		}
-		else if ((garde + i)->r == true && (garde + i)->l == true) {
-			switch (tmp) {
-			case 0: left(maze, size, garde, i); break;
-			case 1: right(maze, size, garde, i); break;
-			}
-		}
-		else if ((garde + i)->r == true) {
-			right(maze, size, garde, i);
-		}
-		else if ((garde + i)->l == true) {
-			left(maze, size, garde, i);
-		}
-		else if ((garde + i)->t == true) {
-			top(maze, size, garde, i);
-		}
-		else {
-			printf("Une erreur est survenue dans l'apparition des gardes");
-		}
+	}
+	printf("\n;");
+	for (int i = 0; i < Quantite_Garde; i++) {
+		int r = rand() % getDoubleLinkedListSize(List);
+		(garde + i)->Id = i + 1;
+		(garde + i)->position = getDoubleLinkedListElem(List, r)->data;
+		(garde + i)->move = getDoubleLinkedListElem(LaDirection, r)->data;
+		DeleteDoubleLinkedListItem(List, (garde + i)->position);
+		DeleteDoubleLinkedListItem(LaDirection, (garde + i)->move);
+		printf("%d:%d,", (garde + i)->position, (garde+i)->move); //;index:direction,
 	}
 	return;
 }
 
-
-
-void MouvementGardes(char* maze, int cote, Garde* garde, int Quantite_Garde) {
-	for (int i = 0; i < Quantite_Garde; i++) {
-		switch ((garde + i)->choix) {
-		case 1: top(maze, cote, garde, i); break;
-		case 2: bottom(maze, cote, garde, i); break;
-		case 3: right(maze, cote, garde, i); break;
-		case 4: left(maze, cote, garde, i); break;
-		}
-	}
-}
+//void top(char* maze, int cote, Garde* garde, int i) {
+//	if (maze[(garde + i)->position] != 'b' && maze[(garde + i)->position] != 'f' && maze[(garde + i)->position] != 'h' && maze[(garde + i)->position] != 'k' && maze[(garde + i)->position] != 'm' && maze[(garde + i)->position] != 'n' && maze[(garde + i)->position] != 'o') {
+//		(garde + i)->position -= cote;
+//		printf("\nNew Garde %d : %d", (garde + i)->Id, (garde + i)->position);
+//		(garde+i)->choix = 1;
+//	}
+//	else {
+//		bottom(maze, cote, garde, i);
+//	}
+//	return;
+//}
+//
+//void bottom(char* maze, int cote, Garde* garde, int i) {
+//	if (maze[(garde + i)->position] != 'd' && maze[(garde + i)->position] != 'f' && maze[(garde + i)->position] != 'i' && maze[(garde + i)->position] != 'j' && maze[(garde + i)->position] != 'l' && maze[(garde + i)->position] != 'm' && maze[(garde + i)->position] != 'o') {
+//		(garde + i)->position += cote;
+//		printf("\nNew Garde %d : %d", (garde + i)->Id, (garde + i)->position);
+//		(garde+i)->choix = 2;
+//	}
+//	else {
+//		top(maze, cote, garde, i);
+//	}
+//	return;
+//}
+//
+//void right(char* maze, int cote, Garde* garde, int i) {
+//	if (maze[(garde + i)->position] != 'c' && maze[(garde + i)->position] != 'g' && maze[(garde + i)->position] != 'h' && maze[(garde + i)->position] != 'i' && maze[(garde + i)->position] != 'l' && maze[(garde + i)->position] != 'n' && maze[(garde + i)->position] != 'o') {
+//		(garde + i)->position += 1;
+//		printf("\nNew Garde %d : %d", (garde + i)->Id, (garde + i)->position);
+//		(garde+i)->choix = 3;
+//	}
+//	else left(maze, cote, garde, i);
+//	return;
+//}
+//
+//void left(char* maze, int cote, Garde* garde, int i) {
+//	if (maze[(garde + i)->position] != 'e' && maze[(garde + i)->position] != 'g' && maze[(garde + i)->position] != 'j' && maze[(garde + i)->position] != 'k' && maze[(garde + i)->position] != 'l' && maze[(garde + i)->position] != 'm' && maze[(garde + i)->position] != 'n') {
+//		(garde + i)->position -= 1;
+//		printf("\nNew Garde %d : %d", (garde + i)->Id, (garde + i)->position);
+//		(garde+i)->choix = 4;
+//	}
+//	else right(maze, cote, garde, i);
+//	return;
+//}
+//
+//void ChoixMouvementGardes(char* maze, int size, Garde* garde, int Quantite_Garde) {
+//	int tmp = 0;
+//	int count = 0;
+//	srand(time(NULL));
+//	for (int i = 0; i < Quantite_Garde; i++) {
+//		count = 0;
+//		if (maze[(garde + i)->position] == 'b' || maze[(garde + i)->position] == 'f' || maze[(garde + i)->position] == 'h' || maze[(garde + i)->position] == 'k' || maze[(garde + i)->position] == 'm' || maze[(garde + i)->position] == 'n' || maze[(garde + i)->position] == 'o')
+//			(garde + i)->t = false;
+//		else {
+//			(garde + i)->t = true;
+//			count += 1;
+//		}
+//			
+//		if (maze[(garde + i)->position] == 'c' || maze[(garde + i)->position] == 'g' || maze[(garde + i)->position] == 'h' || maze[(garde + i)->position] == 'i' || maze[(garde + i)->position] == 'l' || maze[(garde + i)->position] == 'n' || maze[(garde + i)->position] == 'o')
+//			(garde + i)->r = false;
+//		else {
+//			(garde + i)->r = true;
+//			count += 1;
+//		}
+//			
+//		if (maze[(garde + i)->position] == 'd' || maze[(garde + i)->position] == 'f' || maze[(garde + i)->position] == 'i' || maze[(garde + i)->position] == 'j' || maze[(garde + i)->position] == 'l' || maze[(garde + i)->position] == 'm' || maze[(garde + i)->position] == 'o')
+//			(garde + i)->d = false;
+//		else {
+//			(garde + i)->d = true;
+//			count += 1;
+//		}
+//			
+//		if (maze[(garde + i)->position] == 'e' || maze[(garde + i)->position] == 'g' || maze[(garde + i)->position] == 'j' || maze[(garde + i)->position] == 'k' || maze[(garde + i)->position] == 'l' || maze[(garde + i)->position] == 'm' || maze[(garde + i)->position] == 'n')
+//			(garde + i)->l = false;
+//		else {
+//			(garde + i)->l = true;
+//			count += 1;
+//		}
+//		tmp = rand() % count;
+//		if ((garde + i)->d == true) {
+//			if ((garde + i)->r == true) {
+//				if ((garde + i)->t == true) {
+//					if ((garde + i)->l == true) {
+//						switch (tmp) {
+//						case 0: bottom(maze, size, garde, i); break;
+//						case 1: top(maze, size, garde, i); break;
+//						case 2: right(maze, size, garde, i); break;
+//						case 3: left(maze, size, garde, i); break;
+//						}
+//					}
+//					else {
+//						switch (tmp) {
+//						case 0: bottom(maze, size, garde, i); break;
+//						case 1: top(maze, size, garde, i); break;
+//						case 2: right(maze, size, garde, i); break;
+//						}
+//					}
+//				}
+//				else if ((garde + i)->l == true) {
+//					switch (tmp) {
+//					case 0: bottom(maze, size, garde, i); break;
+//					case 1: left(maze, size, garde, i); break;
+//					case 2: right(maze, size, garde, i); break;
+//					}
+//				}
+//				else {
+//					switch (tmp) {
+//					case 0: bottom(maze, size, garde, i); break;
+//					case 2: right(maze, size, garde, i); break;
+//					}
+//				}
+//			}
+//			else if ((garde + i)->t == true && (garde + i)->l == true) {
+//				switch (tmp) {
+//				case 0: bottom(maze, size, garde, i); break;
+//				case 1: left(maze, size, garde, i); break;
+//				case 2: top(maze, size, garde, i); break;
+//				}
+//			}
+//			else if ((garde + i)->t == true) {
+//				switch (tmp) {
+//				case 0: bottom(maze, size, garde, i); break;
+//				case 1: top(maze, size, garde, i); break;
+//				}
+//			}
+//			else if ((garde + i)->l == true) {
+//				switch (tmp) {
+//				case 0: bottom(maze, size, garde, i); break;
+//				case 1: left(maze, size, garde, i); break;
+//				}
+//			}
+//			else {
+//				bottom(maze, size, garde, i);
+//			}
+//		}
+//		else if ((garde + i)->r == true && (garde + i)->t == true && (garde + i)->l == true) {
+//			switch (tmp) {
+//			case 0: right(maze, size, garde, i); break;
+//			case 1: left(maze, size, garde, i); break;
+//			case 2: top(maze, size, garde, i); break;
+//			}
+//		}
+//		else if ((garde + i)->r == true && (garde + i)->t == true) {
+//			switch (tmp) {
+//			case 0: right(maze, size, garde, i); break;
+//			case 1: top(maze, size, garde, i); break;
+//			}
+//		}
+//		else if ((garde + i)->t == true && (garde + i)->l == true) {
+//			switch (tmp) {
+//			case 0: left(maze, size, garde, i); break;
+//			case 1: top(maze, size, garde, i); break;
+//			}
+//		}
+//		else if ((garde + i)->r == true && (garde + i)->l == true) {
+//			switch (tmp) {
+//			case 0: left(maze, size, garde, i); break;
+//			case 1: right(maze, size, garde, i); break;
+//			}
+//		}
+//		else if ((garde + i)->r == true) {
+//			right(maze, size, garde, i);
+//		}
+//		else if ((garde + i)->l == true) {
+//			left(maze, size, garde, i);
+//		}
+//		else if ((garde + i)->t == true) {
+//			top(maze, size, garde, i);
+//		}
+//		else {
+//			printf("Une erreur est survenue dans l'apparition des gardes");
+//		}
+//	}
+//	return;
+//}
+//
+//
+//
+//void MouvementGardes(char* maze, int cote, Garde* garde, int Quantite_Garde) {
+//	for (int i = 0; i < Quantite_Garde; i++) {
+//		switch ((garde + i)->choix) {
+//		case 1: top(maze, cote, garde, i); break;
+//		case 2: bottom(maze, cote, garde, i); break;
+//		case 3: right(maze, cote, garde, i); break;
+//		case 4: left(maze, cote, garde, i); break;
+//		}
+//	}
+//}
 /*Fin Gardes*/
 
 /*Téléporteurs*/
-Teleporteurs_Pair * Generation_Teleporteurs(char* maze, int size, int quantites_pair) {
-	int casevecteur1;
-	int casevecteur2;
-	Teleporteur_Pos* Tab = malloc(sizeof(Teleporteur_Pos));
-	if (Tab == NULL)
-	{
-		printf("erreur allocation mémoire");
-	}
-	Teleporteur_Pos Teleporteur1 = { 0,0 };
-	Teleporteur_Pos Teleporteur2 = { 0,0 };
-	char* mur = maze;
-	int index = 0;
-	//place  toutes les dead end dans un tableau pour facilité le placement des futures téléporteurs
-	for (int x = 0; x < size; x++)
-	{
-		for (int y = 0; y < size; y++)
-		{
-			if ((x == 0 && y == 0) || (x == size - 1 && y == size - 1))
-			{
-				*(mur + (x * 10 + y) * 8) = 'a';
-			}
-			if (*(mur + (x * 10 + y) * 8) == 'l' || *(mur + (x * 10 + y) * 8) == 'm' || *(mur + (x * 10 + y) * 8) == 'n' || *(mur + (x * 10 + y) * 8) == 'o')
-			{
-				if ((Tab + index) == NULL)
-				{
+Teleporteurs_Paire* recherche_loc_tp(int nb_paires, char* maze, int size) {
+	/*recherche localisation des tp*/
+	DoubleLinkedList* List = newDoubleLinkedList();
+	if (nb_paires >= size / 2) return NULL;
 
-					if (Tab != NULL)
-					{	
-						Teleporteur_Pos* R = (Teleporteur_Pos*)realloc(Tab, sizeof(Teleporteur_Pos) * 10);
-						if (R != NULL) {
-							Tab = R;
-						}
-						//printf("allocation réussie");
-						(Tab + index)->x = x;
-						(Tab + index)->y = y;
-						index++;
-					}
-					else
-					{
-						printf("erreur allocation mémoire");
-					}
-				}
-				else
-				{
-					//printf("pas besoin d'allocation");
-					(Tab + index)->x = x;
-					(Tab + index)->y = y;
-					/*printf(" Index :%d\n", index);
-					printf("Tab[%d].x = %d \n", index, (Tab + index)->x);
-					printf("Tab[%d].x = %d \n", index, (Tab + index)->y);*/
 
-					index++;
-				}
-			}
-			//printf("mur[%d][%d] = %c \n", x, y, *(mur + (x * 10 + y) * 8));
+	for (int i = 1; i < size - 1; i++) {
+		if (*(maze + i) == 'l' || *(maze + i) == 'm' || *(maze + i) == 'n' || *(maze + i) == 'o') {
+			DoubleLinkedListElem* elem = NewDoubleLinkedListItem(i);
+			insertItemAtDoubleLinkedListTail(List, elem);
 		}
 	}
-	//boucles permettant de placer les téléporteurs les plus éloignés possible.
-	Teleporteurs_Pair* Tab2 = malloc(sizeof(Teleporteurs_Pair) * quantites_pair);
-	/*if (Tab2 == NULL)
-	{
-		printf("erreur allocation mémoire");
-	}*/
-	int index2 = index - 1;
-	for (int index1 = 0; index1 < quantites_pair; index1++)
-	{
-		if (Tab2 != NULL && Tab != NULL)
-		{
-			(Tab2 + index1)->Teleporteur1.x = (Tab + index1)->x;
-			(Tab2 + index1)->Teleporteur1.y = (Tab + index1)->y;
-			(Tab2 + index1)->Teleporteur2.x = (Tab + index2)->x;
-			(Tab2 + index1)->Teleporteur2.y = (Tab + index2)->y;
-			index2--;
+	//printf("positions trouvees :\n");
+	//DisplayDoubleList(List);
+
+
+
+	/*Creation de paires de tp*/
+	//printf("\nCreation des paires de teleporteurs :\n");
+	Teleporteurs_Paire* tab = (Teleporteurs_Paire*)malloc(sizeof(Teleporteurs_Paire) * nb_paires);
+	srand(time(NULL));
+
+	int pos;
+	if (tab != NULL) {
+		for (int i = 0; i < nb_paires; i++) {
+			int max_index = getDoubleLinkedListSize(List);
+
+			//tirage d'une entrée
+			pos = (rand() * max_index / RAND_MAX) - 1;
+			DoubleLinkedListElem* elem_entree = getDoubleLinkedListElem(List, pos);
+
+			(*(tab + i)).entree = elem_entree->data;
+			DeleteDoubleLinkedListItem(List, elem_entree);
+
+
+			//tirage d'une sortie
+			pos = (rand() * (max_index - 1) / RAND_MAX) - 1;
+			DoubleLinkedListElem* elem_sortie = getDoubleLinkedListElem(List, pos);
+			(*(tab + i)).sortie = elem_sortie->data;
+			DeleteDoubleLinkedListItem(List, elem_sortie);
+
+			//DisplayDoubleList(List);
+			//printf("\n\n");
 		}
-	}
-	printf("\n");
-	for (int o = 0; o < quantites_pair; o++)
-	{
-		if (Tab2 != NULL) {
-			casevecteur1 = (Tab2 + o)->Teleporteur1.y * size + (Tab2 + o)->Teleporteur1.x;
-			casevecteur2 = (Tab2 + o)->Teleporteur2.y * size + (Tab2 + o)->Teleporteur2.x;
-			printf("[%d, %d]\n", casevecteur1, casevecteur2);
+		for (int j = 0; j < nb_paires; j++) {
+			//printf("Paire %d = [%d, %d]\n", j + 1, (*(tab + j)).entree, (*(tab + j)).sortie);
 		}
+		return tab;
 	}
-	return Tab2;
+	return NULL;
 }
 /*Fin Téléporteurs*/
 
@@ -1233,12 +1373,58 @@ void infoPositionHero() {
 	}
 }
 
+void MouvementHero(int cote) {
+	int tableau[2] = { 0 };
+	readFile("CaCLC.csv", tableau);
+
+	for (int i = 0; i < 2; i++) {
+		printf("\nValeur : %d\n", tableau[i]);
+	}
+	int OneDirection = tableau[0];
+	int ClaPosition = tableau[1];
+	switch (OneDirection) {
+	case 1:
+		if (verifHaut) {
+			if (/*Téléporteur*/true) {
+
+			}
+			else {
+				ClaPosition -= cote;
+				printf("%d", ClaPosition);
+				break;
+			}
+
+		}
+		else return -1;
+	case 2:
+		if (verifDroite) {
+			ClaPosition += 1;
+			printf("%d", ClaPosition);
+			break;
+		}
+		else return -1;
+
+	case 3:
+		if (verifGauche) {
+			ClaPosition -= 1;
+			break;
+		}
+		else return -1;
+	case 4:
+		if (verifBas) {
+			ClaPosition += cote;
+			break;
+		}
+		else return -1;
+	}
+	return 1;
+}
 
 int main() {
 
 	//Garde* garde = (Garde*)malloc(sizeof(Garde));
 	//srand(time(NULL));
-	Lab* newl = NewLab(40);
+	Lab* newl = NewLab(10);
 	Free* P = NewFree(100);
 	int o = tryPath(newl, 0, P);
 	////show(newl);
@@ -1256,7 +1442,7 @@ int main() {
 	//printf("TAILLE : %d \n", S->pathSize);
 	//printPath(S);
 	//return EXIT_SUCCESS;
-
+	ApparitionGardes(letter(newl), 10, 3);
 	//printPath(S);
 	int tableau[2] = { 0 };
 	readFile("CaCLC.csv", tableau);
@@ -1299,7 +1485,7 @@ int main() {
 		printf("Gauche \t: \tmur\n");
 	}
 	//readFile("CaCLC.csv");
-
+	MouvementHero(40);
 	//infoPositionHero();
 	return EXIT_SUCCESS;
 }
