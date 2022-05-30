@@ -564,14 +564,12 @@ var list = [new Garde(0, 0)]; // Méthode de création de la liste des gardes.
 function PHP_Start(anime) {
   PHP_Function("../tools/function.php", "generation", function Handle(output) {
     //console.log("Sortie du C : " + output);
-
+    console.log(output);
     newOut = output.split(";");
-    console.log(newOut[0]);
-    console.log(newOut[1]);
-    console.log(newOut[2]);
 
     solveOut = newOut[1].split(",");
     tpOut = newOut[2].split(",");
+    gardeOut = newOut[3].split(",");
 
     for (i = 0; i < tpOut.length; i++) {
       tpOut[i] = tpOut[i].split(":").map(function (item) {
@@ -579,7 +577,14 @@ function PHP_Start(anime) {
       });
     }
 
+    for (i = 0; i < gardeOut.length; i++) {
+      gardeOut[i] = gardeOut[i].split(":").map(function (item) {
+        return parseInt(item, 10);
+      });
+    }
+
     console.log(tpOut);
+    console.log(gardeOut);
 
     if (output.length == 0) {
       location.reload();
