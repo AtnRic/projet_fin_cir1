@@ -14,8 +14,7 @@
         border: solid black 2px;
         border-radius: 15px;
         text-align: center;
-        background-color: grey;
-
+        background-color: red;
     }        
     .popup p {
         font-weight: bold;
@@ -31,7 +30,9 @@
         border-radius: 5px;
         padding-bottom: 0;
     }
-
+    .win{
+        background-color: green;
+    }
 </style>
 <?php
 function popupWin($theme, $step){
@@ -49,29 +50,65 @@ function popupWin($theme, $step){
             break;
         case 'retro':
         ?>
-            <div class="popup">
-                <h1>Congratulation you win</h1>
-                <h3>You done <?php echo $step ?> step</h3>
-                <a href="#"><button>Main menu</button></a>
-                <a href="#"><button>Next level</button></a>
-            </div>
+         <div class="popup">
+            <h1>Congratulation you win</h1>
+            <h3>You done <?php echo $step ?> step</h3>
+            <a href="#"><button>Main menu</button></a>
+            <a href="#"><button>Next level</button></a>
+        </div>
         <?php
             return 1;
             break;
         case 'space':
         ?>  
-            <div class="popup">
-                <h1>Congratulation you win</h1>
-                <h3>You done <?php echo $step ?> step</h3>
-                <a href="#"><button>Main menu</button></a>
-                <a href="#"><button>Next level</button></a>
-            </div>
+         <div class="popup">
+            <h1>Congratulation you win</h1>
+            <h3>You done <?php echo $step ?> step</h3>
+            <a href="#"><button>Main menu</button></a>
+        </div>
         <?php
             return 1;
             break;
     }
     return -1;
 }
+
+function popupLose($theme){
+    switch ($theme) {
+        case 'jungle':
+        ?>
+        <div class="popup">
+            <h1>Congratulation you lose</h1>
+            <a href="#"><button>Main menu</button></a>
+            <a href="#"><button>Retry</button></a>
+        </div>
+        <?php
+            return 1;
+            break;
+        case 'retro':
+        ?>
+        <div class="popup">
+            <h1>Congratulation you lose</h1>
+            <a href="#"><button>Main menu</button></a>
+            <a href="#"><button>Retry</button></a>
+        </div>
+        <?php
+            return 1;
+            break;
+        case 'space':
+        ?>  
+        <div class="popup">
+            <h1>Congratulation you lose</h1>
+            <a href="#"><button>Main menu</button></a>
+            <a href="#"><button>Retry</button></a>
+        </div>
+        <?php
+            return 1;
+            break;
+    }
+    return -1;
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -83,7 +120,7 @@ function popupWin($theme, $step){
 </head>
 <body>
     <div class="">
-        <?php popupWin('jungle', 69) ?>
+        <?php popupLose('jungle') ?>
         <canvas class="confetti" id="canvas"></canvas>
     </div>
 </body>
