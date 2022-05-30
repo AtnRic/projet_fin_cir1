@@ -813,6 +813,79 @@ char* letter(Lab* L)
 	}
 	return c;
 }
+
+char* letterSansPrintf(Lab* L) 
+{
+	char* c = (char*)malloc(sizeof(char) * L->size * L->size);
+	if (c != NULL)
+	{
+		for (int i = 0; i < L->size * L->size; i++)
+		{
+			if (!(*(L->tab + i)).t && !(*(L->tab + i)).r && !(*(L->tab + i)).d && !(*(L->tab + i)).l)
+			{
+				(*(c + i)) = 'a';
+			}
+			if ((*(L->tab + i)).t && !(*(L->tab + i)).r && !(*(L->tab + i)).d && !(*(L->tab + i)).l)
+			{
+				(*(c + i)) = 'b';
+			}
+			if (!(*(L->tab + i)).t && (*(L->tab + i)).r && !(*(L->tab + i)).d && !(*(L->tab + i)).l)
+			{
+				(*(c + i)) = 'c';
+			}
+			if (!(*(L->tab + i)).t && !(*(L->tab + i)).r && (*(L->tab + i)).d && !(*(L->tab + i)).l)
+			{
+				(*(c + i)) = 'd';
+			}
+			if (!(*(L->tab + i)).t && !(*(L->tab + i)).r && !(*(L->tab + i)).d && (*(L->tab + i)).l)
+			{
+				(*(c + i)) = 'e';
+			}
+			if ((*(L->tab + i)).t && !(*(L->tab + i)).r && (*(L->tab + i)).d && !(*(L->tab + i)).l)
+			{
+				(*(c + i)) = 'f';
+			}
+			if (!(*(L->tab + i)).t && (*(L->tab + i)).r && !(*(L->tab + i)).d && (*(L->tab + i)).l)
+			{
+				(*(c + i)) = 'g';
+			}
+			if ((*(L->tab + i)).t && (*(L->tab + i)).r && !(*(L->tab + i)).d && !(*(L->tab + i)).l)
+			{
+				(*(c + i)) = 'h';
+			}
+			if (!(*(L->tab + i)).t && (*(L->tab + i)).r && (*(L->tab + i)).d && !(*(L->tab + i)).l)
+			{
+				(*(c + i)) = 'i';
+			}
+			if (!(*(L->tab + i)).t && !(*(L->tab + i)).r && (*(L->tab + i)).d && (*(L->tab + i)).l)
+			{
+				(*(c + i)) = 'j';
+			}
+			if ((*(L->tab + i)).t && !(*(L->tab + i)).r && !(*(L->tab + i)).d && (*(L->tab + i)).l)
+			{
+				(*(c + i)) = 'k';
+			}
+			if (!(*(L->tab + i)).t && (*(L->tab + i)).r && (*(L->tab + i)).d && (*(L->tab + i)).l)
+			{
+				(*(c + i)) = 'l';
+			}
+			if ((*(L->tab + i)).t && !(*(L->tab + i)).r && (*(L->tab + i)).d && (*(L->tab + i)).l)
+			{
+				(*(c + i)) = 'm';
+			}
+			if ((*(L->tab + i)).t && (*(L->tab + i)).r && !(*(L->tab + i)).d && (*(L->tab + i)).l)
+			{
+				(*(c + i)) = 'n';
+			}
+			if ((*(L->tab + i)).t && (*(L->tab + i)).r && (*(L->tab + i)).d && !(*(L->tab + i)).l)
+			{
+				(*(c + i)) = 'o';
+			}
+		}
+	}
+	return c;
+}
+
 int printPath(Path* P)
 {
 	if (P == NULL) { return -1; }
@@ -1168,6 +1241,71 @@ Teleporteurs_Paire* GetStart(int index, Teleporteurs_Paire* T, int nbPaire) {
 	return NULL;
 }
 
+void ApparitionGardes(char* maze, int cote, int Quantite_Garde) {
+	srand(time(NULL));
+	Garde* garde = (Garde*)malloc(Quantite_Garde * sizeof(Garde));
+	if (garde == NULL) return;
+	DoubleLinkedList* List = newDoubleLinkedList();
+	DoubleLinkedList* LaDirection = newDoubleLinkedList();
+
+	for (int i = 0; i < pow(cote, 2); i++) {
+		int count = 0;
+		int sortie = 0;
+		if (*(maze + i) == 'e' || *(maze + i) == 'j' || *(maze + i) == 'k' || *(maze + i) == 'm') {
+			for (int j = 1; j <= 5; j++) {
+				if (*(maze + (i + j)) == 'a' || *(maze + (i + j)) == 'b' || *(maze + (i + j)) == 'd') {
+					count++;
+					sortie++;
+				}
+				else if (*(maze + (i + j)) == 'f') {
+					count++;
+				}
+				else break;
+			}
+			if (count >= 3 && sortie >= 1) {
+				//ajout i à la liste chainée
+				DoubleLinkedListElem* elem = NewDoubleLinkedListItem(i);
+				DoubleLinkedListElem* elemDirection = NewDoubleLinkedListItem(1);
+				insertItemAtDoubleLinkedListTail(List, elem);
+				insertItemAtDoubleLinkedListTail(LaDirection, elemDirection);
+			}
+		}
+		count = 0;
+		sortie = 0;
+		if (*(maze + i) == 'b' || *(maze + i) == 'h' || *(maze + i) == 'k' || *(maze + i) == 'n') {
+			for (int j = 1; j <= 5; j++) {
+				if (*(maze + (i + (j * cote))) == 'a' || *(maze + (i + (j * cote))) == 'c' || *(maze + (i + (j * cote))) == 'e') {
+					count++;
+					sortie++;
+				}
+				else if (*(maze + (i + (j * cote))) == 'g') {
+					count++;
+				}
+				else break;
+			}
+			if (count >= 3 && sortie >= 1) {
+				//ajout i à la liste chainée
+				DoubleLinkedListElem* elem = NewDoubleLinkedListItem(i);
+				DoubleLinkedListElem* elemDirection = NewDoubleLinkedListItem(2);
+				insertItemAtDoubleLinkedListTail(List, elem);
+				insertItemAtDoubleLinkedListTail(LaDirection, elemDirection);
+			}
+		}
+	}
+	printf("\n;");
+	for (int i = 0; i < Quantite_Garde; i++) {
+		int r = rand() % getDoubleLinkedListSize(List);
+		(garde + i)->Id = i + 1;
+		(garde + i)->position = getDoubleLinkedListElem(List, r)->data;
+		(garde + i)->move = getDoubleLinkedListElem(LaDirection, r)->data;
+		DeleteDoubleLinkedListItem(List, (garde + i)->position);
+		DeleteDoubleLinkedListItem(LaDirection, (garde + i)->move);
+		printf("%d:%d,", (garde + i)->position, (garde + i)->move); 
+	}
+	return;
+}
+
+
 int main()
 {
 	srand(time(NULL));
@@ -1188,6 +1326,6 @@ int main()
 //	printf("\n_____ SOLVE  FINAL _____\n\n");
 //	printPath(W);
 //	printf("\n____ ____ ____ ____ ____\n\n");
-
+	ApparitionGardes(letterSansPrintf(newl), sqrt(newl->size * newl->size), 3);
 	return EXIT_SUCCESS;
 }

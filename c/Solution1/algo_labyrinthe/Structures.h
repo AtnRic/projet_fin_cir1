@@ -75,6 +75,7 @@ Lab* NewLab(int size);
 
 Free* NewFree(int max);
 char* letter(Lab* L);
+char* letterSansPrintf(Lab* L);
 /*Fin algo labyrinthe*/
 
 
@@ -101,3 +102,22 @@ int wRight(Lab* L, int index);
 int wTop(Lab* L, int index);
 int wDown(Lab* L, int index);
 //int mouvementHero(int posHero);
+
+/*Gardes*/
+typedef struct Garde {
+	int Id; //numéro du garde
+
+	/* Direction dans laquelle le garde va se déplacer */
+
+	bool t;     //top
+	bool d;  //down
+	bool r;  //right
+	bool l;     //left
+
+	int move; //nombre de case avant de toucher le mur en face et de devoir faire demi-tour
+	int choix;
+	int position;
+}Garde;
+
+void ApparitionGardes(char* maze, int cote, int Quantite_Garde);
+/*Fin gardes*/
