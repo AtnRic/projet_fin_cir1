@@ -10,7 +10,7 @@
         left: 0;
         right: 0;        
         width: 500px;
-        height: 200px;
+        height: 250px;
         border: solid black 2px;
         border-radius: 15px;
         text-align: center;
@@ -35,13 +35,14 @@
     }
 </style>
 <?php
-function popupWin($theme, $step){
+function popupWin($theme, $step, $score){
     switch ($theme) {
         case 'jungle':
         ?>
         <div class="popup">
             <h1>Congratulation you win</h1>
-            <h3>You done <?php echo $step ?> step</h3>
+            <h3>You done <?php echo $step ?> steps</h3>
+            <h3>Your score is <?php echo $score ?> pts</h3>
             <a href="#"><button>Main menu</button></a>
             <a href="#"><button>Next level</button></a>
         </div>
@@ -120,7 +121,7 @@ function popupLose($theme, $step){
 </head>
 <body>
     <div class="">
-        <?php popupWin('jungle', 69) ?>
+        <?php popupWin('jungle', 69, 420) ?>
         <canvas class="confetti" id="canvas"></canvas>
     </div>
 </body>
