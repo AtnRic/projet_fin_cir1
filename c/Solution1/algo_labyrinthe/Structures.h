@@ -55,12 +55,7 @@ char* letter(Lab* L);
 
 
 //génére les "quantites" téléporteurs dans le maze renvoie le tableau comportant les coordonnees des téléporteurs
-typedef struct Teleporteurs_Paire {
-	int entree;
-	int sortie;
-}Teleporteurs_Paire;
-
-Teleporteurs_Paire* recherche_loc_tp(int nb_paires, char* maze, int size);
+Teleporteurs_Pair* Generation_Teleporteurs(char* maze, int size, int quantites);
 /*Fin téléporteurs*/
 
 /*Gardes*/
@@ -79,7 +74,7 @@ typedef struct Garde {
 	int position;
 }Garde;
 
-void ApparitionGardes(char* maze, int cote, int Quantite_Garde);
+Garde* ApparitionGardes(char* maze, int cote, int Quantite_Garde);
 void ChoixMouvementGardes(char* maze, int size, Garde* garde, int Quantite_Garde);
 void MouvementGardes(char* maze, int cote, Garde* garde, int Quantite_Garde);
 void top(char* maze, int cote, Garde* garde, int i);
@@ -119,34 +114,3 @@ bool verifDroite(char* posHero);
 bool verifBas(char* posHero);
 bool verifGauche(char* posHero);
 void infoPositionHero();
-
-/*Liste Chainée double*/
-typedef struct DoubleLinkedListElem {
-	int data;
-	struct DoubleLinkedListElem* previous;
-	struct DoubleLinkedListElem* next;
-} DoubleLinkedListElem;
-
-
-typedef struct DoubleLinkedList {
-	DoubleLinkedListElem* head;
-	int size;
-	DoubleLinkedListElem* tail;
-} DoubleLinkedList;
-
-// création d'une nouvelle liste chaînée bilatère vide
-// cette fonction renvoie un pointeur sur la nouvelle structure liste chaînée bilatère vide
-DoubleLinkedList* newDoubleLinkedList();
-// instanciation (création) d'un élément (maillon) à insérer dans une liste chaînée bilatère
-// avec stockage de la donnée value dans l'élément de liste
-DoubleLinkedListElem* NewDoubleLinkedListItem(int value);
-// affichage des éléments d'une liste chaînée bilatère en commençant par la tête
-int DisplayDoubleList(DoubleLinkedList* list);
-
-
-int insertItemAtDoubleLinkedListTail(DoubleLinkedList* list, DoubleLinkedListElem* newItem);
-
-
-
-int DeleteDoubleLinkedListItem(DoubleLinkedList* list, DoubleLinkedListElem* elem);
-/*Fin liste chainée double*/
