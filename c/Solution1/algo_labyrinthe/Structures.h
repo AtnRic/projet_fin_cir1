@@ -1,3 +1,5 @@
+#pragma once
+
 typedef struct DoubleLinkedListElem {
 	int data;
 	struct DoubleLinkedListElem* previous;

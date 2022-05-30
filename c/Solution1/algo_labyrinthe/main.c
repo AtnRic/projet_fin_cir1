@@ -1301,7 +1301,12 @@ void ApparitionGardes(char* maze, int cote, int Quantite_Garde) {
 		(garde + i)->move = getDoubleLinkedListElem(LaDirection, r)->data;
 		DeleteDoubleLinkedListItem(List, getDoubleLinkedListElem(List, r));
 		DeleteDoubleLinkedListItem(LaDirection, getDoubleLinkedListElem(LaDirection, r));
-		printf("%d:%d,", (garde + i)->position, (garde + i)->move); 
+		if (i < Quantite_Garde -1) {
+			printf("%d:%d,", (garde + i)->position, (garde + i)->move);
+		}
+		if (i == Quantite_Garde-1) {
+			printf("%d:%d", (garde + i)->position, (garde + i)->move);
+		}
 	}
 	return;
 }
