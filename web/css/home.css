@@ -367,13 +367,13 @@ section {
     top: 150vh;
     left: 50vw;
     transform: translateX(-50%);
-    background: #efe773;
+    background: #DDC8C4;
     width: 18vw;
     height: 13vw;
     border: none;
+    border-radius:2vh;
     transition: all 0.3s ease;
     filter: grayscale(80%);
-    opacity: 0.1;
 }
 
 #but-mar::after {
@@ -383,19 +383,25 @@ section {
     left: 50%;
     width: 10vw;
     height: 10vw;
-    background: url(../images/accueil/jungle_vignette.jpg) center center / cover no-repeat;
+    background: url(../images/accueil/retro_vignette.png) center center / cover no-repeat;
     border: none;
+    border-radius:2vh;
     transform: translateX(-50%) translateY(-5vw);
 }
 
 #but-mar:hover {
     transform: translateX(-50%) translateY(-1vh);
     filter: grayscale(0%);
+    box-shadow: 0 1vh 2vh black;
 }
 
 #but-mar:active {
     transform: translateX(-50%);
     box-shadow: none;
+}
+
+#but-mar:hover::after {
+    background: url(../images/accueil/pacman.gif) center center / cover no-repeat;
 }
 
 #mario-animated {
