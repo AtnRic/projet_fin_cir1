@@ -7,9 +7,22 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
 </head>
 <body>
+
+<script>
+    activate = true; //pour désactiver facilement
+    document.addEventListener("keydown", function (event) {
+        if (activate == true) {
+            if (event.key == " ") {//quand espace est pressé
+                console.log("yolo");
+                location.href = "#choose" //on scroll vers la page suivante
+            }
+        }
+    });
+</script>
+
 <div class="press">
     <h1 id="name">Maze'ltov</h1>
-    <img src="../images/front/log2.png" alt="Logo" id="logoimage">
+    <img src="../images/front/retro_logo.png" alt="Logo" id="logoimage">
     <a href="#choose">
         <h1 id="press">PRESS START</h1>
     </a>

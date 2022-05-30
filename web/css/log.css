@@ -20,7 +20,6 @@ h1, p{
     color: white;
     text-align: center;
 }
-
 #press {
     animation: blinker 1.5s step-end infinite;
 }
@@ -39,9 +38,6 @@ h1, p{
 #press{
     text-align: center;
     margin-top: 10%;
-}
-#press:hover{
-    text-decoration: underline;
 }
 
 #press::before{
