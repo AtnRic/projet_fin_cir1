@@ -103,7 +103,10 @@ int getDoubleLinkedListSize(DoubleLinkedList* list) {
 	if (list != NULL) {
 		return list->size;
 	}
-	return -1;
+	if (list == NULL) {
+		return -1;
+	}
+	
 }
 int DeleteDoubleLinkedListItem(DoubleLinkedList* list, DoubleLinkedListElem* elem) {
 
@@ -1263,12 +1266,14 @@ void ApparitionGardes(char* maze, int cote, int Quantite_Garde) {
 				}
 				else break;
 			}
-			if (count >= 3 && sortie >= 1) {
-				//ajout i à la liste chainée
-				DoubleLinkedListElem* elem = NewDoubleLinkedListItem(i);
-				DoubleLinkedListElem* elemDirection = NewDoubleLinkedListItem(1);
-				insertItemAtDoubleLinkedListTail(List, elem);
-				insertItemAtDoubleLinkedListTail(LaDirection, elemDirection);
+			if (i != 0) {
+				if (count >= 3 && sortie >= 1) {
+					//ajout i à la liste chainée
+					DoubleLinkedListElem* elem = NewDoubleLinkedListItem(i);
+					DoubleLinkedListElem* elemDirection = NewDoubleLinkedListItem(1);
+					insertItemAtDoubleLinkedListTail(List, elem);
+					insertItemAtDoubleLinkedListTail(LaDirection, elemDirection);
+				}
 			}
 		}
 		count = 0;
@@ -1284,12 +1289,14 @@ void ApparitionGardes(char* maze, int cote, int Quantite_Garde) {
 				}
 				else break;
 			}
-			if (count >= 3 && sortie >= 1) {
-				//ajout i à la liste chainée
-				DoubleLinkedListElem* elem = NewDoubleLinkedListItem(i);
-				DoubleLinkedListElem* elemDirection = NewDoubleLinkedListItem(2);
-				insertItemAtDoubleLinkedListTail(List, elem);
-				insertItemAtDoubleLinkedListTail(LaDirection, elemDirection);
+			if (i != 0) {
+				if (count >= 3 && sortie >= 1) {
+					//ajout i à la liste chainée
+					DoubleLinkedListElem* elem = NewDoubleLinkedListItem(i);
+					DoubleLinkedListElem* elemDirection = NewDoubleLinkedListItem(2);
+					insertItemAtDoubleLinkedListTail(List, elem);
+					insertItemAtDoubleLinkedListTail(LaDirection, elemDirection);
+				}
 			}
 		}
 	}
