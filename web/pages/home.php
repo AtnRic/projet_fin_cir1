@@ -49,7 +49,7 @@ require '../tools/_main_tools.php';
             <h3 class="name">The amazing Spider-man</h3>
             <p class="level">Medium</p>
         </div>
-        <!-- <a href="#craft" class=""></a> -->
+        <a href="#space" id="to-space">Next level</a>
     </section>
     <section id="space">
         <div class="star1"></div>
@@ -59,8 +59,6 @@ require '../tools/_main_tools.php';
         <div class="orbite_mars"></div>
         <div id="iss"></div>
         <div class="ufo"></div>
-        <!-- <img src="../images/accueil/ISS.png" id="iss"> -->
-        <!-- <img src="../images/accueil/earth.png" id="earth"> -->
     </section>
     <div class="title">
         <h1>Welcome to Maze'ltov</h1>

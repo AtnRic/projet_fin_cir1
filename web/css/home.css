@@ -796,3 +796,26 @@ section {
 
     background: url(../images/accueil/ufo2.gif) center center / cover no-repeat;
 }
+
+#to-space {
+    color: white;
+    position: absolute;
+    padding: 2vh 5vh;
+    bottom: -95vh;
+    left: 50%;
+    border: none;
+    border-radius: 2vh;
+    transform: translateX(-50%);
+    transition: all 0.1s ease;
+    text-decoration: none;
+    font-size: 4vh;
+    font-weight: 800;
+    font-style: italic;
+    background: url(../images/accueil/space-static.png) center center / cover no-repeat;
+}
+
+#to-space:hover {
+    background: url(../images/accueil/light-speed.gif) center center / cover no-repeat;
+    transform: translateX(-50%) translateY(-1vh);
+    box-shadow: 0 1vh 2vh black;
+}
