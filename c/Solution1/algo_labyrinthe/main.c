@@ -916,6 +916,7 @@ int printTp(Teleporteurs_Paire* P, int nbPaire) {
 			printf(",");
 		}
 	}
+	return 0;
 }
 
 int wLeft(Lab* L, int index)
@@ -1298,8 +1299,8 @@ void ApparitionGardes(char* maze, int cote, int Quantite_Garde) {
 		(garde + i)->Id = i + 1;
 		(garde + i)->position = getDoubleLinkedListElem(List, r)->data;
 		(garde + i)->move = getDoubleLinkedListElem(LaDirection, r)->data;
-		DeleteDoubleLinkedListItem(List, (garde + i)->position);
-		DeleteDoubleLinkedListItem(LaDirection, (garde + i)->move);
+		DeleteDoubleLinkedListItem(List, getDoubleLinkedListElem(List, r));
+		DeleteDoubleLinkedListItem(LaDirection, getDoubleLinkedListElem(LaDirection, r));
 		printf("%d:%d,", (garde + i)->position, (garde + i)->move); 
 	}
 	return;
