@@ -29,10 +29,12 @@ require '../tools/_main_tools.php';
         <img src="../images/accueil/side-palm-right.png" id="palm-right">
         <img src="../images/accueil/left-palm.png" id="palm-left">
         <img src="../images/accueil/top-palm.png" id="top-palm">
-        <div class="button" id="jungle-but">
-            <h3 class="name">Welcome to the jungle</h3>
-            <p class="level">Easy</p>
-        </div>
+        <a href="jungle.html">
+            <div class="button" id="jungle-but">
+                <h3 class="name">Welcome to the jungle</h3>
+                <p class="level">Easy</p>
+            </div>
+        </a>
         <a href="#mario" class="next 8bit">Next level</a>
     </section>
     <section id="mario">
@@ -45,10 +47,12 @@ require '../tools/_main_tools.php';
         <img src="../images/accueil/mario-pipe.png" id="mario-pipe1">
         <img src="../images/accueil/mario-pipe.png" id="mario-pipe2">
         <img src="../images/accueil/mario-coin.gif" id="mario-coin">
-        <div class="button" id="but-mar">
-            <h3 class="name">The amazing Spider-man</h3>
-            <p class="level">Medium</p>
+        <a href="retro.html">
+            <div class="button" id="but-mar">
+                <h3 class="name">Tartaros fantasy</h3>
+                <p class="level">Medium</p>
         </div>
+        </a>
         <a href="#space" id="to-space">Next level</a>
     </section>
     <section id="space">
@@ -59,6 +63,10 @@ require '../tools/_main_tools.php';
         <div class="orbite_mars"></div>
         <div id="iss"></div>
         <div class="ufo"></div>
+        <div class="button" id="but-space">
+                <h3 class="name">Ta mère non ?</h3>
+                <p class="level">Hard</p>
+        </div>
     </section>
     <div class="title">
         <h1>Welcome to Maze'ltov</h1>
