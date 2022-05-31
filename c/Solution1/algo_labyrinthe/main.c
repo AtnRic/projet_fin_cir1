@@ -232,7 +232,7 @@ int readFile(char* filename, int tableau[]) {
 	value = fgetc(stream);
 	printf("%c", value);*/
 	if (stream != NULL) {
-		for (int i = 0; i < 2; i++) {
+		for (int i = 0; i < 4; i++) {
 			fscanf_s(stream, "%d", &tableau[i]);
 			printf("\ntableau %d : %d", i, tableau[i]);
 		}
@@ -250,7 +250,7 @@ int readFile(char* filename, int tableau[]) {
 			return -1;
 		}
 	}
-	return 1;
+	return tableau;
 }
 /*Fin fichier*/
 
