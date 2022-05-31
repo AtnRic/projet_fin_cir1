@@ -487,6 +487,8 @@ var Jungle = {
   Pr: "../images/heros/jungle_hero_droite_sprite.png",
   Gl: "../images/gardes/jungle_guard_droite.png",
   Gr: "../images/gardes/jungle_guard_gauche.png",
+  Death: "../images/heros/retro_hero_death.png",
+
   Theme: "../son/theme_jungle.mp3",
 };
 var Space = {
@@ -514,6 +516,8 @@ var Space = {
   Gr: "../images/gardes/space_guard_red_droite.png",
   Gl: "../images/gardes/space_guard_red_gauche.png",
   Theme: "../son/theme_space.mp3",
+  Death: "../images/heros/retro_hero_death.png",
+
   DeathSound: "../son/sound_hero_death.mp3",
 };
 var Retro = {
@@ -579,6 +583,14 @@ function PHP_Start(anime) {
       MainMusic = PlaySound(Ambiance.Theme);
       sch_Start(anime);
     }
+    if (event.key == "x") {
+      if (cheat == true) {
+        cheat = false;
+      } else {
+        cheat = true;
+      }
+      console.log("AVcheat:" + cheat + "Opcl.");
+    }
   });
 }
 
@@ -635,6 +647,7 @@ let TpStruct;
 let gardeGlobal = [];
 let X;
 let MainMusic;
+let cheat = false;
 
 // Création d'une grid avec spawn du joueur et des gardes.
 function Launch(size, tab, spawnCellId, boolAnimation, solver, tps) {
@@ -800,10 +813,12 @@ function Launch(size, tab, spawnCellId, boolAnimation, solver, tps) {
           tmp_img.style.transform = "rotate(90deg)";
           break;
       }
-      /*
+
       newCell.addEventListener("click", function () {
-        TeleportePlayer(newCell.id);
-      });*/
+        if (cheat) {
+          //TeleportePlayer(newCell.id);
+        }
+      });
     }
   }
 
@@ -878,7 +893,7 @@ function SpawnPlayer(cellId, solver) {
       if (event.key == "p") {
         Solveur(solver);
       } else if (event.key == "ArrowDown") {
-        if (CanMove(PlayerPos, Labyrinthe, "d")) {
+        if (CanMove(PlayerPos, Labyrinthe, "d") || cheat == true) {
           MoveGarde(height, 2);
           activate = true;
           anime({
@@ -894,7 +909,7 @@ function SpawnPlayer(cellId, solver) {
           PlayerAnim(0, -height);
         }
       } else if (event.key == "ArrowUp") {
-        if (CanMove(PlayerPos, Labyrinthe, "t")) {
+        if (CanMove(PlayerPos, Labyrinthe, "t") || cheat == true) {
           MoveGarde(height, 4);
           activate = true;
           anime({
@@ -910,7 +925,7 @@ function SpawnPlayer(cellId, solver) {
           PlayerAnim(0, height);
         }
       } else if (event.key == "ArrowLeft") {
-        if (CanMove(PlayerPos, Labyrinthe, "l")) {
+        if (CanMove(PlayerPos, Labyrinthe, "l") || cheat == true) {
           MoveGarde(height, 3);
           activate = true;
           anime({
@@ -927,7 +942,7 @@ function SpawnPlayer(cellId, solver) {
           PlayerAnim(height, 0);
         }
       } else if (event.key == "ArrowRight") {
-        if (CanMove(PlayerPos, Labyrinthe, "r")) {
+        if (CanMove(PlayerPos, Labyrinthe, "r") || cheat == true) {
           MoveGarde(height, 1);
           activate = true;
           anime({
@@ -1133,7 +1148,6 @@ function Garde(id, dir, pos) {
 // Génération des gardes avec une liste de garde.
 function GenerationGarde() {
   for (i = 0; i < gardeGlobal.length; i++) {
-    console.log("Génération.");
     var Cell = document.getElementById(gardeGlobal[i].pos);
     const GardeDiv = document.createElement("div");
     const GardeImg = document.createElement("img");
