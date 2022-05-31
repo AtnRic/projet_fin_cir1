@@ -4,23 +4,104 @@ echo "<canvas class='confetti' id='canvas'></canvas>";
 $link = "../images/popup/popup_jungle.png";
 echo "
 <div class='popup' style='background-image: url($link)'>
-    <h3>Welcome to the Jungle !</h3>
-    <p>lorem ipsum, dolor sit amet</p>
-</div>
-"
+    <h1>Welcome to the Jungle</h1>
+    <h2>Well Done !</h2>
+    <p>number of steps : </p>
+    <p>shortest solution : </p>
+    <p>longest solution : </p>
+    <div class='star'>
+        <img src='../images/popup/star.png' alt='star'>
+        <img src='../images/popup/star_empty.png' alt='star'>
+    </div>
+    <div class='but'>
+        <button>replay</button>
+        <button>home</button>
+        <button>record</button> 
+        <button>next level</button> 
+    </div>
+    
+     
+</div>";
 ?>
 
 <style>
-    h3, p{
+    h1, h2, p, img{
         background-image: none;
+        text-align: center;
+        align-items: center;
     }
-    .popup{
-        padding: 100px 150px;
+    .star{
+        align-items: center;
+        background-image: none;
         position: absolute;
-        top: 50%;
+        top: 75%;
         left: 50%;
         transform: translateX(-50%) translateY(-50%);
+    }
+    img{
+        display: inline-block;
+        margin: auto;
+        height: 80px;
+        width: 80px;
+
+    }
+    h1{
+        margin-top: 80px;
+        font-size: 3em;
+    }
+    h2{
+        margin-top: -30px;
+        font-size: 2.5em;
+    }
+    p{
+        margin-top: -15px;
+        font-size: 1.5em;
+    }
+    button{
+        background-image: none;
+        font-size: 1.2em;
+        margin: 10px;
+        flex: fit-content;
+    }
+    .but{
+        position: absolute;
+        display: flex;
+        background-image: none;
+        align-items: center;
+    }
+    .popup{
+        width: 60vw;
+        height: calc(0.7 * 50vw);
+        position: absolute;
+        top: 50%;
+        left: 48%;
+        transform: translateX(-50%) translateY(-50%);
         background-size: cover;
+        z-index: 10;
+    }
+    canvas{
+        z-index: 9;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-image: none;
+    }
+
+
+
+
+
+    @media screen and (max-width: 1170px) {
+        .popup h1 {
+            font-size: 2em;
+        }
+        .popup h2 {
+            font-size: 1.5em;
+        }
+        .popup p, button {
+            font-size: 1em;
+        }
+
     }
 </style>
 
@@ -35,9 +116,9 @@ cx = ctx.canvas.width / 2;
 cy = ctx.canvas.height / 2;
 
 let confetti = [];
-    const confettiCount = 300;
-    const gravity = 0.5;
-    const terminalVelocity = 5;
+    const confettiCount = 700;
+    const gravity = 1;
+    const terminalVelocity = 4;
     const drag = 0.075;
     const colors = [
     { front: 'red', back: 'darkred' },
