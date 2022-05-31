@@ -29,7 +29,7 @@ require '../tools/_main_tools.php';
         <img src="../images/accueil/side-palm-right.png" id="palm-right">
         <img src="../images/accueil/left-palm.png" id="palm-left">
         <img src="../images/accueil/top-palm.png" id="top-palm">
-        <a href="jungle.html">
+        <a href="jungle.php">
             <div class="button" id="jungle-but">
                 <h3 class="name">Welcome to the jungle</h3>
                 <p class="level">Easy</p>

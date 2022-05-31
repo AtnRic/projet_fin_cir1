@@ -42,7 +42,7 @@ function popupWin($theme, $step, $score){
         <div class="popup">
             <h1>Congratulation you win</h1>
             <h3>You done <?php echo $step ?> steps</h3>
-            <h3>Your score is <?php echo $score ?> pts</h3>
+            <h3>Your score is <?php echo $score; ?> pts</h3>
             <a href="#"><button>Main menu</button></a>
             <a href="#"><button>Next level</button></a>
         </div>
