@@ -13,8 +13,8 @@
     document.addEventListener("keydown", function (event) {
         if (activate == true) {
             if (event.key == " ") {//quand espace est pressé
-                console.log("yolo");
                 location.href = "#choose" //on scroll vers la page suivante
+                activate = false;
             }
         }
     });
