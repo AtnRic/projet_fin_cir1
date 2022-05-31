@@ -12,13 +12,27 @@
       $nbrGuard = $_POST['nbrGuard']; 
       $nbrTP = $_POST['nbrTP']; 
       $theme = $_POST['theme'];
+      switch($theme){
+        case('j$Jungle'): $theme = 1; break;
+        case('Retro'): $theme = 2; break;
+        case('Space'): $theme = 3; break;
+      }
 
-      $customMaze = array($mazeSize, $nbrGuard, $nbrTP, $theme);
+      $customMaze = array(
+        array($mazeSize), 
+        array($nbrTP), 
+        array($nbrGuard), 
+        array($theme)
+      );
 
       $path = './dataCustomMaze.csv';
-      $file = fopen($path, 'w');
-      fputcsv($file, $customMaze);
+      if ($file = @fopen($path, 'w')) {
+        foreach ($customMaze as $ligne) {
+          fputcsv($file, $ligne);
+        }
+        fclose($file);
     }
+  }
   ?>
   <div class="title">
     <h1>Welcome to the sandbox</h1>
