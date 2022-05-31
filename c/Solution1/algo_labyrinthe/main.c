@@ -1318,20 +1318,68 @@ void ApparitionGardes(char* maze, int cote, int Quantite_Garde) {
 	return;
 }
 
+int readFile(char* filename, int tableau[]) {
+	FILE* stream;
+	errno_t err;
+	//int tableau[2] = { 0 };
+
+	err = fopen_s(&stream, filename, "r");
+	if (err == 0)
+		printf("Le fichier 'file.txt' est ouvert\n");
+	else
+		printf("Le fichier 'file.txt' n'est pas ouvert\n");
+	if (stream == NULL) {
+		printf("\nstream pas OK");
+		return -1;
+	}
+	else printf("\nstream ok");
+
+	fseek(stream, 0, SEEK_SET);
+
+	/*char* value;
+	value = fgetc(stream);
+	printf("%c", value);*/
+	if (stream != NULL) {
+		for (int i = 0; i < 4; i++) {
+			fscanf_s(stream, "%d", &tableau[i]);
+		}
+	}
+
+	if (stream) {
+		err = fclose(stream);
+		if (err == 0) {
+			printf("\nLe fichier 'file.txt' est ferme\n");
+			return 1;
+		}
+
+		else {
+			printf("\nLe fichier 'file.txt' n'est pas ferme\n");
+			return -1;
+		}
+	}
+	return 1;
+}
 
 int main()
 {
+	int tableau[4] = { 0 };
+	readFile("DonneesLabyrinthe.csv", tableau);
+	int SIZ3 = tableau[0];
+	int TELEPORTE = tableau[1];
+	int GARDAVOU = tableau[2];
+	int THEMA = tableau[3];
+	//printf("\nsize : %d\nteleporteur : %d\ngarde : %d\ntheme : %d\n", SIZ3, TELEPORTE, GARDAVOU, THEMA);
 	srand(time(NULL));
-	Lab* newl = NewLab(15);
+	Lab* newl = NewLab(SIZ3);
 	Free* P = NewFree(100);
 	int o = tryPath(newl, 0, P);
-	Teleporteurs_Paire* pairs = recherche_loc_tp(5, letter(newl), newl->size*newl->size);
+	Teleporteurs_Paire* pairs = recherche_loc_tp(TELEPORTE, letter(newl), newl->size*newl->size);
 	letter(newl);
-	Path* S = Solve(newl, pairs, 5);
+	Path* S = Solve(newl, pairs, TELEPORTE);
 //	show(newl, S, pairs, 5);
 //	printf("\n_____ SOLVE  FINAL _____\n\n");
 	printPath(S);
-	printTp(pairs, 5);
+	printTp(pairs, TELEPORTE);
 //	printf("\n____ ____ ____ ____ ____\n\n");
 
 	//Path* W = Solve(newl, NULL, 0);
@@ -1339,6 +1387,6 @@ int main()
 //	printf("\n_____ SOLVE  FINAL _____\n\n");
 //	printPath(W);
 //	printf("\n____ ____ ____ ____ ____\n\n");
-	ApparitionGardes(letterSansPrintf(newl), sqrt(newl->size * newl->size), 3);
+	ApparitionGardes(letterSansPrintf(newl), sqrt(newl->size * newl->size), GARDAVOU);
 	return EXIT_SUCCESS;
 }

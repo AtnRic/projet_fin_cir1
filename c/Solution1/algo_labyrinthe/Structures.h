@@ -123,3 +123,5 @@ typedef struct Garde {
 
 void ApparitionGardes(char* maze, int cote, int Quantite_Garde);
 /*Fin gardes*/
+
+int readFile(char* filename, int tableau[]);
