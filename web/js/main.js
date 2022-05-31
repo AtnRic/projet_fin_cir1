@@ -864,8 +864,7 @@ function SpawnPlayer(cellId, solver) {
     if (activate == false) {
       if (event.key == "p") {
         Solveur(solver);
-      }
-      if (event.key == "ArrowDown") {
+      } else if (event.key == "ArrowDown") {
         if (CanMove(PlayerPos, Labyrinthe, "d")) {
           activate = true;
           anime({
@@ -875,14 +874,13 @@ function SpawnPlayer(cellId, solver) {
             duration: 500,
             loop: false,
           });
-          MoveGarde(height);
+          MoveGarde(height, 2);
           PlayerPos += cellNum;
           let newPos = document.getElementById(PlayerPos);
           newPos.appendChild(Player);
           PlayerAnim(0, -height);
         }
-      }
-      if (event.key == "ArrowUp") {
+      } else if (event.key == "ArrowUp") {
         if (CanMove(PlayerPos, Labyrinthe, "t")) {
           activate = true;
           anime({
@@ -892,14 +890,13 @@ function SpawnPlayer(cellId, solver) {
             duration: 500,
             loop: false,
           });
-          MoveGarde(height);
+          MoveGarde(height, 4);
           PlayerPos -= cellNum;
           let newPos = document.getElementById(PlayerPos);
           newPos.appendChild(Player);
           PlayerAnim(0, height);
         }
-      }
-      if (event.key == "ArrowLeft") {
+      } else if (event.key == "ArrowLeft") {
         if (CanMove(PlayerPos, Labyrinthe, "l")) {
           activate = true;
           anime({
@@ -909,15 +906,14 @@ function SpawnPlayer(cellId, solver) {
             duration: 500,
             loop: false,
           });
-          MoveGarde(height);
+          MoveGarde(height, 3);
           PlayerPos -= 1;
           let newPos = document.getElementById(PlayerPos);
           PlayerImg.src = Ambiance.Pl;
           newPos.appendChild(Player);
           PlayerAnim(height, 0);
         }
-      }
-      if (event.key == "ArrowRight") {
+      } else if (event.key == "ArrowRight") {
         if (CanMove(PlayerPos, Labyrinthe, "r")) {
           activate = true;
           anime({
@@ -927,14 +923,25 @@ function SpawnPlayer(cellId, solver) {
             duration: 500,
             loop: false,
           });
-          MoveGarde(height);
+          MoveGarde(height, 1);
           PlayerPos += 1;
           let newPos = document.getElementById(PlayerPos);
           PlayerImg.src = Ambiance.Pr;
           newPos.appendChild(Player);
           PlayerAnim(-height, 0);
         }
+      } else {
+        MoveGarde(height, -1);
       }
+      if (PlayerPos == LabSize * LabSize - 1) {
+        Win();
+      }
+      for (i = 0; i < gardeGlobal.length; i++) {
+        if (gardeGlobal[i].pos == PlayerPos) {
+          Loose();
+        }
+      }
+      activate = true;
       setTimeout(function () {
         if (TeleporterStart.includes(PlayerPos)) {
           for (p = 0; p < TpStruct.length; p++) {
@@ -960,6 +967,15 @@ function SpawnPlayer(cellId, solver) {
     loop: true,
   });
   //#endregion
+}
+
+// Niveau fini.
+function Win() {
+  console.log("fini.");
+}
+// Niveau perdu.
+function Loose() {
+  console.log("stop.");
 }
 
 // Autorisation d'un mouvement d'une case à une autre.
@@ -1120,7 +1136,7 @@ function GenerationGarde() {
 }
 
 // Mouvement d'un garde dans une certaine position.
-function MoveGarde(size) {
+function MoveGarde(size, move) {
   for (i = 0; i < gardeGlobal.length; i++) {
     indexIndent = 0;
     XposIndent = 0;
@@ -1168,18 +1184,42 @@ function MoveGarde(size) {
         }
         break;
     }
+    console.log(PlayerPos);
+
+    switch (gardeGlobal[i].dir) {
+      case 1: // vers la droite.
+        if (PlayerPos == gardeGlobal[i].pos + 1 && move == 3) {
+          Loose();
+        }
+        break;
+      case 2: //vers le bas.
+        if (PlayerPos == gardeGlobal[i].pos + LabSize && move == 4) {
+          Loose();
+        }
+        break;
+      case 3: // vers la gauche.
+        if (PlayerPos == gardeGlobal[i].pos - 1 && move == 1) {
+          Loose();
+        }
+        break;
+      case 4: // vers la haut.
+        if (PlayerPos == gardeGlobal[i].pos - LabSize && move == 2) {
+          Loose();
+        }
+        break;
+    }
+
+    //console.log(PlayerPos + "PlayerPos == gardeGlobal[i].pos + indexIndent != " + (gardeGlobal[i].pos + indexIndent));
 
     gardeGlobal[i].pos += indexIndent;
     let newCell = document.getElementById(gardeGlobal[i].pos);
-    console.log("new pos: " + gardeGlobal[i].pos + " ID: " + gardeGlobal[i].id);
+    //console.log("new pos: " + gardeGlobal[i].pos + " ID: " + gardeGlobal[i].id);
     let Garde = document.getElementById("G_div" + gardeGlobal[i].id);
     let GardeImg = document.getElementById("G_ui" + gardeGlobal[i].id);
 
     if (indexIndent < 0) {
-      console.log("Garde");
       GardeImg.src = Ambiance.Gl;
     } else {
-      console.log("Gard2");
       GardeImg.src = Ambiance.Gr;
     }
 
