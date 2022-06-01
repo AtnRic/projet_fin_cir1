@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Connexion</title>
     <link rel="stylesheet" type="text/css" href="../css/log.css">
+    <link rel='icon' href='../images/front/favicon.ico' type='image/x-icon'>
     <meta name="viewport" content="width=device-width,initial-scale=1">
 </head>
 <body>

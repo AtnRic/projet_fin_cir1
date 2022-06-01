@@ -2,7 +2,9 @@
 <html lang='fr'>
 
 <head>
+  <title>Maze'ltov - customisation</title>
   <link rel="stylesheet" type="text/css" href="../css/custom.css">
+  <link rel='icon' href='../images/front/favicon.ico' type='image/x-icon'>
 </head>
 
 <body>
