@@ -13,7 +13,7 @@
       $nbrTP = $_POST['nbrTP']; 
       $theme = $_POST['theme'];
       switch($theme){
-        case('j$Jungle'): $theme = 1; break;
+        case('Jungle'): $theme = 1; break;
         case('Retro'): $theme = 2; break;
         case('Space'): $theme = 3; break;
       }
