@@ -10,6 +10,10 @@
 <div class="global">
     <table id="container"></table>
 </div>
+<?php
+    $theme = 'jungle';
+    include 'popups/popup_outro.php';
+    ?>
 </body>
 <script src="../js/conf.js"></script>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>

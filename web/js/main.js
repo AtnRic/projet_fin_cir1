@@ -487,7 +487,7 @@ var Jungle = {
   Pr: "../images/heros/jungle_hero_droite_sprite.png",
   Gl: "../images/gardes/jungle_guard_droite.png",
   Gr: "../images/gardes/jungle_guard_gauche.png",
-  Death: "../images/heros/retro_hero_death.png",
+  Death: "../images/heros/jungle_hero_death.png",
 
   Theme: "../son/theme_jungle.mp3",
 };
@@ -516,7 +516,7 @@ var Space = {
   Gr: "../images/gardes/space_guard_red_droite.png",
   Gl: "../images/gardes/space_guard_red_gauche.png",
   Theme: "../son/theme_space.mp3",
-  Death: "../images/heros/retro_hero_death.png",
+  Death: "../images/heros/space_hero_death.png",
 
   DeathSound: "../son/sound_hero_death.mp3",
 };
