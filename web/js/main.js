@@ -485,8 +485,11 @@ var Jungle = {
   ],
   Pl: "../images/heros/jungle_hero_gauche_sprite.png",
   Pr: "../images/heros/jungle_hero_droite_sprite.png",
-  Gl: "../images/gardes/jungle_guard_droite.png",
-  Gr: "../images/gardes/jungle_guard_gauche.png",
+
+  Gl: "../images/gardes/jungle_guard_gauche.png",
+  Gr: "../images/gardes/jungle_guard_droite.png",
+  Gar: "../images/gardes/jungle_guard_attack_droite.png",
+  Gal: "../images/gardes/jungle_guard_attack_gauche.png",
   Death: "../images/heros/jungle_hero_death.png",
 
   Theme: "../son/theme_jungle.mp3",
@@ -513,8 +516,12 @@ var Space = {
   ],
   Pl: "../images/heros/space_hero_gauche.png",
   Pr: "../images/heros/space_hero_droite.png",
+
   Gr: "../images/gardes/space_guard_red_droite.png",
   Gl: "../images/gardes/space_guard_red_gauche.png",
+  Gar: "../images/gardes/space_guard_attack_droite.png",
+  Gal: "../images/gardes/space_guard_attack_gauche.png",
+
   Theme: "../son/theme_space.mp3",
   Death: "../images/heros/space_hero_death.png",
 
@@ -545,6 +552,8 @@ var Retro = {
   Death: "../images/heros/retro_hero_death.png",
   Gr: "../images/gardes/pac_guard_blue_droite.png",
   Gl: "../images/gardes/pac_guard_blue_gauche.png",
+  Gar: "../images/gardes/retro_guard_attack_droite.png",
+  Gal: "../images/gardes/retro_guard_attack_gauche.png",
 
   Theme: "../son/theme_retro.mp3",
   DeathSound: "../son/sound_hero_death.mp3",
@@ -590,7 +599,6 @@ function PHP_Start(anime, custom, data) {
       } else {
         cheat = true;
       }
-      console.log("AVcheat:" + cheat + "Opcl.");
     }
   });
 }
@@ -623,8 +631,8 @@ function sch_Start(anime, custom, data) {
     for (i = 0; i < gardeOut.length; i++) {
       gardeList.push(new Garde(i, gardeOut[i][1], gardeOut[i][0]));
     }
-    console.log(gardeList);
-    console.log(tpOut);
+    //console.log(gardeList);
+    //console.log(tpOut);
 
     if (output.length == 0) {
       location.reload();
@@ -643,8 +651,6 @@ function sch_Start(anime, custom, data) {
       "../tools/function.php",
       "generation",
       function Handle(output) {
-        //console.log("Sortie du C : " + output);
-        console.log(output);
         BaseOut = output;
         newOut = output.split(";");
         solveOut = newOut[1].split(",");
@@ -668,8 +674,8 @@ function sch_Start(anime, custom, data) {
         for (i = 0; i < gardeOut.length; i++) {
           gardeList.push(new Garde(i, gardeOut[i][1], gardeOut[i][0]));
         }
-        console.log(gardeList);
-        console.log(tpOut);
+        //console.log(gardeList);
+        //console.log(tpOut);
 
         if (output.length == 0) {
           location.reload();
@@ -701,6 +707,7 @@ let gardeGlobal = [];
 let X;
 let MainMusic;
 let cheat = false;
+let finish = false;
 
 // Création d'une grid avec spawn du joueur et des gardes.
 function Launch(size, tab, spawnCellId, boolAnimation, solver, tps) {
@@ -708,7 +715,7 @@ function Launch(size, tab, spawnCellId, boolAnimation, solver, tps) {
   LabSize = size;
 
   //#region ROWS
-  console.log("Size: " + size);
+  //console.log("Size: " + size);
   makeRows(size);
   cellNum = size;
   //#endregion
@@ -905,7 +912,9 @@ function Launch(size, tab, spawnCellId, boolAnimation, solver, tps) {
   }, 3000);
   //#endregion
 
+  //#region SAVING
   Save();
+  //#endregion
 }
 
 // Génération du joueur.
@@ -944,6 +953,7 @@ function SpawnPlayer(cellId, solver) {
   //#region Input
   activate = false;
   document.addEventListener("keydown", function (event) {
+    console.log(event);
     if (activate == false && finish == false) {
       if (event.key == "p") {
         Solveur(solver);
@@ -1017,7 +1027,7 @@ function SpawnPlayer(cellId, solver) {
           newPos.appendChild(Player);
           PlayerAnim(-height, 0);
         }
-      } else {
+      } else if (event.key == " ") {
         MoveGarde(height, -1);
       }
       if (PlayerPos == LabSize * LabSize - 1) {
@@ -1070,15 +1080,12 @@ function Win() {
   PlaySound("../son/sound_hero_win.mp3");
   initConfetti();
   render();
-  console.log(Solver.length); // Trajet le plus court.
-  console.log(Mouvement); // Trajet du joueur.
-  console.log("fini.");
+  //console.log(Solver.length); // Trajet le plus court.
+  //console.log(Mouvement); // Trajet du joueur.
 }
 
-let finish = false;
 // Niveau perdu.
 function Loose() {
-  console.log("stop.");
   MainMusic.pause();
   PlaySound(Ambiance.DeathSound);
   finish = true;
@@ -1146,7 +1153,7 @@ function Save() {
     "../tools/function.php",
     "save",
     function Handle(output) {
-      console.log(output);
+      //console.log(output);
     },
     BaseOut
   );
@@ -1267,7 +1274,9 @@ function MoveGarde(size, move) {
     indexIndent = 0;
     XposIndent = 0;
     YposIndent = 0;
+    Attack = false;
 
+    //#region Position
     switch (gardeGlobal[i].dir) {
       case 1: // vers la droite.
         if (!CanMove(gardeGlobal[i].pos, Labyrinthe, "l")) {
@@ -1310,42 +1319,53 @@ function MoveGarde(size, move) {
         }
         break;
     }
+    //#endregion
 
+    //#region Check
     switch (gardeGlobal[i].dir) {
       case 1: // vers la droite.
         if (PlayerPos == gardeGlobal[i].pos - 1 && move == 1) {
           Loose();
+          Attack = true;
         }
         break;
       case 2: //vers le bas.
         if (PlayerPos == gardeGlobal[i].pos + LabSize && move == 4) {
           Loose();
+          Attack = true;
         }
         break;
       case 3: // vers la gauche.
         if (PlayerPos == gardeGlobal[i].pos + 1 && move == 3) {
           Loose();
+          Attack = true;
         }
         break;
       case 4: // vers la haut.
         if (PlayerPos == gardeGlobal[i].pos - LabSize && move == 2) {
           Loose();
+          Attack = true;
         }
         break;
     }
+    //#endregion
 
-    //console.log(PlayerPos + "PlayerPos == gardeGlobal[i].pos + indexIndent != " + (gardeGlobal[i].pos + indexIndent));
-
+    //#region Animation
     gardeGlobal[i].pos += indexIndent;
     let newCell = document.getElementById(gardeGlobal[i].pos);
-    //console.log("new pos: " + gardeGlobal[i].pos + " ID: " + gardeGlobal[i].id);
     let Garde = document.getElementById("G_div" + gardeGlobal[i].id);
     let GardeImg = document.getElementById("G_ui" + gardeGlobal[i].id);
 
     if (indexIndent < 0) {
       GardeImg.src = Ambiance.Gl;
+      if (Attack == true) {
+        GardeImg.src = Ambiance.Gal;
+      }
     } else {
       GardeImg.src = Ambiance.Gr;
+      if (Attack == true) {
+        GardeImg.src = Ambiance.Gar;
+      }
     }
 
     let X;
@@ -1373,6 +1393,7 @@ function MoveGarde(size, move) {
       direction: "reverse",
       duration: 150,
     });
+    //#endregion
   }
 }
 
