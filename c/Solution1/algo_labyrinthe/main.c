@@ -1267,7 +1267,7 @@ void ApparitionGardes(char* maze, int cote, int Quantite_Garde) {
 				else break;
 			}
 			if (i != 0) {
-				if (count >= 3 && sortie >= 1) {
+				if (count >= 3 && sortie >= 1 && i != 0) {
 					//ajout i à la liste chainée
 					DoubleLinkedListElem* elem = NewDoubleLinkedListItem(i);
 					DoubleLinkedListElem* elemDirection = NewDoubleLinkedListItem(1);
@@ -1290,7 +1290,7 @@ void ApparitionGardes(char* maze, int cote, int Quantite_Garde) {
 				else break;
 			}
 			if (i != 0) {
-				if (count >= 3 && sortie >= 1) {
+				if (count >= 3 && sortie >= 1 && i != 0) {
 					//ajout i à la liste chainée
 					DoubleLinkedListElem* elem = NewDoubleLinkedListItem(i);
 					DoubleLinkedListElem* elemDirection = NewDoubleLinkedListItem(2);
@@ -1363,7 +1363,7 @@ int readFile(char* filename, int tableau[]) {
 int main()
 {
 	int tableau[4] = { 0 };
-	readFile("DonneesLabyrinthe.csv", tableau);
+	readFile("../pages/dataCustomMaze.csv", tableau);
 	int SIZ3 = tableau[0];
 	int TELEPORTE = tableau[1];
 	int GARDAVOU = tableau[2];
