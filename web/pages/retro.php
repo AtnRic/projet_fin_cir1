@@ -21,6 +21,6 @@
 <script src="../js/main.js"></script>
 <script>
     SetAmbiance("Retro");
-    PHP_Start(true, false, null);
+    PHP_Start(false, false, null);
     </script>
 </html>
