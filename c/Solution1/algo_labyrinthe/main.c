@@ -1363,7 +1363,7 @@ int readFile(char* filename, int tableau[]) {
 int main()
 {
 	int tableau[4] = { 0 };
-	readFile("../pages/dataCustomMaze.csv", tableau);
+	readFile("DonneesLabyrinthe.csv", tableau);
 	int SIZ3 = tableau[0];
 	int TELEPORTE = tableau[1];
 	int GARDAVOU = tableau[2];
