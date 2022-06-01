@@ -29,8 +29,8 @@ require '../tools/_main_tools.php';
         <img src="../images/accueil/side-palm-right.png" id="palm-right">
         <img src="../images/accueil/left-palm.png" id="palm-left">
         <img src="../images/accueil/top-palm.png" id="top-palm">
-        <a href="?MazeSize=15&nbrTP=3&nbrGuard=3&theme=1">
-            <?php
+        <a href="?MazeSize=22&nbrTP=4&nbrGuard=4&theme=2">
+        <?php
             if(isset($_GET['MazeSize']) && isset($_GET['nbrTP']) && isset($_GET['nbrGuard']) && isset($_GET['theme'])){
                 $mazeSize = $_GET['MazeSize'];
                 $nbrTP = $_GET['nbrTP'];
@@ -49,9 +49,10 @@ require '../tools/_main_tools.php';
                       fputcsv($file, $ligne);
                     }
                     fclose($file);
-                    header("Location:jungle.html");
+                    header("Location:jungle.php");
                   }
                   else header("Location:home.php");
+
             }
             ?>
             <div class="button" id="jungle-but">
@@ -91,7 +92,7 @@ require '../tools/_main_tools.php';
                       fputcsv($file, $ligne);
                     }
                     fclose($file);
-                    header("Location:retro.html");
+                    header("Location:retro.php");
                   }
                   else header("Location:home.php");
 
