@@ -575,6 +575,7 @@ let cells = document.getElementsByClassName("cell");
 // Lancement complet du jeu.
 
 let start = false;
+document.getElementById("popup").style.zIndex = -10;
 
 function PHP_Start(anime, custom, data) {
   document.addEventListener("keydown", function (event) {
@@ -1057,6 +1058,17 @@ function SpawnPlayer(cellId, solver) {
 
 // Niveau fini.
 function Win() {
+  MainMusic.pause();
+  document.getElementById("short").innerHTML += " " + Solver.length;
+  document.getElementById("long").innerHTML += " " + 2 * Solver.length;
+  document.getElementById("number").innerHTML += " " + Mouvement;
+
+  document.getElementById("popup").style.zIndex = 10;
+
+  document.getElementById("popup").style.zIndex = 10;
+  PlaySound("../son/sound_hero_win.mp3");
+  initConfetti();
+  render();
   console.log(Solver.length); // Trajet le plus court.
   console.log(Mouvement); // Trajet du joueur.
   console.log("fini.");
@@ -1065,19 +1077,23 @@ function Win() {
 let finish = false;
 // Niveau perdu.
 function Loose() {
-  console.log("stop.");
-  MainMusic.pause();
-  PlaySound(Ambiance.DeathSound);
-  finish = true;
-  let player = document.getElementById("playerimg");
-  player.src = Ambiance.Death;
-  anime({
-    targets: "#playerimg",
-    translateX: [X, -(7.5 * X)],
-    easing: "steps(8)",
-    duration: 1500,
-    loop: false,
-  });
+  if (true) {
+    Win();
+  } else {
+    console.log("stop.");
+    MainMusic.pause();
+    PlaySound(Ambiance.DeathSound);
+    finish = true;
+    let player = document.getElementById("playerimg");
+    player.src = Ambiance.Death;
+    anime({
+      targets: "#playerimg",
+      translateX: [X, -(7.5 * X)],
+      easing: "steps(8)",
+      duration: 1500,
+      loop: false,
+    });
+  }
 }
 
 // Autorisation d'un mouvement d'une case à une autre.
