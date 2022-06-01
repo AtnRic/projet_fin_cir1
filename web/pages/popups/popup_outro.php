@@ -1,7 +1,7 @@
 <?php
 switch($theme){
     case 'jungle':
-        $hyperlink = './retro.html';
+        $hyperlink = './retro.php';
         $link = "../images/popup/popup_jungle.png";
         break;
     case 'retro':
@@ -30,10 +30,10 @@ echo "
     </div>
     <div class='but'>
         <button>replay</button>
-        <button>home</button>
+        <button><a href='./home.php'>home</a></button>
         <button id='save'>save</button>";
-        if ($theme == 'jungle' || $theme == 'retro'){
-            echo "<button><a href='$hyperlink'>next level</a></button>";
+        if ($theme == 'jungle'){
+            echo "<button><a href='./retro.php'>next level</a></button>";
         }
     echo "</div>
 

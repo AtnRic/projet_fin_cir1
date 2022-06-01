@@ -1,5 +1,5 @@
 <?php
-echo "<canvas class='confetti' id='canvas'></canvas>";
+//echo "<canvas class='confetti' id='canvas'></canvas>";
 echo "
 <div id='popup'>
     <h1>Tartaros Fantasy</h1>
@@ -15,9 +15,9 @@ echo "
     </div>
     <div class='but'>
         <a><p>replay</p></a>
-        <a><p>home</p></a>
+        <a href='./home.php'><p>home</p></a>
         <a id='save'><p>save</p></a>
-        <a><p>next level</p></a>
+        <a href='./space.php'><p>next level</p></a>
     </div>
 
 </div>";
@@ -28,8 +28,8 @@ echo "
     }
     #popup{
         position: absolute;
-        top: 21vh;
-        height: 50vh;
+        top: 22.2vh;
+        height: 47vh;
         width: 60vh;
         left: 50%;
         transform: translateX(-50%);
@@ -38,8 +38,8 @@ echo "
         border-width: 5px;
         border-color: #0ff;
         box-shadow: 0 0 10px 5px #0ff;
-        background-color: rgba(0,4, 23, 0.8);
-        border-radius: 10px;
+        background-color: rgba(0,4, 23, 0.75);
+        border-radius: 20px;
         padding: 20px;
 
         text-align: center;
@@ -50,12 +50,10 @@ echo "
         background-color: transparent;
     }
     h1{
-        font-size: 2em;
-
-
+        font-size: 1.3em;
     }
     h2{
-        font-size: 1.3em;
+        font-size: 1.5em;
         margin-bottom: 10px;
     }
     p{
@@ -63,17 +61,21 @@ echo "
     }
     a{
         display: inline-block;
-        margin: 10px;
-
+        margin: 5px;
+        font-size: 0.8em;
+        border-style: solid;
+        border-width: 5px;
+        border-color: transparent;
+        border-radius: 10px;
+        padding: 0 5px;
+        cursor: pointer;
     }
     a:hover{
         border-style: solid;
         border-width: 5px;
         border-color: #0ff;
         box-shadow: 0 0 10px 3px #0ff;
-        background-color: #000417;
-        border-radius: 10px;
-        padding: 0 5px;
+        background-color: transparent;
     }
 
     .star{
@@ -82,7 +84,7 @@ echo "
         width: 100%;
         justify-content: center;
         display: flex;
-        margin-top: -20px;
+
     }
     .center_img{
         background-color: transparent;
@@ -100,8 +102,15 @@ echo "
         height: 50px;
         width: 50px;
     }
+    .but{
+        position: relative;
+        top: 25px;
+    }
     .but, a{
         background-color: transparent;
+    }
+    a p{
+        position: static;
     }
 </style>
 
