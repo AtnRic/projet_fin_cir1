@@ -28,7 +28,7 @@ function printFile($mazeSize, $nbrTP, $nbrGuard, $theme){
     
   switch($theme){
     case "1" : header("jungle.html"); break;
-    case "2" : header("retro.html"); break;
+    case "2" : header("retro.php"); break;
     case "3" : header("space.php"); break;
   }
 }

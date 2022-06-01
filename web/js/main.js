@@ -493,6 +493,7 @@ var Jungle = {
   Death: "../images/heros/jungle_hero_death.png",
 
   Theme: "../son/theme_jungle.mp3",
+  DeathSound: "../son/sound_hero_death.mp3",
 };
 var Space = {
   W1: [
@@ -588,7 +589,7 @@ document.getElementById("popup").style.zIndex = -10;
 
 function PHP_Start(anime, custom, data) {
   document.addEventListener("keydown", function (event) {
-    if (!start) {
+    if (!start && event.key != "m" && event.key != "r") {
       start = true;
       MainMusic = PlaySound(Ambiance.Theme);
       sch_Start(anime, custom, data);
@@ -599,6 +600,12 @@ function PHP_Start(anime, custom, data) {
       } else {
         cheat = true;
       }
+    }
+    if (event.key == "m") {
+      ThemeSound();
+    }
+    if (event.key == "r") {
+      location.reload();
     }
   });
 }
@@ -953,7 +960,6 @@ function SpawnPlayer(cellId, solver) {
   //#region Input
   activate = false;
   document.addEventListener("keydown", function (event) {
-    console.log(event);
     if (activate == false && finish == false) {
       if (event.key == "p") {
         Solveur(solver);
@@ -1043,7 +1049,6 @@ function SpawnPlayer(cellId, solver) {
         if (TeleporterStart.includes(PlayerPos)) {
           for (p = 0; p < TpStruct.length; p++) {
             if (TpStruct[p][0] == PlayerPos) {
-              PlaySound("../son/sound_teleportation.mp3");
               TeleportePlayer(TpStruct[p][1]);
               setTimeout(function () {
                 activate = false;
@@ -1397,6 +1402,13 @@ function MoveGarde(size, move) {
   }
 }
 
+function Hard() {
+  for (i = 0; i < gardeGlobal.length; i++) {
+    let GardeImg = document.getElementById("G_ui" + gardeGlobal[i].id);
+    GardeImg.style.visibility = "hidden";
+  }
+}
+
 let Solved = false;
 // Envoyer la liste de cases qui composent le chemin du solveur.
 function Solveur(tab) {
@@ -1514,13 +1526,14 @@ function TeleportePlayer(cellId) {
   let newPos = document.getElementById(PlayerPos);
   let Player = document.getElementById("player");
 
+  PlaySound("../son/sound_teleportation.mp3");
   anime({
     targets: "#player",
     scale: [{ value: 0, easing: "easeOutSine", duration: 500 }],
   });
   setTimeout(function () {
     newPos.appendChild(Player);
-
+    PlaySound("../son/sound_teleportation.mp3");
     anime({
       targets: "#player",
       scale: [{ value: 1, easing: "easeOutSine", duration: 500 }],
@@ -1533,4 +1546,22 @@ function PlaySound(path) {
   let file = new Audio(path);
   file.play();
   return file;
+}
+
+let ThemeSoundActivate = true;
+// Pause sur le son principal.
+function ThemeSound() {
+  if (MainMusic != null) {
+    if (ThemeSoundActivate == true) {
+      MainMusic.pause();
+      ThemeSoundActivate = false;
+    } else {
+      MainMusic.play();
+      ThemeSoundActivate = true;
+    }
+  }
+}
+
+function Return() {
+  document.location.href = "../pages/home.php";
 }
