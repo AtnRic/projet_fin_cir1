@@ -576,12 +576,12 @@ let cells = document.getElementsByClassName("cell");
 
 let start = false;
 
-function PHP_Start(anime) {
+function PHP_Start(anime, custom, data) {
   document.addEventListener("keydown", function (event) {
     if (!start) {
       start = true;
       MainMusic = PlaySound(Ambiance.Theme);
-      sch_Start(anime);
+      sch_Start(anime, custom, data);
     }
     if (event.key == "x") {
       if (cheat == true) {
@@ -594,8 +594,9 @@ function PHP_Start(anime) {
   });
 }
 
-function sch_Start(anime) {
-  PHP_Function("../tools/function.php", "generation", function Handle(output) {
+function sch_Start(anime, custom, data) {
+  if (custom == true) {
+    let output = data;
     //console.log("Sortie du C : " + output);
     console.log(output);
     BaseOut = output;
@@ -636,7 +637,54 @@ function sch_Start(anime) {
       solveOut,
       tpOut
     );
-  });
+  } else {
+    PHP_Function(
+      "../tools/function.php",
+      "generation",
+      function Handle(output) {
+        //console.log("Sortie du C : " + output);
+        console.log(output);
+        BaseOut = output;
+        newOut = output.split(";");
+        solveOut = newOut[1].split(",");
+        Solver = solveOut;
+        tpOut = newOut[2].split(",");
+        gardeOut = newOut[3].split(",");
+
+        for (i = 0; i < tpOut.length; i++) {
+          tpOut[i] = tpOut[i].split(":").map(function (item) {
+            return parseInt(item, 10);
+          });
+        }
+
+        for (i = 0; i < gardeOut.length; i++) {
+          gardeOut[i] = gardeOut[i].split(":").map(function (item) {
+            return parseInt(item, 10);
+          });
+        }
+
+        gardeList = [];
+        for (i = 0; i < gardeOut.length; i++) {
+          gardeList.push(new Garde(i, gardeOut[i][1], gardeOut[i][0]));
+        }
+        console.log(gardeList);
+        console.log(tpOut);
+
+        if (output.length == 0) {
+          location.reload();
+        }
+        gardeGlobal = gardeList;
+        Launch(
+          Math.sqrt(newOut[0].length / 2),
+          Array.from(newOut[0]),
+          0,
+          anime,
+          solveOut,
+          tpOut
+        );
+      }
+    );
+  }
 }
 
 // Variables globales.

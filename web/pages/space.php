@@ -17,7 +17,7 @@
 </script>
 <script>
     SetAmbiance("Space");
-    PHP_Start(true);
+    PHP_Start(true, false, null);
 </script>
 
 </html>
