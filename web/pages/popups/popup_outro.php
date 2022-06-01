@@ -3,43 +3,54 @@
 echo "<canvas class='confetti' id='canvas'></canvas>";
 $link = "../images/popup/popup_jungle.png";
 echo "
-<div class='popup' style='background-image: url($link)'>
+<div id='popup' style='background-image: url($link)'>
     <h1>Welcome to the Jungle</h1>
     <h2>Well Done !</h2>
-    <p>number of steps : </p>
-    <p>shortest solution : </p>
-    <p>longest solution : </p>
+    <p id='number'>number of steps : </p>
+    <p id='short'>shortest solution : </p>
+    <p id='long'>longest solution : </p>
     <div class='star'>
-        <img src='../images/popup/star.png' alt='star'>
-        <img src='../images/popup/star_empty.png' alt='star'>
+        <div class='center_img'>
+            <img src='../images/popup/star.png' alt='star'>
+            <img src='../images/popup/star_empty.png' alt='star'>
+        </div>  
     </div>
     <div class='but'>
         <button>replay</button>
         <button>home</button>
-        <button>record</button> 
+        <button id='save'>save</button> 
         <button>next level</button> 
     </div>
-    
-     
+
 </div>";
 ?>
 
-<style>
+<?php
+if($theme == 'jungle'){
+    echo "
+    <style>
     h1, h2, p, img{
         background-image: none;
         text-align: center;
         align-items: center;
     }
     .star{
-        align-items: center;
         background-image: none;
-        position: absolute;
-        top: 75%;
-        left: 50%;
-        transform: translateX(-50%) translateY(-50%);
+        width: 100%;
+        justify-content: center;
+        display: flex;
+        margin-top: -20px;
+    }
+    .center_img{
+        width: 200px;
+        background-image: none;
+        justify-content: center;
+        display: flex;
     }
     img{
-        display: inline-block;
+        display: flex;
+        justify-content: center;
+
         margin: auto;
         height: 80px;
         width: 80px;
@@ -60,18 +71,21 @@ echo "
     button{
         background-image: none;
         font-size: 1.2em;
+        display: flex;
+        flex-wrap: wrap;
         margin: 10px;
-        flex: fit-content;
+        top: 30px;
     }
     .but{
         position: absolute;
         display: flex;
         background-image: none;
-        align-items: center;
+        width: 100%;
+        justify-content: center;
     }
-    .popup{
-        width: 60vw;
-        height: calc(0.7 * 50vw);
+    #popup{
+        width: 70vw;
+        height: calc(0.82 * 50vw);
         position: absolute;
         top: 50%;
         left: 48%;
@@ -91,7 +105,7 @@ echo "
 
 
 
-    @media screen and (max-width: 1170px) {
+    @media screen and (max-width: 1300px) {
         .popup h1 {
             font-size: 2em;
         }
@@ -103,7 +117,11 @@ echo "
         }
 
     }
-</style>
+</style>";
+}
+
+?>
+
 
 
 <script>

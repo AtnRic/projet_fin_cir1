@@ -12,6 +12,7 @@
         <table id="container"></table>
     </div>
     <?php
+    $theme = 'jungle';
     include 'popups/popup_outro.php';
     ?>
 </body>  
