@@ -209,7 +209,6 @@ if ($count == 3) {
 
 //si les 3 conditions sont vérifiées :
 if ($count == 4) {
-    echo Console("Not to twooter.");
 
     $login = $_POST['pseudo'];
     $mdp_hash = hash('sha256', $_POST['mdpin']); //on fait un hash du mot de passe pour ne pas stocker le mot de passe en clair
@@ -237,7 +236,7 @@ if (isset($_POST['mdpco'])) {
                             border-width: 2px;
                             border-color:red;
                         }
-                        </style>";
+              </style>";
     } else {
         $count++;
     }

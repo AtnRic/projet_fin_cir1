@@ -103,6 +103,99 @@ function signin($pseudo): bool
     return false;
 }
 
+//récupére le rank du joueur
+function Rank_User($username){
+    $connexion=connect();
+    $resultat=mysqli_query($connexion,"SELECT Nbr_Points FROM dbjeu WHERE Pseudo='$username'");
+    $Points=mysqli_fetch_assoc($resultat);
+    if($resultat!=NULL){
+        switch($Points){
+            case $Points>=0 && $Points<10000:
+                $rank=0;//Wood rank de départ
+                break;
+            case $Points>=10000 && $Points<25000:
+                $rank=1;//Copper premier rank
+                break;
+            case $Points>=25000 && $Points<50000:
+                $rank=2;//Silver deuxieme rank
+                break;
+            case $Points>=50000 && $Points<100000:
+                $rank=3;//Gold Troisieme rank
+                break;
+            case $Points>=100000 && $Points<200000:
+                $rank=4;//Diamond Quatrieme rank
+                break;
+            case $Points>=200000:
+                $rank=5;//Chad of the maze Cinquieme rank   
+                break;     
+        }
+        return $rank;
+    }
+    else{
+        echo"error resultat";
+    }
+}
+
+//récupére les points de l'utilisateur pour les display
+function GetUserPoints($username){
+    $connexion=connect();
+    $resultat=mysqli_query($connexion,"SELECT Nbr_Points FROM dbjeu WHERE Pseudo='$username'");
+    $Points=mysqli_fetch_assoc($resultat);
+    return $Points;
+
+}
+
+//Reset les points de l'utilisateur connecté
+function ResetPoint($username){
+    $connexion=connect();
+    $resultat=mysqli_query($connexion,"UPDATE Nbr_Points=0 FROM dbjeu WHERE Pseudo='$username'");
+}
+
+function GetUserLevels($username){
+    $connexion=connect();
+    $resultat=mysqli_query($connexion,"SELECT 'NAME,SIZE,GUARD_NUMBER,TELEPORTER_NUMBER,THEME' FROM 'custom_level,users' WHERE 'users.Pseudo=custom_level.AUTHOR'" );
+    if($resultat!=NULL){
+        while ($niveaux = mysqli_fetch_assoc($resultat)){
+            $Name = $niveaux['NAME'];
+            $Size = $niveaux['SIZE'];
+            $Guard = $niveaux['GUARD_NUMBER'];
+            $Teleporteur = $niveaux['TELEPORTER_NUMBER'];
+            $Theme = $niveaux['THEME'];
+            ?>
+            <div id="niveaux_display">
+                <p><?php echo $Name;?></p>
+                <p>Size:<?php echo $Size;?></p>
+                <p>Guard Number:<?php echo $Guard;?></p>
+                <p>Portal Number:<?php echo $Teleporteur;?></p>
+                <p>Background:<?php echo GetTheme($Theme);?></p>
+                <input type="submit" value="Share" href="../tools/rintFile.php?"/>
+            </div>
+            <style>
+                #niveaux_display{
+                    border: solid 2px black;
+                }
+            </style>
+            <?php
+        }
+    }
+    else{
+        echo"erreur connexion data base";
+    }
+}
+
+//Récupére le theme pour l'afficher dans l'explorateur de niveaux sur la page de profil
+function GetTheme($Theme){
+    if($Theme==1){
+        echo"Jungle";
+    }
+    if($Theme==2){
+        echo"Retro";
+    }
+    if($Theme==3){
+        echo"Space";
+    }
+}
+
 //récupère l'id de l'utilisateur à partir de son pseudo
 function GetUserId($nickname)
 {
