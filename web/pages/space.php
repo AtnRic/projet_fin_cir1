@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Space</title>
+    <title>Maze'ltov - space</title>
     <link rel="stylesheet" type="text/css" href="../css/space.css">
     <link rel='icon' href='../images/front/favicon.ico' type='image/x-icon'>
 </head>
