@@ -1,5 +1,9 @@
 <?php
 $functionName = $_POST['functionName'];
+$data = null;
+if(isset($_POST['functionParameters'])){
+    $data = $_POST['functionParameters'];
+}
 
 if($functionName == 'Up')
 {
@@ -33,6 +37,7 @@ if($functionName == 'generation')
     }
     echo $out; // true ou false.
 }
-
-
+if($functionName == 'save'){
+    echo $data . ' saving...';
+}
 ?>

@@ -598,9 +598,10 @@ function sch_Start(anime) {
   PHP_Function("../tools/function.php", "generation", function Handle(output) {
     //console.log("Sortie du C : " + output);
     console.log(output);
+    BaseOut = output;
     newOut = output.split(";");
-
     solveOut = newOut[1].split(",");
+    Solver = solveOut;
     tpOut = newOut[2].split(",");
     gardeOut = newOut[3].split(",");
 
@@ -639,6 +640,9 @@ function sch_Start(anime) {
 }
 
 // Variables globales.
+let Mouvement = 0;
+let BaseOut;
+let Solver;
 let Labyrinthe;
 let PlayerPos;
 let LabSize;
@@ -851,6 +855,8 @@ function Launch(size, tab, spawnCellId, boolAnimation, solver, tps) {
     SpawnPlayer(spawnCellId, solver);
   }, 3000);
   //#endregion
+
+  Save();
 }
 
 // Génération du joueur.
@@ -896,6 +902,7 @@ function SpawnPlayer(cellId, solver) {
         if (CanMove(PlayerPos, Labyrinthe, "d") || cheat == true) {
           MoveGarde(height, 2);
           activate = true;
+          Mouvement++;
           anime({
             targets: "#playerimg",
             translateX: [X, -(7.5 * X)],
@@ -912,6 +919,7 @@ function SpawnPlayer(cellId, solver) {
         if (CanMove(PlayerPos, Labyrinthe, "t") || cheat == true) {
           MoveGarde(height, 4);
           activate = true;
+          Mouvement++;
           anime({
             targets: "#playerimg",
             translateX: [X, -(7.5 * X)],
@@ -928,6 +936,7 @@ function SpawnPlayer(cellId, solver) {
         if (CanMove(PlayerPos, Labyrinthe, "l") || cheat == true) {
           MoveGarde(height, 3);
           activate = true;
+          Mouvement++;
           anime({
             targets: "#playerimg",
             translateX: [X, -(7.5 * X)],
@@ -945,6 +954,7 @@ function SpawnPlayer(cellId, solver) {
         if (CanMove(PlayerPos, Labyrinthe, "r") || cheat == true) {
           MoveGarde(height, 1);
           activate = true;
+          Mouvement++;
           anime({
             targets: "#playerimg",
             translateX: [X, -(7.5 * X)],
@@ -999,6 +1009,8 @@ function SpawnPlayer(cellId, solver) {
 
 // Niveau fini.
 function Win() {
+  console.log(Solver.length); // Trajet le plus court.
+  console.log(Mouvement); // Trajet du joueur.
   console.log("fini.");
 }
 
@@ -1065,6 +1077,17 @@ function CanMove(index, lab, direction) {
       }
       break;
   }
+}
+
+function Save() {
+  PHP_Function(
+    "../tools/function.php",
+    "save",
+    function Handle(output) {
+      console.log(output);
+    },
+    BaseOut
+  );
 }
 
 // Génération d'un random.
