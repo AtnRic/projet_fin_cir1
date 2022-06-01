@@ -1,7 +1,20 @@
 <?php
+switch($theme){
+    case 'jungle':
+        $hyperlink = './retro.html';
+        $link = "../images/popup/popup_jungle.png";
+        break;
+    case 'retro':
+        $hyperlink = './space.php';
+        $link = "";
+        break;
+    case 'space':
+        $link = "";
+        break;
+}
+
 
 echo "<canvas class='confetti' id='canvas'></canvas>";
-$link = "../images/popup/popup_jungle.png";
 echo "
 <div id='popup' style='background-image: url($link)'>
     <h1>Welcome to the Jungle</h1>
@@ -18,9 +31,11 @@ echo "
     <div class='but'>
         <button>replay</button>
         <button>home</button>
-        <button id='save'>save</button> 
-        <button>next level</button> 
-    </div>
+        <button id='save'>save</button>";
+        if ($theme == 'jungle' || $theme == 'retro'){
+            echo "<button><a href='$hyperlink'>next level</a></button>";
+        }
+    echo "</div>
 
 </div>";
 ?>
@@ -100,9 +115,13 @@ if($theme == 'jungle'){
         left: 0;
         background-image: none;
     }
+    a{
+        color: black;
+        background: none;
+        text-decoration: none;
+    }
 
-
-
+    
 
 
     @media screen and (max-width: 1300px) {
@@ -117,7 +136,13 @@ if($theme == 'jungle'){
         }
 
     }
-</style>";
+    </style>";
+}
+else if($theme == 'retro'){
+    
+}
+else{
+
 }
 
 ?>
