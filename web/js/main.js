@@ -1058,6 +1058,7 @@ function SpawnPlayer(cellId, solver) {
 
 // Niveau fini.
 function Win() {
+  finish = true;
   MainMusic.pause();
   document.getElementById("short").innerHTML += " " + Solver.length;
   document.getElementById("long").innerHTML += " " + 2 * Solver.length;
@@ -1077,23 +1078,19 @@ function Win() {
 let finish = false;
 // Niveau perdu.
 function Loose() {
-  if (true) {
-    Win();
-  } else {
-    console.log("stop.");
-    MainMusic.pause();
-    PlaySound(Ambiance.DeathSound);
-    finish = true;
-    let player = document.getElementById("playerimg");
-    player.src = Ambiance.Death;
-    anime({
-      targets: "#playerimg",
-      translateX: [X, -(7.5 * X)],
-      easing: "steps(8)",
-      duration: 1500,
-      loop: false,
-    });
-  }
+  console.log("stop.");
+  MainMusic.pause();
+  PlaySound(Ambiance.DeathSound);
+  finish = true;
+  let player = document.getElementById("playerimg");
+  player.src = Ambiance.Death;
+  anime({
+    targets: "#playerimg",
+    translateX: [X, -(7.5 * X)],
+    easing: "steps(8)",
+    duration: 1500,
+    loop: false,
+  });
 }
 
 // Autorisation d'un mouvement d'une case à une autre.
