@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Jungle</title>
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
+</head>
+
+<body>
+    <!--<div class="one sline"></div>-->
+    <div class="two sline"></div>
+    <div class="global">
+        <table id="container"></table>
+    </div>
+    <?php
+    $theme = 'jungle';
+    include 'popups/popup_outro.php';
+    ?>
+</body>  
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
+<script src="../js/node_modules/animejs/lib/anime.min.js"></script>
+<script src="../js/main.js">
+</script>
+<script>
+SetAmbiance("Jungle");
+PHP_Start(true);
+</script>
+
+</html>
