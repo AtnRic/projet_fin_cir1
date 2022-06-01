@@ -1140,6 +1140,7 @@ function CanMove(index, lab, direction) {
   }
 }
 
+// Sauvegarde du niveau.
 function Save() {
   PHP_Function(
     "../tools/function.php",
@@ -1506,6 +1507,7 @@ function TeleportePlayer(cellId) {
   }, 500);
 }
 
+// Lecture d'un son.
 function PlaySound(path) {
   let file = new Audio(path);
   file.play();
