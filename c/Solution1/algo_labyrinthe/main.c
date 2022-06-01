@@ -1252,7 +1252,7 @@ void ApparitionGardes(char* maze, int cote, int Quantite_Garde) {
 	DoubleLinkedList* List = newDoubleLinkedList();
 	DoubleLinkedList* LaDirection = newDoubleLinkedList();
 
-	for (int i = 0; i < pow(cote, 2); i++) {
+	for (int i = 1; i < pow(cote, 2); i++) {
 		int count = 0;
 		int sortie = 0;
 		if (*(maze + i) == 'e' || *(maze + i) == 'j' || *(maze + i) == 'k' || *(maze + i) == 'm') {
