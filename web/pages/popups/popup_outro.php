@@ -106,13 +106,13 @@ if($theme == 'jungle'){
 
 
     @media screen and (max-width: 1300px) {
-        .popup h1 {
+        #popup h1 {
             font-size: 2em;
         }
-        .popup h2 {
+        #popup h2 {
             font-size: 1.5em;
         }
-        .popup p, button {
+        #popup p, button {
             font-size: 1em;
         }
 

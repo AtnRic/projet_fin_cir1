@@ -166,7 +166,7 @@ require '../tools/_main_tools.php';
         $nbrGuard = 4;
         $theme = 2;
 
-        include 'retro.html';
+        include 'retro.php';
     }
     else if($labyrinthe == 3){
         $mazeSize = 40;
