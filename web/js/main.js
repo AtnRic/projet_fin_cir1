@@ -1561,3 +1561,7 @@ function ThemeSound() {
     }
   }
 }
+
+function Return() {
+  document.location.href = "../pages/home.php";
+}
