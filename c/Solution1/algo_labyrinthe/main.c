@@ -1324,15 +1324,16 @@ int readFile(char* filename, int tableau[]) {
 	//int tableau[2] = { 0 };
 
 	err = fopen_s(&stream, filename, "r");
-	if (err == 0)
-		printf("Le fichier 'file.txt' est ouvert\n");
+	if (err == 0) {
+		//printf("Le fichier 'file.txt' est ouvert\n");
+	}
 	else
-		printf("Le fichier 'file.txt' n'est pas ouvert\n");
+		//printf("Le fichier 'file.txt' n'est pas ouvert\n");
 	if (stream == NULL) {
-		printf("\nstream pas OK");
+		//printf("\nstream pas OK");
 		return -1;
 	}
-	else printf("\nstream ok");
+	else //printf("\nstream ok");
 
 	fseek(stream, 0, SEEK_SET);
 
@@ -1348,12 +1349,12 @@ int readFile(char* filename, int tableau[]) {
 	if (stream) {
 		err = fclose(stream);
 		if (err == 0) {
-			printf("\nLe fichier 'file.txt' est ferme\n");
+			//printf("\nLe fichier 'file.txt' est ferme\n");
 			return 1;
 		}
 
 		else {
-			printf("\nLe fichier 'file.txt' n'est pas ferme\n");
+			//printf("\nLe fichier 'file.txt' n'est pas ferme\n");
 			return -1;
 		}
 	}
