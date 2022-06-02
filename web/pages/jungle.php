@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Jungle</title>
+    <title>Maze'ltov - jungle</title>
     <link rel="stylesheet" type="text/css" href="../css/main.css">
     <link rel='icon' href='../images/front/favicon.ico' type='image/x-icon'>
 </head>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>retro</title>
+    <title>Maze'ltov - retro</title>
     <link rel="stylesheet" type="text/css" href="../css/retro.css">
     <link rel='icon' href='../images/front/favicon.ico' type='image/x-icon'>
 </head>
