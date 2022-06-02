@@ -73,7 +73,7 @@
                 <label for='pseudo'></label><input type='text' id='pseudo' name='pseudo' placeholder='nickname' autofocus required ><br>
                 <label for='mdpin'></label><input type='password' id='mdpin' name='mdpin' placeholder='password*' required><br>
                 <label for='verifmdp'></label><input type='password' id='verifmdp' name='verifmdp' placeholder='password verification*' required><br><br>
-                <div>*Your password must have Caps,Numbers,low-case and 8 caracter minimum.</div>
+                <div>*Your password must have Caps,Numbers,low-case and 8 character minimum.</div>
                 <input type='submit' class='sub' name='sub' value='Envoyer'>
             </form>";
         }
