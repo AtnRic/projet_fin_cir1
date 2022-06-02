@@ -26,7 +26,7 @@ function passwd($mdp): bool
     $minuscule = preg_match('@[a-z]@', $mdp);
     $chiffre = preg_match('@\d@', $mdp);
 
-    if(!$majuscule || !$minuscule || !$chiffre || strlen($mdp) < 8){
+    if(!$majuscule || !$minuscule || !$chiffre || strlen($mdp) <= 8){
         return false;
     }
     else{
@@ -65,7 +65,7 @@ function signup($pseudo): bool
         }
     }
     $mdp_hash = hash('sha256', $_POST['mdpin']);//on fait un hash du mot de passe pour ne pas stocker le mot de passe en clair
-    $requete2 = "INSERT INTO `users` (`Pseudo`, `Mdp`) VALUES ('$pseudo', '$mdp_hash')"; //La requete SQL
+    $requete2 = "INSERT INTO `users` (`Pseudo`, `Mdp`, `Nbr_Points`) VALUES ('$pseudo', '$mdp_hash', 0)"; //La requete SQL
     $resultat2 = mysqli_query($connexion, $requete2); //Executer la requete
     if (!$resultat2){
         echo Console("<p>Erreur d'exécution de la requete : ".mysqli_error($connexion)."</p>");

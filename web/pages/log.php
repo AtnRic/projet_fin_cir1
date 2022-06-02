@@ -71,8 +71,9 @@
             echo "<h1>Sign up</h1>";
             echo "<form class='formulaires' action='' method='POST'>
                 <label for='pseudo'></label><input type='text' id='pseudo' name='pseudo' placeholder='nickname' autofocus required ><br>
-                <label for='mdpin'></label><input type='password' id='mdpin' name='mdpin' placeholder='password with num,Cap' required><br>
-                <label for='verifmdp'></label><input type='password' id='verifmdp' name='verifmdp' placeholder='password verification' required><br><br>
+                <label for='mdpin'></label><input type='password' id='mdpin' name='mdpin' placeholder='password*' required><br>
+                <label for='verifmdp'></label><input type='password' id='verifmdp' name='verifmdp' placeholder='password verification*' required><br><br>
+                <div>*Your password must have Caps,Numbers,low-case and 8 caracter minimum.</div>
                 <input type='submit' class='sub' name='sub' value='Envoyer'>
             </form>";
         }
@@ -112,6 +113,7 @@ if (isset($_POST['mdpin'])) {
                     border-color:red;
                 }
                 </style>";
+        echo"<p style='color:red;'>Password invalid</p>";
     } else {
         $count++;
     }
@@ -127,6 +129,7 @@ if (isset($_POST['mdpin'])) {
                         border-color:red;
                     }
                     </style>";
+        echo"<p style='color:red;'>Pseudo empty</p>";
     } else {
         $count++;
     }
@@ -143,6 +146,7 @@ if (isset($_POST['mdpin'])) {
                         border-color:red;
                     }
                     </style>";
+        echo"<p style='color:red;'>Password empty</p>";
     }
     if (empty($_POST['verifmdp'])) {
         echo Console("Password empty.");
@@ -156,6 +160,7 @@ if (isset($_POST['mdpin'])) {
                         border-color:red;
                     }
                     </style>";
+        echo"<p style='color:red;'>Password empty</p>";            
     }
 } else {
     echo "<style>
@@ -213,7 +218,6 @@ if ($count == 4) {
 
     $login = $_POST['pseudo'];
     $mdp_hash = hash('sha256', $_POST['mdpin']); //on fait un hash du mot de passe pour ne pas stocker le mot de passe en clair
-    $_SESSION["pseudo"] = $login; //Variable de session "pseudo"
     if (!isset($_COOKIE['pseudo']) && !isset($_COOKIE['mdp_hash'])) {
         setcookie("login", $login, time() + (3600 * 24 * 365));
         setcookie("mdp_hash", $mdp_hash, time() + (3600 * 24 * 365));
