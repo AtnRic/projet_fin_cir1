@@ -44,7 +44,7 @@ require '../tools/_main_tools.php';
                   );
                
                   $path = './dataCustomMaze.csv';
-                  if ($file = @fopen('dataCustomMaze.csv', 'w')) {
+                  if ($file = @fopen('../tools/DonneesLabyrinthe.csv', 'w')) {
                     foreach ($customMaze as $ligne) {
                       fputcsv($file, $ligne);
                     }
@@ -72,7 +72,7 @@ require '../tools/_main_tools.php';
         <img src="../images/accueil/mario-pipe.png" id="mario-pipe1">
         <img src="../images/accueil/mario-pipe.png" id="mario-pipe2">
         <img src="../images/accueil/mario-coin.gif" id="mario-coin">
-        <a href="?MAzeSize=22&nbrTP=4&nbrGuard=4&theme=2">
+        <a href="?MAzeSize=28&nbrTP=4&nbrGuard=4&theme=2">
             <?php
             if(isset($_GET['MAzeSize']) && isset($_GET['nbrTP']) && isset($_GET['nbrGuard']) && isset($_GET['theme'])){
                 $mazeSize = $_GET['MAzeSize'];
@@ -87,7 +87,7 @@ require '../tools/_main_tools.php';
                   );
                
                   $path = './dataCustomMaze.csv';
-                  if ($file = @fopen('dataCustomMaze.csv', 'w')) {
+                  if ($file = @fopen('../tools/DonneesLabyrinthe.csv', 'w')) {
                     foreach ($customMaze as $ligne) {
                       fputcsv($file, $ligne);
                     }
@@ -128,7 +128,7 @@ require '../tools/_main_tools.php';
                   );
                
                   $path = './dataCustomMaze.csv';
-                  if ($file = @fopen('dataCustomMaze.csv', 'w')) {
+                  if ($file = @fopen('../tools/DonneesLabyrinthe.csv', 'w')) {
                     foreach ($customMaze as $ligne) {
                       fputcsv($file, $ligne);
                     }
