@@ -12,8 +12,8 @@
     <table id="container"></table>
 </div>
 <?php
-    $theme = 'jungle';
     include 'popups/popup_outro.php';
+    include 'popups/popup_lose_space.php';
     ?>
 </body>
 <script src="../js/conf.js"></script>

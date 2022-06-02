@@ -99,6 +99,7 @@ if($theme == 'jungle'){
         justify-content: center;
     }
     #popup{
+        z-index: -10;
         width: 70vw;
         height: calc(0.82 * 50vw);
         position: absolute;

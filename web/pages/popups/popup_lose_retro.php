@@ -1,7 +1,7 @@
 <?php
 echo "<canvas class='confetti' id='canvas'></canvas>";
 echo "
-<div id='popup'>
+<div id='popup_lose'>
     <h1>Tartaros Fantasy</h1>
     <h2>Game Over</h2>
     
@@ -18,7 +18,8 @@ echo "
     *{
         font-family: "8-bit HUD", serif;
     }
-    #popup{
+    #popup_lose{
+        z-index: -10;
         position: absolute;
         top: 22.2vh;
         height: 47vh;
@@ -37,7 +38,7 @@ echo "
         text-align: center;
         align-items: center;
     }
-    #popup h1, p, h2{
+    #popup_lose h1, p, h2{
         color: white;
         background-color: transparent;
     }

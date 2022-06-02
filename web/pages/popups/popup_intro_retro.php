@@ -42,6 +42,8 @@ echo "
         font-family: "8-bit HUD", serif;
     }
     #popup{
+        z-index: -10;
+
         position: absolute;
         top: 22.2vh;
         height: 47vh;

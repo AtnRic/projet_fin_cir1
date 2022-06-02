@@ -11,10 +11,10 @@ echo "
         <div class='center_img'>
             <img src='../images/popup/star.png' alt='star'>
             <img src='../images/popup/star_empty.png' alt='star'>
-        </div>  
-    </div>
+        </div>    
+    </div>  
     <div class='but'>
-        <a><p>replay</p></a>
+        <a id='restart'><p>replay</p></a>
         <a href='./home.php'><p>home</p></a>
         <a id='save'><p>save</p></a>
         <a href='./space.php'><p>next level</p></a>
@@ -23,10 +23,16 @@ echo "
 </div>";
 ?>
 <style>
+    @font-face {
+	font-family: "8-bit HUD";
+	src: url('../images/font/8-bit-hud.ttf');
+}
+
     *{
         font-family: "8-bit HUD", serif;
     }
     #popup{
+        z-index: -10;
         position: absolute;
         top: 22.2vh;
         height: 47vh;
