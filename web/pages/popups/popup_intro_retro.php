@@ -1,10 +1,9 @@
 <?php
 //echo "<canvas class='confetti' id='canvas'></canvas>";
 echo "
-<div id='popup'>
+<div id='popup_intro'>
     <h1>Tartaros Fantasy</h1>
     <div class='carrousel'>
-								
 			<input type='radio' name='slides' id='radio-1' checked>
 			<input type='radio' name='slides' id='radio-2'>
 			<input type='radio' name='slides' id='radio-3'>
@@ -31,9 +30,6 @@ echo "
 				<label for='radio-3' id='dotForRadio-3'></label>
 				<label for='radio-4' id='dotForRadio-4'></label>
 			</div>
-    
-    
-   
 
 </div>";
 ?>
@@ -41,7 +37,9 @@ echo "
     *{
         font-family: "8-bit HUD", serif;
     }
-    #popup{
+    #popup_intro{
+        z-index: -10;
+
         position: absolute;
         top: 22.2vh;
         height: 47vh;
@@ -60,7 +58,7 @@ echo "
         text-align: center;
         align-items: center;
     }
-    #popup h1, p, h2{
+    #popup_intro h1, p, h2{
         color: white;
         background-color: transparent;
     }
@@ -83,6 +81,7 @@ echo "
         border-color: transparent;
         border-radius: 10px;
         padding: 0 5px;
+        background-color: transparent;
     }
     a:hover{
         border-style: solid;
@@ -95,6 +94,7 @@ echo "
     .carrousel .tp {
         display: block;
         margin: auto auto 10px auto;
+        background-color: transparent;
 
     }
     img{
@@ -109,6 +109,7 @@ echo "
 
     a p{
         position: static;
+        background-color: transparent;
     }
 
 
@@ -134,6 +135,7 @@ echo "
         padding: 0;
         font-size: 1em;
         text-align: center;
+        background-color: transparent;
 
     }
     .carrousel .slides {
@@ -144,6 +146,7 @@ echo "
         overflow: hidden;
         list-style: none;
         position: relative;
+        background-color: transparent;
 
         -webkit-transition: transform .5s;
         -moz-transition: transform .5s;
@@ -152,14 +155,17 @@ echo "
     }
     .carrousel #slide2{
         top: -20px;
+        background-color: transparent;
     }
     .carrousel .slides li {
         width: 25%;
         position: relative;
         float: left;
+        background-color: transparent;
     }
     .carrousel li p{
         margin-top: 0;
+        background-color: transparent;
     }
 
 
@@ -171,10 +177,12 @@ echo "
         margin-left: -1.5em;
         margin-right: 0.5em;
         vertical-align: middle;
+        background-color: transparent;
     }
 
     .carrousel .slidesNavigation {
         display: block;
+        background-color: transparent;
         list-style: none;
         text-align: center;
         bottom: 1em;
@@ -188,8 +196,10 @@ echo "
     }
     .carrousel input {
         display: none;
+        background-color: transparent;
     }
     .carrousel .slidesNavigation label {
+        background-color: transparent;
         float: left;
         margin: 6px;
         display: block;

@@ -12,7 +12,10 @@
         <table id="container"></table>
     </div>
     <?php
+    include 'popups/popup_intro_retro.php';
     include 'popups/popup_win_retro.php';
+    include 'popups/popup_lose_retro.php';
+
     ?>
 </body>
 <div class="preload" style="display: none"><img rel="preload" loading="eager" src="../images/retro/retro.png" alt=""></div>

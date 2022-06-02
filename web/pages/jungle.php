@@ -13,8 +13,9 @@
         <table id="container"></table>
     </div>
     <?php
-    $theme = 'jungle';
-    include 'popups/popup_outro.php';
+    include 'popups/popup_lose_retro.php';
+    include 'popups/popup_win_retro.php';
+    include 'popups/popup_intro_retro.php';
     ?>
 </body>  
 <script src="../js/conf.js"></script>
