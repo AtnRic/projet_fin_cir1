@@ -1373,7 +1373,7 @@ int main()
 	Lab* newl = NewLab(SIZ3);
 	Free* P = NewFree(100);
 	int o = tryPath(newl, 0, P);
-	Teleporteurs_Paire* pairs = recherche_loc_tp(TELEPORTE, letter(newl), newl->size*newl->size);
+	Teleporteurs_Paire* pairs = recherche_loc_tp(TELEPORTE, letterSansPrintf(newl), newl->size*newl->size);
 	letter(newl);
 	Path* S = Solve(newl, pairs, TELEPORTE);
 //	show(newl, S, pairs, 5);
