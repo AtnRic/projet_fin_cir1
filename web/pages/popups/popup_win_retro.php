@@ -58,9 +58,10 @@ echo "
     h1{
         font-size: 1.3em;
     }
-    h2{
+    #popup h2{
         font-size: 1.5em;
         margin-bottom: 10px;
+        top: 0;
     }
     p{
         font-size: 0.8em;
