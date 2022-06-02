@@ -1,0 +1,6 @@
+﻿  main.c
+C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\tp\main.c(7,29): warning C4013: 'NewDoubleLinkedList' non défini(e) ; extern retournant int pris par défaut
+C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\tp\main.c(7,1): warning C4047: 'initialisation' : les niveaux d'indirection de 'DoubleLinkedList *' et de 'int' sont différents
+C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\tp\main.c(142): warning C4716: 'insertItemBeforeItem' : doit retourner une valeur
+main.obj : error LNK2019: symbole externe non résolu NewDoubleLinkedList référencé dans la fonction main
+C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\x64\Debug\tp.exe : fatal error LNK1120: 1 externes non résolus

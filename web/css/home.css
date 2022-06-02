@@ -1,0 +1,863 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;1,300;1,800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family:  -apple-system, BlinkMacSystemFont, 'Montserrat', 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+
+#jungle {
+    position: relative;
+    top: 0;
+    left: 0;
+    min-height: 100vh;
+    min-width: 100vw;
+    background: linear-gradient(#014948, #72ae53);
+}
+
+#jungle img {
+    object-fit: cover;
+}
+
+.title {
+    position: fixed;
+    top: 0;
+    padding-top: 5vh;
+    font-weight: 800;
+    font-style: italic;
+    font-size: 4vh;
+    text-align: center;
+    width: 100%;
+    color: white;
+}
+
+#ground {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    max-width: 99vw;
+}
+
+#left-leaves {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    max-height: 105vh;
+    max-width: 100vw;
+}
+
+#middle {
+    position: absolute;
+    top: 50vh;
+    transform: translateY(-50%);
+    max-height: 30vh;
+    animation-name: middle-leaf;
+    animation-duration: 5s;
+    animation-iteration-count:infinite;
+}
+
+#middlebis {
+    position: absolute;
+    top: 50vh;
+    max-height: 20vh;
+    animation-name: middle-leaf-bis;
+    animation-duration: 6s;
+    animation-iteration-count:infinite;
+}
+
+#upper-bottom-left-leaf {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    max-height: 30vh;
+    animation-name: upper-bottom-left-leaf;
+    animation-duration: 4s;
+    animation-iteration-count:infinite;
+}
+
+#bottom-left-leaf {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    max-height: 25vh;
+    animation-name: bottom-left-leaf;
+    animation-duration: 3s;
+    animation-iteration-count:infinite;
+}
+
+#sun {
+    position: absolute;
+    top: 15vh;
+    right: 20vw;
+    width: 15vw;
+    height: 15vw;
+    background: #d5fcf5;
+    border: none;
+    border-radius: 50%;
+}
+
+#sun::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    z-index: 0;
+    background: #54d6a8;
+    width: 40vw;
+    height: 40vw;
+    border: none;
+    border-radius: 50%;
+    filter:  blur(20vw);
+    animation-name: sunlight;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+}
+
+#right-leaves {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    max-height: 100vh;
+    max-width: 100vw;
+}
+
+#bottom-right-leaf-bis {
+    position: absolute;
+    bottom: 5vh;
+    right: 0;
+    max-height: 35vh;
+    animation-name: bottom-right-leaf;
+    animation-duration: 5s;
+    animation-iteration-count:infinite;
+}
+
+#bottom-right-leaf {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    max-height: 25vh;
+    animation-name: bottom-right-leaf;
+    animation-duration: 3s;
+    animation-iteration-count:infinite;
+}
+
+#middle-right-leaf-bis {
+    position: absolute;
+    top: 35vh;
+    right: 10vw;
+    max-height: 20vh;
+    animation-name: bottom-right-leaf;
+    animation-duration: 7s;
+    animation-iteration-count:infinite;
+}
+
+#middle-right-leaf {
+    position: absolute;
+    top: 40vh;
+    right: 0;
+    max-height: 25vh;
+    animation-name: bottom-right-leaf;
+    animation-duration: 5s;
+    animation-iteration-count:infinite;
+}
+
+#palm-right {
+    position: absolute;
+    top: 10vh;
+    right: 14vh;
+    max-height: 25vh;
+    animation-name: right-palm;
+    animation-duration: 5s;
+    animation-iteration-count:infinite;
+}
+
+#palm-left {
+    position: absolute;
+    top: 8vh;
+    right: 30vh;
+    max-height: 25vh;
+    animation-name: bottom-right-leaf;
+    animation-duration: 3s;
+    animation-iteration-count:infinite;
+}
+
+#top-palm {
+    position: absolute;
+    top: 0;
+    right: 60vh;
+    max-height: 25vh;
+    animation-name: bottom-right-leaf;
+    animation-duration: 4s;
+    animation-iteration-count:infinite;
+}
+
+/* --------------- ANIMATIONS ----------------- */
+
+@keyframes middle-leaf {
+    0% {transform: translateY(-50%) rotate(0deg);}
+    50% {transform: translateY(-70%) rotate(-10deg);}
+    100% {transform: translateY(-50%) rotate(0deg);}
+}
+
+@keyframes middle-leaf-bis {
+    0% {transform: translateY(0%) rotate(0deg);}
+    50% {transform: translateY(-30%) rotate(-10deg);}
+    100% {transform: translateY(0%) rotate(0deg);}
+}
+
+@keyframes upper-bottom-left-leaf {
+    0% {transform: translateY(0%) rotate(0deg);}
+    50% {transform: translateY(-10%) rotate(-10deg);}
+    100% {transform: translateY(0%) rotate(0deg);}
+}
+
+@keyframes bottom-left-leaf {
+    0% {transform: translateY(0%) rotate(0deg);}
+    50% {transform: translateY(-10%) rotate(-10deg);}
+    100% {transform: translateY(0%) rotate(0deg);}
+}
+
+@keyframes sunlight {
+    0% {opacity: 35%;}
+    50% {opacity: 50%;}
+    100% {opacity: 35%;}
+}
+
+@keyframes bottom-right-leaf {
+    0% {transform: translateY(0%) rotate(0deg);}
+    50% {transform: translateY(-10%) rotate(10deg);}
+    100% {transform: translateY(0%) rotate(0deg);}
+}
+
+@keyframes right-palm {
+    0% {transform: translateX(0%) translateY(0%) rotate(0deg);}
+    50% {transform: translateX(5%) translateY(-5%) rotate(-10deg);}
+    100% {transform: translateX(0%) translateY(0%) rotate(0deg);}
+}
+
+/* Level choose : Jungle */
+
+#jungle-but {
+    position: absolute;
+    top: 50vh;
+    left: 50vw;
+    transform: translateX(-50%);
+    background: #efe773;
+    width: 18vw;
+    height: 13vw;
+    border: none;
+    border-radius: 2vh;
+    transition: all 0.3s ease;
+    filter: grayscale(80%);
+}
+
+#jungle-but::after {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 50%;
+    width: 10vw;
+    height: 10vw;
+    background: url(../images/accueil/jungle_vignette.jpg) center center / cover no-repeat;
+    border: none;
+    border-radius: 2vh;
+    transform: translateX(-50%) translateY(-5vw);
+}
+
+#jungle-but:hover {
+    box-shadow: 0 1vh 2vh black;
+    transform: translateX(-50%) translateY(-1vh);
+    filter: grayscale(0%);
+}
+
+#jungle-but:hover::after{
+    background: url(../images/accueil/vignette-jungle.gif) center center / cover   no-repeat;
+}
+
+#jungle-but:active {
+    box-shadow: none;
+    border:none;
+    filter: none;
+    transform: translateX(-50%) translateY(0);
+}
+
+.name {
+    position: sticky;
+    font-weight: 800;
+    font-style: italic;
+    text-align: center;
+    margin-top: 12vh;
+}
+
+.level {
+    font-weight: 300;
+    font-style: italic;
+    padding-top: 2vh;
+    text-align: center;
+}
+
+.next {
+    position: absolute;
+    padding: 2vh 5vh;
+    bottom: 5vh;
+    left: 50%;
+    border: none;
+    border-radius: 2vh;
+    transform: translateX(-50%);
+    background: url(../images/accueil/but-mario.jpg) center bottom / cover no-repeat;
+    transition: all 0.1s ease;
+    text-decoration: none;
+    font-size: 4vh;
+    font-weight: 800;
+    font-style: italic;
+    color: #6A0400;
+}
+
+.next:hover {
+    transform: translateX(-50%) translateY(-1vh);
+    box-shadow: 0 1vh 2vh black;
+    background: url(../images/accueil/mario-button.gif) center bottom / cover no-repeat;
+    color: #FFD987;
+}
+
+.next:active {
+    transform: translateX(-50%);
+    box-shadow: none;
+    background: url(../images/accueil/mario-button.gif) center bottom / cover no-repeat;
+    color: #FFD987;
+}
+
+
+/* ---------------- 8BIT ----------------- */
+
+section {
+    width: 100vw;
+    height: 100vh;
+}
+
+#mario {
+    scroll-behavior: smooth;
+    background: linear-gradient(#2e457b, #4d76d0);
+    overflow-x: hidden;
+}
+
+.marioground {
+    position: absolute;
+    top: 200vh;
+    transform: translateY(-100%);
+    left: 0;
+    width: 100vw;
+    height: 25vh;
+    background: url(../images/accueil/mario-ground.png) center top;
+}
+
+#but-mar {
+    position: absolute;
+    top: 150vh;
+    left: 50vw;
+    transform: translateX(-50%);
+    background: #DDC8C4;
+    width: 18vw;
+    height: 13vw;
+    border: none;
+    border-radius:2vh;
+    transition: all 0.3s ease;
+    filter: grayscale(80%);
+}
+
+#but-mar::after {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 50%;
+    width: 10vw;
+    height: 10vw;
+    background: url(../images/accueil/retro_vignette.png) center center / cover no-repeat;
+    border: none;
+    border-radius:2vh;
+    transform: translateX(-50%) translateY(-5vw);
+}
+
+#but-mar:hover {
+    transform: translateX(-50%) translateY(-1vh);
+    filter: grayscale(0%);
+    box-shadow: 0 1vh 2vh black;
+}
+
+#but-mar:active {
+    transform: translateX(-50%);
+    box-shadow: none;
+}
+
+#but-mar:hover::after {
+    background: url(../images/accueil/pacman.gif) center center / cover no-repeat;
+}
+
+#mario-animated {
+    position: absolute;
+    top : 160vh;
+    left: -10vw;
+    width: 5vw;
+    height: 8vw;
+    background: url(../images/accueil/mario-run.gif) center center / cover no-repeat;
+    animation-name: runmario;
+    animation-duration: 8s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes runmario {
+    0% {left: -10%;}
+    17% {top: 160vh; left: 70vw;}
+    20% {top: 137vh; left: 70vw;}
+    27% {top: 160vh; left: 70vw ;}
+    35% {top: 160vh; left: 90vw; opacity: 1;}
+    36% {top: 160vh; left: 90vw; opacity: 0;}
+    37% {top: 117vh; left: 0; opacity: 0;}
+    38%{top: 117vh; left: 2vw; opacity: 1;}
+    60% {top:117vh; left: 76vw;}
+    63% {top: 160vh; left: 76vw; background: url(../images/accueil/mario-run.gif) center center / cover no-repeat;}
+    64% {top: 160vh; left: 76vw; background: url(../images/accueil/mario-revrun.gif) center center / cover no-repeat;}
+    100% {top: 160vh; left: -10%; background: url(../images/accueil/mario-revrun.gif) center center / cover no-repeat;}
+}
+
+#mystery-boxe {
+    position: absolute;
+    width: 10vh;
+    height: 10vh;
+    top: 130vh;
+    left: 70vw;
+    animation-name: mysterybox;
+    animation-duration: 8s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes mysterybox {
+    19% {transform: translateY(0%);}
+    20% {transform: translateY(-3vh);}
+    23% {transform: translateY(0%);}
+}
+
+#mario-coin {
+    position: absolute;
+    width: 6vh;
+    height: 6vh;
+    top: 123vh;
+    left: 71vw;
+    opacity: 0;
+    animation-name: coin;
+    animation-duration: 8s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes coin {
+    19% {opacity: 0;}
+    20% {opacity: 1;}
+    49% {opacity: 1;}
+    50% {opacity: 0;}
+}
+
+.upper-roof {
+    position: absolute;
+    background: url(../images/accueil/mario-ground.png) center top ;
+    top: 130vh;
+    left: 0;
+    width: 70vw;
+    height:10vh;
+}
+
+.down-roof {
+    position: absolute;
+    background: url(../images/accueil/mario-ground.png);
+    top: 150vh;
+    right: 0;
+    width: 10vh;
+    height: 10vh;
+}
+
+#mario-pipe1 {
+    position: absolute;
+    top: 158vh;
+    right: 0;
+    transform: rotate(-90deg);
+    width: 20vh;
+    height: 20vh;
+}
+
+#mario-pipe2 {
+    position: absolute;
+    top: 113vh;
+    left: 0;
+    transform: rotate(90deg);
+    width: 20vh;
+    height: 20vh;
+}
+
+#mario-cloud1 {
+    position: absolute;
+    top: 105vh;
+    right: 10vw;
+    width: 15vw;
+    height: 15vw;
+    background: url(../images/accueil/mario-cloud.png) center center / cover no-repeat;
+}
+
+#mario-cloud2 {
+    position: absolute;
+    top: 140vh;
+    left: 10vw;
+    width: 15vw;
+    height: 15vw;
+    background: url(../images/accueil/mario-cloud.png) center center / cover no-repeat;
+}
+
+
+/* Espace */
+
+#space {
+    background: url(../images/accueil/space-bg.png) center center / cover;
+    /* background: black; */
+}
+
+
+.orbite_earth {
+    position: absolute;
+
+    top: 250vh;
+    left: 50%;
+
+    width: 70vh;
+    height: 70vh;
+
+    border: none;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+
+    animation-name: orbite;
+    animation-duration: 15s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+
+    background: none;
+}
+
+@keyframes orbite {
+    from {transform: translate(-50%, -50%) rotate(0deg);}
+    to {transform: translate(-50%, -50%) rotate(360deg);}
+}
+
+.orbite_earth::after {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 15vh;
+    height: 15vh;
+    background: url(../images/accueil/earth.png) center center / cover no-repeat;
+    /* background: red; */
+}
+
+.orbite_mars {
+    position: absolute;
+
+    top: 250vh;
+    left: 50%;
+
+    width: 70vh;
+    height: 70vh;
+
+    border: none;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+
+    animation-name: orbite;
+    animation-duration: 8s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+
+    /* overflow: hidden; */
+
+    background: none;
+}
+
+.orbite_mars::after {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 10vh;
+    height: 10vh;
+    background: url(../images/accueil/mars.png) center center / cover no-repeat;
+}
+
+#iss {
+    position: absolute;
+    top: 220vh;
+    left: 75vw;
+
+
+    height: 15vh;
+    width: 25vh;
+    /* background-color: red; */
+    background: url(../images/accueil/ISS2.png) center center / cover;
+    animation-name: iss;
+    animation-iteration-count: infinite;
+    animation-duration: 10s;
+    /* animation-timing-function: linear; */
+}
+
+@keyframes iss {
+    0% {
+        top: 220vh;
+        left: 75vw;
+    }
+    50%{
+        top: 225h;
+        left: 70vw;
+        transform: scale(1.15);
+    }
+    100% {
+        top: 220vh;
+        left: 75vw;
+    }
+}
+
+.star1 {
+    position: absolute;
+    top: 220vh;
+    left: 10vw;
+
+    width: 25vw;
+    height: 25vw;
+    overflow: hidden;
+}
+
+.star1::after {
+    position: absolute;
+    content: "";
+    top: 0vw;
+    left: 0vw;
+    width: 10vw;
+    height: 0.5vh;
+    border: none;
+    /* filter: blur(50%); */
+    border-radius: 50px;
+
+    transform: rotate(45deg) translateX(-50%) ;
+    background-color: white;
+
+    animation-name: star;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes star {
+    0% {
+        top: -6vh;
+        left: -8vw;
+        transform: rotate(45deg);
+        opacity: 1;
+    }
+    50% {
+        top: 25vw;
+        left: 25vw;
+        transform: rotate(45deg);
+    }
+    96% {
+        top: 25vw;
+        left: 25vw;
+        transform: rotate(45deg);
+        opacity: 1;
+    }
+    97% {
+        top: 25vw;
+        left: 25vw;
+        transform: rotate(45deg);
+        opacity: 0;
+    }
+    99% {
+        top: -6vh;
+        left: -8vw;
+        transform: rotate(45deg);
+        opacity: 0;
+    }
+}
+
+.star2 {
+    position: absolute;
+    top: 240vh;
+    left: 50vw;
+
+    width: 25vw;
+    height: 25vw;
+
+    overflow: hidden;
+}
+
+.star2::after {
+    position: absolute;
+    content: "";
+    top: 0vw;
+    left: 0vw;
+    width: 10vw;
+    height: 0.5vh;
+    border: none;
+    filter: blur(2px);
+    border-radius: 50px;
+
+    transform: rotate(45deg) translateX(-50%) ;
+    background-color: white;
+
+    animation-name: star2;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes star2 {
+    0% {
+        top: -6vh;
+        left: -8vw;
+        transform: rotate(45deg);
+        opacity: 1;
+    }
+    20% {
+        top: 25vw;
+        left: 25vw;
+        transform: rotate(45deg);
+    }
+    96% {
+        top: 25vw;
+        left: 25vw;
+        transform: rotate(45deg);
+        opacity: 1;
+    }
+    97% {
+        top: 25vw;
+        left: 25vw;
+        transform: rotate(45deg);
+        opacity: 0;
+    }
+    99% {
+        top: -6vh;
+        left: -8vw;
+        transform: rotate(45deg);
+        opacity: 0;
+    }
+}
+
+
+.star3 {
+    position: absolute;
+    top: 220vh;
+    left: 70vw;
+
+    width: 25vw;
+    height: 25vw;
+    overflow: hidden;
+    /* background: red; */
+}
+
+.star3::after {
+    position: absolute;
+    content: "";
+    top: 0vw;
+    left: 0vw;
+    width: 10vw;
+    height: 0.5vh;
+    border: none;
+    filter: blur(2px);
+    border-radius: 50px;
+
+    transform: rotate(45deg) translateX(-50%) ;
+    background-color: white;
+
+    animation-name: star;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+}
+
+.ufo {
+    position: absolute;
+    top: 275vh;
+    left: 5vw;
+
+    height: 85px;
+    width: 200px;
+
+    background: url(../images/accueil/ufo2.gif) center center / cover no-repeat;
+}
+
+#to-space {
+    color: white;
+    position: absolute;
+    padding: 2vh 5vh;
+    bottom: -95vh;
+    left: 50%;
+    border: none;
+    border-radius: 2vh;
+    transform: translateX(-50%);
+    transition: all 0.1s ease;
+    text-decoration: none;
+    font-size: 4vh;
+    font-weight: 800;
+    font-style: italic;
+    background: url(../images/accueil/space-static.png) center center / cover no-repeat;
+}
+
+#to-space:hover {
+    background: url(../images/accueil/light-speed.gif) center center / cover no-repeat;
+    transform: translateX(-50%) translateY(-1vh);
+    box-shadow: 0 1vh 2vh black;
+}
+
+#but-space {
+    position: absolute;
+    top: 250vh;
+    left: 50vw;
+    transform: translateX(-50%);
+    background: #53A2BE;
+    width: 18vw;
+    height: 13vw;
+    border: none;
+    border-radius:2vh;
+    transition: all 0.3s ease;
+    filter: grayscale(80%);
+}
+
+#but-space::after {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 50%;
+    width: 10vw;
+    height: 10vw;
+    background: url(../images/accueil/space_vignette.jpg) center center / cover no-repeat;
+    border: none;
+    border-radius:2vh;
+    transform: translateX(-50%) translateY(-5vw);
+}
+
+#but-space:hover {
+    transform: translateX(-50%) translateY(-1vh);
+    filter: grayscale(0%);
+    box-shadow: 0 1vh 2vh black;
+}
+
+#but-space:active {
+    transform: translateX(-50%);
+    box-shadow: none;
+}
+
+#but-space:hover::after {
+    background: url(../images/accueil/sus.gif) center center / cover no-repeat;
+}

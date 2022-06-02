@@ -1,0 +1,221 @@
+@font-face {
+	font-family: "8-bit HUD";
+	src: url('../images/font/8-bit-hud.ttf');
+}
+
+*{
+    font-family: "8-bit HUD", serif;
+    background-color: black;
+    overflow: hidden;
+}
+html, body{
+    scroll-behavior: smooth;
+}
+.press{
+    width: 100vw;
+    height: 100vh;
+    text-align: center;
+}
+h1, p{
+    color: white;
+    text-align: center;
+}
+#press {
+    animation: blinker 1.5s step-end infinite;
+}
+
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
+}
+
+#logoimage{
+    width: 25%;
+    margin-top:50px;
+}
+
+#press{
+    text-align: center;
+    margin-top: 10%;
+}
+
+#press::before{
+    content: ">>> ";
+}
+
+#press::after{
+    content: " <<<";
+}
+
+.choose{
+    height: 100vh;
+    width: 98vw;
+}
+.choose h1{
+    margin-top: 5vh;
+}
+
+.container{
+    position: absolute;
+    top: 40%;
+    right: 50%;
+    transform: translateX(50%) translateY(170%);
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 98vw;
+    justify-content: space-evenly;
+}
+
+
+.center {
+    position: absolute;
+    top: 50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+}
+
+.but {
+    display: block;
+    width: 100vw;
+    justify-content: center;
+}
+
+.but h3 {
+    margin-top: 2vh;
+    width: 98%;
+    text-align: center;
+    color: white;
+    font-style: italic;
+}
+
+a{
+    text-decoration: none;
+}
+
+#guest{
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+form #guest div{
+    width: 40%;
+    margin: auto;
+}
+
+.tuile{
+    margin: 0 auto;
+    width: 200px;
+    height: 40vh;
+    border-radius: 20px;
+    background-color: white;
+}
+
+.login, .signup, .without{
+    display: block;
+    max-width: 210px;
+}
+.login .tuile{
+    background-image: url("../images/front/retro_hero_static.png");
+    background-position: center;
+    /*background-size: 70%;
+    margin: auto;
+    align-items: center;*/
+    background-repeat: no-repeat;
+}
+.signup .tuile{
+    background-image: url("../images/front/jungle_hero_static.png");
+    background-position: center;
+    background-size: 70%;
+    margin: auto;
+    align-items: center;
+    background-repeat: no-repeat;
+}
+.without .tuile{
+    background-image: url("../images/front/space_hero_static.png");
+    background-position: center;
+    background-size: 80%;
+    margin: auto;
+    align-items: center;
+    background-repeat: no-repeat;
+}
+.login .tuile:hover{
+    background-image: url("../images/front/retro_hero_gif.gif");
+}
+.signup .tuile:hover{
+    background-image: url("../images/front/jungle.gif");
+}
+.without .tuile:hover{
+    background-image: url("../images/front/space_hero_gif.gif");
+    background-size: 90%;
+}
+#log{
+    width: 98vw;
+    height: 100vh;
+}
+
+form{
+    align-items: center;
+    text-align: center;
+    color: white;
+    top: 0;
+    transform: translateY(0%);
+}
+input{
+    margin: 10px;
+    border-width: 5px;
+    border-color: white;
+    padding: 10px;
+    color: white;
+}
+#log h1 {
+    margin-top: 20vh;
+    width: 98%;
+    text-align: center;
+    color: white;
+    font-style: italic;
+}
+
+@media screen and (max-width: 800px) {
+    #logoimage{
+        margin-top: 50px ;
+    }
+    #press{
+        margin-top: 10%;
+    }
+    #log{
+        padding-top: 0%;
+    }
+}
+
+@media screen and (max-width: 720px) {
+    #logoimage{
+        margin-top: 50px;
+    }
+    #press{
+        margin-top: 20px;
+    }
+    #press::before{
+        content: none;
+    }
+    #press::after{
+        content: none;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    #logoimage{
+        margin-top: 50px;
+    }
+    #press{
+        margin-top: 35px;
+    }
+    #press::before{
+        content: none;
+    }
+    #press::after{
+        content: none;
+    }
+}

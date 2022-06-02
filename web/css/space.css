@@ -1,0 +1,112 @@
+*{
+    background-image: url("../images/front/space.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+
+body{
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+}
+
+.absolute{
+    position: absolute;
+    z-index: 10;
+    margin-left: 50%;
+    background-image: none;
+}
+.global, td, .container, table, tr{
+    background-image: none;
+}
+
+.Teleporteur{
+    position:absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-image: none;
+    background-color: transparent;
+}
+.Solveur{
+    position:absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-image: none;
+    background-color: transparent;
+}
+.SolveurImg
+{
+    width: auto;
+    height: 50%;
+    margin-top: 25%;
+    margin-left: 25%;
+    border-radius: 50%;
+    background-image: none;
+}
+.walls {
+    position: absolute;
+    top: 0;
+    height: 103%;/*pour éviter traits blancs*/
+    width: 103%;
+}
+
+.global{
+    background-color: transparent;
+    position: absolute;
+    height: 87vh;
+    width: 87vh;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(calc(-50% + 1vh));
+}
+.container, table{
+    border: none;
+    background-color: transparent;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+#player {
+    position:absolute;
+    margin-left:25%;
+    overflow: hidden;
+    margin-top: -50%;
+    z-index: 100;
+    background: none;
+}
+
+#playerimg, .GardeImg, .TeleporteurImg
+{
+    width: auto;
+    height: 100%;
+    background-color: transparent;
+    background-image: none;
+}
+
+.Garde{
+    margin-top: -50%;
+    margin-left: 20%;
+    position:absolute;
+    overflow: hidden;
+    z-index: 100;
+    background: none;
+}
+
+table, tr, td{
+    padding: 0;
+    border-spacing: 0;
+}
+
+
+.identify{
+    background-color:yellow;
+}

@@ -19,13 +19,13 @@ typedef struct Teleporteurs_Paire {
 	int sortie;
 }Teleporteurs_Paire;
 
-// création d'une nouvelle liste chaînée bilatère vide
-// cette fonction renvoie un pointeur sur la nouvelle structure liste chaînée bilatère vide
+// crï¿½ation d'une nouvelle liste chaï¿½nï¿½e bilatï¿½re vide
+// cette fonction renvoie un pointeur sur la nouvelle structure liste chaï¿½nï¿½e bilatï¿½re vide
 DoubleLinkedList* newDoubleLinkedList();
-// instanciation (création) d'un élément (maillon) à insérer dans une liste chaînée bilatère
-// avec stockage de la donnée value dans l'élément de liste
+// instanciation (crï¿½ation) d'un ï¿½lï¿½ment (maillon) ï¿½ insï¿½rer dans une liste chaï¿½nï¿½e bilatï¿½re
+// avec stockage de la donnï¿½e value dans l'ï¿½lï¿½ment de liste
 DoubleLinkedListElem* NewDoubleLinkedListItem(int value);
-// affichage des éléments d'une liste chaînée bilatère en commençant par la tête
+// affichage des ï¿½lï¿½ments d'une liste chaï¿½nï¿½e bilatï¿½re en commenï¿½ant par la tï¿½te
 int DisplayDoubleList(DoubleLinkedList* list);
 
 
@@ -107,9 +107,9 @@ int wDown(Lab* L, int index);
 
 /*Gardes*/
 typedef struct Garde {
-	int Id; //numéro du garde
+	int Id; //numï¿½ro du garde
 
-	/* Direction dans laquelle le garde va se déplacer */
+	/* Direction dans laquelle le garde va se dï¿½placer */
 
 	bool t;     //top
 	bool d;  //down
