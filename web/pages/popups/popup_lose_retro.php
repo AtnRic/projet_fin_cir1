@@ -20,6 +20,7 @@ echo "
     }
     #popup_lose{
         visibility: hidden;
+        z-index: 10;
         position: absolute;
         top: 22.4vh;
         height: 47vh;

@@ -71,6 +71,7 @@ echo "
             padding: 0 5px;
             text-decoration: none;
             cursor: pointer;
+            box-shadow: none;
         }
         #popup a p:hover{
             text-decoration: underline;
