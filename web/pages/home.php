@@ -139,7 +139,7 @@ require '../tools/_main_tools.php';
             }
             ?>
         <div class="button" id="but-space">
-                <h3 class="name">Ta mère non ?</h3>
+                <h3 class="name">Stool space</h3>
                 <p class="level">Hard</p>
         </div>
         </a>

@@ -28,7 +28,7 @@
       );
 
       $path = './dataCustomMaze.csv';
-      if ($file = @fopen($path, 'w')) {
+      if ($file = @fopen('../tools/DonneesLabyrinthe.csv', 'w')) {
         foreach ($customMaze as $ligne) {
           fputcsv($file, $ligne);
         }
