@@ -174,6 +174,7 @@ function GetUserLevels($username){
                 <p>Guard Number:<?php echo $Guard;?></p>
                 <p>Portal Number:<?php echo $Teleporteur;?></p>
                 <p>Background:<?php echo GetTheme($Theme);?></p>
+                <a href="">play level</a>
                 <input type="submit" value="Share" href="../tools/rintFile.php?"/>
             </div>
             <style>
