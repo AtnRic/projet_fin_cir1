@@ -105,43 +105,49 @@ function signin($pseudo): bool
 
 //récupére le rank du joueur
 function Rank_User($username){
+    $Points=GetUserPoints($username);
     $connexion=connect();
-    $resultat=mysqli_query($connexion,"SELECT Nbr_Points FROM dbjeu WHERE Pseudo='$username'");
-    $Points=mysqli_fetch_assoc($resultat);
-    if($resultat!=NULL){
-        switch($Points){
-            case $Points>=0 && $Points<10000:
-                $rank=0;//Wood rank de départ
-                break;
-            case $Points>=10000 && $Points<25000:
-                $rank=1;//Copper premier rank
-                break;
-            case $Points>=25000 && $Points<50000:
-                $rank=2;//Silver deuxieme rank
-                break;
-            case $Points>=50000 && $Points<100000:
-                $rank=3;//Gold Troisieme rank
-                break;
-            case $Points>=100000 && $Points<200000:
-                $rank=4;//Diamond Quatrieme rank
-                break;
-            case $Points>=200000:
-                $rank=5;//Chad of the maze Cinquieme rank   
-                break;     
+    //echo "points du joueur:".$Points;
+        if($Points>=0 && $Points<10000){
+            $rank=0;//Wood rank de départ
+            //echo"true 0";
+            return $rank;
         }
-        return $rank;
-    }
-    else{
-        echo"error resultat";
-    }
+        if($Points>=10000 && $Points<25000){
+            $rank=1;//Copper premier rank
+            echo"true 1";
+            return $rank;
+        }
+        if ($Points>=25000 && $Points<50000){
+            $rank=2;//Silver deuxieme rank
+            //echo"true 2";
+            return $rank;
+        }
+        if ($Points>=50000 && $Points<100000){
+            $rank=3;//Gold Troisieme rank
+            //echo"true 3";
+            return $rank;
+        }
+        if ($Points>=100000 && $Points<200000){
+            $rank=4;//Diamond Quatrieme rank
+            //echo"true 4";
+            return $rank;
+        }
+        if ($Points>=200000){
+            $rank=5;//Chad of the maze Cinquieme rank   
+            //echo"true 5";  
+            return $rank; 
+        }
 }
 
 //récupére les points de l'utilisateur pour les display
 function GetUserPoints($username){
     $connexion=connect();
-    $resultat=mysqli_query($connexion,"SELECT Nbr_Points FROM dbjeu WHERE Pseudo='$username'");
-    $Points=mysqli_fetch_assoc($resultat);
-    return $Points;
+    $resultat=mysqli_query($connexion,"SELECT Nbr_Points FROM users WHERE Pseudo='$username'");
+    while($Points=mysqli_fetch_assoc($resultat)){
+        $pointsjoueur=$Points["Nbr_Points"];
+    }
+    return $pointsjoueur;
 
 }
 

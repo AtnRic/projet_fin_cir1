@@ -15,9 +15,10 @@
             <!--Image joueur-->
             <input id="imageuser" type="image" src="../images/profileuser/profilimage/jungle_hero_cut.png">
             <!--Pseudo player-->
-            <div id="pseudo"><label>your name:<br><?php echo $_COOKIE["pseudo"] ?></div>
+            <div id="pseudo"><label>your name:<br><?php echo $_COOKIE["login"] ?></div>
             <form method="POST">
                 <input class="button"type="submit" value="Reset stats" name="chadbutton">
+                <input class="button"type="submit" value="Change pseudo" name="Change_Name">
             </form>
             <?php
             if(isset($_POST["chadbutton"])){
@@ -29,9 +30,18 @@
                 </style>
                 <?php
                 if(isset($_POST["OMEGALUL"])){
-                    ResetPoint($_COOKIE["pseudo"]);
+                    ResetPoint($_COOKIE["login"]);
                     header("Location:profiluser.php");
                 }
+            }
+            if(isset($_POST["Change_Name"])){
+                ?>
+                <style>
+                    #newpseudo{
+                        display: block;
+                    }
+                </style>
+                <?php
             }    
             ?>    
         </div>
@@ -39,9 +49,9 @@
         <div id="second">
             <!--information compte-->
             <div id="rank">
-                <p>Points Total du compte : <?php //$Points=GetUserPoints($username); echo $Points;?></p>
+                <p>Points Total du compte : <?php echo GetUserPoints($_COOKIE["login"]);?></p>
                 <p>niveaux du compte :<br/></p>
-                <?php $Rank=Rank_User($_COOKIE["pseudo"]); echo $Rank;?>
+                <?php $Rank=Rank_User($_COOKIE["login"]);?>
                 <img src="../images/profileuser/Rank/wood.png" alt="Woodrank" id="wood" class="rank_image"/>
                 <img id="bronze" class="rank_image" src="../images/profileuser/Rank/Bronze.png" alt="Bronzerank"/>
                 <img id="silver" class="rank_image" src="../images/profileuser/Rank/Silver.png" alt="Silverrank">
@@ -125,14 +135,17 @@
             <p>Enter your new name</p>
             <form method="POST">
             <input type="text" name="PogChamp">
+            <br>
             <input type="submit" name="PEPPE">
             </form>
             <?php
             if(isset($_POST["PEPPE"]) && isset($_POST["PogChamp"])){
                 $newPseudo=$_POST["PogChamp"];
-                $username=$_COOKIE["pseudo"];
+                $username=$_COOKIE["login"];
                 $connexion=connect();
-                $resultat=mysqli_query($connexion,"UPDATE Pseudo=$newPseudo FROM users WHERE Pseudo=$username");
+                $resultat=mysqli_query($connexion,"UPDATE users SET Pseudo='$newPseudo' WHERE Pseudo='$username'");
+                setcookie("login", $newPseudo, time() + (3600 * 24 * 365));
+                header("Location:profiluser.php");
             }
             elseif(empty($_POST["PogChamp"])){
                 echo "Pseudo invalide";
@@ -149,8 +162,9 @@
                 <?php
                 if(isset($_POST["OMGALUL"])){
                     $connexion=connect();
-                    $username=$_COOKIE["pseudo"];
-                    $resultat=mysqli_query($connexion,"UPDATE Nbr_Points=0 FROM users WHERE Pseudo=$username");
+                    $username=$_COOKIE["login"];
+                    $resultat=mysqli_query($connexion,"UPDATE users SET Nbr_Points='0' WHERE Pseudo='$username'");
+                    header("Location:profiluser.php");
                 }
                 if(isset($_POST["POGGERS"])){
                    ?>
