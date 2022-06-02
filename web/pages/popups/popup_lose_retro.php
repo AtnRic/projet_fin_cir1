@@ -19,9 +19,9 @@ echo "
         font-family: "8-bit HUD", serif;
     }
     #popup_lose{
-        z-index: -10;
+        visibility: hidden;
         position: absolute;
-        top: 22.2vh;
+        top: 0vh;
         height: 47vh;
         width: 60vh;
         left: 50%;

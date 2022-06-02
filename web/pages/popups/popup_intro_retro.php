@@ -11,10 +11,12 @@ echo "
     <ul class='slides'>
         <li class='slide'>
             <h2>Welcome !</h2>
-            <p>You must reach the exit of the maze</p>
+            <p>You must reach the exit of the maze : </p>
+            <img class='tp' src='../images/mazes/maze_sortie.png' alt='exit'>
+            
         </li>
         <li class='slide' id='slide2'>
-              <p>You have teleporters available with <br> an entrance : <img class='tp' src='../../images/mazes/tp_red_input.png' alt='tp'> <br> and an exit : <img  class='tp' src='../../images/mazes/tp_red_output.png' alt='tp'><br> Be careful, these teleporters are one-way!</p>
+              <p>You have teleporters available with <br> an entrance : <img class='tp' src='../images/mazes/tp_red_input.png' alt='tp'> <br> and an exit : <img  class='tp' src='../images/mazes/tp_red_output.png' alt='tp'><br> Be careful, these teleporters are one-way!</p>
            </li>
           <li class='slide'>
              <p>You must also dodge the guards that advance in sync with you:<br> You step, the guards step. <br>They move between two walls and go back and forth :</p>
@@ -38,11 +40,11 @@ echo "
         font-family: "8-bit HUD", serif;
     }
     #popup_intro{
-        z-index: -10;
-
+        visibility: hidden;
+        z-index: 10;
         position: absolute;
         top: 22.2vh;
-        height: 47vh;
+        height: 48vh;
         width: 60vh;
         left: 50%;
         transform: translateX(-50%);
@@ -51,7 +53,7 @@ echo "
         border-width: 5px;
         border-color: #0ff;
         box-shadow: 0 0 10px 5px #0ff;
-        background-color: rgba(0,4, 23, 0.75);
+        background-color: rgba(0,4, 23, 1);
         border-radius: 20px;
         padding: 20px;
 
@@ -65,12 +67,14 @@ echo "
     h1{
         font-size: 1.3em;
     }
-    h2{
+    #popup_intro h2{
         font-size: 1.5em;
         margin-bottom: 10px;
+        top: 0;
     }
     p{
         font-size: 0.8em;
+        top: 20px;
     }
     a{
         display: inline-block;
@@ -111,9 +115,9 @@ echo "
         position: static;
         background-color: transparent;
     }
-
-
-
+    #canvas{
+        visibility: hidden;
+    }
 
 
 
