@@ -13,9 +13,9 @@
         <!--Premiere moitier-->
         <div id="first">
             <!--Image joueur-->
-            <input id="imageuser" type="image" src="../images/profileuser/profilimage/jungle_hero_cut.png">
+            <input id="imageuser" type="image" src="../images/profileuser/profil/gigachad.png">
             <!--Pseudo player-->
-            <div id="pseudo"><label>your name:<br><?php echo $_COOKIE["pseudo"] ?></div>
+            <div id="pseudo"><label><?php echo $_COOKIE["pseudo"] ?></div>
             <form method="POST">
                 <input class="button"type="submit" value="Reset stats" name="chadbutton">
             </form>
