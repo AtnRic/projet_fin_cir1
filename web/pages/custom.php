@@ -34,6 +34,11 @@
         }
         fclose($file);
     }
+    switch($theme){
+      case 1: header('Location:jungle.php'); break;
+      case 2: header('Location:retro.php'); break;
+      case 3: header('Location:space.php'); break;
+    }
   }
   ?>
   <div class="title">
