@@ -1,7 +1,7 @@
 <?php
 //echo "<canvas class='confetti' id='canvas'></canvas>";
 echo "
-<div id='popup_win'>
+<div id='popup'>
     <h1>A grand day out</h1>
     <h2>Well Done !</h2>
     <p id='number'>number of steps : </p>
@@ -31,9 +31,10 @@ echo "
         *{
             font-family: "space age", serif;
         }
-        #popup_win{
+        #popup{
             visibility: hidden;
             position: absolute;
+            background-image: none;
             top: 50%;
             height: 70vh;
             width: 100vh;
@@ -46,37 +47,36 @@ echo "
             text-align: center;
             align-items: center;
         }
-        #popup_win h1, p, h2{
+        #popup h1, p, h2{
             color: white;
             background-color: transparent;
+            background-image: none;
         }
-        #popup_win h1{
+        #popup h1{
             font-size: 2.5em;
         }
-        #popup_win h2{
+        #popup h2{
             font-size: 3em;
             margin-bottom: 10px;
         }
-        #popup_win p{
+        #popup p{
             font-size: 1.5em;
         }
-        #popup_win a{
+        #popup a{
+            background-image: none;
             display: inline-block;
             margin: 5px;
             font-size: 1.2em;
-            border-style: solid;
-            border-width: 5px;
-            border-color: transparent;
-            border-radius: 10px;
+            border: none;
             padding: 0 5px;
             text-decoration: none;
             cursor: pointer;
         }
-        #popup_win a p:hover{
+        #popup a p:hover{
             text-decoration: underline;
         }
 
-        #popup_win .star{
+        #popup .star{
             background-image: none;
             background-color: transparent;
             width: 100%;
@@ -84,30 +84,33 @@ echo "
             display: flex;
 
         }
-        #popup_win .center_img{
+        #popup .center_img{
             background-color: transparent;
             width: 200px;
             background-image: none;
             justify-content: center;
             display: flex;
         }
-        #popup_win img{
+        #popup img{
             background-color: transparent;
             display: flex;
             justify-content: center;
-
+            background-image: none;
             margin: auto;
             height: 50px;
             width: 50px;
         }
-        #popup_win .but{
+        #popup .but{
+            background-image: none;
             position: relative;
             top: 25px;
         }
-        #popup_win .but, a{
+        #popup .but, a{
+            background-image: none;
             background-color: transparent;
         }
-        #popup_win a p{
+        #popup a p{
+            background-image: none;
             position: static;
         }
     </style>

@@ -1,7 +1,7 @@
 <?php
 //echo "<canvas class='confetti' id='canvas'></canvas>";
 echo "
-<div id='popup_win'>
+<div id='popup_lose'>
     <h1>A grand day out</h1>
     <h2>Game Over</h2>  
     <div class='but'>
@@ -21,7 +21,7 @@ echo "
         *{
             font-family: "space age", serif;
         }
-        #popup_win{
+        #popup_lose{
             visibility: hidden;
             position: absolute;
             top: 50%;
@@ -32,45 +32,48 @@ echo "
             background-color: #2E4052;
             border-radius: 20px;
             padding: 15px;
-
+            background-image: none;
             text-align: center;
             align-items: center;
         }
-        #popup_win h1, p, h2{
+        #popup_lose h1, p, h2{
+            background-image: none;
             color: white;
             background-color: transparent;
         }
-        #popup_win h1{
+        #popup_lose h1{
             margin-top: 30px;
             font-size: 2.5em;
         }
-        #popup_win h2{
+        #popup_lose h2{
             font-size: 5em;
             position: relative;
             top: 0;
             transform: translateY(50%);
             margin-bottom: 10px;
         }
-        #popup_win p{
+        #popup_lose p{
             font-size: 1.5em;
         }
-        #popup_win a{
+        #popup_lose a{
+            background-image: none;
             display: inline-block;
             margin: 5px;
             font-size: 1.2em;
-            border-style: solid;
-            border-width: 5px;
-            border-color: transparent;
-            border-radius: 10px;
+            border: none;
             padding: 0 5px;
             text-decoration: none;
             cursor: pointer;
         }
-        #popup_win a p:hover{
+        #popup_lose a p:hover{
+            background-image: none;
             text-decoration: underline;
+            box-shadow: none;
         }
-
-        #popup_win .star{
+        #popup_lose a:hover{
+            box-shadow: none;
+        }
+        #popup_lose .star{
             background-image: none;
             background-color: transparent;
             width: 100%;
@@ -78,30 +81,33 @@ echo "
             display: flex;
 
         }
-        #popup_win .center_img{
+        #popup_lose .center_img{
             background-color: transparent;
             width: 200px;
             background-image: none;
             justify-content: center;
             display: flex;
         }
-        #popup_win img{
+        #popup_lose img{
+            background-image: none;
             background-color: transparent;
             display: flex;
             justify-content: center;
-
             margin: auto;
             height: 50px;
             width: 50px;
         }
-        #popup_win .but{
+        #popup_lose .but{
+            background-image: none;
             position: relative;
             top: 150px;
         }
-        #popup_win .but, a{
+        #popup_lose .but, a{
+            background-image: none;
             background-color: transparent;
         }
-        #popup_win a p{
+        #popup_lose a p{
+            background-image: none;
             position: static;
         }
     </style>
