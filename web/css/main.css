@@ -129,17 +129,39 @@ table, tr, td{
   border-spacing: 0;
 }
 
-
 .identify{
 background-color:yellow;
 }
 
 
 
+
+.global{
+  position: absolute;
+  top: 50%;
+  height: 100vh;
+  width: 100vh;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  z-index: 5;
+}
+.container, table{
+  border: none;
+  background-color: #9e9e9e;
+  position: absolute;
+  height: calc(90vh - 1px);
+  width:calc(90vh - 1px);
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+
+/*
 @media screen and (min-width: 1600px) {
   .global { display:block;
     width: 700px;height: 700px;
-    /*margin: calc(50vh - 450px) auto auto;*/
+
   }
 }
 
@@ -163,7 +185,6 @@ background-color:yellow;
     display: block;
     width: 600px;
     height: 600px;
-    /*margin: calc(50vh - 450px) auto auto;*/
   }
 }
 
@@ -191,3 +212,4 @@ background-color:yellow;
     margin: calc(50vh - 200px) auto auto;
   }
 }
+*/
