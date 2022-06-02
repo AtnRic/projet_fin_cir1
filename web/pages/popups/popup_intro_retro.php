@@ -1,7 +1,7 @@
 <?php
 //echo "<canvas class='confetti' id='canvas'></canvas>";
 echo "
-<div id='popup'>
+<div id='popup_intro_retro'>
     <h1>Tartaros Fantasy</h1>
     <div class='carrousel'>
 								
