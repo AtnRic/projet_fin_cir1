@@ -609,6 +609,7 @@ function PHP_Start(anime, custom, data) {
         }
       }
       if (event.key == "m") {
+        console.log("theme");
         ThemeSound();
       }
       if (event.key == "r") {
@@ -966,8 +967,11 @@ function Click(event) {
   const PlayerImg = document.getElementById("playerimg");
 
   if (activate == false && finish == false) {
+    if (event.key == "o") {
+      PlaySound("../son/sound_teleportation.mp3");
+    }
     if (event.key == "p") {
-      Solveur(solver);
+      Solveur(Solver);
     } else if (event.key == "ArrowDown") {
       if (CanMove(PlayerPos, Labyrinthe, "d") || cheat == true) {
         MoveGarde(height, 2);
@@ -1040,8 +1044,6 @@ function Click(event) {
         });
         PlayerPos += 1;
         let newPos = document.getElementById(PlayerPos);
-        console.log(PlayerPos);
-        console.log(newPos);
         PlayerImg.src = Ambiance.Pr;
         newPos.appendChild(Player);
         PlayerAnim(-height, 0);
@@ -1518,6 +1520,36 @@ function Solveur(tab) {
 
 // Génération des téléporteurs, 0 => [0, 1], 1 => [1, 2]
 function Teleporter(tab) {
+  let Cell1 = document.getElementById(0);
+  let Cell2 = document.getElementById(LabSize * LabSize - 1);
+
+  const Div1 = document.createElement("div");
+  const Div2 = document.createElement("div");
+
+  let box = document.getElementById("1");
+  let width = box.offsetWidth;
+  let height = box.offsetHeight;
+
+  Div1.style.width = width + "px";
+  Div1.style.height = height + "px";
+  Div2.style.width = width + "px";
+  Div2.style.height = height + "px";
+
+  const Img1 = document.createElement("img");
+  const Img2 = document.createElement("img");
+  Img1.src = "../images/mazes/maze_entree.png";
+  Img2.src = "../images/mazes/maze_sortie.png";
+
+  Cell1.appendChild(Div1);
+  Div1.appendChild(Img1);
+  Cell2.appendChild(Div2);
+  Div2.appendChild(Img2);
+
+  Div1.classList.add("Teleporteur");
+  Div2.classList.add("Teleporteur");
+  Img1.classList.add("TeleporteurImg");
+  Img2.classList.add("TeleporteurImg");
+
   TpStruct = tab;
   for (i = 0; i < tab.length; i++) {
     TeleporterStart.push(tab[i][0]);
