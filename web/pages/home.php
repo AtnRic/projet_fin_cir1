@@ -29,7 +29,7 @@ require '../tools/_main_tools.php';
         <img src="../images/accueil/side-palm-right.png" id="palm-right">
         <img src="../images/accueil/left-palm.png" id="palm-left">
         <img src="../images/accueil/top-palm.png" id="top-palm">
-        <a href="?MazeSize=22&nbrTP=4&nbrGuard=4&theme=2">
+        <a href="?MazeSize=15&nbrTP=4&nbrGuard=4&theme=2">
         <?php
             if(isset($_GET['MazeSize']) && isset($_GET['nbrTP']) && isset($_GET['nbrGuard']) && isset($_GET['theme'])){
                 $mazeSize = $_GET['MazeSize'];
@@ -72,7 +72,7 @@ require '../tools/_main_tools.php';
         <img src="../images/accueil/mario-pipe.png" id="mario-pipe1">
         <img src="../images/accueil/mario-pipe.png" id="mario-pipe2">
         <img src="../images/accueil/mario-coin.gif" id="mario-coin">
-        <a href="?MAzeSize=28&nbrTP=4&nbrGuard=4&theme=2">
+        <a href="?MAzeSize=20&nbrTP=4&nbrGuard=4&theme=2">
             <?php
             if(isset($_GET['MAzeSize']) && isset($_GET['nbrTP']) && isset($_GET['nbrGuard']) && isset($_GET['theme'])){
                 $mazeSize = $_GET['MAzeSize'];

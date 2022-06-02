@@ -2,7 +2,7 @@
 //echo "<canvas class='confetti' id='canvas'></canvas>";
 echo "
 <div id='popup_intro'>
-    <h1>Tartaros Fantasy</h1>
+    <h1>A Grand Day Out</h1>
     <div class='carrousel'>
 		<input type='radio' name='slides' id='radio-1' checked>
 		<input type='radio' name='slides' id='radio-2'>
@@ -18,7 +18,7 @@ echo "
                 <p>You have teleporters available with <br> an entrance : <img class='tp' src='../images/mazes/tp_red_input.png' alt='tp'> <br> and an exit : <img  class='tp' src='../images/mazes/tp_red_output.png' alt='tp'><br> Be careful, these teleporters are one-way!</p>
             </li>
             <li class='slide'>
-                <p>You must also dodge the guards that advance in sync with you<br> You step, the guards step. <br>They move between two walls and go back and forth : <img class='guard' src='../images/popup/retro_guard_animation.gif' alt='guard'></p>
+                <p>You must also dodge the guards that advance in sync with you<br> You step, the guards step. <br>They move between two walls and go back and forth : <img class='guard' src='../images/popup/space_guard_animation.gif' alt='guard'></p>
             </li>
             <li class='slide'>
                 <h1>Press Start</h1>
@@ -34,44 +34,44 @@ echo "
 </div>";
 ?>
 <style>
+    @font-face {
+        font-family: "space age";
+        src: url('../images/font/space age.ttf');
+    }
     *{
-        font-family: "8-bit HUD", serif;
+        font-family: "space age", serif;
     }
     #popup_intro{
         visibility: hidden;
         z-index: 10;
         position: absolute;
-        top: 22.2vh;
-        height: 48vh;
-        width: 60vh;
+        top: 50%;
+        height: 70vh;
+        width: 100vh;
         left: 50%;
-        transform: translateX(-50%);
-
-        border-style: solid;
-        border-width: 5px;
-        border-color: #0ff;
-        box-shadow: 0 0 10px 5px #0ff;
-        background-color: rgba(0,4, 23, 1);
+        transform: translateX(-50%) translateY(-50%);
+        background-color: #2E4052;
         border-radius: 20px;
         padding: 20px;
-
+        background-image: none;
         text-align: center;
         align-items: center;
     }
     #popup_intro h1, p, h2{
         color: white;
         background-color: transparent;
+        background-image: none;
     }
     h1{
-        font-size: 1.3em;
+        font-size: 2.5em;
     }
     #popup_intro h2{
-        font-size: 1.5em;
-        margin-bottom: 10px;
+        font-size: 3em;
+        margin-bottom: 30px;
         top: 0;
     }
     p{
-        font-size: 0.8em;
+        font-size: 1em;
         top: 20px;
     }
     a{
@@ -84,6 +84,7 @@ echo "
         border-radius: 10px;
         padding: 0 5px;
         background-color: transparent;
+        background-image: none;
     }
     a:hover{
         border-style: solid;
@@ -97,6 +98,7 @@ echo "
         display: block;
         margin: auto auto 10px auto;
         background-color: transparent;
+        background-image: none;
 
     }
     img{
@@ -107,15 +109,18 @@ echo "
         margin: auto;
         height: 50px;
         width: 50px;
+        background-image: none;
     }
 
 
     a p{
         position: static;
         background-color: transparent;
+        background-image: none;
     }
     #canvas{
         visibility: hidden;
+        background-image: none;
     }
 
 
@@ -125,15 +130,18 @@ echo "
     .carrousel {
         z-index: 1000;
         background-color: transparent;
+        background-image: none;
         text-align: center;
         /*padding: 4.5em 0;
         height: 7.5em;*/
+        height: 57vh;
         max-width: 750px;
         margin: auto;
         position: relative;
         overflow: hidden;
     }
     .carrousel h2 {
+        background-image: none;
         margin: 0;
         padding: 0;
         font-size: 1em;
@@ -142,6 +150,7 @@ echo "
 
     }
     .carrousel .slides {
+        background-image: none;
         width: 400%;
         left: 0;
         padding-left: 0;
@@ -157,18 +166,22 @@ echo "
         transition: transform .5s;
     }
     .carrousel #slide2{
+        background-image: none;
         top: -20px;
         background-color: transparent;
     }
     .carrousel .slides li {
+        background-image: none;
         width: 25%;
         position: relative;
         float: left;
         background-color: transparent;
     }
     .carrousel li p{
+        background-image: none;
         margin-top: 0;
         background-color: transparent;
+        font-size: 1.5em;
     }
 
 
@@ -189,12 +202,13 @@ echo "
         object-fit: cover;
         border-radius: 0;
         left: 50%;
-        transform: translateX(15%);
+        transform: translateX(60%);
         margin-top: 40px;
         vertical-align: middle;
         background-color: transparent;
     }
     .carrousel .slidesNavigation {
+        background-image: none;
         display: block;
         background-color: transparent;
         list-style: none;
@@ -209,10 +223,12 @@ echo "
         margin-left: -52px; /*adjusting the centering by applying a negative margin of half of the width*/
     }
     .carrousel input {
+        background-image: none;
         display: none;
         background-color: transparent;
     }
     .carrousel .slidesNavigation label {
+        background-image: none;
         background-color: transparent;
         float: left;
         margin: 6px;
