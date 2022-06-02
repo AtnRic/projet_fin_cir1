@@ -21,7 +21,7 @@ echo "
     #popup_lose{
         visibility: hidden;
         position: absolute;
-        top: 0vh;
+        top: 22.4vh;
         height: 47vh;
         width: 60vh;
         left: 50%;

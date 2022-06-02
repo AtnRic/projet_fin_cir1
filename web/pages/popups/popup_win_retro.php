@@ -34,7 +34,7 @@ echo "
     #popup{
         visibility: hidden;
         position: absolute;
-        top: 0;
+        top: 22.4vh;
         height: 47vh;
         width: 60vh;
         left: 50%;
