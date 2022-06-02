@@ -589,6 +589,7 @@ document.getElementById("popup").style.zIndex = -10;
 document.getElementById("restart").addEventListener("click", Restart);
 
 function PHP_Start(anime, custom, data) {
+  document.getElementById("popup_intro").style.zIndex = 10;
   animation = anime;
   if (custom) {
     start = true;
@@ -598,6 +599,7 @@ function PHP_Start(anime, custom, data) {
     document.addEventListener("keydown", function (event) {
       if (!start && event.key != "m" && event.key != "r") {
         start = true;
+        document.getElementById("popup_intro").style.zIndex = -10;
         MainMusic = PlaySound(Ambiance.Theme);
         sch_Start(anime, custom, data);
       }
