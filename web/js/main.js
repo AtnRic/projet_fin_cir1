@@ -616,6 +616,7 @@ function sch_Start(anime, custom, data) {
     //console.log("Sortie du C : " + output);
     console.log(output);
     BaseOut = output;
+
     newOut = output.split(";");
     solveOut = newOut[1].split(",");
     Solver = solveOut;
@@ -646,7 +647,7 @@ function sch_Start(anime, custom, data) {
     }
     gardeGlobal = gardeList;
     Launch(
-      Math.sqrt(newOut[0].length / 2),
+      Math.sqrt(newOut[0].length),
       Array.from(newOut[0]),
       0,
       anime,
@@ -658,12 +659,17 @@ function sch_Start(anime, custom, data) {
       "../tools/function.php",
       "generation",
       function Handle(output) {
+        console.log(output);
         BaseOut = output;
         newOut = output.split(";");
         solveOut = newOut[1].split(",");
         Solver = solveOut;
         tpOut = newOut[2].split(",");
         gardeOut = newOut[3].split(",");
+
+        console.log(
+          "Taille : " + Math.sqrt(newOut[0].length) + " : " + newOut[0]
+        );
 
         for (i = 0; i < tpOut.length; i++) {
           tpOut[i] = tpOut[i].split(":").map(function (item) {
@@ -689,7 +695,7 @@ function sch_Start(anime, custom, data) {
         }
         gardeGlobal = gardeList;
         Launch(
-          Math.sqrt(newOut[0].length / 2),
+          Math.sqrt(newOut[0].length),
           Array.from(newOut[0]),
           0,
           anime,
@@ -1085,8 +1091,6 @@ function Win() {
   PlaySound("../son/sound_hero_win.mp3");
   initConfetti();
   render();
-  //console.log(Solver.length); // Trajet le plus court.
-  //console.log(Mouvement); // Trajet du joueur.
 }
 
 // Niveau perdu.
@@ -1107,36 +1111,45 @@ function Loose() {
 
 // Autorisation d'un mouvement d'une case à une autre.
 function CanMove(index, lab, direction) {
-  labTop = lab[index - Math.sqrt(lab.length / 2)];
-  indexTop = index - Math.sqrt(lab.length / 2);
-  labDown = lab[index + Math.sqrt(lab.length / 2)];
-  indexDown = index + Math.sqrt(lab.length / 2);
+  labTop = lab[index - Math.sqrt(lab.length)];
+  indexTop = index - Math.sqrt(lab.length);
+  labDown = lab[index + Math.sqrt(lab.length)];
+  indexDown = index + Math.sqrt(lab.length);
   labRight = lab[index + 1];
   indexRight = index + 1;
   labLeft = lab[index - 1];
   indexLeft = index - 1;
 
+  console.log(lab[index]);
+
   switch (direction) {
     case "t":
-      if (index < Math.sqrt(lab.length / 2)) {
+      if (index < Math.sqrt(lab.length)) {
         return false;
       }
-      if (WallDown.includes(labTop, 0)) return false;
-      else {
+      if (WallTop.includes(lab[index], 0)) {
+        console.log(false);
+        return false;
+      } else {
         return true;
       }
       break;
     case "d":
-      if (WallTop.includes(labDown, 0)) {
+      if (index > LabSize * LabSize - 1 - LabSize) {
+        return false;
+      }
+      if (WallDown.includes(lab[index], 0)) {
+        console.log(false);
         return false;
       } else {
         return true;
       }
       break;
     case "r":
-      //if (indexTop < 0) return false;
-      if (WallLeft.includes(labRight, 0)) return false;
-      else {
+      if (WallRight.includes(lab[index], 0)) {
+        console.log(false);
+        return false;
+      } else {
         return true;
       }
       break;
@@ -1144,8 +1157,10 @@ function CanMove(index, lab, direction) {
       if (index == 0) {
         return false;
       }
-      if (WallRight.includes(labLeft, 0)) return false;
-      else {
+      if (WallLeft.includes(lab[index], 0)) {
+        console.log(false);
+        return false;
+      } else {
         return true;
       }
       break;
@@ -1281,6 +1296,35 @@ function MoveGarde(size, move) {
     YposIndent = 0;
     Attack = false;
 
+    console.log("------------------------------------------------------");
+    console.log(gardeGlobal[i].pos);
+
+    console.log(
+      "G" +
+        gardeGlobal[i].id +
+        "left : " +
+        CanMove(gardeGlobal[i].pos, Labyrinthe, "l")
+    );
+    console.log(
+      "G" +
+        gardeGlobal[i].id +
+        "right : " +
+        CanMove(gardeGlobal[i].pos, Labyrinthe, "r")
+    );
+    console.log(
+      "G" +
+        gardeGlobal[i].id +
+        "top : " +
+        CanMove(gardeGlobal[i].pos, Labyrinthe, "t")
+    );
+    console.log(
+      "G" +
+        gardeGlobal[i].id +
+        "down : " +
+        CanMove(gardeGlobal[i].pos, Labyrinthe, "d")
+    );
+    console.log("------------------------------------------------------");
+
     //#region Position
     switch (gardeGlobal[i].dir) {
       case 1: // vers la droite.
@@ -1358,6 +1402,9 @@ function MoveGarde(size, move) {
     //#region Animation
     gardeGlobal[i].pos += indexIndent;
     let newCell = document.getElementById(gardeGlobal[i].pos);
+    if (newCell == null) {
+      console.log(gardeGlobal[i].pos);
+    }
     let Garde = document.getElementById("G_div" + gardeGlobal[i].id);
     let GardeImg = document.getElementById("G_ui" + gardeGlobal[i].id);
 
