@@ -1245,7 +1245,7 @@ Teleporteurs_Paire* GetStart(int index, Teleporteurs_Paire* T, int nbPaire) {
 	return NULL;
 }
 
-void ApparitionGardes(char* maze, int cote, int Quantite_Garde) {
+void ApparitionGardes(char* maze, int cote, int Quantite_Garde, int Quantite_teleporteur, Teleporteurs_Paire* P) {
 	srand(time(NULL));
 	Garde* garde = (Garde*)malloc(Quantite_Garde * sizeof(Garde));
 	if (garde == NULL) return;
@@ -1260,6 +1260,30 @@ void ApparitionGardes(char* maze, int cote, int Quantite_Garde) {
 				if (*(maze + (i + j)) == 'a' || *(maze + (i + j)) == 'b' || *(maze + (i + j)) == 'd') {
 					count++;
 					sortie++;
+					switch (*(maze + (i + j))) {
+					case 'a':
+						for (int k = 0; k < Quantite_teleporteur; k++) {
+							if (*(maze + (i + j + cote)) == (P + k)) {
+								break;
+							}
+							if (*(maze + (i + j - cote)) == (P + k)) {
+								break;
+							}
+						}
+					case 'b':
+						for (int k = 0; k < Quantite_teleporteur; k++) {
+							if (*(maze + (i + j + cote)) == (P + k)) {
+								break;
+							}
+						}
+					case 'd':
+						for (int k = 0; k < Quantite_teleporteur; k++) {
+							if (*(maze + (i + j - cote)) == (P + k)) {
+								break;
+							}
+						}
+					}
+					
 				}
 				else if (*(maze + (i + j)) == 'f') {
 					count++;
@@ -1283,6 +1307,29 @@ void ApparitionGardes(char* maze, int cote, int Quantite_Garde) {
 				if (*(maze + (i + (j * cote))) == 'a' || *(maze + (i + (j * cote))) == 'c' || *(maze + (i + (j * cote))) == 'e') {
 					count++;
 					sortie++;
+					switch (*(maze + (i + j))) {
+					case 'a':
+						for (int k = 0; k < Quantite_teleporteur; k++) {
+							if (*(maze + (i + j + 1)) == (P + k)) {
+								break;
+							}
+							if (*(maze + (i + j - 1)) == (P + k)) {
+								break;
+							}
+						}
+					case 'c':
+						for (int k = 0; k < Quantite_teleporteur; k++) {
+							if (*(maze + (i + j - 1)) == (P + k)) {
+								break;
+							}
+						}
+					case 'e':
+						for (int k = 0; k < Quantite_teleporteur; k++) {
+							if (*(maze + (i + j + 1)) == (P + k)) {
+								break;
+							}
+						}
+					}
 				}
 				else if (*(maze + (i + (j * cote))) == 'g') {
 					count++;
@@ -1388,6 +1435,6 @@ int main()
 //	printf("\n_____ SOLVE  FINAL _____\n\n");
 //	printPath(W);
 //	printf("\n____ ____ ____ ____ ____\n\n");
-	ApparitionGardes(letterSansPrintf(newl), sqrt(newl->size * newl->size), GARDAVOU);
+	ApparitionGardes(letterSansPrintf(newl), sqrt(newl->size * newl->size), GARDAVOU, TELEPORTE, pairs);
 	return EXIT_SUCCESS;
 }
