@@ -149,51 +149,5 @@ require '../tools/_main_tools.php';
         <p>Choose your level</p>
     </div>
 <!-- <h2 class="title sub own">Or create your own !</h2> -->
-<?php
-/*if(isset($_GET['labyrinthe'])){
-    $labyrinthe=$_GET['labyrinthe'];
-    if($labyrinthe == 1){
-        $mazeSize = 15;
-        $nbrTP = 3;
-        $nbrGuard = 3;
-        $theme = 1;
-
-        include 'jungle.html';
-    }
-    else if($labyrinthe ==2){
-        $mazeSize = 22;
-        $nbrTP = 4;
-        $nbrGuard = 4;
-        $theme = 2;
-
-        include 'retro.php';
-    }
-    else if($labyrinthe == 3){
-        $mazeSize = 40;
-        $nbrTP = 5;
-        $nbrGuard = 5;
-        $theme = 3;
-
-        include 'space.php';
-    }
-
-    $customMaze = array(
-        array($mazeSize), 
-        array($nbrTP), 
-        array($nbrGuard), 
-        array($theme)
-      );
-
-      $path = './dataCustomMaze.csv';
-      if ($file = @fopen($path, 'w')) {
-        foreach ($customMaze as $ligne) {
-          fputcsv($file, $ligne);
-        }
-        fclose($file);
-    }*/
-    //<a href='../pages/other_profil.php?pseudo=$nickname'><b>" . $name . "</b></a>
-//<a href='../tools/printFile.php?mazeSize='.$mazeSize.'?nbrTP='.$nbrTP.'?nbrGuard='.$nbrGuard.'?theme='.$theme.''><b>" . $mazSize . $nbrTP . $nbrGuard . $theme ."</b></a>
-//}
-?>
 </body>
 </html>
