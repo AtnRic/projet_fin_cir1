@@ -23,10 +23,16 @@ echo "
 </div>";
 ?>
 <style>
+    @font-face {
+	font-family: "8-bit HUD";
+	src: url('../images/font/8-bit-hud.ttf');
+}
+
     *{
         font-family: "8-bit HUD", serif;
     }
     #popup{
+        z-index: -10;
         position: absolute;
         top: 22.2vh;
         height: 47vh;
