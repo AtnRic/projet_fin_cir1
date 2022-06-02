@@ -585,11 +585,12 @@ let cells = document.getElementsByClassName("cell");
 // Lancement complet du jeu.
 
 let start = false;
-document.getElementById("popup").style.zIndex = -10;
+document.getElementById("popup").style.visibility = "hidden";
+
 document.getElementById("restart").addEventListener("click", Restart);
 
 function PHP_Start(anime, custom, data) {
-  document.getElementById("popup_intro").style.zIndex = 10;
+  document.getElementById("popup_intro").style.visibility = "visible";
   animation = anime;
   if (custom) {
     start = true;
@@ -599,7 +600,7 @@ function PHP_Start(anime, custom, data) {
     document.addEventListener("keydown", function (event) {
       if (!start && event.key != "m" && event.key != "r") {
         start = true;
-        document.getElementById("popup_intro").style.zIndex = -10;
+        document.getElementById("popup_intro").style.visibility = "hidden";
         MainMusic = PlaySound(Ambiance.Theme);
         sch_Start(anime, custom, data);
       }
@@ -726,8 +727,8 @@ function Restart() {
     child = e.lastElementChild;
   }
   document.removeEventListener("keydown", Click);
-  document.getElementById("popup").style.zIndex = -10;
-  document.getElementById("popup_lose").style.zIndex = -10;
+  document.getElementById("popup").style.visibility = "hidden";
+  document.getElementById("popup_lose").style.visibility = "hidden";
   Mouvement = 0;
   PlayerPos = 0;
   LabSize = 0;
@@ -1133,7 +1134,7 @@ function Win() {
   document.getElementById("long").innerHTML += " " + 2 * Solver.length;
   document.getElementById("number").innerHTML += " " + Mouvement;
 
-  document.getElementById("popup").style.zIndex = 10;
+  document.getElementById("popup").style.visibility = "visible";
   PlaySound("../son/sound_hero_win.mp3");
   initConfetti();
   render();
@@ -1141,7 +1142,7 @@ function Win() {
 
 // Niveau perdu.
 function Loose() {
-  document.getElementById("popup_lose").style.zIndex = 10;
+  document.getElementById("popup_lose").style.visibility = "visible";
   MainMusic.pause();
   PlaySound(Ambiance.DeathSound);
   finish = true;
