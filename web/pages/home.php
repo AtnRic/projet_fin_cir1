@@ -44,7 +44,7 @@ require '../tools/_main_tools.php';
                   );
                
                   $path = './dataCustomMaze.csv';
-                  if ($file = @fopen('dataCustomMaze.csv', 'w')) {
+                  if ($file = @fopen('../tools/DonneesLabyrinthe.csv', 'w')) {
                     foreach ($customMaze as $ligne) {
                       fputcsv($file, $ligne);
                     }
@@ -72,7 +72,7 @@ require '../tools/_main_tools.php';
         <img src="../images/accueil/mario-pipe.png" id="mario-pipe1">
         <img src="../images/accueil/mario-pipe.png" id="mario-pipe2">
         <img src="../images/accueil/mario-coin.gif" id="mario-coin">
-        <a href="?MAzeSize=22&nbrTP=4&nbrGuard=4&theme=2">
+        <a href="?MAzeSize=28&nbrTP=4&nbrGuard=4&theme=2">
             <?php
             if(isset($_GET['MAzeSize']) && isset($_GET['nbrTP']) && isset($_GET['nbrGuard']) && isset($_GET['theme'])){
                 $mazeSize = $_GET['MAzeSize'];
@@ -87,7 +87,7 @@ require '../tools/_main_tools.php';
                   );
                
                   $path = './dataCustomMaze.csv';
-                  if ($file = @fopen('dataCustomMaze.csv', 'w')) {
+                  if ($file = @fopen('../tools/DonneesLabyrinthe.csv', 'w')) {
                     foreach ($customMaze as $ligne) {
                       fputcsv($file, $ligne);
                     }
@@ -128,7 +128,7 @@ require '../tools/_main_tools.php';
                   );
                
                   $path = './dataCustomMaze.csv';
-                  if ($file = @fopen('dataCustomMaze.csv', 'w')) {
+                  if ($file = @fopen('../tools/DonneesLabyrinthe.csv', 'w')) {
                     foreach ($customMaze as $ligne) {
                       fputcsv($file, $ligne);
                     }
@@ -139,7 +139,7 @@ require '../tools/_main_tools.php';
             }
             ?>
         <div class="button" id="but-space">
-                <h3 class="name">Ta mère non ?</h3>
+                <h3 class="name">Stool space</h3>
                 <p class="level">Hard</p>
         </div>
         </a>
@@ -149,51 +149,5 @@ require '../tools/_main_tools.php';
         <p>Choose your level</p>
     </div>
 <!-- <h2 class="title sub own">Or create your own !</h2> -->
-<?php
-/*if(isset($_GET['labyrinthe'])){
-    $labyrinthe=$_GET['labyrinthe'];
-    if($labyrinthe == 1){
-        $mazeSize = 15;
-        $nbrTP = 3;
-        $nbrGuard = 3;
-        $theme = 1;
-
-        include 'jungle.html';
-    }
-    else if($labyrinthe ==2){
-        $mazeSize = 22;
-        $nbrTP = 4;
-        $nbrGuard = 4;
-        $theme = 2;
-
-        include 'retro.php';
-    }
-    else if($labyrinthe == 3){
-        $mazeSize = 40;
-        $nbrTP = 5;
-        $nbrGuard = 5;
-        $theme = 3;
-
-        include 'space.php';
-    }
-
-    $customMaze = array(
-        array($mazeSize), 
-        array($nbrTP), 
-        array($nbrGuard), 
-        array($theme)
-      );
-
-      $path = './dataCustomMaze.csv';
-      if ($file = @fopen($path, 'w')) {
-        foreach ($customMaze as $ligne) {
-          fputcsv($file, $ligne);
-        }
-        fclose($file);
-    }*/
-    //<a href='../pages/other_profil.php?pseudo=$nickname'><b>" . $name . "</b></a>
-//<a href='../tools/printFile.php?mazeSize='.$mazeSize.'?nbrTP='.$nbrTP.'?nbrGuard='.$nbrGuard.'?theme='.$theme.''><b>" . $mazSize . $nbrTP . $nbrGuard . $theme ."</b></a>
-//}
-?>
 </body>
 </html>

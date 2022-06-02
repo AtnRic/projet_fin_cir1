@@ -279,7 +279,6 @@ if (isset($_POST['mdpco'])) {
 if ($count == 2) {
     $login = $_POST['login'];
     $mdp_hash = hash('sha256', $_POST['mdpco']); //on fait un hash du mot de passe pour ne pas stocker le mot de passe en clair
-    $_SESSION["pseudo"] = $login; //Variable de session "pseudo"
     if (!isset($_COOKIE['pseudo']) && !isset($_COOKIE['mdp_hash'])) {
         setcookie("login", $login, time() + (3600 * 24 * 365));
         setcookie("mdp_hash", $mdp_hash, time() + (3600 * 24 * 365));
