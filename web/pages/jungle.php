@@ -13,8 +13,8 @@
         <table id="container"></table>
     </div>
     <?php
-    $theme = 'jungle';
     include 'popups/popup_outro.php';
+    include 'popups/popup_lose_jungle.php';
     ?>
 </body>  
 <script src="../js/conf.js"></script>

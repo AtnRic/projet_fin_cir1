@@ -586,34 +586,42 @@ let cells = document.getElementsByClassName("cell");
 
 let start = false;
 document.getElementById("popup").style.zIndex = -10;
+document.getElementById("restart").addEventListener("click", Restart);
 
 function PHP_Start(anime, custom, data) {
-  document.addEventListener("keydown", function (event) {
-    if (!start && event.key != "m" && event.key != "r") {
-      start = true;
-      MainMusic = PlaySound(Ambiance.Theme);
-      sch_Start(anime, custom, data);
-    }
-    if (event.key == "x") {
-      if (cheat == true) {
-        cheat = false;
-      } else {
-        cheat = true;
+  animation = anime;
+  if (custom) {
+    start = true;
+    MainMusic = PlaySound(Ambiance.Theme);
+    sch_Start(anime, custom, data);
+  } else {
+    document.addEventListener("keydown", function (event) {
+      if (!start && event.key != "m" && event.key != "r") {
+        start = true;
+        MainMusic = PlaySound(Ambiance.Theme);
+        sch_Start(anime, custom, data);
       }
-    }
-    if (event.key == "m") {
-      ThemeSound();
-    }
-    if (event.key == "r") {
-      location.reload();
-    }
-  });
+      if (event.key == "x") {
+        if (cheat == true) {
+          cheat = false;
+        } else {
+          cheat = true;
+        }
+      }
+      if (event.key == "m") {
+        ThemeSound();
+      }
+      if (event.key == "r") {
+        location.reload();
+      }
+    });
+  }
 }
 
 function sch_Start(anime, custom, data) {
   if (custom == true) {
     let output = data;
-    //console.log("Sortie du C : " + output);
+    console.log(data);
     console.log(output);
     BaseOut = output;
 
@@ -707,7 +715,25 @@ function sch_Start(anime, custom, data) {
   }
 }
 
-// Variables globales.
+function Restart() {
+  var e = document.getElementById("container");
+  var child = e.lastElementChild;
+  while (child) {
+    e.removeChild(child);
+    child = e.lastElementChild;
+  }
+  document.removeEventListener("keydown", Click);
+  document.getElementById("popup").style.zIndex = -10;
+  document.getElementById("popup_lose").style.zIndex = -10;
+  Mouvement = 0;
+  PlayerPos = 0;
+  LabSize = 0;
+  finish = false;
+  cheat = false;
+  PHP_Start(animation, true, BaseOut);
+}
+
+//#region  Variables globales.
 let Mouvement = 0;
 let BaseOut;
 let Solver;
@@ -718,9 +744,13 @@ let TeleporterStart = [];
 let TpStruct;
 let gardeGlobal = [];
 let X;
+let height;
 let MainMusic;
+let animation = false;
 let cheat = false;
 let finish = false;
+let Event;
+//#endregion
 
 // Création d'une grid avec spawn du joueur et des gardes.
 function Launch(size, tab, spawnCellId, boolAnimation, solver, tps) {
@@ -930,6 +960,121 @@ function Launch(size, tab, spawnCellId, boolAnimation, solver, tps) {
   //#endregion
 }
 
+function Click(event) {
+  cellNum = LabSize;
+  const Player = document.getElementById("player");
+  const PlayerImg = document.getElementById("playerimg");
+
+  if (activate == false && finish == false) {
+    if (event.key == "p") {
+      Solveur(solver);
+    } else if (event.key == "ArrowDown") {
+      if (CanMove(PlayerPos, Labyrinthe, "d") || cheat == true) {
+        MoveGarde(height, 2);
+        activate = true;
+        Mouvement++;
+        anime({
+          targets: "#playerimg",
+          translateX: [X, -(7.5 * X)],
+          easing: "steps(8)",
+          duration: 500,
+          loop: false,
+        });
+        PlayerPos += cellNum;
+        let newPos = document.getElementById(PlayerPos);
+        console.log(PlayerPos);
+        console.log(newPos);
+        newPos.appendChild(Player);
+        PlayerAnim(0, -height);
+      }
+    } else if (event.key == "ArrowUp") {
+      if (CanMove(PlayerPos, Labyrinthe, "t") || cheat == true) {
+        MoveGarde(height, 4);
+        activate = true;
+        Mouvement++;
+        anime({
+          targets: "#playerimg",
+          translateX: [X, -(7.5 * X)],
+          easing: "steps(8)",
+          duration: 500,
+          loop: false,
+        });
+        PlayerPos -= cellNum;
+        let newPos = document.getElementById(PlayerPos);
+        console.log(PlayerPos);
+        console.log(newPos);
+        newPos.appendChild(Player);
+        PlayerAnim(0, height);
+      }
+    } else if (event.key == "ArrowLeft") {
+      if (CanMove(PlayerPos, Labyrinthe, "l") || cheat == true) {
+        MoveGarde(height, 3);
+        activate = true;
+        Mouvement++;
+        anime({
+          targets: "#playerimg",
+          translateX: [X, -(7.5 * X)],
+          easing: "steps(8)",
+          duration: 500,
+          loop: false,
+        });
+        PlayerPos -= 1;
+        let newPos = document.getElementById(PlayerPos);
+        console.log(PlayerPos);
+        console.log(newPos);
+        PlayerImg.src = Ambiance.Pl;
+        newPos.appendChild(Player);
+        PlayerAnim(height, 0);
+      }
+    } else if (event.key == "ArrowRight") {
+      if (CanMove(PlayerPos, Labyrinthe, "r") || cheat == true) {
+        MoveGarde(height, 1);
+        activate = true;
+        Mouvement++;
+        anime({
+          targets: "#playerimg",
+          translateX: [X, -(7.5 * X)],
+          easing: "steps(8)",
+          duration: 500,
+          loop: false,
+        });
+        PlayerPos += 1;
+        let newPos = document.getElementById(PlayerPos);
+        console.log(PlayerPos);
+        console.log(newPos);
+        PlayerImg.src = Ambiance.Pr;
+        newPos.appendChild(Player);
+        PlayerAnim(-height, 0);
+      }
+    } else if (event.key == " ") {
+      MoveGarde(height, -1);
+    }
+    if (PlayerPos == LabSize * LabSize - 1) {
+      Win();
+    }
+    for (i = 0; i < gardeGlobal.length; i++) {
+      if (gardeGlobal[i].pos == PlayerPos) {
+        Loose();
+      }
+    }
+    activate = true;
+    setTimeout(function () {
+      if (TeleporterStart.includes(PlayerPos)) {
+        for (p = 0; p < TpStruct.length; p++) {
+          if (TpStruct[p][0] == PlayerPos) {
+            TeleportePlayer(TpStruct[p][1]);
+            setTimeout(function () {
+              activate = false;
+            }, 1000);
+          }
+        }
+      } else {
+        activate = false;
+      }
+    }, 250);
+  }
+}
+
 // Génération du joueur.
 function SpawnPlayer(cellId, solver) {
   //#region Identification
@@ -949,7 +1094,7 @@ function SpawnPlayer(cellId, solver) {
 
   let box = document.getElementById("1");
   let width = box.offsetWidth;
-  let height = box.offsetHeight;
+  height = box.offsetHeight;
 
   Player.style.width = width / 2 + "px";
   Player.style.height = height + "px";
@@ -965,108 +1110,7 @@ function SpawnPlayer(cellId, solver) {
 
   //#region Input
   activate = false;
-  document.addEventListener("keydown", function (event) {
-    if (activate == false && finish == false) {
-      if (event.key == "p") {
-        Solveur(solver);
-      } else if (event.key == "ArrowDown") {
-        if (CanMove(PlayerPos, Labyrinthe, "d") || cheat == true) {
-          MoveGarde(height, 2);
-          activate = true;
-          Mouvement++;
-          anime({
-            targets: "#playerimg",
-            translateX: [X, -(7.5 * X)],
-            easing: "steps(8)",
-            duration: 500,
-            loop: false,
-          });
-          PlayerPos += cellNum;
-          let newPos = document.getElementById(PlayerPos);
-          newPos.appendChild(Player);
-          PlayerAnim(0, -height);
-        }
-      } else if (event.key == "ArrowUp") {
-        if (CanMove(PlayerPos, Labyrinthe, "t") || cheat == true) {
-          MoveGarde(height, 4);
-          activate = true;
-          Mouvement++;
-          anime({
-            targets: "#playerimg",
-            translateX: [X, -(7.5 * X)],
-            easing: "steps(8)",
-            duration: 500,
-            loop: false,
-          });
-          PlayerPos -= cellNum;
-          let newPos = document.getElementById(PlayerPos);
-          newPos.appendChild(Player);
-          PlayerAnim(0, height);
-        }
-      } else if (event.key == "ArrowLeft") {
-        if (CanMove(PlayerPos, Labyrinthe, "l") || cheat == true) {
-          MoveGarde(height, 3);
-          activate = true;
-          Mouvement++;
-          anime({
-            targets: "#playerimg",
-            translateX: [X, -(7.5 * X)],
-            easing: "steps(8)",
-            duration: 500,
-            loop: false,
-          });
-          PlayerPos -= 1;
-          let newPos = document.getElementById(PlayerPos);
-          PlayerImg.src = Ambiance.Pl;
-          newPos.appendChild(Player);
-          PlayerAnim(height, 0);
-        }
-      } else if (event.key == "ArrowRight") {
-        if (CanMove(PlayerPos, Labyrinthe, "r") || cheat == true) {
-          MoveGarde(height, 1);
-          activate = true;
-          Mouvement++;
-          anime({
-            targets: "#playerimg",
-            translateX: [X, -(7.5 * X)],
-            easing: "steps(8)",
-            duration: 500,
-            loop: false,
-          });
-          PlayerPos += 1;
-          let newPos = document.getElementById(PlayerPos);
-          PlayerImg.src = Ambiance.Pr;
-          newPos.appendChild(Player);
-          PlayerAnim(-height, 0);
-        }
-      } else if (event.key == " ") {
-        MoveGarde(height, -1);
-      }
-      if (PlayerPos == LabSize * LabSize - 1) {
-        Win();
-      }
-      for (i = 0; i < gardeGlobal.length; i++) {
-        if (gardeGlobal[i].pos == PlayerPos) {
-          Loose();
-        }
-      }
-      activate = true;
-      setTimeout(function () {
-        if (TeleporterStart.includes(PlayerPos)) {
-          for (p = 0; p < TpStruct.length; p++) {
-            if (TpStruct[p][0] == PlayerPos) {
-              TeleportePlayer(TpStruct[p][1]);
-              setTimeout(function () {
-                activate = false;
-              }, 1000);
-            }
-          }
-        } else {
-          activate = false;
-        }
-      }, 250);
-    }
-  });
+  document.addEventListener("keydown", Click);
 
   anime({
     targets: ".global",
@@ -1086,8 +1130,6 @@ function Win() {
   document.getElementById("number").innerHTML += " " + Mouvement;
 
   document.getElementById("popup").style.zIndex = 10;
-
-  document.getElementById("popup").style.zIndex = 10;
   PlaySound("../son/sound_hero_win.mp3");
   initConfetti();
   render();
@@ -1095,6 +1137,7 @@ function Win() {
 
 // Niveau perdu.
 function Loose() {
+  document.getElementById("popup_lose").style.zIndex = 10;
   MainMusic.pause();
   PlaySound(Ambiance.DeathSound);
   finish = true;
@@ -1119,8 +1162,6 @@ function CanMove(index, lab, direction) {
   indexRight = index + 1;
   labLeft = lab[index - 1];
   indexLeft = index - 1;
-
-  console.log(lab[index]);
 
   switch (direction) {
     case "t":
@@ -1295,35 +1336,6 @@ function MoveGarde(size, move) {
     XposIndent = 0;
     YposIndent = 0;
     Attack = false;
-
-    console.log("------------------------------------------------------");
-    console.log(gardeGlobal[i].pos);
-
-    console.log(
-      "G" +
-        gardeGlobal[i].id +
-        "left : " +
-        CanMove(gardeGlobal[i].pos, Labyrinthe, "l")
-    );
-    console.log(
-      "G" +
-        gardeGlobal[i].id +
-        "right : " +
-        CanMove(gardeGlobal[i].pos, Labyrinthe, "r")
-    );
-    console.log(
-      "G" +
-        gardeGlobal[i].id +
-        "top : " +
-        CanMove(gardeGlobal[i].pos, Labyrinthe, "t")
-    );
-    console.log(
-      "G" +
-        gardeGlobal[i].id +
-        "down : " +
-        CanMove(gardeGlobal[i].pos, Labyrinthe, "d")
-    );
-    console.log("------------------------------------------------------");
 
     //#region Position
     switch (gardeGlobal[i].dir) {
