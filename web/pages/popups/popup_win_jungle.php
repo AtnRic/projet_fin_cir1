@@ -99,7 +99,8 @@ echo "<div id='popup' style='background-image: url($link)'>
        
     }
     canvas{
-        z-index: 9;
+        z-index: 10;
+        visibility: visible;
         position: absolute;
         top: 0;
         left: 0;

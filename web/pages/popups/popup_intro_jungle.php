@@ -3,7 +3,7 @@
 $link = '../images/popup/popup_jungle.png';
 echo "
 <div id='popup_intro' style='background-image: url($link)'>
-    <h1>Tartaros Fantasy</h1>
+    <h1>Welcome to the Jungle</h1>
     <div class='carrousel'>
 		<input type='radio' name='slides' id='radio-1' checked>
 		<input type='radio' name='slides' id='radio-2'>
@@ -11,12 +11,10 @@ echo "
 		<input type='radio' name='slides' id='radio-4'>
         <ul class='slides'>
             <li class='slide'>
-                <h2>Welcome !</h2>
                 <p>You must reach the exit of the maze : </p>
-                <img class='tp' src='../images/mazes/maze_sortie.png' alt='exit'>  
-            </li>
+                <img class='tp' src='../images/mazes/maze_sortie.png' alt='exit'> 
             <li class='slide' id='slide2'>
-                <p>You have teleporters available with <br> an entrance : <img class='tp' src='../images/mazes/tp_red_input.png' alt='tp'> <br> and an exit : <img  class='tp' src='../images/mazes/tp_red_output.png' alt='tp'><br> Be careful, these teleporters are one-way!</p>
+                <p>You have teleporters available with <br> an entrance : </p><img class='tp' src='../images/mazes/tp_red_input.png' alt='tp'> <p>and an exit :</p> <img  class='tp' src='../images/mazes/tp_red_output.png' alt='tp'><p>Be careful, these teleporters are one-way!</p>
             </li>
             <li class='slide'>
                 <p>You must also dodge the guards that advance in sync with you<br> You step, the guards step. <br>They move between two walls and go back and forth : <img class='guard' src='../images/popup/jungle_guard_animation.gif' alt='guard'></p>
@@ -61,7 +59,7 @@ echo "
         align-items: center;
     }
     h1{
-        font-size: 1.3em;
+        font-size: 2.5em;
     }
     #popup_intro h2{
         font-size: 1.5em;
@@ -69,8 +67,8 @@ echo "
         top: 0;
     }
     p{
-        font-size: 0.8em;
-        top: 20px;
+
+        top: 0;
     }
     a{
         display: inline-block;
@@ -129,21 +127,14 @@ echo "
         text-align: center;
         /*padding: 4.5em 0;
         height: 7.5em;*/
+        height: 50vh;
         max-width: 750px;
         margin: auto;
         position: relative;
         overflow: hidden;
         background-image: none;
     }
-    .carrousel h2 {
-        margin: 0;
-        padding: 0;
-        font-size: 1em;
-        text-align: center;
-        background-color: transparent;
-        background-image: none;
 
-    }
     .carrousel .slides {
         width: 400%;
         left: 0;
@@ -175,6 +166,7 @@ echo "
         margin-top: 0;
         background-color: transparent;
         background-image: none;
+        font-size: 1.5em;
     }
 
 
@@ -184,6 +176,7 @@ echo "
         object-fit: cover;
         border-radius: 50%;
         margin-left: -1.5em;
+        margin-top: -50px;
         margin-right: 0.5em;
         vertical-align: middle;
         background-color: transparent;
