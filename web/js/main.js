@@ -734,7 +734,7 @@ function Restart() {
   document.removeEventListener("keydown", Click);
   document.getElementById("popup").style.visibility = "hidden";
   document.getElementById("popup_lose").style.visibility = "hidden";
-  Mouvement = 0;
+  Mouvement = 2;
   PlayerPos = 0;
   LabSize = 0;
   finish = false;
@@ -743,7 +743,7 @@ function Restart() {
 }
 
 //#region  Variables globales.
-let Mouvement = 0;
+let Mouvement = 2;
 let BaseOut;
 let Solver;
 let Labyrinthe;
