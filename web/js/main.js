@@ -296,7 +296,7 @@ function Restart() {
   document.removeEventListener("keydown", Click);
   document.getElementById("popup").style.visibility = "hidden";
   document.getElementById("popup_lose").style.visibility = "hidden";
-  Mouvement = 2;
+  Mouvement = 1;
   PlayerPos = 0;
   LabSize = 0;
   finish = false;
@@ -305,7 +305,7 @@ function Restart() {
 }
 
 //#region  Variables globales.
-let Mouvement = 2;
+let Mouvement = 1;
 let BaseOut; // Ensemble de la génération.
 let Solver; // Index du solver.
 let Labyrinthe; // Lettres du labyrinthe.
@@ -709,6 +709,7 @@ function SpawnPlayer(cellId, solver) {
 
 // Niveau fini.
 function Win() {
+  Mouvement++;
   // Fin de la partie.
   finish = true;
   MainMusic.pause();
