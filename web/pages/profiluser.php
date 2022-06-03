@@ -15,8 +15,7 @@
             <!--Image joueur-->
             <input id="imageuser" type="image" src="../images/profileuser/profil/gigachad.png">
             <!--Pseudo player-->
-            <div id="pseudo"><label><?php echo $_COOKIE["pseudo"] ?></div>
-            <div id="pseudo"><label>Your name:<br><?php echo $_COOKIE["login"] ?></div>
+            <div id="pseudo"><label><?php echo $_COOKIE["login"] ?></div>
             <form method="POST">
                 <input class="button"type="submit" value="Reset stats" name="chadbutton">
                 <input class="button"type="submit" value="Change pseudo" name="Change_Name">
@@ -50,7 +49,7 @@
         <div id="second">
             <!--information compte-->
             <div id="rank">
-                <p>Points Account total : <?php echo GetUserPoints($_COOKIE["login"]);?></p>
+                <p>Points Account total : <span class="score"><?php echo GetUserPoints($_COOKIE["login"]);?></span></p>
                 <p>Account levels :<br/></p>
                 <?php $Rank=Rank_User($_COOKIE["login"]);?>
                 <img src="../images/profileuser/Rank/wood.png" alt="Woodrank" id="wood" class="rank_image"/>

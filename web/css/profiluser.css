@@ -1,3 +1,13 @@
+@font-face {
+	font-family: "8-bit HUD";
+	src: url('../images/font/8-bit-hud.ttf');
+}
+
+body {
+    background-color:black;
+    color: white;
+    font-family:  -apple-system, BlinkMacSystemFont, 'Montserrat', 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
 .button{
     border-radius: 10px;
     cursor: pointer;
@@ -27,7 +37,6 @@
     margin-left: 10px;
     margin-bottom: 10px;
     height: 1fr;
-    color: white;
 }
 
 #imageuser{
@@ -41,6 +50,7 @@
     font-size:40px;
     text-decoration-line:none;
     margin-bottom: 5%;
+    font-style: italic;
 }
 
 #pseudo input{
@@ -54,6 +64,9 @@
     border-bottom: solid black 1px ;
 }
 
+.score{
+    font-family: "8-bit HUD", serif;
+}
 .rank_image{
     margin-left: auto;
     display: none;
@@ -62,6 +75,7 @@
 
 #rank{
     float: right;
+    background-color: grey;
     border: black solid 1px;
     width: 55%;
     margin-top: 50px;
