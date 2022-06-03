@@ -16,7 +16,7 @@
             <input id="imageuser" type="image" src="../images/profileuser/profil/gigachad.png">
             <!--Pseudo player-->
             <div id="pseudo"><label><?php echo $_COOKIE["pseudo"] ?></div>
-            <div id="pseudo"><label>your name:<br><?php echo $_COOKIE["login"] ?></div>
+            <div id="pseudo"><label>Your name:<br><?php echo $_COOKIE["login"] ?></div>
             <form method="POST">
                 <input class="button"type="submit" value="Reset stats" name="chadbutton">
                 <input class="button"type="submit" value="Change pseudo" name="Change_Name">
@@ -50,8 +50,8 @@
         <div id="second">
             <!--information compte-->
             <div id="rank">
-                <p>Points Total du compte : <?php echo GetUserPoints($_COOKIE["login"]);?></p>
-                <p>niveaux du compte :<br/></p>
+                <p>Points Account total : <?php echo GetUserPoints($_COOKIE["login"]);?></p>
+                <p>Account levels :<br/></p>
                 <?php $Rank=Rank_User($_COOKIE["login"]);?>
                 <img src="../images/profileuser/Rank/wood.png" alt="Woodrank" id="wood" class="rank_image"/>
                 <img id="bronze" class="rank_image" src="../images/profileuser/Rank/Bronze.png" alt="Bronzerank"/>
@@ -125,9 +125,9 @@
                 ?>
             </div>
             <div id="leveleditor">
-                <div>galerie de tes niveaux</div>
-                <a><div  class="niveau">niveau 1</div></a>
-                <a><div  class="niveau">niveau 2</div></a>
+                <div>Gallery of your levels</div>
+                <a><div  class="niveau">Level 1</div></a>
+                <a><div  class="niveau">Level 2</div></a>
                 <input class="button" type="submit" value="Create a level" href="">  
             </div>
         </div>
