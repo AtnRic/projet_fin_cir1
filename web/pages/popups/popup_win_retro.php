@@ -32,9 +32,9 @@ echo "
         font-family: "8-bit HUD", serif;
     }
     #popup{
-        z-index: -10;
+        visibility: hidden;
         position: absolute;
-        top: 22.2vh;
+        top: 0;
         height: 47vh;
         width: 60vh;
         left: 50%;
@@ -109,12 +109,13 @@ echo "
         height: 50px;
         width: 50px;
     }
-    .but{
+    #popup .but{
         position: relative;
         top: 25px;
     }
     .but, a{
         background-color: transparent;
+        text-decoration: none;
     }
     a p{
         position: static;

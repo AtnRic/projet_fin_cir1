@@ -99,7 +99,7 @@ if($theme == 'jungle'){
         justify-content: center;
     }
     #popup{
-        z-index: -10;
+        visibility: hidden;
         width: 70vw;
         height: calc(0.82 * 50vw);
         position: absolute;
@@ -107,7 +107,7 @@ if($theme == 'jungle'){
         left: 48%;
         transform: translateX(-50%) translateY(-50%);
         background-size: cover;
-        z-index: 10;
+       
     }
     canvas{
         z-index: 9;

@@ -12,7 +12,7 @@
     <table id="container"></table>
 </div>
 <?php
-    include 'popups/popup_outro.php';
+    include 'popups/popup_win_space.php';
     include 'popups/popup_lose_space.php';
     ?>
 </body>
