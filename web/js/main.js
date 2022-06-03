@@ -558,8 +558,6 @@ function Click(event) {
         });
         PlayerPos += cellNum;
         let newPos = document.getElementById(PlayerPos);
-        console.log(PlayerPos);
-        console.log(newPos);
         newPos.appendChild(Player);
         PlayerAnim(0, -height);
       }
@@ -579,8 +577,6 @@ function Click(event) {
         });
         PlayerPos -= cellNum;
         let newPos = document.getElementById(PlayerPos);
-        console.log(PlayerPos);
-        console.log(newPos);
         newPos.appendChild(Player);
         PlayerAnim(0, height);
       }
@@ -600,8 +596,6 @@ function Click(event) {
         });
         PlayerPos -= 1;
         let newPos = document.getElementById(PlayerPos);
-        console.log(PlayerPos);
-        console.log(newPos);
         PlayerImg.src = Ambiance.Pl;
         newPos.appendChild(Player);
         PlayerAnim(height, 0);
@@ -761,7 +755,6 @@ function CanMove(index, lab, direction) {
         return false;
       }
       if (WallTop.includes(lab[index], 0)) {
-        console.log(false);
         return false;
       } else {
         return true;
@@ -772,7 +765,6 @@ function CanMove(index, lab, direction) {
         return false;
       }
       if (WallDown.includes(lab[index], 0)) {
-        console.log(false);
         return false;
       } else {
         return true;
@@ -780,7 +772,6 @@ function CanMove(index, lab, direction) {
       break;
     case "r":
       if (WallRight.includes(lab[index], 0)) {
-        console.log(false);
         return false;
       } else {
         return true;
@@ -791,7 +782,6 @@ function CanMove(index, lab, direction) {
         return false;
       }
       if (WallLeft.includes(lab[index], 0)) {
-        console.log(false);
         return false;
       } else {
         return true;
@@ -978,25 +968,21 @@ function MoveGarde(size, move) {
     switch (gardeGlobal[i].dir) {
       case 1: // vers la droite.
         if (PlayerPos == gardeGlobal[i].pos - 1 && move == 1) {
-          Loose();
           Attack = true;
         }
         break;
       case 2: //vers le bas.
         if (PlayerPos == gardeGlobal[i].pos + LabSize && move == 4) {
-          Loose();
           Attack = true;
         }
         break;
       case 3: // vers la gauche.
         if (PlayerPos == gardeGlobal[i].pos + 1 && move == 3) {
-          Loose();
           Attack = true;
         }
         break;
       case 4: // vers la haut.
         if (PlayerPos == gardeGlobal[i].pos - LabSize && move == 2) {
-          Loose();
           Attack = true;
         }
         break;
@@ -1049,6 +1035,11 @@ function MoveGarde(size, move) {
       direction: "reverse",
       duration: 150,
     });
+
+    if (Attack) {
+      console.log("Animation");
+      Loose();
+    }
     //#endregion
   }
 }
