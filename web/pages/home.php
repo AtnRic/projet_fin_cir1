@@ -31,6 +31,9 @@ require '../tools/_main_tools.php';
         <img src="../images/accueil/top-palm.png" id="top-palm">
         <a href="?MazeSize=15&nbrTP=4&nbrGuard=4&theme=2">
         <?php
+            if(isset($_SESSION["custom"])){
+              $_SESSION["custom"]=false;
+            }
             if(isset($_GET['MazeSize']) && isset($_GET['nbrTP']) && isset($_GET['nbrGuard']) && isset($_GET['theme'])){
                 $mazeSize = $_GET['MazeSize'];
                 $nbrTP = $_GET['nbrTP'];
