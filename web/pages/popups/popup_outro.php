@@ -29,7 +29,7 @@ echo "
         </div>  
     </div>
     <div class='but'>
-        <button>replay</button>
+        <button class='restart'>replay</button>
         <button><a href='./home.php'>home</a></button>
         <button id='save'>save</button>";
         if ($theme == 'jungle'){

@@ -587,7 +587,11 @@ let cells = document.getElementsByClassName("cell");
 let start = false;
 document.getElementById("popup").style.visibility = "hidden";
 
-document.getElementById("restart").addEventListener("click", Restart);
+for (i = 0; i < document.getElementsByClassName("restart").length; i++) {
+  document
+    .getElementsByClassName("restart")
+    [i].addEventListener("click", Restart);
+}
 
 function PHP_Start(anime, custom, data) {
   document.getElementById("popup_intro").style.visibility = "visible";
@@ -595,6 +599,7 @@ function PHP_Start(anime, custom, data) {
   if (custom) {
     start = true;
     MainMusic = PlaySound(Ambiance.Theme);
+    document.getElementById("popup_intro").style.visibility = "hidden";
     sch_Start(anime, custom, data);
   } else {
     document.addEventListener("keydown", function (event) {
@@ -729,7 +734,7 @@ function Restart() {
   document.removeEventListener("keydown", Click);
   document.getElementById("popup").style.visibility = "hidden";
   document.getElementById("popup_lose").style.visibility = "hidden";
-  Mouvement = 0;
+  Mouvement = 2;
   PlayerPos = 0;
   LabSize = 0;
   finish = false;
@@ -738,7 +743,7 @@ function Restart() {
 }
 
 //#region  Variables globales.
-let Mouvement = 0;
+let Mouvement = 2;
 let BaseOut;
 let Solver;
 let Labyrinthe;
@@ -1133,16 +1138,18 @@ function Win() {
   document.getElementById("short").innerHTML += " " + Solver.length;
   document.getElementById("long").innerHTML += " " + 2 * Solver.length;
   document.getElementById("number").innerHTML += " " + Mouvement;
-
-  document.getElementById("popup").style.visibility = "visible";
   PlaySound("../son/sound_hero_win.mp3");
+
+  setTimeout(function () {
+    document.getElementById("popup").style.visibility = "visible";
+  }, 1000);
+
   initConfetti();
   render();
 }
 
 // Niveau perdu.
 function Loose() {
-  document.getElementById("popup_lose").style.visibility = "visible";
   MainMusic.pause();
   PlaySound(Ambiance.DeathSound);
   finish = true;
@@ -1155,6 +1162,10 @@ function Loose() {
     duration: 1500,
     loop: false,
   });
+
+  setTimeout(function () {
+    document.getElementById("popup_lose").style.visibility = "visible";
+  }, 1000);
 }
 
 // Autorisation d'un mouvement d'une case à une autre.
