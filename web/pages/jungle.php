@@ -13,9 +13,10 @@
         <table id="container"></table>
     </div>
     <?php
+
     include 'popups/popup_lose_jungle.php';
-    include 'popups/popup_win_jungle.php';
     include 'popups/popup_intro_jungle.php';
+    include 'popups/popup_win_jungle.php';
     ?>
 </body>  
 <script src="../js/conf.js"></script>

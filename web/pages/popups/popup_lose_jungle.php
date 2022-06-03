@@ -93,6 +93,7 @@ echo "<div id='popup_lose' style='background-image: url($link)'>
         canvas{
             z-index: 9;
             position: absolute;
+
             top: 0;
             left: 0;
             background-image: none;
