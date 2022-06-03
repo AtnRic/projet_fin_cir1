@@ -1,445 +1,4 @@
-var labyrinthe = [
-  [
-    "k",
-    "f",
-    "b",
-    "f",
-    "f",
-    "f",
-    "b",
-    "f",
-    "f",
-    "o",
-    "k",
-    "f",
-    "b",
-    "f",
-    "f",
-    "f",
-    "b",
-    "f",
-    "f",
-    "o",
-  ],
-  [
-    "e",
-    "h",
-    "g",
-    "m",
-    "b",
-    "h",
-    "g",
-    "m",
-    "f",
-    "h",
-    "k",
-    "f",
-    "b",
-    "f",
-    "f",
-    "f",
-    "b",
-    "f",
-    "f",
-    "o",
-  ],
-  [
-    "l",
-    "g",
-    "j",
-    "f",
-    "i",
-    "g",
-    "g",
-    "k",
-    "f",
-    "i",
-    "k",
-    "f",
-    "b",
-    "f",
-    "f",
-    "f",
-    "b",
-    "f",
-    "f",
-    "o",
-  ],
-  [
-    "n",
-    "j",
-    "f",
-    "h",
-    "k",
-    "d",
-    "a",
-    "a",
-    "f",
-    "h",
-    "k",
-    "f",
-    "b",
-    "f",
-    "f",
-    "f",
-    "b",
-    "f",
-    "f",
-    "o",
-  ],
-  [
-    "e",
-    "f",
-    "h",
-    "j",
-    "i",
-    "m",
-    "i",
-    "g",
-    "k",
-    "i",
-    "k",
-    "f",
-    "b",
-    "f",
-    "f",
-    "f",
-    "b",
-    "f",
-    "f",
-    "o",
-  ],
-  [
-    "g",
-    "n",
-    "j",
-    "f",
-    "b",
-    "f",
-    "f",
-    "i",
-    "j",
-    "o",
-    "k",
-    "f",
-    "b",
-    "f",
-    "f",
-    "f",
-    "b",
-    "f",
-    "f",
-    "o",
-  ],
-  [
-    "k",
-    "f",
-    "b",
-    "f",
-    "f",
-    "f",
-    "b",
-    "f",
-    "f",
-    "o",
-    "k",
-    "f",
-    "b",
-    "f",
-    "f",
-    "f",
-    "b",
-    "f",
-    "f",
-    "o",
-  ],
-  [
-    "e",
-    "h",
-    "g",
-    "m",
-    "b",
-    "h",
-    "g",
-    "m",
-    "f",
-    "h",
-    "k",
-    "f",
-    "b",
-    "f",
-    "f",
-    "f",
-    "b",
-    "f",
-    "f",
-    "o",
-  ],
-  [
-    "l",
-    "g",
-    "j",
-    "f",
-    "i",
-    "g",
-    "g",
-    "k",
-    "f",
-    "i",
-    "k",
-    "f",
-    "b",
-    "f",
-    "f",
-    "f",
-    "b",
-    "f",
-    "f",
-    "o",
-  ],
-  [
-    "n",
-    "j",
-    "f",
-    "h",
-    "k",
-    "d",
-    "a",
-    "a",
-    "f",
-    "h",
-    "k",
-    "f",
-    "b",
-    "f",
-    "f",
-    "f",
-    "b",
-    "f",
-    "f",
-    "o",
-  ],
-  [
-    "e",
-    "f",
-    "h",
-    "j",
-    "i",
-    "m",
-    "i",
-    "g",
-    "k",
-    "i",
-    "k",
-    "f",
-    "b",
-    "f",
-    "f",
-    "f",
-    "b",
-    "f",
-    "f",
-    "o",
-  ],
-  [
-    "g",
-    "n",
-    "j",
-    "f",
-    "b",
-    "f",
-    "f",
-    "i",
-    "j",
-    "o",
-    "k",
-    "f",
-    "b",
-    "f",
-    "f",
-    "f",
-    "b",
-    "f",
-    "f",
-    "o",
-  ],
-  [
-    "k",
-    "f",
-    "b",
-    "f",
-    "f",
-    "f",
-    "b",
-    "f",
-    "f",
-    "o",
-    "k",
-    "f",
-    "b",
-    "f",
-    "f",
-    "f",
-    "b",
-    "f",
-    "f",
-    "o",
-  ],
-  [
-    "e",
-    "h",
-    "g",
-    "m",
-    "b",
-    "h",
-    "g",
-    "m",
-    "f",
-    "h",
-    "k",
-    "f",
-    "b",
-    "f",
-    "f",
-    "f",
-    "b",
-    "f",
-    "f",
-    "o",
-  ],
-  [
-    "l",
-    "g",
-    "j",
-    "f",
-    "i",
-    "g",
-    "g",
-    "k",
-    "f",
-    "i",
-    "k",
-    "f",
-    "b",
-    "f",
-    "f",
-    "f",
-    "b",
-    "f",
-    "f",
-    "o",
-  ],
-  [
-    "n",
-    "j",
-    "f",
-    "h",
-    "k",
-    "d",
-    "a",
-    "a",
-    "f",
-    "h",
-    "k",
-    "f",
-    "b",
-    "f",
-    "f",
-    "f",
-    "b",
-    "f",
-    "f",
-    "o",
-  ],
-  [
-    "e",
-    "f",
-    "h",
-    "j",
-    "i",
-    "m",
-    "i",
-    "g",
-    "k",
-    "i",
-    "k",
-    "f",
-    "b",
-    "f",
-    "f",
-    "f",
-    "b",
-    "f",
-    "f",
-    "o",
-  ],
-  [
-    "g",
-    "n",
-    "j",
-    "f",
-    "b",
-    "f",
-    "f",
-    "i",
-    "j",
-    "o",
-    "k",
-    "f",
-    "b",
-    "f",
-    "f",
-    "f",
-    "b",
-    "f",
-    "f",
-    "o",
-  ],
-  [
-    "g",
-    "n",
-    "j",
-    "f",
-    "b",
-    "f",
-    "f",
-    "i",
-    "j",
-    "o",
-    "k",
-    "f",
-    "b",
-    "f",
-    "f",
-    "f",
-    "b",
-    "f",
-    "f",
-    "o",
-  ],
-  [
-    "g",
-    "n",
-    "j",
-    "f",
-    "b",
-    "f",
-    "f",
-    "i",
-    "j",
-    "o",
-    "k",
-    "f",
-    "b",
-    "f",
-    "f",
-    "f",
-    "b",
-    "f",
-    "f",
-    "o",
-  ],
-];
+// Lettres du labyrinthe
 var correspondance = {
   a: [0, 0, 0, 0],
   b: [1, 0, 0, 0],
@@ -463,6 +22,7 @@ let WallLeft = ["e", "g", "j", "k", "l", "m", "n"];
 let WallRight = ["c", "g", "h", "i", "l", "n", "o"];
 let WallTop = ["b", "f", "h", "k", "m", "n", "o"];
 
+// Redirection vers les images par ambiance.
 var Jungle = {
   W1: [
     "../images/mazes/jungle_maze_one_a.png",
@@ -583,18 +143,23 @@ let rows = document.getElementsByClassName("gridRow");
 let cells = document.getElementsByClassName("cell");
 
 // Lancement complet du jeu.
-
 let start = false;
 document.getElementById("popup").style.visibility = "hidden";
 
-document.getElementById("restart").addEventListener("click", Restart);
+for (i = 0; i < document.getElementsByClassName("restart").length; i++) {
+  document
+    .getElementsByClassName("restart")
+    [i].addEventListener("click", Restart);
+}
 
+// Fonction appelée depuis le js.
 function PHP_Start(anime, custom, data) {
   document.getElementById("popup_intro").style.visibility = "visible";
   animation = anime;
   if (custom) {
     start = true;
     MainMusic = PlaySound(Ambiance.Theme);
+    document.getElementById("popup_intro").style.visibility = "hidden";
     sch_Start(anime, custom, data);
   } else {
     document.addEventListener("keydown", function (event) {
@@ -622,6 +187,7 @@ function PHP_Start(anime, custom, data) {
   }
 }
 
+// Lancement différent.
 function sch_Start(anime, custom, data) {
   if (custom == true) {
     let output = data;
@@ -719,6 +285,7 @@ function sch_Start(anime, custom, data) {
   }
 }
 
+// Relancer le labyrinthe sans relancer la page.
 function Restart() {
   var e = document.getElementById("container");
   var child = e.lastElementChild;
@@ -729,7 +296,7 @@ function Restart() {
   document.removeEventListener("keydown", Click);
   document.getElementById("popup").style.visibility = "hidden";
   document.getElementById("popup_lose").style.visibility = "hidden";
-  Mouvement = 0;
+  Mouvement = 1;
   PlayerPos = 0;
   LabSize = 0;
   finish = false;
@@ -738,21 +305,21 @@ function Restart() {
 }
 
 //#region  Variables globales.
-let Mouvement = 0;
-let BaseOut;
-let Solver;
-let Labyrinthe;
-let PlayerPos;
-let LabSize;
-let TeleporterStart = [];
-let TpStruct;
-let gardeGlobal = [];
-let X;
-let height;
-let MainMusic;
-let animation = false;
+let Mouvement = 1;
+let BaseOut; // Ensemble de la génération.
+let Solver; // Index du solver.
+let Labyrinthe; // Lettres du labyrinthe.
+let PlayerPos; // Position du joueur.
+let LabSize; // Taille du labyrinthe.
+let TeleporterStart = []; // Ensemble des téléporteurs de départ.
+let TpStruct; // Couples de téléporteurs.
+let gardeGlobal = []; // Position des gardes.
+let X; // Variation de position des sprites.
+let height; // Taille des cases.
+let MainMusic; // Musique globale
+let animation = false; // Paramètres de lancement.
 let cheat = false;
-let finish = false;
+let finish = false; // Le jeu est-il fini.
 let Event;
 //#endregion
 
@@ -964,18 +531,20 @@ function Launch(size, tab, spawnCellId, boolAnimation, solver, tps) {
   //#endregion
 }
 
+// Application lors d'un mouvement du joueur. Input.
 function Click(event) {
   cellNum = LabSize;
   const Player = document.getElementById("player");
   const PlayerImg = document.getElementById("playerimg");
 
+  // On vérifie que le mouvement préc. est bien fini & que le joueur n'a pas fini la partie.
   if (activate == false && finish == false) {
-    if (event.key == "o") {
-      PlaySound("../son/sound_teleportation.mp3");
-    }
+    // Génération du solveur.
     if (event.key == "p") {
       Solveur(Solver);
-    } else if (event.key == "ArrowDown") {
+    }
+    // Mouvement vers le bas.
+    else if (event.key == "ArrowDown") {
       if (CanMove(PlayerPos, Labyrinthe, "d") || cheat == true) {
         MoveGarde(height, 2);
         activate = true;
@@ -989,12 +558,12 @@ function Click(event) {
         });
         PlayerPos += cellNum;
         let newPos = document.getElementById(PlayerPos);
-        console.log(PlayerPos);
-        console.log(newPos);
         newPos.appendChild(Player);
         PlayerAnim(0, -height);
       }
-    } else if (event.key == "ArrowUp") {
+    }
+    // Mouvement vers le haut.
+    else if (event.key == "ArrowUp") {
       if (CanMove(PlayerPos, Labyrinthe, "t") || cheat == true) {
         MoveGarde(height, 4);
         activate = true;
@@ -1008,12 +577,12 @@ function Click(event) {
         });
         PlayerPos -= cellNum;
         let newPos = document.getElementById(PlayerPos);
-        console.log(PlayerPos);
-        console.log(newPos);
         newPos.appendChild(Player);
         PlayerAnim(0, height);
       }
-    } else if (event.key == "ArrowLeft") {
+    }
+    // Mouvement vers la gauche.
+    else if (event.key == "ArrowLeft") {
       if (CanMove(PlayerPos, Labyrinthe, "l") || cheat == true) {
         MoveGarde(height, 3);
         activate = true;
@@ -1027,13 +596,13 @@ function Click(event) {
         });
         PlayerPos -= 1;
         let newPos = document.getElementById(PlayerPos);
-        console.log(PlayerPos);
-        console.log(newPos);
         PlayerImg.src = Ambiance.Pl;
         newPos.appendChild(Player);
         PlayerAnim(height, 0);
       }
-    } else if (event.key == "ArrowRight") {
+    }
+    // Mouvement vers la droite.
+    else if (event.key == "ArrowRight") {
       if (CanMove(PlayerPos, Labyrinthe, "r") || cheat == true) {
         MoveGarde(height, 1);
         activate = true;
@@ -1051,18 +620,24 @@ function Click(event) {
         newPos.appendChild(Player);
         PlayerAnim(-height, 0);
       }
-    } else if (event.key == " ") {
+    }
+    // Passage du temps.
+    else if (event.key == " ") {
       MoveGarde(height, -1);
     }
+    // Si le joueur est sur la case de sortie.
     if (PlayerPos == LabSize * LabSize - 1) {
       Win();
     }
+    // Vérification des positions des gardes.
     for (i = 0; i < gardeGlobal.length; i++) {
       if (gardeGlobal[i].pos == PlayerPos) {
         Loose();
       }
     }
+    // Mise en mouvement.
     activate = true;
+    // Sortie du mouvement.
     setTimeout(function () {
       if (TeleporterStart.includes(PlayerPos)) {
         for (p = 0; p < TpStruct.length; p++) {
@@ -1128,26 +703,36 @@ function SpawnPlayer(cellId, solver) {
 
 // Niveau fini.
 function Win() {
+  Mouvement++;
+  // Fin de la partie.
   finish = true;
   MainMusic.pause();
+
+  // Activation de la pop-up et de ses paramètres.
   document.getElementById("short").innerHTML += " " + Solver.length;
   document.getElementById("long").innerHTML += " " + 2 * Solver.length;
   document.getElementById("number").innerHTML += " " + Mouvement;
-
-  document.getElementById("popup").style.visibility = "visible";
   PlaySound("../son/sound_hero_win.mp3");
+
+  // Pop-up visible.
+  setTimeout(function () {
+    document.getElementById("popup").style.visibility = "visible";
+  }, 1000);
+
+  // Lancement des conf.
   initConfetti();
   render();
 }
 
 // Niveau perdu.
 function Loose() {
-  document.getElementById("popup_lose").style.visibility = "visible";
   MainMusic.pause();
   PlaySound(Ambiance.DeathSound);
   finish = true;
   let player = document.getElementById("playerimg");
   player.src = Ambiance.Death;
+
+  // Animation de mort.
   anime({
     targets: "#playerimg",
     translateX: [X, -(7.5 * X)],
@@ -1155,26 +740,21 @@ function Loose() {
     duration: 1500,
     loop: false,
   });
+
+  // Pop-up visible.
+  setTimeout(function () {
+    document.getElementById("popup_lose").style.visibility = "visible";
+  }, 1000);
 }
 
 // Autorisation d'un mouvement d'une case à une autre.
 function CanMove(index, lab, direction) {
-  labTop = lab[index - Math.sqrt(lab.length)];
-  indexTop = index - Math.sqrt(lab.length);
-  labDown = lab[index + Math.sqrt(lab.length)];
-  indexDown = index + Math.sqrt(lab.length);
-  labRight = lab[index + 1];
-  indexRight = index + 1;
-  labLeft = lab[index - 1];
-  indexLeft = index - 1;
-
   switch (direction) {
     case "t":
       if (index < Math.sqrt(lab.length)) {
         return false;
       }
       if (WallTop.includes(lab[index], 0)) {
-        console.log(false);
         return false;
       } else {
         return true;
@@ -1185,7 +765,6 @@ function CanMove(index, lab, direction) {
         return false;
       }
       if (WallDown.includes(lab[index], 0)) {
-        console.log(false);
         return false;
       } else {
         return true;
@@ -1193,7 +772,6 @@ function CanMove(index, lab, direction) {
       break;
     case "r":
       if (WallRight.includes(lab[index], 0)) {
-        console.log(false);
         return false;
       } else {
         return true;
@@ -1204,7 +782,6 @@ function CanMove(index, lab, direction) {
         return false;
       }
       if (WallLeft.includes(lab[index], 0)) {
-        console.log(false);
         return false;
       } else {
         return true;
@@ -1216,10 +793,10 @@ function CanMove(index, lab, direction) {
 // Sauvegarde du niveau.
 function Save() {
   PHP_Function(
-    "../tools/function.php",
+    "../tools/save.php",
     "save",
     function Handle(output) {
-      //console.log(output);
+      console.log("Resultat: " + output);
     },
     BaseOut
   );
@@ -1391,25 +968,21 @@ function MoveGarde(size, move) {
     switch (gardeGlobal[i].dir) {
       case 1: // vers la droite.
         if (PlayerPos == gardeGlobal[i].pos - 1 && move == 1) {
-          Loose();
           Attack = true;
         }
         break;
       case 2: //vers le bas.
         if (PlayerPos == gardeGlobal[i].pos + LabSize && move == 4) {
-          Loose();
           Attack = true;
         }
         break;
       case 3: // vers la gauche.
         if (PlayerPos == gardeGlobal[i].pos + 1 && move == 3) {
-          Loose();
           Attack = true;
         }
         break;
       case 4: // vers la haut.
         if (PlayerPos == gardeGlobal[i].pos - LabSize && move == 2) {
-          Loose();
           Attack = true;
         }
         break;
@@ -1462,14 +1035,12 @@ function MoveGarde(size, move) {
       direction: "reverse",
       duration: 150,
     });
-    //#endregion
-  }
-}
 
-function Hard() {
-  for (i = 0; i < gardeGlobal.length; i++) {
-    let GardeImg = document.getElementById("G_ui" + gardeGlobal[i].id);
-    GardeImg.style.visibility = "hidden";
+    if (Attack) {
+      console.log("Animation");
+      Loose();
+    }
+    //#endregion
   }
 }
 
@@ -1656,6 +1227,7 @@ function ThemeSound() {
   }
 }
 
+// Retour sur la page main.
 function Return() {
   document.location.href = "../pages/home.php";
 }
