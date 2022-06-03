@@ -5,7 +5,7 @@ echo "
     <h1>A grand day out</h1>
     <h2>Game Over</h2>  
     <div class='but'>
-        <a id='restart'><p>replay</p></a>
+        <a class='restart'><p>replay</p></a>
         <a id='home' href='./home.php'><p>home</p></a>
         <a id='save'><p>save</p></a>
     </div>

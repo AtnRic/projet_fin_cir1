@@ -7,7 +7,7 @@ echo "
     
     
     <div class='but'>
-        <a><p>replay</p></a>
+        <a><p class='restart'>replay</p></a>
         <a><p>home</p></a>
         <a id='save'><p>save</p></a>
     </div>
