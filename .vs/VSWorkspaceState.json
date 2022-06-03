@@ -3,8 +3,9 @@
     "",
     "\\c",
     "\\c\\Solution1",
-    "\\c\\Solution1\\algo_labyrinthe"
+    "\\c\\Solution1\\algo_labyrinthe",
+    "\\c\\Solution1\\tools"
   ],
-  "SelectedNode": "\\c\\Solution1\\algo_labyrinthe\\main.c",
+  "SelectedNode": "\\c\\Solution1\\algo_labyrinthe\\DonneesLabyrinthe.csv",
   "PreviewInSolutionExplorer": false
 }

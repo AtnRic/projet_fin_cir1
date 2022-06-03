@@ -14,7 +14,7 @@ echo "
         </div>    
     </div>  
     <div class='but'>
-        <a id='restart'><p>replay</p></a>
+        <a class='restart'><p>replay</p></a>
         <a href='./home.php'><p>home</p></a>
         <a id='save'><p>save</p></a>
         <a href='./space.php'><p>next level</p></a>
@@ -32,9 +32,10 @@ echo "
         font-family: "8-bit HUD", serif;
     }
     #popup{
+        z-index: 10;
         visibility: hidden;
         position: absolute;
-        top: 0;
+        top: 22.4vh;
         height: 47vh;
         width: 60vh;
         left: 50%;

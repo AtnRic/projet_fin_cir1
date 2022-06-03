@@ -7,7 +7,7 @@ echo "
     
     
     <div class='but'>
-        <a><p>replay</p></a>
+        <a><p class='restart'>replay</p></a>
         <a><p>home</p></a>
         <a id='save'><p>save</p></a>
     </div>
@@ -20,8 +20,9 @@ echo "
     }
     #popup_lose{
         visibility: hidden;
+        z-index: 10;
         position: absolute;
-        top: 0vh;
+        top: 22.4vh;
         height: 47vh;
         width: 60vh;
         left: 50%;

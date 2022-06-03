@@ -1,0 +1,6 @@
+﻿  Source.c
+C:\Users\Adrien\source\repos\Lab2\Source.c(48,12): warning C4244: 'fonction' : conversion de 'time_t' en 'unsigned int', perte possible de données
+C:\Users\Adrien\source\repos\Lab2\Source.c(160,50): warning C4244: 'fonction' : conversion de 'double' en 'float', perte possible de données
+C:\Users\Adrien\source\repos\Lab2\Source.c(160,15): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
+C:\Users\Adrien\source\repos\Lab2\Source.c(450): warning C4716: 'convert' : doit retourner une valeur
+  Lab2.vcxproj -> C:\Users\Adrien\source\repos\Lab2\x64\Debug\Lab2.exe

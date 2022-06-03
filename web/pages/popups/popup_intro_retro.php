@@ -4,35 +4,33 @@ echo "
 <div id='popup_intro'>
     <h1>Tartaros Fantasy</h1>
     <div class='carrousel'>
-			<input type='radio' name='slides' id='radio-1' checked>
-			<input type='radio' name='slides' id='radio-2'>
-			<input type='radio' name='slides' id='radio-3'>
-			<input type='radio' name='slides' id='radio-4'>
-    <ul class='slides'>
-        <li class='slide'>
-            <h2>Welcome !</h2>
-            <p>You must reach the exit of the maze : </p>
-            <img class='tp' src='../images/mazes/maze_sortie.png' alt='exit'>
-            
-        </li>
-        <li class='slide' id='slide2'>
-              <p>You have teleporters available with <br> an entrance : <img class='tp' src='../images/mazes/tp_red_input.png' alt='tp'> <br> and an exit : <img  class='tp' src='../images/mazes/tp_red_output.png' alt='tp'><br> Be careful, these teleporters are one-way!</p>
-           </li>
-          <li class='slide'>
-             <p>You must also dodge the guards that advance in sync with you:<br> You step, the guards step. <br>They move between two walls and go back and forth :</p>
-          </li>
-          <li class='slide'>
-             <h1>Press Start</h1>
-          </li>
-         
-			</ul>
-			<div class='slidesNavigation'>
-				<label for='radio-1' id='dotForRadio-1'></label>
-				<label for='radio-2' id='dotForRadio-2'></label>
-				<label for='radio-3' id='dotForRadio-3'></label>
-				<label for='radio-4' id='dotForRadio-4'></label>
-			</div>
-
+		<input type='radio' name='slides' id='radio-1' checked>
+		<input type='radio' name='slides' id='radio-2'>
+		<input type='radio' name='slides' id='radio-3'>
+		<input type='radio' name='slides' id='radio-4'>
+        <ul class='slides'>
+            <li class='slide'>
+                <h2>Welcome !</h2>
+                <p>You must reach the exit of the maze : </p>
+                <img class='tp' src='../images/mazes/maze_sortie.png' alt='exit'>  
+            </li>
+            <li class='slide' id='slide2'>
+                <p>You have teleporters available with <br> an entrance : <img class='tp' src='../images/mazes/tp_red_input.png' alt='tp'> <br> and an exit : <img  class='tp' src='../images/mazes/tp_red_output.png' alt='tp'><br> Be careful, these teleporters are one-way!</p>
+            </li>
+            <li class='slide'>
+                <p>You must also dodge the guards that advance in sync with you<br> You step, the guards step. <br>They move between two walls and go back and forth : <img class='guard' src='../images/popup/retro_guard_animation.gif' alt='guard'></p>
+            </li>
+            <li class='slide'>
+                <h1>Press Start</h1>
+            </li>
+		</ul>
+		<div class='slidesNavigation'>
+			<label for='radio-1' id='dotForRadio-1'></label>
+			<label for='radio-2' id='dotForRadio-2'></label>
+			<label for='radio-3' id='dotForRadio-3'></label>
+			<label for='radio-4' id='dotForRadio-4'></label>
+		</div>
+	</div>
 </div>";
 ?>
 <style>
@@ -111,6 +109,7 @@ echo "
         width: 50px;
     }
 
+
     a p{
         position: static;
         background-color: transparent;
@@ -183,7 +182,18 @@ echo "
         vertical-align: middle;
         background-color: transparent;
     }
+    .carrousel img.guard{
 
+        width: 50vh;
+        height: auto;
+        object-fit: cover;
+        border-radius: 0;
+        left: 50%;
+        transform: translateX(15%);
+        margin-top: 40px;
+        vertical-align: middle;
+        background-color: transparent;
+    }
     .carrousel .slidesNavigation {
         display: block;
         background-color: transparent;
