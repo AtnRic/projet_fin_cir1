@@ -1,7 +1,8 @@
 <?php
-//echo "<canvas class='confetti' id='canvas'></canvas>";
+
+$link = '../images/popup/popup_jungle.png';
 echo "
-<div id='popup_intro'>
+<div id='popup_intro' style='background-image: url($link)'>
     <h1>Tartaros Fantasy</h1>
     <div class='carrousel'>
 		<input type='radio' name='slides' id='radio-1' checked>
@@ -18,7 +19,7 @@ echo "
                 <p>You have teleporters available with <br> an entrance : <img class='tp' src='../images/mazes/tp_red_input.png' alt='tp'> <br> and an exit : <img  class='tp' src='../images/mazes/tp_red_output.png' alt='tp'><br> Be careful, these teleporters are one-way!</p>
             </li>
             <li class='slide'>
-                <p>You must also dodge the guards that advance in sync with you<br> You step, the guards step. <br>They move between two walls and go back and forth : <img class='guard' src='../images/popup/retro_guard_animation.gif' alt='guard'></p>
+                <p>You must also dodge the guards that advance in sync with you<br> You step, the guards step. <br>They move between two walls and go back and forth : <img class='guard' src='../images/popup/jungle_guard_animation.gif' alt='guard'></p>
             </li>
             <li class='slide'>
                 <h1>Press Start</h1>
@@ -34,32 +35,30 @@ echo "
 </div>";
 ?>
 <style>
+    @font-face {
+        font-family: 'permanent marker';
+        src: url('../../images/font/PermanentMarker-Regular.ttf');
+    }
+
     *{
-        font-family: "8-bit HUD", serif;
+        font-family: "permanent marker", serif;
     }
     #popup_intro{
+        z-index: 1000;
         visibility: visible;
-        z-index: 10;
+        width: 70vw;
+        height: calc(0.82 * 50vw);
         position: absolute;
-        top: 22.2vh;
-        height: 48vh;
-        width: 60vh;
-        left: 50%;
-        transform: translateX(-50%);
-
-        border-style: solid;
-        border-width: 5px;
-        border-color: #0ff;
-        box-shadow: 0 0 10px 5px #0ff;
-        background-color: rgba(0,4, 23, 1);
-        border-radius: 20px;
-        padding: 20px;
-        text-align: center;
-        align-items: center;
+        top: 50%;
+        left: 48%;
+        transform: translateX(-50%) translateY(-50%);
+        background-size: cover;
     }
     #popup_intro h1, p, h2{
-        color: white;
-        background-color: transparent;
+        color: #3E3228;
+        background-image: none;
+        text-align: center;
+        align-items: center;
     }
     h1{
         font-size: 1.3em;
@@ -83,6 +82,7 @@ echo "
         border-radius: 10px;
         padding: 0 5px;
         background-color: transparent;
+        background-image: none;
     }
     a:hover{
         border-style: solid;
@@ -96,13 +96,14 @@ echo "
         display: block;
         margin: auto auto 10px auto;
         background-color: transparent;
+        background-image: none;
 
     }
     img{
         background-color: transparent;
         display: flex;
         justify-content: center;
-
+        background-image: none;
         margin: auto;
         height: 50px;
         width: 50px;
@@ -112,6 +113,7 @@ echo "
     a p{
         position: static;
         background-color: transparent;
+        background-image: none;
     }
     #canvas{
         visibility: hidden;
@@ -131,6 +133,7 @@ echo "
         margin: auto;
         position: relative;
         overflow: hidden;
+        background-image: none;
     }
     .carrousel h2 {
         margin: 0;
@@ -138,6 +141,7 @@ echo "
         font-size: 1em;
         text-align: center;
         background-color: transparent;
+        background-image: none;
 
     }
     .carrousel .slides {
@@ -149,7 +153,7 @@ echo "
         list-style: none;
         position: relative;
         background-color: transparent;
-
+        background-image: none;
         -webkit-transition: transform .5s;
         -moz-transition: transform .5s;
         -o-transition: transform .5s;
@@ -158,16 +162,19 @@ echo "
     .carrousel #slide2{
         top: -20px;
         background-color: transparent;
+        background-image: none;
     }
     .carrousel .slides li {
         width: 25%;
         position: relative;
         float: left;
         background-color: transparent;
+        background-image: none;
     }
     .carrousel li p{
         margin-top: 0;
         background-color: transparent;
+        background-image: none;
     }
 
 
@@ -180,6 +187,7 @@ echo "
         margin-right: 0.5em;
         vertical-align: middle;
         background-color: transparent;
+        background-image: none;
     }
     .carrousel img.guard{
 
@@ -188,14 +196,16 @@ echo "
         object-fit: cover;
         border-radius: 0;
         left: 50%;
-        transform: translateX(15%);
+        transform: translateX(57%);
         margin-top: 40px;
         vertical-align: middle;
         background-color: transparent;
+        background-image: none;
     }
     .carrousel .slidesNavigation {
         display: block;
         background-color: transparent;
+        background-image: none;
         list-style: none;
         text-align: center;
         bottom: 1em;
@@ -210,6 +220,7 @@ echo "
     .carrousel input {
         display: none;
         background-color: transparent;
+        background-image: none;
     }
     .carrousel .slidesNavigation label {
         background-color: transparent;
@@ -220,8 +231,9 @@ echo "
         width: 10px;
         -webkit-border-radius: 50%;
         border-radius: 50%;
-        border: solid 2px #2980b9;
+        border: solid 2px #3E3228;
         font-size: 0;
+        background-image: none;
     }
 
     #radio-1:checked ~ .slides {
@@ -245,7 +257,7 @@ echo "
     .carrousel #radio-2:checked ~ .slidesNavigation label#dotForRadio-2,
     .carrousel #radio-3:checked ~ .slidesNavigation label#dotForRadio-3,
     .carrousel #radio-4:checked ~ .slidesNavigation label#dotForRadio-4 {
-        background: #2980b9;
+        background: #3E3228;
     }
 
     @media  (max-width: 796px) {
@@ -267,7 +279,6 @@ echo "
             margin-right: 0.25em;
         }
     }
-
-
 </style>
+
 
