@@ -1,22 +1,8 @@
 <?php
-switch($theme){
-    case 'jungle':
-        $hyperlink = './retro.php';
-        $link = "../images/popup/popup_jungle.png";
-        break;
-    case 'retro':
-        $hyperlink = './space.php';
-        $link = "";
-        break;
-    case 'space':
-        $link = "";
-        break;
-}
-
-
 echo "<canvas class='confetti' id='canvas'></canvas>";
-echo "
-<div id='popup' style='background-image: url($link)'>
+$link = '../images/popup/popup_jungle.png';
+echo "<div id='popup' style='background-image: url($link)'>
+    
     <h1>Welcome to the Jungle</h1>
     <h2>Well Done !</h2>
     <p id='number'>number of steps : </p>
@@ -31,20 +17,24 @@ echo "
     <div class='but'>
         <button class='restart'>replay</button>
         <button><a href='./home.php'>home</a></button>
-        <button id='save'>save</button>";
-        if ($theme == 'jungle'){
-            echo "<button><a href='./retro.php'>next level</a></button>";
-        }
-    echo "</div>
+        <button id='save'>save</button>
+    <button><a href='./retro.php'>next level</a></button>
+    </div>
 
 </div>";
 ?>
 
-<?php
-if($theme == 'jungle'){
-    echo "
-    <style>
+<style>
+    @font-face {
+	font-family: 'permanent marker';
+	src: url('../images/font/PermanentMarker-Regular.ttf');
+}
+
+    *{
+        font-family: "permanent marker", serif;
+    }
     h1, h2, p, img{
+        color: #3E3228;
         background-image: none;
         text-align: center;
         align-items: center;
@@ -65,7 +55,6 @@ if($theme == 'jungle'){
     img{
         display: flex;
         justify-content: center;
-
         margin: auto;
         height: 80px;
         width: 80px;
@@ -99,25 +88,29 @@ if($theme == 'jungle'){
         justify-content: center;
     }
     #popup{
+        z-index: 1000;
         visibility: hidden;
         width: 70vw;
         height: calc(0.82 * 50vw);
         position: absolute;
         top: 50%;
-        left: 48%;
+        left: 50.5%;
         transform: translateX(-50%) translateY(-50%);
         background-size: cover;
        
     }
-    canvas{
-        z-index: 9;
+    #canvas{
+        visibility: visible;
         position: absolute;
         top: 0;
         left: 0;
+        height: 100vh;
+        width: 100vw;
         background-image: none;
     }
+
     a{
-        color: black;
+        color: #3E3228;
         background: none;
         text-decoration: none;
     }
@@ -137,13 +130,5 @@ if($theme == 'jungle'){
         }
 
     }
-    </style>";
-}
-else if($theme == 'retro'){
     
-}
-else{
-
-}
-
-?>
+    </style>

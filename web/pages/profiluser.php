@@ -12,14 +12,13 @@
     <div id="block">
         <!--Premiere moitier-->
         <div id="first">
-            <form method="POST">
             <!--Image joueur-->
-            <img id="imageuser" src="../images/profileuser/profilimage/jungle_hero_cut.png">
+            <input id="imageuser" type="image" src="../images/profileuser/profil/gigachad.png">
             <!--Pseudo player-->
-            <div id="pseudo"><label>your name:<br><?php echo $_COOKIE["login"] ?></div>
+            <div id="pseudo"><label><?php echo $_COOKIE["login"] ?></div>
+            <form method="POST">
                 <input class="button"type="submit" value="Reset stats" name="chadbutton">
                 <input class="button"type="submit" value="Change pseudo" name="Change_Name">
-                <input class="button"type="submit" value="Change picture" name="imageprofil">
             </form>
             <?php
             if(isset($_POST["chadbutton"])){
@@ -44,23 +43,14 @@
                 </style>
                 <?php
             }    
-            if(isset($_POST["imageprofil"])){
-                ?>
-                <style>
-                    #imageprofile{
-                        display: block;
-                    }
-                </style>
-                <?php
-            }   
             ?>    
         </div>
         <!--deuxieme moitier-->
         <div id="second">
             <!--information compte-->
             <div id="rank">
-                <p>Points Total du compte : <?php echo GetUserPoints($_COOKIE["login"]);?></p>
-                <p>niveaux du compte :<br/></p>
+                <p>Points Account total : <span class="score"><?php echo GetUserPoints($_COOKIE["login"]);?></span></p>
+                <p>Account levels :<br/></p>
                 <?php $Rank=Rank_User($_COOKIE["login"]);?>
                 <img src="../images/profileuser/Rank/wood.png" alt="Woodrank" id="wood" class="rank_image"/>
                 <img id="bronze" class="rank_image" src="../images/profileuser/Rank/Bronze.png" alt="Bronzerank"/>
@@ -134,9 +124,9 @@
                 ?>
             </div>
             <div id="leveleditor">
-                <div>galerie de tes niveaux</div>
-                <a><div  class="niveau">niveau 1</div></a>
-                <a><div  class="niveau">niveau 2</div></a>
+                <div>Gallery of your levels</div>
+                <a><div  class="niveau">Level 1</div></a>
+                <a><div  class="niveau">Level 2</div></a>
                 <input class="button" type="submit" value="Create a level" href="">  
             </div>
         </div>
@@ -149,7 +139,7 @@
             <input type="submit" name="PEPPE">
             </form>
             <?php
-            if(isset($_POST["PEPPE"]) && !empty($_POST["PogChamp"])){
+            if(isset($_POST["PEPPE"]) && isset($_POST["PogChamp"])){
                 $newPseudo=$_POST["PogChamp"];
                 $username=$_COOKIE["login"];
                 $connexion=connect();
@@ -157,8 +147,8 @@
                 setcookie("login", $newPseudo, time() + (3600 * 24 * 365));
                 header("Location:profiluser.php");
             }
-            else{
-                echo "pseudo invalide";
+            elseif(empty($_POST["PogChamp"])){
+                echo "Pseudo invalide";
             }
             ?>
         </div>
@@ -187,31 +177,8 @@
                 }
                 ?>
         </div>
-        <!--POPUP 3,image profil-->
-        <div class="Popup" id="imageprofile">
-                <p>Are you sure about that ?</p>
-                <form method="POST"> 
-                <input type="file" name="file"/>
-                <input type="submit" value="change avatar picture" name="accept"/>
-                <input type="submit" value="no changes" name="POGGERS"/>
-                </form>
-                <?php
-                if(isset($_POST["accept"])){
-                    $connexion=connect();
-                    $username=$_COOKIE["login"];
-                    $resultat=mysqli_query($connexion,"UPDATE users SET Nbr_Points='0' WHERE Pseudo='$username'");
-                    header("Location:profiluser.php");
-                }
-                if(isset($_POST["POGGERS"])){
-                   ?>
-                   <style>
-                        .Popup{
-                            display: none;
-                        }
-                   </style>
-                   <?php
-                }
-                ?>
+        <div>
+        
         </div>
     </div>
 </body>
