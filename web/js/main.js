@@ -716,9 +716,11 @@ function Win() {
   MainMusic.pause();
 
   // Activation de la pop-up et de ses paramètres.
-  document.getElementById("short").innerHTML += " " + Solver.length;
-  document.getElementById("long").innerHTML += " " + 2 * Solver.length;
-  document.getElementById("number").innerHTML += " " + Mouvement;
+  document.getElementById("short").innerHTML =
+    "shortest solution : " + Solver.length;
+  document.getElementById("long").innerHTML =
+    "longest solution : " + 2 * Solver.length;
+  document.getElementById("number").innerHTML = "number of steps :" + Mouvement;
   PlaySound("../son/sound_hero_win.mp3");
 
   // Pop-up visible.
