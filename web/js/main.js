@@ -629,16 +629,23 @@ function Click(event) {
     if (PlayerPos == LabSize * LabSize - 1) {
       Win();
     }
+    let L = false;
+
     // Vérification des positions des gardes.
     for (i = 0; i < gardeGlobal.length; i++) {
       if (gardeGlobal[i].pos == PlayerPos) {
-        Loose();
+        L = true;
+        break;
       }
     }
     // Mise en mouvement.
     activate = true;
     // Sortie du mouvement.
     setTimeout(function () {
+      if (L) {
+        console.log("Finish");
+        Loose();
+      }
       if (TeleporterStart.includes(PlayerPos)) {
         for (p = 0; p < TpStruct.length; p++) {
           if (TpStruct[p][0] == PlayerPos) {
@@ -730,6 +737,8 @@ function Loose() {
   PlaySound(Ambiance.DeathSound);
   finish = true;
   let player = document.getElementById("playerimg");
+  console.log(player);
+  console.log("bonsoir");
   player.src = Ambiance.Death;
 
   // Animation de mort.
@@ -988,7 +997,6 @@ function MoveGarde(size, move) {
         break;
     }
     //#endregion
-
     //#region Animation
     gardeGlobal[i].pos += indexIndent;
     let newCell = document.getElementById(gardeGlobal[i].pos);
@@ -1037,7 +1045,7 @@ function MoveGarde(size, move) {
     });
 
     if (Attack) {
-      console.log("Animation");
+      console.log("Loose");
       Loose();
     }
     //#endregion
