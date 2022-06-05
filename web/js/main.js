@@ -296,6 +296,7 @@ function Restart() {
   document.removeEventListener("keydown", Click);
   document.getElementById("popup").style.visibility = "hidden";
   document.getElementById("popup_lose").style.visibility = "hidden";
+  Attack = false;
   Mouvement = 1;
   PlayerPos = 0;
   LabSize = 0;
@@ -321,6 +322,7 @@ let animation = false; // Paramètres de lancement.
 let cheat = false;
 let finish = false; // Le jeu est-il fini.
 let Event;
+let Attack = false;
 //#endregion
 
 // Création d'une grid avec spawn du joueur et des gardes.
@@ -632,13 +634,18 @@ function Click(event) {
     // Vérification des positions des gardes.
     for (i = 0; i < gardeGlobal.length; i++) {
       if (gardeGlobal[i].pos == PlayerPos) {
-        Loose();
+        Attack = true;
+        break;
       }
     }
     // Mise en mouvement.
     activate = true;
     // Sortie du mouvement.
     setTimeout(function () {
+      if (Attack) {
+        console.log("Finish");
+        Loose();
+      }
       if (TeleporterStart.includes(PlayerPos)) {
         for (p = 0; p < TpStruct.length; p++) {
           if (TpStruct[p][0] == PlayerPos) {
@@ -709,9 +716,11 @@ function Win() {
   MainMusic.pause();
 
   // Activation de la pop-up et de ses paramètres.
-  document.getElementById("short").innerHTML += " " + Solver.length;
-  document.getElementById("long").innerHTML += " " + 2 * Solver.length;
-  document.getElementById("number").innerHTML += " " + Mouvement;
+  document.getElementById("short").innerHTML =
+    "shortest solution : " + Solver.length;
+  document.getElementById("long").innerHTML =
+    "longest solution : " + 2 * Solver.length;
+  document.getElementById("number").innerHTML = "number of steps :" + Mouvement;
   PlaySound("../son/sound_hero_win.mp3");
 
   // Pop-up visible.
@@ -730,7 +739,9 @@ function Loose() {
   PlaySound(Ambiance.DeathSound);
   finish = true;
   let player = document.getElementById("playerimg");
+  console.log(player);
   player.src = Ambiance.Death;
+  console.log(Ambiance.Death);
 
   // Animation de mort.
   anime({
@@ -917,8 +928,6 @@ function MoveGarde(size, move) {
     indexIndent = 0;
     XposIndent = 0;
     YposIndent = 0;
-    Attack = false;
-
     //#region Position
     switch (gardeGlobal[i].dir) {
       case 1: // vers la droite.
@@ -988,7 +997,6 @@ function MoveGarde(size, move) {
         break;
     }
     //#endregion
-
     //#region Animation
     gardeGlobal[i].pos += indexIndent;
     let newCell = document.getElementById(gardeGlobal[i].pos);
@@ -1015,7 +1023,6 @@ function MoveGarde(size, move) {
     let width = box.offsetWidth;
     let height = box.offsetHeight;
     X = parseFloat(width) / 2;
-
     newCell.appendChild(Garde);
     Garde.style.width = width / 2 + "px";
     Garde.style.height = height + "px";
@@ -1035,11 +1042,6 @@ function MoveGarde(size, move) {
       direction: "reverse",
       duration: 150,
     });
-
-    if (Attack) {
-      console.log("Animation");
-      Loose();
-    }
     //#endregion
   }
 }
