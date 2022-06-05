@@ -296,6 +296,7 @@ function Restart() {
   document.removeEventListener("keydown", Click);
   document.getElementById("popup").style.visibility = "hidden";
   document.getElementById("popup_lose").style.visibility = "hidden";
+  Attack = false;
   Mouvement = 1;
   PlayerPos = 0;
   LabSize = 0;
@@ -321,6 +322,7 @@ let animation = false; // Paramètres de lancement.
 let cheat = false;
 let finish = false; // Le jeu est-il fini.
 let Event;
+let Attack = false;
 //#endregion
 
 // Création d'une grid avec spawn du joueur et des gardes.
@@ -629,12 +631,10 @@ function Click(event) {
     if (PlayerPos == LabSize * LabSize - 1) {
       Win();
     }
-    let L = false;
-
     // Vérification des positions des gardes.
     for (i = 0; i < gardeGlobal.length; i++) {
       if (gardeGlobal[i].pos == PlayerPos) {
-        L = true;
+        Attack = true;
         break;
       }
     }
@@ -642,7 +642,7 @@ function Click(event) {
     activate = true;
     // Sortie du mouvement.
     setTimeout(function () {
-      if (L) {
+      if (Attack) {
         console.log("Finish");
         Loose();
       }
@@ -738,8 +738,8 @@ function Loose() {
   finish = true;
   let player = document.getElementById("playerimg");
   console.log(player);
-  console.log("bonsoir");
   player.src = Ambiance.Death;
+  console.log(Ambiance.Death);
 
   // Animation de mort.
   anime({
@@ -926,8 +926,6 @@ function MoveGarde(size, move) {
     indexIndent = 0;
     XposIndent = 0;
     YposIndent = 0;
-    Attack = false;
-
     //#region Position
     switch (gardeGlobal[i].dir) {
       case 1: // vers la droite.
@@ -1023,7 +1021,6 @@ function MoveGarde(size, move) {
     let width = box.offsetWidth;
     let height = box.offsetHeight;
     X = parseFloat(width) / 2;
-
     newCell.appendChild(Garde);
     Garde.style.width = width / 2 + "px";
     Garde.style.height = height + "px";
@@ -1043,11 +1040,6 @@ function MoveGarde(size, move) {
       direction: "reverse",
       duration: 150,
     });
-
-    if (Attack) {
-      console.log("Loose");
-      Loose();
-    }
     //#endregion
   }
 }
