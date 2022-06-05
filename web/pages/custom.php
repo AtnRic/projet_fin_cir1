@@ -9,22 +9,24 @@
 
 <body>
   <?php
-    if (isset($_POST['mazeSize']) && isset($_POST['nbrGuard']) && isset($_POST['nbrTP']) && isset($_POST['theme'])){
-      $mazeSize = $_POST['mazeSize']; 
-      $nbrGuard = $_POST['nbrGuard']; 
-      $nbrTP = $_POST['nbrTP']; 
-      $theme = $_POST['theme'];
-      switch($theme){
-        case('Jungle'): $theme = 1; break;
-        case('Retro'): $theme = 2; break;
-        case('Space'): $theme = 3; break;
+    $_SESSION["custom"]=true;
+    if (isset($_POST['mazeSize']) && isset($_POST['nbrGuard']) && isset($_POST['nbrTP']) && isset($_POST['theme']) && isset($_POST["Maze_Name"])){
+      $_SESSION["name"]=$_POST['Maze_Name'];
+      $_SESSION["mazeSize"] = $_POST['mazeSize']; 
+      $_SESSION["nbrGuard"] = $_POST['nbrGuard']; 
+      $_SESSION["nbrTP"] = $_POST['nbrTP']; 
+      $_SESSION["theme"] = $_POST['theme'];
+      switch($_SESSION["theme"]){
+        case('Jungle'): $_SESSION["theme"] = 1; break;
+        case('Retro'): $_SESSION["theme"] = 2; break;
+        case('Space'): $_SESSION["theme"] = 3; break;
       }
 
       $customMaze = array(
-        array($mazeSize), 
-        array($nbrTP), 
-        array($nbrGuard), 
-        array($theme)
+        array($_SESSION["mazeSize"]), 
+        array($_SESSION["nbrTP"]), 
+        array($_SESSION["nbrGuard"]), 
+        array($_SESSION["theme"])
       );
 
       $path = './dataCustomMaze.csv';
@@ -34,7 +36,7 @@
         }
         fclose($file);
     }
-    switch($theme){
+    switch($_SESSION["theme"]){
       case 1: header('Location:jungle.php'); break;
       case 2: header('Location:retro.php'); break;
       case 3: header('Location:space.php'); break;
@@ -48,6 +50,8 @@
   <div class="range">
     <!--[X] : valeur qui changera selon la position du curseur-->
     <form method="POST" action="./custom.php">
+      <label>Name of the maze : </label>
+      <input type="text" placeholder="Name" name="Maze_Name">
       <label>Size of the maze : [X]</label>
       <input type="range" name="mazeSize" min="5" max="30" value="5">
       <br>

@@ -1,184 +1,52 @@
 <?php
-    include "../tools/_main_tools.php";
-?>    
+include "../tools/_main_tools.php";
+?>
 <!DOCTYPE html>
 <html lang='fr'>
+
 <head>
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="stylesheet" type="text/css" href="../css/profiluser.css">
-<link rel='icon' href='../images/front/favicon.ico' type='image/x-icon'>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../css/profiluser.css">
+    <link rel='icon' href='../images/front/favicon.ico' type='image/x-icon'>
 </head>
+
 <body>
+    <header>
+        <a href="./home.php" id="homeButton">MENU</a>
+    </header>
     <div id="block">
-        <!--Premiere moitier-->
-        <div id="first">
-            <!--Image joueur-->
-            <input id="imageuser" type="image" src="../images/profileuser/profil/gigachad.png">
-            <!--Pseudo player-->
-            <div id="pseudo"><label><?php echo $_COOKIE["login"] ?></div>
-            <form method="POST">
-                <input class="button"type="submit" value="Reset stats" name="chadbutton">
-                <input class="button"type="submit" value="Change pseudo" name="Change_Name">
-            </form>
-            <?php
-            if(isset($_POST["chadbutton"])){
-                ?>
-                <style>
-                    #reset{
-                        display: block;
-                    }
-                </style>
-                <?php
-                if(isset($_POST["OMEGALUL"])){
-                    ResetPoint($_COOKIE["login"]);
-                    header("Location:profiluser.php");
-                }
-            }
-            if(isset($_POST["Change_Name"])){
-                ?>
-                <style>
-                    #newpseudo{
-                        display: block;
-                    }
-                </style>
-                <?php
-            }    
-            ?>    
-        </div>
-        <!--deuxieme moitier-->
-        <div id="second">
-            <!--information compte-->
+        <div id="informations">
+            <div id="profil">
+                <img width="50%" src="./../images/profileuser/profil/gigachad.png">
+            </div>
+            <div id="pseudo" class="text8bit">
+                <label><?php echo $_COOKIE["login"] ?></label>
+            </div>
             <div id="rank">
-                <p>Points Account total : <span class="score"><?php echo GetUserPoints($_COOKIE["login"]);?></span></p>
-                <p>Account levels :<br/></p>
-                <?php $Rank=Rank_User($_COOKIE["login"]);?>
-                <img src="../images/profileuser/Rank/wood.png" alt="Woodrank" id="wood" class="rank_image"/>
-                <img id="bronze" class="rank_image" src="../images/profileuser/Rank/Bronze.png" alt="Bronzerank"/>
-                <img id="silver" class="rank_image" src="../images/profileuser/Rank/Silver.png" alt="Silverrank">
-                <img src="../images/profileuser/Rank/gold.png" alt="Goldrank" id="gold" class="rank_image">
-                <img src="../images/profileuser/Rank/Diamond.png" alt="Diamondrank" id="diamond" class="rank_image">
-                <img  src="../images/profileuser/Rank/Chad.png" alt="Chadrank" id="chad" class="rank_image">
-                <?php
-                switch($Rank){
+                <?php 
+                $rank = 0;
+                switch($rank){
                     case 0:
-                        echo "wood rank";
-                        ?>
-                        <style>
-                            #wood{
-                                display: block;
-                            }
-                        </style>
-                        <?php
+                        $grade = './../profiluser/images/Rank/wood.png';
                         break;     
                     case 1:
-                        echo "bronze rank";
-                        ?>
-                        <style>
-                            #bronze{
-                                display: block;
-                            }
-                        </style>
-                        <?php
+                        $grade = './../profiluser/images/Rank/Bronze.png';
                         break;  
                     case 2:
-                        echo "silver rank";
-                        ?>
-                        <style>
-                            #silver{
-                                display: block;
-                            }
-                        </style>
-                        <?php
+                        $grade = './../profiluser/images/Rank/Silver.png';
                         break;   
                     case 3:
-                        echo "gold rank";
-                        ?>
-                        <style>
-                            #gold{
-                                display: block;
-                            }
-                        </style>
-                        <?php 
-                        break;  
+                        $grade = './../profiluser/images/Rank/gold.png';
                     case 4:
-                        echo "diamond rank";
-                        ?>
-                        <style>
-                            #diamond{
-                                display: block;
-                            }
-                        </style>
-                        <?php
+                        $grade = './../profiluser/images/Rank/Diamond.png';
                         break;    
                     case 5:
-                        echo "chad of the maze rank";
-                        ?>
-                        <style>
-                            #chad{
-                                display: block;
-                            }
-                        </style>
-                        <?php
-                        break;      
+                        $grade = './../profiluser/images/Rank/Chad.png';
+                        break;  
                 }
                 ?>
+                <img src= <?php $rank ?> >
             </div>
-            <div id="leveleditor">
-                <div>Gallery of your levels</div>
-                <a><div  class="niveau">Level 1</div></a>
-                <a><div  class="niveau">Level 2</div></a>
-                <input class="button" type="submit" value="Create a level" href="">  
-            </div>
-        </div>
-        <!--POPUP 1,changement de pseudo-->
-        <div class="Popup" id="newpseudo">
-            <p>Enter your new name</p>
-            <form method="POST">
-            <input type="text" name="PogChamp">
-            <br>
-            <input type="submit" name="PEPPE">
-            </form>
-            <?php
-            if(isset($_POST["PEPPE"]) && isset($_POST["PogChamp"])){
-                $newPseudo=$_POST["PogChamp"];
-                $username=$_COOKIE["login"];
-                $connexion=connect();
-                $resultat=mysqli_query($connexion,"UPDATE users SET Pseudo='$newPseudo' WHERE Pseudo='$username'");
-                setcookie("login", $newPseudo, time() + (3600 * 24 * 365));
-                header("Location:profiluser.php");
-            }
-            elseif(empty($_POST["PogChamp"])){
-                echo "Pseudo invalide";
-            }
-            ?>
-        </div>
-        <!--POPUP 2,reset de compte-->
-        <div class="Popup" id="reset">
-                <p>Are you sure about that ?</p>
-                <form method="POST"> 
-                <input type="submit" value="YES" name="OMGALUL"/>
-                <input type="submit" value="NO" name="POGGERS"/>
-                </form>
-                <?php
-                if(isset($_POST["OMGALUL"])){
-                    $connexion=connect();
-                    $username=$_COOKIE["login"];
-                    $resultat=mysqli_query($connexion,"UPDATE users SET Nbr_Points='0' WHERE Pseudo='$username'");
-                    header("Location:profiluser.php");
-                }
-                if(isset($_POST["POGGERS"])){
-                   ?>
-                   <style>
-                        .Popup{
-                            display: none;
-                        }
-                   </style>
-                   <?php
-                }
-                ?>
-        </div>
-        <div>
-        
         </div>
     </div>
 </body>

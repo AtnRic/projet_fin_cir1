@@ -2,6 +2,7 @@
 echo "<canvas class='confetti' id='canvas'></canvas>";
 $link = '../images/popup/popup_jungle.png';
 echo "<div id='popup' style='background-image: url($link)'>
+    
     <h1>Welcome to the Jungle</h1>
     <h2>Well Done !</h2>
     <p id='number'>number of steps : </p>
@@ -93,18 +94,21 @@ echo "<div id='popup' style='background-image: url($link)'>
         height: calc(0.82 * 50vw);
         position: absolute;
         top: 50%;
-        left: 48%;
+        left: 50.5%;
         transform: translateX(-50%) translateY(-50%);
         background-size: cover;
        
     }
-    canvas{
-        z-index: 9;
+    #canvas{
+        visibility: visible;
         position: absolute;
         top: 0;
         left: 0;
+        height: 100vh;
+        width: 100vw;
         background-image: none;
     }
+
     a{
         color: #3E3228;
         background: none;
