@@ -1,170 +1,145 @@
 @font-face {
-	font-family: "8-bit HUD";
-	src: url('../images/font/8-bit-hud.ttf');
+    font-family: "8-bit HUD";
+    src: url('../images/font/8-bit-hud.ttf');
 }
-.text8bit{
-    font-family: "8-bit HUD", serif;
+
+* {
+    font-family: "8-bit HUD";
+
 }
 
 body {
-    background-color:black;
+    background-color: black;
     color: white;
-    font-family:  -apple-system, BlinkMacSystemFont, 'Montserrat', 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Montserrat', 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-#homeButton{
+a:hover {
+    animation: blink 1s step-start 0s infinite;
+}
+
+
+main {
+    height: 100%;
+}
+
+#homeButton {
     font-size: larger;
     text-decoration: none;
     color: white;
-    font-family: "8-bit HUD";
     text-align: center;
     margin-top: 3%;
     display: block;
     margin-left: auto;
     margin-right: auto;
 }
-#homeButton:hover{
-    animation: blink 1s step-start 0s infinite;
-}
-@keyframes blink {
-    50% {
-      opacity: 0.0;
-    }
-  }
 
-#informations{
-    /*width: 100%;*/
+#informations {
+    margin-top: 5%;
+    display: flex;
 }
-#profil{
+
+#picture {
     width: 33%;
-    float: left;
     text-align: center;
 }
-#pseudo{
+
+#profil {
     width: 33%;
-    margin: auto;
+    padding-top: 3%;
+    text-align: center;
 }
-#rank{
+
+#pseudo {
+    font-size: 30px;
+    padding-bottom: 10%;
+}
+
+#points {
+    font-size: 20px;
+}
+
+#rank {
     width: 33%;
-    float: right;
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 3%;
 }
 
-
-
-/*
-.button{
-    border-radius: 10px;
-    cursor: pointer;
-    margin:20px;
+#levels {
+    margin-top: 5%;
+    text-align: center;
 }
 
-.niveau{
-    border: solid black 1px;
-    margin: 10px;
-    border-radius: 10px;
-    width: 120px;
+#buttonLevel>a {
+    text-decoration: none;
+    color: white;
+    font-size: 15px;
 }
 
-#block{
-    height: 100%;
-    width: 100%;
+#parameters {
+    text-align: center;
+    margin-top: 5%;
 }
 
-#first{
-    width: 40%;
-    float: left;
-    background-color: grey;
-    border: black solid 1px;
-    border-radius: 10px;
-    margin-top: 50px;
-    text-align:center;
-    margin-left: 10px;
-    margin-bottom: 10px;
-    height: 1fr;
+#popup {
+    text-align: center;
+    margin-top: 100px;
 }
 
-#imageuser{
+#newPseudo {
+    display: none;
+    z-index: 1;
+    position: fixed;
+    top: 15%;
+    left: 37%;
     width: 25%;
-    margin: 5% auto 5% auto;
+    height: 32%;
+    background-color: black;
+    border: solid 2px white;
+    text-align: center;
 }
 
-#pseudo{
+#newPseudo>p {
+    margin-bottom: 10%;
+}
+
+#newPseudo>form>input {
+    margin-bottom: 10%;
+}
+
+#resetStats {
+    display: none;
+    z-index: 1;
+    position: fixed;
+    top: 15%;
+    left: 27%;
+    width: 45%;
+    height: 30%;
+    background-color: black;
+    border: solid 2px white;
     text-align: center;
-    font-size:200%;
-    text-decoration:none;
+}
+
+#resetStats>p {
     margin-bottom: 5%;
 }
 
-.text8bit{
-    font-family: "8-bit HUD", serif;
-}
-.rank_image{
-    margin-left: auto;
-    display: none;
-    margin-right: auto;
+#resetStats>form>input {
+    margin-bottom: 5%;
 }
 
-#rank{
-    float: right;
-    background-color: grey;
-    border: black solid 1px;
-    width: 55%;
-    margin-top: 50px;
-    text-align:center;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    height: 1fr;
-    border-radius: 10px;
+.disableLink {
+    pointer-events: none;
 }
 
-#points{
-    float: left;
-    width: 66%;
-    text-align: center;
+@keyframes blink {
+    50% {
+        opacity: 0.0;
+    }
 }
 
-#badge{
-    float: right;
-    width: 33%;
-    padding-top: 5px;
-    padding-bottom: 5px;
-}
-
-
-
-#leveleditor{
-    text-align:center;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    height: 1fr;
-    margin-top: 70px;
-    float: right;
-    clear: right;
-    width: 55%;
-    border: black solid 1px;
-    border-radius: 10px;
-}
-
-#leveleditor a{
-    text-align: center;
-}
-
-#imageuser:hover{
-    content: "modifier";
-    transform: 1s;
-    color: white;
-}
-
-.Popup{
-    display: none;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    text-align: center;
-    border-radius:10px;
-    padding: 10px;   
-}
-*/
 @media screen and (max-width: 475px) {
     #pseudo {
         font-size: 20px;
@@ -173,7 +148,7 @@ body {
 }
 
 @media screen and (max-width: 920px) {
-    #profilimage{
+    #profilimage {
         top: 10%;
         right: 10%;
         width: 300px;
@@ -181,5 +156,3 @@ body {
         border-radius: 150px;
     }
 }
-
-
