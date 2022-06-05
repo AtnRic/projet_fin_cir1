@@ -47,29 +47,36 @@
     <h1>Welcome to the sandbox</h1>
     <h4>Here you can create your own maze</h4>
   </div>
-  <div class="range">
+  <?php
+  echo "
+  <div class='range'>
     <!--[X] : valeur qui changera selon la position du curseur-->
-    <form method="POST" action="./custom.php">
+    <form method='POST' action='./custom.php'>
       <label>Name of the maze : </label>
-      <input type="text" placeholder="Name" name="Maze_Name">
+      <input type='text' placeholder='Name' name='Maze_Name'>
       <label>Size of the maze : [X]</label>
-      <input type="range" name="mazeSize" min="5" max="30" value="5">
+      <input type='range' name='mazeSize' min=\"5\" max=\"37\" value=\"5\">
       <br>
       <label>Number of guards : [X]</label>
-      <input type="range" name="nbrGuard" min="0" max="10" value="0">
+      
+      <input type='range' name='nbrGuard' min=\"0\" max=\"10\" value=\"0\">
       <br>
       <label>Number of teleporter pairs : [X]</label>
-      <input type="range" name="nbrTP" min="0" max="5" value="0">
+      <input type='range' name='nbrTP' min=\"0\" max=\"5\" value=\"0\">
       <br>
       <label>Select the theme :</label>
-      <select name="theme">
+      <select name='theme'>
         <option>Jungle</option>
         <option>Retro</option>
         <option>Space</option>
       </select>
       <br>
-      <input type="submit" value="Generate">
+      <input type='submit' value='Generate'>
     </form>
   </div>
 
+  ";
+  ?>
+  
+  
 </body>
