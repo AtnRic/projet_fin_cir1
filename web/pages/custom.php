@@ -1,3 +1,6 @@
+<?php
+session_start()
+?>
 <!DOCTYPE html>
 <html lang='fr'>
 
@@ -11,47 +14,50 @@ require '../tools/_main_tools.php';
 
 <body>
   <?php
-    $_SESSION["custom"]=true;
-    if (isset($_POST['mazeSize']) && isset($_POST['nbrGuard']) && isset($_POST['nbrTP']) && isset($_POST['theme']) && isset($_POST["Maze_Name"])){
-      $_SESSION["name"]=$_POST['Maze_Name'];
-      $_SESSION["mazeSize"] = $_POST['mazeSize']; 
-      $_SESSION["nbrGuard"] = $_POST['nbrGuard']; 
-      $_SESSION["nbrTP"] = $_POST['nbrTP']; 
-      $_SESSION["theme"] = $_POST['theme'];
-      switch($_SESSION["theme"]){
-        case('Jungle'): $_SESSION["theme"] = 1; break;
-        case('Retro'): $_SESSION["theme"] = 2; break;
-        case('Space'): $_SESSION["theme"] = 3; break;
-      }
-
-      $customMaze = array(
-        array($_SESSION["mazeSize"]), 
-        array($_SESSION["nbrTP"]), 
-        array($_SESSION["nbrGuard"]), 
-        array($_SESSION["theme"])
-      );
-
-      $path = './dataCustomMaze.csv';
-      if ($file = @fopen('../tools/DonneesLabyrinthe.csv', 'w')) {
-        foreach ($customMaze as $ligne) {
-          fputcsv($file, $ligne);
+  //&& isset($_POST["Maze_Name"])
+    $_SESSION['custom']=true;
+    if (isset($_POST['mazeSize']) && isset($_POST['nbrGuard']) && isset($_POST['nbrTP']) && isset($_POST['theme'])){
+        echo Console("<p>Erreur d'exécution de la requete </p>");
+        $_SESSION["name"]=$_POST['Maze_Name'];
+        $_SESSION["mazeSize"] = $_POST['mazeSize'];
+        $_SESSION["nbrGuard"] = $_POST['nbrGuard'];
+        $_SESSION["nbrTP"] = $_POST['nbrTP'];
+        $_SESSION["theme"] = $_POST['theme'];
+        switch($_SESSION["theme"]){
+            case('Jungle'): $_SESSION["theme"] = 1; break;
+            case('Retro'): $_SESSION["theme"] = 2; break;
+            case('Space'): $_SESSION["theme"] = 3; break;
         }
-        fclose($file);
+
+        $customMaze = array(
+            array($_SESSION["mazeSize"]),
+            array($_SESSION["nbrTP"]),
+            array($_SESSION["nbrGuard"]),
+            array($_SESSION["theme"])
+        );
+
+        $path = './dataCustomMaze.csv';
+        if ($file = @fopen('../tools/DonneesLabyrinthe.csv', 'w')) {
+            foreach ($customMaze as $ligne) {
+                fputcsv($file, $ligne);
+            }
+            fclose($file);
+        }
+        switch($_SESSION["theme"]){
+        case 1: header('Location: jungle.php'); break;
+        case 2: header('Location: retro.php'); break;
+        case 3: header('Location: space.php'); break;
+        }
+
     }
-    switch($_SESSION["theme"]){
-      case 1: header('Location:jungle.php'); break;
-      case 2: header('Location:retro.php'); break;
-      case 3: header('Location:space.php'); break;
-    }
-  }
-  ?>
+    ?>
   <section class="back">
     <div class="moon"></div>
     <img src="../images/accueil/static-left-leaves.png" class="left">
     <img src="../" alt="" class="right">
     <!-- <div id="right"></div> -->
     <div class="range">
-      <form method="POST" action="custom.php" class="builder">
+      <form method="post" action="custom.php" class="builder">
         <p>Size</p>
         <input type="range" name="mazeSize" min="5" max="30" value="5">
         <br>
