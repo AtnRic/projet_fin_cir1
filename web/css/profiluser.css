@@ -1,0 +1,158 @@
+@font-face {
+    font-family: "8-bit HUD";
+    src: url('../images/font/8-bit-hud.ttf');
+}
+
+* {
+    font-family: "8-bit HUD";
+
+}
+
+body {
+    background-color: black;
+    color: white;
+    font-family: -apple-system, BlinkMacSystemFont, 'Montserrat', 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+a:hover {
+    animation: blink 1s step-start 0s infinite;
+}
+
+
+main {
+    height: 100%;
+}
+
+#homeButton {
+    font-size: larger;
+    text-decoration: none;
+    color: white;
+    text-align: center;
+    margin-top: 3%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#informations {
+    margin-top: 5%;
+    display: flex;
+}
+
+#picture {
+    width: 33%;
+    text-align: center;
+}
+
+#profil {
+    width: 33%;
+    padding-top: 3%;
+    text-align: center;
+}
+
+#pseudo {
+    font-size: 30px;
+    padding-bottom: 10%;
+}
+
+#points {
+    font-size: 20px;
+}
+
+#rank {
+    width: 33%;
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 3%;
+}
+
+#levels {
+    margin-top: 5%;
+    text-align: center;
+}
+
+#buttonLevel>a {
+    text-decoration: none;
+    color: white;
+    font-size: 15px;
+}
+
+#parameters {
+    text-align: center;
+    margin-top: 5%;
+}
+
+#popup {
+    text-align: center;
+    margin-top: 100px;
+}
+
+#newPseudo {
+    display: none;
+    z-index: 1;
+    position: fixed;
+    top: 15%;
+    left: 37%;
+    width: 25%;
+    height: 32%;
+    background-color: black;
+    border: solid 2px white;
+    text-align: center;
+}
+
+#newPseudo>p {
+    margin-bottom: 10%;
+}
+
+#newPseudo>form>input {
+    margin-bottom: 10%;
+}
+
+#resetStats {
+    display: none;
+    z-index: 1;
+    position: fixed;
+    top: 15%;
+    left: 27%;
+    width: 45%;
+    height: 30%;
+    background-color: black;
+    border: solid 2px white;
+    text-align: center;
+}
+
+#resetStats>p {
+    margin-bottom: 5%;
+}
+
+#resetStats>form>input {
+    margin-bottom: 5%;
+}
+
+.disableLink {
+    pointer-events: none;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0.0;
+    }
+}
+
+@media screen and (max-width: 475px) {
+    #pseudo {
+        font-size: 20px;
+        width: 300px;
+    }
+}
+
+@media screen and (max-width: 920px) {
+    #profilimage {
+        top: 10%;
+        right: 10%;
+        width: 300px;
+        height: 300px;
+        border-radius: 150px;
+    }
+}

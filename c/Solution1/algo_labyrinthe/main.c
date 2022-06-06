@@ -13,8 +13,7 @@
 #include "structures.h"
 
 
-
-//Ce qui doit être obtenu
+// Ce qui doit être obtenu
 /*var labyrinthe = [
 		["k", "f", "b", "f", "f", "f", "b", "f", "f", "o"],
 		["e", "h", "g", "m", "b", "h", "g", "m", "f", "h"],
@@ -26,7 +25,6 @@
 		["j", "f", "f", "f", "f", "i", "j", "d", "o", "l"],
 ];
 var correspondance = {
-  //   h  d  b  g
   a : [0, 0, 0, 0] ,
   b : [1, 0, 0, 0] ,
   c : [0, 1, 0, 0] ,
@@ -43,101 +41,229 @@ var correspondance = {
   n : [1, 1, 0, 1] ,
   o : [1, 1, 1, 0] ,
   p : [1, 1, 1, 1] ,
-};
-console.log(labyrinthe[3][1]);*/
+};*/
 
-/*Tri Fusion*/
-void triFusion(int i, int j, int tab[], int tmp[]) {
-	if (j <= i) { return; }
-
-	int m = (i + j) / 2;
-
-	triFusion(i, m, tab, tmp);     //trier la moiti� gauche r�cursivement
-	triFusion(m + 1, j, tab, tmp); //trier la moiti� droite r�cursivement
-	int pg = i;     //pg pointe au d�but du sous-tableau de gauche
-	int pd = m + 1; //pd pointe au d�but du sous-tableau de droite
-	int c;          //compteur
-// on boucle de i � j pour remplir chaque �l�ment du tableau final fusionn�
-	for (c = i; c <= j; c++) {
-		if (pg == m + 1) { //le pointeur du sous-tableau de gauche a atteint la limite
-			tmp[c] = tab[pd];
-			pd++;
-		}
-		else if (pd == j + 1) { //le pointeur du sous-tableau de droite a atteint la limite
-			tmp[c] = tab[pg];
-			pg++;
-		}
-		else if (tab[pg] < tab[pd]) { //le pointeur du sous-tableau de gauche pointe vers un �l�ment plus petit
-			tmp[c] = tab[pg];
-			pg++;
-		}
-		else {  //le pointeur du sous-tableau de droite pointe vers un �l�ment plus petit
-			tmp[c] = tab[pd];
-			pd++;
-		}
+/// <summary>
+/// utilitaire liste chainées
+/// </summary>
+/// <returns></returns>
+DoubleLinkedList* newDoubleLinkedList() {
+	DoubleLinkedList* tmp;
+	tmp = (DoubleLinkedList*)malloc(sizeof(DoubleLinkedList));
+	if (tmp != NULL) {
+		tmp->head = NULL;
+		tmp->tail = NULL;
+		tmp->size = 0;
 	}
-	for (c = i; c <= j; c++) {  //copier les �l�ments de tmp � tab
-		tab[c] = tmp[c];
-	}
+	return tmp;
 }
-/*Fin tri Fusion*/
-
-/*Fichier*/
-int readFile(char* filename) {
-	int returnCode;
-	int count;
-
-	FILE* stream;// , * stream2;
-	errno_t err;
-
-	err = fopen_s(&stream, filename, "r");
-	if (err == 0)
-		printf("Le fichier 'file.txt' est ouvert\n");
-	else
-		printf("Le fichier 'file.txt' n'est pas ouvert\n");
-
-	fseek(stream, 0, SEEK_SET);
-
-	char value;
-	value = fgetc(stream);
-	printf("%c", value);
-
-
-	if (stream) {
-		err = fclose(stream);
-		if (err == 0)
-			printf("\nLe fichier 'file.txt' est ferme\n");
-		else
-			printf("\nLe fichier 'file.txt' n'est pas ferme\n");
+DoubleLinkedListElem* NewDoubleLinkedListItem(int value) {
+	DoubleLinkedListElem* tmp;
+	tmp = (DoubleLinkedListElem*)malloc(sizeof(DoubleLinkedListElem));
+	if (tmp != NULL) {
+		tmp->data = value;
+		tmp->next = NULL;
+		tmp->previous = NULL;
 	}
-	return value;
+	return(tmp);
 }
-/*Fin fichier*/
+
+
+
+int DisplayDoubleList(DoubleLinkedList* list) {
+	if (list == NULL || list->head == NULL || list->tail == NULL) { return 0; }
+
+	DoubleLinkedListElem* courant = list->head;
+	while (courant != NULL) {
+		printf("%d ", courant->data);
+		courant = courant->next;
+	}
+	return 1;
+}
+int insertItemAtDoubleLinkedListTail(DoubleLinkedList* list, DoubleLinkedListElem* newItem) {
+	if (list == NULL)
+		return 0;
+	if (newItem == NULL || newItem->next != NULL || newItem->previous != NULL)
+		return 0;
+
+	if (list->tail == NULL) {
+		list->tail = newItem;
+		list->head = newItem;
+		list->size = 1;
+	}
+	else {
+		newItem->previous = list->tail;
+		list->tail->next = newItem;
+		list->tail = newItem;
+		list->size++;
+	}
+	return 1;
+}
+int getDoubleLinkedListSize(DoubleLinkedList* list) {
+	if (list != NULL) {
+		return list->size;
+	}
+	if (list == NULL) {
+		return -1;
+	}
+	
+}
+int DeleteDoubleLinkedListItem(DoubleLinkedList* list, DoubleLinkedListElem* elem) {
+
+	// cas d'erreur
+	// La liste n'existe pas
+	if (list == NULL) return(0);
+	// liste vide ou anomalie
+	if ((list->head == NULL) || (list->tail == NULL)) return(0);
+	// anomalie sur la taille
+	if ((list->head == list->tail) && (list->size != 1)) return(0);
+	// pas d'élément dans la liste ou elem invalide
+	if ((list->size == 0) || (elem == NULL)) return(0);
+	// initialisation d'un pointeur sur l'élément courant
+	DoubleLinkedListElem* tmp = list->head;
+	//tmp->previous = NULL;
+	
+
+		// l'élément est en tête et en queue, il y a donc 1 seul élément dans la liste
+		if ((elem == list->head) && (elem == list->tail)) {
+			list->head = NULL;
+			list->tail = NULL;
+			list->size = 0;
+			free(elem);
+			return(1);
+		}
+		// il est en tête, on supprime la tête
+		if (elem == list->head) {
+			list->head = elem->next;
+			list->size--;
+			free(elem);
+			return(1);
+		}
+		// Recherche du maillon dans le reste de la liste chaînée
+		while ((tmp != NULL) && (tmp != elem)) {
+			//tmp->previous = tmp;
+			tmp = tmp->next;
+		}
+		// s'il est en queue, on supprime la queue
+		if ((tmp == elem) && (tmp->next == NULL)) {
+			list->tail = elem->previous;
+			//tmp = NULL;
+			list->size--;
+			free(elem);
+			return(1);
+		}	
+		if (tmp != NULL) {
+			// s'il est au milieu, on supprime l'élément
+			if ((tmp->previous != NULL) && (tmp == elem) && (tmp->next != NULL)) {
+				(elem->next)->previous = elem->previous;
+				(elem->previous)->next = elem->next;
+				list->size--;
+				free(elem);
+				return(1);
+			}
+			// l'élément recherché n'a pas été trouvé
+			return(0);
+		}
+		return 0;
+}
+
+DoubleLinkedListElem * getDoubleLinkedListElem(DoubleLinkedList* list, int pos) {
+	DoubleLinkedListElem * tmp = list->head;
+	for (int i = 1; i <= pos; i++) {
+		tmp = tmp->next;
+	}
+	return tmp;
+}
+
+
+
+/// <summary>
+///recherche des endroits ou placer les tp dans le labyrinthe et stocke dans une liste chainée
+/// </summary>
+/// <returns></returns>
+Teleporteurs_Paire* recherche_loc_tp(int nb_paires, char* maze, int size) {
+	/*recherche localisation des tp*/
+	DoubleLinkedList* List = newDoubleLinkedList();
+	if (nb_paires >= size / 2) return NULL;
+
+
+	for (int i = 1; i < size - 1; i++) {
+		if (*(maze + i) == 'l' || *(maze + i) == 'm' || *(maze + i) == 'n' || *(maze + i) == 'o') {
+			DoubleLinkedListElem* elem = NewDoubleLinkedListItem(i);
+			insertItemAtDoubleLinkedListTail(List, elem);
+		}
+	}
+	//printf("positions trouvees :\n");
+	//DisplayDoubleList(List);
+
+
+
+	/*Creation de paires de tp*/
+	//printf("\nCreation des paires de teleporteurs :\n");
+	Teleporteurs_Paire* tab = (Teleporteurs_Paire*)malloc(sizeof(Teleporteurs_Paire) * nb_paires);
+	srand(time(NULL));
+
+	int pos;
+	if (tab != NULL) {
+		for (int i = 0; i < nb_paires; i++) {
+			int max_index = getDoubleLinkedListSize(List);
+
+			//tirage d'une entrée
+			pos = (rand() * max_index / RAND_MAX) - 1;
+			DoubleLinkedListElem* elem_entree = getDoubleLinkedListElem(List, pos);
+
+			(*(tab + i)).entree = elem_entree->data;
+			DeleteDoubleLinkedListItem(List, elem_entree);
+
+
+			//tirage d'une sortie
+			pos = (rand() * (max_index - 1) / RAND_MAX) - 1;
+			DoubleLinkedListElem* elem_sortie = getDoubleLinkedListElem(List, pos);
+			(*(tab + i)).sortie = elem_sortie->data;
+			DeleteDoubleLinkedListItem(List, elem_sortie);
+
+			//DisplayDoubleList(List);
+			//printf("\n\n");
+		}
+		for (int j = 0; j < nb_paires; j++) {
+			//printf("Paire %d = [%d, %d]\n", j + 1, (*(tab + j)).entree, (*(tab + j)).sortie);
+		}
+		return tab;
+	}
+	return NULL;
+}
 
 /*Algo labyrinthe*/
-int NearCase(Lab* L, int index) {
-	printf("INDEX %d - L:%d R:%d T:%d D:%d\n", index, Left(L, index), Right(L, index), Top(L, index), Down(L, index));
+int NearCase(Lab* L, int index)
+{
+	// printf("INDEX %d - L:%d R:%d T:%d D:%d\n", index, Left(L, index), Right(L, index), Top(L, index), Down(L, index));
 	return 0;
 }
 
-Free* NewFree(int max) {
+Free* NewFree(int max)
+{
 	Free* F = (Free*)malloc(sizeof(Free));
-	if (F != NULL) {
+	if (F != NULL)
+	{
 		F->List = (int*)malloc(sizeof(int*) * max);
 		F->Size = 0;
 	}
 	return F;
 }
-
-Lab* NewLab(int size) {
+Lab* NewLab(int size)
+{
 	Lab* N = (Lab*)malloc(sizeof(Lab));
-	if (N != NULL) {
+	if (N != NULL)
+	{
 		(N->tab) = (Cell*)malloc(sizeof(Cell) * size * size);
-		if (N->tab == NULL) {
+		if (N->tab == NULL)
+		{
 			printf("Erreur d'initialisation du labyrinthe. {1}");
 		}
-		else {
-			for (int i = 0; i < size * size; i++) {
+		else
+		{
+			for (int i = 0; i < size * size; i++)
+			{
 				(N->tab + i)->d = true;
 				(N->tab + i)->l = true;
 				(N->tab + i)->r = true;
@@ -148,77 +274,90 @@ Lab* NewLab(int size) {
 		N->size = size;
 		return N;
 	}
-	else {
+	else
+	{
 		printf("Erreur d'initialisation du labyrinthe. {2}");
 	}
 	return N;
 }
 
-int Launch(Lab* L) {
-	if (L == NULL) {
+int Launch(Lab* L)
+{
+	if (L == NULL)
+	{
 		printf("Labyrinthe vide.");
 		return 0;
 	}
 	Cell* origin = L->tab;
 	return EXIT_SUCCESS;
 }
-int tryPath(Lab* L, int index, Free* F) {
+int tryPath(Lab* L, int index, Free* F)
+{
 	char wall = r_CaseNear(L, index);
-	//printf("%d(%c)-", index, (L->tab+index)->used ? 'y' : 'n');
-	if (!Isolate(L, index)) {
-		printf("%d ", index);
+	// printf("%d(%c)-", index, (L->tab+index)->used ? 'y' : 'n');
+	if (!Isolate(L, index))
+	{
+		// printf("%d ", index);
 		(*(F->List + F->Size)) = index;
 		F->Size++;
 	}
-	switch (wall) {
+	switch (wall)
+	{
 	case 'l':
 		(L->tab + index)->used = true;
 		DelWall(L, index, 'l');
-		if (Left(L, index) != -1) {
-			//printf("\nNext(%c)\n", (L->tab + Left(L, index))->used ? 'y' : 'n');
+		if (Left(L, index) != -1)
+		{
+			// printf("\nNext(%c)\n", (L->tab + Left(L, index))->used ? 'y' : 'n');
 			return tryPath(L, Left(L, index), F);
 		}
 	case 'r':
 		(L->tab + index)->used = true;
 		DelWall(L, index, 'r');
-		if (Right(L, index) != -1) {
-			//printf("\nNext(%c)\n", (L->tab + Right(L, index))->used ? 'y' : 'n');
+		if (Right(L, index) != -1)
+		{
+			// printf("\nNext(%c)\n", (L->tab + Right(L, index))->used ? 'y' : 'n');
 			return tryPath(L, Right(L, index), F);
 		}
 	case 't':
 		(L->tab + index)->used = true;
 		DelWall(L, index, 't');
-		if (Top(L, index) != -1) {
-			//printf("\nNext(%c)\n", (L->tab + Top(L, index))->used ? 'y' : 'n');
+		if (Top(L, index) != -1)
+		{
+			// printf("\nNext(%c)\n", (L->tab + Top(L, index))->used ? 'y' : 'n');
 			return tryPath(L, Top(L, index), F);
 		}
 	case 'd':
 		(L->tab + index)->used = true;
 		DelWall(L, index, 'd');
-		if (Down(L, index) != -1) {
-			//printf("\nNext(%c)\n", (L->tab + Down(L, index))->used ? 'y' : 'n');
+		if (Down(L, index) != -1)
+		{
+			// printf("\nNext(%c)\n", (L->tab + Down(L, index))->used ? 'y' : 'n');
 			return tryPath(L, Down(L, index), F);
 		}
 	case 'n':
 		(L->tab + index)->used = true;
 	}
-	if (F->Size != 0) {
+	if (F->Size != 0)
+	{
 
-		printf("\033[1m\033[32m");
-		printf("END\n");
-		printf("\033[0m");
+		// printf("\033[1m\033[32m");
+		// printf("END\n");
+		// printf("\033[0m");
 	}
-	for (int i = 0; i < F->Size; i++) {
+	for (int i = 0; i < F->Size; i++)
+	{
 		Free* G = NewFree(1000);
 		tryPath(L, (*(F->List + i)), G);
 	}
 	free(F);
 	return 0;
 }
-char r_CaseNear(Lab* L, int index) {
+char r_CaseNear(Lab* L, int index)
+{
 	int R = ceilf(((float)rand() / (float)RAND_MAX) * 4.0);
-	switch (R) {
-
+	switch (R)
+	{
 	case 1:
 		if (Right(L, index) != -1)
 		{
@@ -290,104 +429,129 @@ char r_CaseNear(Lab* L, int index) {
 	}
 	return 'n';
 }
-bool Isolate(Lab* L, int index) {
-	if (Right(L, index) == -1 && Left(L, index) == -1 && Top(L, index) == -1 && Down(L, index) == -1) {
-		//printf("%d Isolated %d %d %d %d\n", index, Right(L, index), Left(L, index), Top(L, index), Down(L, index));
+bool Isolate(Lab* L, int index)
+{
+	if (Right(L, index) == -1 && Left(L, index) == -1 && Top(L, index) == -1 && Down(L, index) == -1)
+	{
+		// printf("%d Isolated %d %d %d %d\n", index, Right(L, index), Left(L, index), Top(L, index), Down(L, index));
 		return true;
 	}
-	else {
-		//printf("%d Not isolated%d %d %d %d\n", index, Right(L, index), Left(L, index), Top(L, index), Down(L, index));
+	else
+	{
+		// printf("%d Not isolated%d %d %d %d\n", index, Right(L, index), Left(L, index), Top(L, index), Down(L, index));
 		return false;
 	}
 }
-int Left(Lab* L, int index) {
-	printf("\033[1m\033[31m");
+
+int Left(Lab* L, int index)
+{
+	// printf("\033[1m\033[31m");
 	int size = L->size;
 	Cell* origin = L->tab;
-	if ((index % size) == 0) {
-		//printf("Left %d : NULL\n", index);
+	if ((index % size) == 0)
+	{
+		// printf("Left %d : NULL\n", index);
 		return -1;
 	}
-	if (((origin + index - 1)->used)) {
-		//printf("Left %d : USED\n", index);
+	if (((origin + index - 1)->used))
+	{
+		// printf("Left %d : USED\n", index);
 		return -1;
 	}
-	else {
-		if (index - 1 > L->size * L->size) {
-			//printf("\nIndex problem %d\n", index - 1);
+	else
+	{
+		if (index - 1 > L->size * L->size)
+		{
+			// printf("\nIndex problem %d\n", index - 1);
 		}
 		return (index - 1);
-	}	printf("\033[0m");
+	} // printf("\033[0m");
 }
-int Right(Lab* L, int index) {
-	printf("\033[1m\033[31m");
+int Right(Lab* L, int index)
+{
+	// printf("\033[1m\033[31m");
 	int size = L->size;
 	Cell* origin = L->tab;
-	if ((index + 1) % size == 0) {
-		//printf("Right %d : NULL\n", index);
+	if ((index + 1) % size == 0)
+	{
+		// printf("Right %d : NULL\n", index);
 		return -1;
 	}
 
-	if (((origin + index + 1)->used)) {
-		//printf("Right %d : %c : USED\n", index+1, ((origin + index + 1)->used) ? 'y':'n');
+	if (((origin + index + 1)->used))
+	{
+		// printf("Right %d : %c : USED\n", index+1, ((origin + index + 1)->used) ? 'y':'n');
 		return -1;
 	}
-	else {
-		if (index + 1 > L->size * L->size) {
-			//printf("\nIndex problem %d\n", index + 1);
+	else
+	{
+		if (index + 1 > L->size * L->size)
+		{
+			// printf("\nIndex problem %d\n", index + 1);
 		}
 		return (index + 1);
-	}	printf("\033[0m");
+	} // printf("\033[0m");
 }
-int Top(Lab* L, int index) {
-	printf("\033[1m\033[31m");
+int Top(Lab* L, int index)
+{
+	// printf("\033[1m\033[31m");
 	int size = L->size;
 	Cell* origin = L->tab;
-	if (index < size) {
-		//printf("Top %d : NULL\n", index);
+	if (index < size)
+	{
+		// printf("Top %d : NULL\n", index);
 		return -1;
 	}
-	if (((origin + index - size)->used)) {
-		//printf("Top %d : USED\n", index);
+	if (((origin + index - size)->used))
+	{
+		// printf("Top %d : USED\n", index);
 		return -1;
 	}
-	else {
-		if (index - size > L->size * L->size) {
-			//printf("\nIndex problem %d\n", index - size);
+	else
+	{
+		if (index - size > L->size * L->size)
+		{
+			// printf("\nIndex problem %d\n", index - size);
 		}
 		return (index - size);
-	}	printf("\033[0m");
+	} // printf("\033[0m");
 }
-int Down(Lab* L, int index) {
-	printf("\033[1m\033[31m");
+int Down(Lab* L, int index)
+{
+	// printf("\033[1m\033[31m");
 	int size = L->size;
 	Cell* origin = L->tab;
 
-	if (index >= ((size * size) - size)) {
-		//printf("Bottom %d : NULL\n", index);
+	if (index >= ((size * size) - size))
+	{
+		// printf("Bottom %d : NULL\n", index);
 		return -1;
 	}
-	if (((origin + index + size)->used)) {
+	if (((origin + index + size)->used))
+	{
 		return -1;
 	}
-	else {
-		if (index + size > L->size * L->size) {
-			//printf("\nIndex problem %d\n", index + size);
+	else
+	{
+		if (index + size > L->size * L->size)
+		{
+			// printf("\nIndex problem %d\n", index + size);
 		}
 		return (index + size);
 	}
-	printf("\033[0m");
+	// printf("\033[0m");
 }
 
-// wall = t, d, l, r
-int DelWall(Lab* L, int index, char wall) {
+int DelWall(Lab* L, int index, char wall)
+{
 
-
-	if (L == NULL || index == -1 || index >= (L->size * L->size)) {
+	if (L == NULL || index == -1 || index >= (L->size * L->size))
+	{
 		printf("Error");
 		return -1;
 	}
-	if ((L->tab + index) == NULL) {
+	if ((L->tab + index) == NULL)
+	{
 		printf("Error");
 		return -1;
 	}
@@ -400,7 +564,8 @@ int DelWall(Lab* L, int index, char wall) {
 		{
 			(L->tab + Left(L, index))->r = false;
 		}
-		else {
+		else
+		{
 			printf("null1");
 		}
 		break;
@@ -410,7 +575,8 @@ int DelWall(Lab* L, int index, char wall) {
 		{
 			(L->tab + Right(L, index))->l = false;
 		}
-		else {
+		else
+		{
 			printf("null2");
 		}
 		break;
@@ -418,9 +584,11 @@ int DelWall(Lab* L, int index, char wall) {
 		(L->tab + index)->t = false;
 		if (Top(L, index) != -1)
 		{
-			(L->tab + Top(L, index))->d = false;;
+			(L->tab + Top(L, index))->d = false;
+			;
 		}
-		else {
+		else
+		{
 			printf("null3");
 		}
 		break;
@@ -430,16 +598,18 @@ int DelWall(Lab* L, int index, char wall) {
 		{
 			(L->tab + Down(L, index))->t = false;
 		}
-		else {
+		else
+		{
 			printf("null4");
 		}
 		break;
 	}
 	return 1;
 }
-int show(Lab* L, Path* P) {
+int show(Lab* L, Path* P, Teleporteurs_Paire* T, int nbPaire)
+{
 	printf("\nLabyrinthe * Taille : %d : \n", L->size);
-	//for (int i = 0; i < L->size * L->size; i++)
+	// for (int i = 0; i < L->size * L->size; i++)
 	//{
 	//	if ((L->tab + i)->t == 0 || (L->tab + i)->r == 0 || (L->tab + i)->l == 0 || (L->tab + i)->d == 0) {
 	//		printf("\033[31m");
@@ -448,137 +618,197 @@ int show(Lab* L, Path* P) {
 	//		printf("\033[32m");
 	//	}
 	//	//printf("Cell %d : t%d, d%d, l%d, r%d\n", i, (L->tab + i)->t, (L->tab + i)->d, (L->tab + i)->l, (L->tab + i)->r);
-	//}
+	// }
 
-	printf("\033[0m");
-	for (int w = 0; w < L->size; w++) {
-		for (int i = 0; i < L->size; i++) {
+	// printf("\033[0m");
+	for (int w = 0; w < L->size; w++)
+	{
+		for (int i = 0; i < L->size; i++)
+		{
 			int index = (L->size * w + i);
-			if (Contains(P, index)) {
+			int Tps = ContainsTp(index, T, nbPaire);
+			if (ContainsPath(P, index))
+			{
 				printf("\033[1m\033[32m");
 			}
-			else {
+			if (Tps != -1) {
+				printf("\033[0;3%dm", Tps + 1);
+			}
+			if (Tps != -1 && ContainsPath(P, index)) {
+				printf("\033[0;3%dm", Tps + 1);
+			}
+			if (Tps == -1 && !ContainsPath(P, index))
+			{
 				printf("\033[0m");
 			}
-			if ((L->tab + index)->t == 1) {
-				printf("-----");
+			if ((L->tab + index)->t == 1)
+			{
+				printf("-------");
 			}
-			if ((L->tab + index)->t == 0) {
+			if ((L->tab + index)->t == 0)
+			{
 
-				printf("     ");
+				printf("       ");
 			}
 		}
 		printf("\n");
-		for (int i = 0; i < L->size; i++) {
+		for (int i = 0; i < L->size; i++)
+		{
 			int index = (L->size * w + i);
-			char p = ' ';
-			if (Contains(P, index)) {
-				printf("\033[1m\033[32m");
-				p = 'x';
+			int Tps = ContainsTp(index, T, nbPaire);
+			int p = 0;
+			if (ContainsPath(P, index))
+			{
+				 printf("\033[1m\033[32m");
+				p = -1;
 			}
-			else {
-				printf("\033[0m");
-				p = ' ';
+			if (Tps != -1) {
+				printf("\033[0;3%dm", Tps + 1);
+				p = -2;
 			}
-			if ((L->tab + index)->l == 1 && (L->tab + index)->r == 1) {
-				printf("| %c |", p);
+			if (Tps != -1 && ContainsPath(P, index)) {
+				printf("\033[0;3%dm", Tps + 1);
+				p = -3;
 			}
-			else if ((L->tab + index)->l == 0 && (L->tab + index)->r == 1) {
-				printf("  %c |", p);
+			if(Tps == -1 && !ContainsPath(P, index))
+			{
+				 printf("\033[0m");
+				 p = index;
 			}
-			else if ((L->tab + index)->l == 1 && (L->tab + index)->r == 0) {
-				printf("| %c  ", p);
+			if ((L->tab + index)->l == 1 && (L->tab + index)->r == 1)
+			{
+				printf("| %3d |", p);
 			}
-			else if ((L->tab + index)->l == 0 && (L->tab + index)->r == 0) {
-				printf("  %c  ", p);
+			else if ((L->tab + index)->l == 0 && (L->tab + index)->r == 1)
+			{
+				printf("  %3d |", p);
+			}
+			else if ((L->tab + index)->l == 1 && (L->tab + index)->r == 0)
+			{
+				printf("| %3d  ", p);
+			}
+			else if ((L->tab + index)->l == 0 && (L->tab + index)->r == 0)
+			{
+				printf("  %3d  ", p);
 			}
 		}
 		printf("\n");
-		if (w == L->size - 1) {
-			for (int i = 0; i < L->size; i++) {
-				int index = (L->size * w + i);
-				if (Contains(P, index)) {
+		if (w == L->size - 1)
+		{
+			for (int i = 0; i < L->size; i++)
+			{
+				int index = (L->size * w + i);				
+				int Tps = ContainsTp(index, T, nbPaire);
+				if (ContainsPath(P, index))
+				{
 					printf("\033[1m\033[32m");
 				}
-				else {
+				if (Tps != -1) {
+					printf("\033[0;3%dm", Tps + 1);
+				}
+				if (Tps != -1 && ContainsPath(P, index)) {
+					printf("\033[0;3%dm", Tps + 1); 
+				}
+				if (Tps == -1 && !ContainsPath(P, index))
+				{
 					printf("\033[0m");
 				}
-				if ((L->tab + index)->d == 1) {
-					printf("-----");
+				if ((L->tab + index)->d == 1)
+				{
+					printf("-------");
 				}
-				else {
-					printf("     ");
+				else
+				{
+					printf("       ");
 				}
 			}
 		}
 	}
 	return EXIT_SUCCESS;
 }
-
-char* letter(Lab* L) {
+char* letter(Lab* L)
+{
 	char* c = (char*)malloc(sizeof(char) * L->size * L->size);
-	if (c != NULL) {
-		for (int i = 0; i < L->size * L->size; i++) {
-			if ((i % L->size) == 0 && i != 0 && i != L->size) {
+	if (c != NULL)
+	{
+		for (int i = 0; i < L->size * L->size; i++)
+		{
+			if ((i % L->size) == 0 && i != 0 && i != L->size)
+			{
 				printf("\n");
 			}
-			if (!(*(L->tab + i)).t && !(*(L->tab + i)).r && !(*(L->tab + i)).d && !(*(L->tab + i)).l) {
+			if (!(*(L->tab + i)).t && !(*(L->tab + i)).r && !(*(L->tab + i)).d && !(*(L->tab + i)).l)
+			{
 				(*(c + i)) = 'a';
 				printf("a");
 			}
-			if ((*(L->tab + i)).t && !(*(L->tab + i)).r && !(*(L->tab + i)).d && !(*(L->tab + i)).l) {
+			if ((*(L->tab + i)).t && !(*(L->tab + i)).r && !(*(L->tab + i)).d && !(*(L->tab + i)).l)
+			{
 				(*(c + i)) = 'b';
 				printf("b");
 			}
-			if (!(*(L->tab + i)).t && (*(L->tab + i)).r && !(*(L->tab + i)).d && !(*(L->tab + i)).l) {
+			if (!(*(L->tab + i)).t && (*(L->tab + i)).r && !(*(L->tab + i)).d && !(*(L->tab + i)).l)
+			{
 				(*(c + i)) = 'c';
 				printf("c");
 			}
-			if (!(*(L->tab + i)).t && !(*(L->tab + i)).r && (*(L->tab + i)).d && !(*(L->tab + i)).l) {
+			if (!(*(L->tab + i)).t && !(*(L->tab + i)).r && (*(L->tab + i)).d && !(*(L->tab + i)).l)
+			{
 				(*(c + i)) = 'd';
 				printf("d");
 			}
-			if (!(*(L->tab + i)).t && !(*(L->tab + i)).r && !(*(L->tab + i)).d && (*(L->tab + i)).l) {
+			if (!(*(L->tab + i)).t && !(*(L->tab + i)).r && !(*(L->tab + i)).d && (*(L->tab + i)).l)
+			{
 				(*(c + i)) = 'e';
 				printf("e");
 			}
-			if ((*(L->tab + i)).t && !(*(L->tab + i)).r && (*(L->tab + i)).d && !(*(L->tab + i)).l) {
+			if ((*(L->tab + i)).t && !(*(L->tab + i)).r && (*(L->tab + i)).d && !(*(L->tab + i)).l)
+			{
 				(*(c + i)) = 'f';
 				printf("f");
 			}
-			if (!(*(L->tab + i)).t && (*(L->tab + i)).r && !(*(L->tab + i)).d && (*(L->tab + i)).l) {
+			if (!(*(L->tab + i)).t && (*(L->tab + i)).r && !(*(L->tab + i)).d && (*(L->tab + i)).l)
+			{
 				(*(c + i)) = 'g';
 				printf("g");
 			}
-			if ((*(L->tab + i)).t && (*(L->tab + i)).r && !(*(L->tab + i)).d && !(*(L->tab + i)).l) {
+			if ((*(L->tab + i)).t && (*(L->tab + i)).r && !(*(L->tab + i)).d && !(*(L->tab + i)).l)
+			{
 				(*(c + i)) = 'h';
 				printf("h");
 			}
-			if (!(*(L->tab + i)).t && (*(L->tab + i)).r && (*(L->tab + i)).d && !(*(L->tab + i)).l) {
+			if (!(*(L->tab + i)).t && (*(L->tab + i)).r && (*(L->tab + i)).d && !(*(L->tab + i)).l)
+			{
 				(*(c + i)) = 'i';
 				printf("i");
 			}
-			if (!(*(L->tab + i)).t && !(*(L->tab + i)).r && (*(L->tab + i)).d && (*(L->tab + i)).l) {
+			if (!(*(L->tab + i)).t && !(*(L->tab + i)).r && (*(L->tab + i)).d && (*(L->tab + i)).l)
+			{
 				(*(c + i)) = 'j';
 				printf("j");
 			}
-			if ((*(L->tab + i)).t && !(*(L->tab + i)).r && !(*(L->tab + i)).d && (*(L->tab + i)).l) {
+			if ((*(L->tab + i)).t && !(*(L->tab + i)).r && !(*(L->tab + i)).d && (*(L->tab + i)).l)
+			{
 				(*(c + i)) = 'k';
 				printf("k");
 			}
-			if (!(*(L->tab + i)).t && (*(L->tab + i)).r && (*(L->tab + i)).d && (*(L->tab + i)).l) {
+			if (!(*(L->tab + i)).t && (*(L->tab + i)).r && (*(L->tab + i)).d && (*(L->tab + i)).l)
+			{
 				(*(c + i)) = 'l';
 				printf("l");
 			}
-			if ((*(L->tab + i)).t && !(*(L->tab + i)).r && (*(L->tab + i)).d && (*(L->tab + i)).l) {
+			if ((*(L->tab + i)).t && !(*(L->tab + i)).r && (*(L->tab + i)).d && (*(L->tab + i)).l)
+			{
 				(*(c + i)) = 'm';
 				printf("m");
 			}
-			if ((*(L->tab + i)).t && (*(L->tab + i)).r && !(*(L->tab + i)).d && (*(L->tab + i)).l) {
+			if ((*(L->tab + i)).t && (*(L->tab + i)).r && !(*(L->tab + i)).d && (*(L->tab + i)).l)
+			{
 				(*(c + i)) = 'n';
 				printf("n");
 			}
-			if ((*(L->tab + i)).t && (*(L->tab + i)).r && (*(L->tab + i)).d && !(*(L->tab + i)).l) {
+			if ((*(L->tab + i)).t && (*(L->tab + i)).r && (*(L->tab + i)).d && !(*(L->tab + i)).l)
+			{
 				(*(c + i)) = 'o';
 				printf("o");
 			}
@@ -586,425 +816,249 @@ char* letter(Lab* L) {
 	}
 	return c;
 }
-/*Fin algo labyrinthe*/
 
-/*Gardes*/
-Garde* ApparitionGardes(char* maze, int cote, int Quantite_Garde) {
-	srand(time(NULL));
-	Garde* garde = (Garde*)malloc(sizeof(Garde));
-	if (garde == NULL) return NULL;
-	int modulo = pow(cote, 2);
-	for (int i = 0; i < Quantite_Garde; i++) {
-		//Garde* (garde + i) = (Garde*)malloc(sizeof(Garde));
-		(garde + i)->Id = i + 1;
-		(garde + i)->position = rand() % modulo;
-		while ((garde + i)->position == 0 || (garde + i)->position == pow(cote, 2)) {
-			(garde + i)->position = rand() % modulo;
-		}
-		printf("\nGarde %d : %d", (garde + i)->Id, (garde + i)->position);
-	}
-}
-
-void top(char* maze, int cote, Garde* garde, int i) {
-	if (maze[(garde + i)->position] != 'b' && maze[(garde + i)->position] != 'f' && maze[(garde + i)->position] != 'h' && maze[(garde + i)->position] != 'k' && maze[(garde + i)->position] != 'm' && maze[(garde + i)->position] != 'n' && maze[(garde + i)->position] != 'o') {
-		(garde + i)->position -= cote;
-		printf("\nNew Garde %d : %d", (garde + i)->Id, (garde + i)->position);
-		(garde+i)->choix = 1;
-	}
-	else {
-		bottom(maze, cote, garde, i);
-	}
-	return;
-}
-
-void bottom(char* maze, int cote, Garde* garde, int i) {
-	if (maze[(garde + i)->position] != 'd' && maze[(garde + i)->position] != 'f' && maze[(garde + i)->position] != 'i' && maze[(garde + i)->position] != 'j' && maze[(garde + i)->position] != 'l' && maze[(garde + i)->position] != 'm' && maze[(garde + i)->position] != 'o') {
-		(garde + i)->position += cote;
-		printf("\nNew Garde %d : %d", (garde + i)->Id, (garde + i)->position);
-		(garde+i)->choix = 2;
-	}
-	else {
-		top(maze, cote, garde, i);
-	}
-	return;
-}
-
-void right(char* maze, int cote, Garde* garde, int i) {
-	if (maze[(garde + i)->position] != 'c' && maze[(garde + i)->position] != 'g' && maze[(garde + i)->position] != 'h' && maze[(garde + i)->position] != 'i' && maze[(garde + i)->position] != 'l' && maze[(garde + i)->position] != 'n' && maze[(garde + i)->position] != 'o') {
-		(garde + i)->position += 1;
-		printf("\nNew Garde %d : %d", (garde + i)->Id, (garde + i)->position);
-		(garde+i)->choix = 3;
-	}
-	else left(maze, cote, garde, i);
-	return;
-}
-
-void left(char* maze, int cote, Garde* garde, int i) {
-	if (maze[(garde + i)->position] != 'e' && maze[(garde + i)->position] != 'g' && maze[(garde + i)->position] != 'j' && maze[(garde + i)->position] != 'k' && maze[(garde + i)->position] != 'l' && maze[(garde + i)->position] != 'm' && maze[(garde + i)->position] != 'n') {
-		(garde + i)->position -= 1;
-		printf("\nNew Garde %d : %d", (garde + i)->Id, (garde + i)->position);
-		(garde+i)->choix = 4;
-	}
-	else right(maze, cote, garde, i);
-	return;
-}
-
-void ChoixMouvementGardes(char* maze, int size, Garde* garde, int Quantite_Garde) {
-	int tmp = 0;
-	int count = 0;
-	srand(time(NULL));
-	for (int i = 0; i < Quantite_Garde; i++) {
-		count = 0;
-		if (maze[(garde + i)->position] == 'b' || maze[(garde + i)->position] == 'f' || maze[(garde + i)->position] == 'h' || maze[(garde + i)->position] == 'k' || maze[(garde + i)->position] == 'm' || maze[(garde + i)->position] == 'n' || maze[(garde + i)->position] == 'o')
-			(garde + i)->t = false;
-		else {
-			(garde + i)->t = true;
-			count += 1;
-		}
-			
-		if (maze[(garde + i)->position] == 'c' || maze[(garde + i)->position] == 'g' || maze[(garde + i)->position] == 'h' || maze[(garde + i)->position] == 'i' || maze[(garde + i)->position] == 'l' || maze[(garde + i)->position] == 'n' || maze[(garde + i)->position] == 'o')
-			(garde + i)->r = false;
-		else {
-			(garde + i)->r = true;
-			count += 1;
-		}
-			
-		if (maze[(garde + i)->position] == 'd' || maze[(garde + i)->position] == 'f' || maze[(garde + i)->position] == 'i' || maze[(garde + i)->position] == 'j' || maze[(garde + i)->position] == 'l' || maze[(garde + i)->position] == 'm' || maze[(garde + i)->position] == 'o')
-			(garde + i)->d = false;
-		else {
-			(garde + i)->d = true;
-			count += 1;
-		}
-			
-		if (maze[(garde + i)->position] == 'e' || maze[(garde + i)->position] == 'g' || maze[(garde + i)->position] == 'j' || maze[(garde + i)->position] == 'k' || maze[(garde + i)->position] == 'l' || maze[(garde + i)->position] == 'm' || maze[(garde + i)->position] == 'n')
-			(garde + i)->l = false;
-		else {
-			(garde + i)->l = true;
-			count += 1;
-		}
-		tmp = rand() % count;
-		if ((garde + i)->d == true) {
-			if ((garde + i)->r == true) {
-				if ((garde + i)->t == true) {
-					if ((garde + i)->l == true) {
-						switch (tmp) {
-						case 0: bottom(maze, size, garde, i); break;
-						case 1: top(maze, size, garde, i); break;
-						case 2: right(maze, size, garde, i); break;
-						case 3: left(maze, size, garde, i); break;
-						}
-					}
-					else {
-						switch (tmp) {
-						case 0: bottom(maze, size, garde, i); break;
-						case 1: top(maze, size, garde, i); break;
-						case 2: right(maze, size, garde, i); break;
-						}
-					}
-				}
-				else if ((garde + i)->l == true) {
-					switch (tmp) {
-					case 0: bottom(maze, size, garde, i); break;
-					case 1: left(maze, size, garde, i); break;
-					case 2: right(maze, size, garde, i); break;
-					}
-				}
-				else {
-					switch (tmp) {
-					case 0: bottom(maze, size, garde, i); break;
-					case 2: right(maze, size, garde, i); break;
-					}
-				}
-			}
-			else if ((garde + i)->t == true && (garde + i)->l == true) {
-				switch (tmp) {
-				case 0: bottom(maze, size, garde, i); break;
-				case 1: left(maze, size, garde, i); break;
-				case 2: top(maze, size, garde, i); break;
-				}
-			}
-			else if ((garde + i)->t == true) {
-				switch (tmp) {
-				case 0: bottom(maze, size, garde, i); break;
-				case 1: top(maze, size, garde, i); break;
-				}
-			}
-			else if ((garde + i)->l == true) {
-				switch (tmp) {
-				case 0: bottom(maze, size, garde, i); break;
-				case 1: left(maze, size, garde, i); break;
-				}
-			}
-			else {
-				bottom(maze, size, garde, i);
-			}
-		}
-		else if ((garde + i)->r == true && (garde + i)->t == true && (garde + i)->l == true) {
-			switch (tmp) {
-			case 0: right(maze, size, garde, i); break;
-			case 1: left(maze, size, garde, i); break;
-			case 2: top(maze, size, garde, i); break;
-			}
-		}
-		else if ((garde + i)->r == true && (garde + i)->t == true) {
-			switch (tmp) {
-			case 0: right(maze, size, garde, i); break;
-			case 1: top(maze, size, garde, i); break;
-			}
-		}
-		else if ((garde + i)->t == true && (garde + i)->l == true) {
-			switch (tmp) {
-			case 0: left(maze, size, garde, i); break;
-			case 1: top(maze, size, garde, i); break;
-			}
-		}
-		else if ((garde + i)->r == true && (garde + i)->l == true) {
-			switch (tmp) {
-			case 0: left(maze, size, garde, i); break;
-			case 1: right(maze, size, garde, i); break;
-			}
-		}
-		else if ((garde + i)->r == true) {
-			right(maze, size, garde, i);
-		}
-		else if ((garde + i)->l == true) {
-			left(maze, size, garde, i);
-		}
-		else if ((garde + i)->t == true) {
-			top(maze, size, garde, i);
-		}
-		else {
-			printf("Une erreur est survenue dans l'apparition des gardes");
-		}
-	}
-	return;
-}
-
-
-
-void MouvementGardes(char* maze, int cote, Garde* garde, int Quantite_Garde) {
-	for (int i = 0; i < Quantite_Garde; i++) {
-		switch ((garde + i)->choix) {
-		case 1: top(maze, cote, garde, i); break;
-		case 2: bottom(maze, cote, garde, i); break;
-		case 3: right(maze, cote, garde, i); break;
-		case 4: left(maze, cote, garde, i); break;
-		}
-	}
-}
-/*Fin Gardes*/
-
-/*Téléporteurs*/
-Teleporteurs_Pair * Generation_Teleporteurs(char* maze, int size, int quantites_pair) {
-	int casevecteur1;
-	int casevecteur2;
-	Teleporteur_Pos* Tab = malloc(sizeof(Teleporteur_Pos));
-	if (Tab == NULL)
+char* letterSansPrintf(Lab* L) 
+{
+	char* c = (char*)malloc(sizeof(char) * L->size * L->size);
+	if (c != NULL)
 	{
-		printf("erreur allocation mémoire");
-	}
-	Teleporteur_Pos Teleporteur1 = { 0,0 };
-	Teleporteur_Pos Teleporteur2 = { 0,0 };
-	char* mur = maze;
-	int index = 0;
-	//place  toutes les dead end dans un tableau pour facilité le placement des futures téléporteurs
-	for (int x = 0; x < size; x++)
-	{
-		for (int y = 0; y < size; y++)
+		for (int i = 0; i < L->size * L->size; i++)
 		{
-			if ((x == 0 && y == 0) || (x == size - 1 && y == size - 1))
+			if (!(*(L->tab + i)).t && !(*(L->tab + i)).r && !(*(L->tab + i)).d && !(*(L->tab + i)).l)
 			{
-				*(mur + (x * 10 + y) * 8) = 'a';
+				(*(c + i)) = 'a';
 			}
-			if (*(mur + (x * 10 + y) * 8) == 'l' || *(mur + (x * 10 + y) * 8) == 'm' || *(mur + (x * 10 + y) * 8) == 'n' || *(mur + (x * 10 + y) * 8) == 'o')
+			if ((*(L->tab + i)).t && !(*(L->tab + i)).r && !(*(L->tab + i)).d && !(*(L->tab + i)).l)
 			{
-				if ((Tab + index) == NULL)
-				{
-
-					if (Tab != NULL)
-					{	
-						Teleporteur_Pos* R = (Teleporteur_Pos*)realloc(Tab, sizeof(Teleporteur_Pos) * 10);
-						if (R != NULL) {
-							Tab = R;
-						}
-						//printf("allocation réussie");
-						(Tab + index)->x = x;
-						(Tab + index)->y = y;
-						index++;
-					}
-					else
-					{
-						printf("erreur allocation mémoire");
-					}
-				}
-				else
-				{
-					//printf("pas besoin d'allocation");
-					(Tab + index)->x = x;
-					(Tab + index)->y = y;
-					/*printf(" Index :%d\n", index);
-					printf("Tab[%d].x = %d \n", index, (Tab + index)->x);
-					printf("Tab[%d].x = %d \n", index, (Tab + index)->y);*/
-
-					index++;
-				}
+				(*(c + i)) = 'b';
 			}
-			//printf("mur[%d][%d] = %c \n", x, y, *(mur + (x * 10 + y) * 8));
+			if (!(*(L->tab + i)).t && (*(L->tab + i)).r && !(*(L->tab + i)).d && !(*(L->tab + i)).l)
+			{
+				(*(c + i)) = 'c';
+			}
+			if (!(*(L->tab + i)).t && !(*(L->tab + i)).r && (*(L->tab + i)).d && !(*(L->tab + i)).l)
+			{
+				(*(c + i)) = 'd';
+			}
+			if (!(*(L->tab + i)).t && !(*(L->tab + i)).r && !(*(L->tab + i)).d && (*(L->tab + i)).l)
+			{
+				(*(c + i)) = 'e';
+			}
+			if ((*(L->tab + i)).t && !(*(L->tab + i)).r && (*(L->tab + i)).d && !(*(L->tab + i)).l)
+			{
+				(*(c + i)) = 'f';
+			}
+			if (!(*(L->tab + i)).t && (*(L->tab + i)).r && !(*(L->tab + i)).d && (*(L->tab + i)).l)
+			{
+				(*(c + i)) = 'g';
+			}
+			if ((*(L->tab + i)).t && (*(L->tab + i)).r && !(*(L->tab + i)).d && !(*(L->tab + i)).l)
+			{
+				(*(c + i)) = 'h';
+			}
+			if (!(*(L->tab + i)).t && (*(L->tab + i)).r && (*(L->tab + i)).d && !(*(L->tab + i)).l)
+			{
+				(*(c + i)) = 'i';
+			}
+			if (!(*(L->tab + i)).t && !(*(L->tab + i)).r && (*(L->tab + i)).d && (*(L->tab + i)).l)
+			{
+				(*(c + i)) = 'j';
+			}
+			if ((*(L->tab + i)).t && !(*(L->tab + i)).r && !(*(L->tab + i)).d && (*(L->tab + i)).l)
+			{
+				(*(c + i)) = 'k';
+			}
+			if (!(*(L->tab + i)).t && (*(L->tab + i)).r && (*(L->tab + i)).d && (*(L->tab + i)).l)
+			{
+				(*(c + i)) = 'l';
+			}
+			if ((*(L->tab + i)).t && !(*(L->tab + i)).r && (*(L->tab + i)).d && (*(L->tab + i)).l)
+			{
+				(*(c + i)) = 'm';
+			}
+			if ((*(L->tab + i)).t && (*(L->tab + i)).r && !(*(L->tab + i)).d && (*(L->tab + i)).l)
+			{
+				(*(c + i)) = 'n';
+			}
+			if ((*(L->tab + i)).t && (*(L->tab + i)).r && (*(L->tab + i)).d && !(*(L->tab + i)).l)
+			{
+				(*(c + i)) = 'o';
+			}
 		}
 	}
-	//boucles permettant de placer les téléporteurs les plus éloignés possible.
-	Teleporteurs_Pair* Tab2 = malloc(sizeof(Teleporteurs_Pair) * quantites_pair);
-	/*if (Tab2 == NULL)
-	{
-		printf("erreur allocation mémoire");
-	}*/
-	int index2 = index - 1;
-	for (int index1 = 0; index1 < quantites_pair; index1++)
-	{
-		if (Tab2 != NULL && Tab != NULL)
-		{
-			(Tab2 + index1)->Teleporteur1.x = (Tab + index1)->x;
-			(Tab2 + index1)->Teleporteur1.y = (Tab + index1)->y;
-			(Tab2 + index1)->Teleporteur2.x = (Tab + index2)->x;
-			(Tab2 + index1)->Teleporteur2.y = (Tab + index2)->y;
-			index2--;
-		}
-	}
-	printf("\n");
-	for (int o = 0; o < quantites_pair; o++)
-	{
-		if (Tab2 != NULL) {
-			casevecteur1 = (Tab2 + o)->Teleporteur1.y * size + (Tab2 + o)->Teleporteur1.x;
-			casevecteur2 = (Tab2 + o)->Teleporteur2.y * size + (Tab2 + o)->Teleporteur2.x;
-			printf("[%d, %d]\n", casevecteur1, casevecteur2);
-		}
-	}
-	return Tab2;
+	return c;
 }
-/*Fin Téléporteurs*/
 
-int printPath(Path* P) {
-	printf("\033[1m\033[31m");
-	printf("\n");
-	printf("Path size : %d | ", P->pathSize);
-	for (int i = 0; i < P->pathSize; i++) {
-		printf("%d->", (*(P->cells + i)));
+int printPath(Path* P)
+{
+	if (P == NULL) { return -1; }
+	//printf("\033[1m\033[31m");
+
+	printf("\n");	
+	//printf("\nTAILLE : %d | ", P->pathSize);
+	printf(";");
+	for (int i = 0; i < P->pathSize; i++)
+	{
+		printf("%d", (*(P->cells + i)));
+		if (i != P->pathSize - 1)
+		{
+			printf(",");
+		}
 	}
-	printf(" | END\n");
-	printf("\033[0m");
+	 //printf(" | END\n");
+	 //printf("\033[0m");
+	 //printf("\n");
+	return 0;
+}
+int printTp(Teleporteurs_Paire* P, int nbPaire) {
 	printf("\n");
+	printf(";");
+	for (int i = 0; i < nbPaire; i++) {
+		printf("%d:%d", (P + i)->entree, (P + i)->sortie);
+		if (i != nbPaire - 1) {
+			printf(",");
+		}
+	}
 	return 0;
 }
 
-int wLeft(Lab* L, int index) {
+int wLeft(Lab* L, int index)
+{
 	int size = L->size;
 	Cell* origin = L->tab;
-	if ((index % size) == 0 && index != 0) {
-		//printf("Left %d : NULL\n", index);
+	if ((index % size) == 0 && index != 0)
+	{
+		// printf("Left %d : NULL\n", index);
 		return -1;
 	}
-	else {
-		if (index - 1 > L->size * L->size) {
-			//printf("\nIndex problem %d\n", index - 1);
-		}		
-		if (((origin + index)->l) == false) {
-			//printf("(l-ok)");
+	else
+	{
+		if (index - 1 > L->size * L->size)
+		{
+			// printf("\nIndex problem %d\n", index - 1);
+		}
+		if (((origin + index)->l) == false)
+		{
+			// printf("(l-ok)");
 			return (index - 1);
 		}
-		else {
-			//printf("Mur à gauche");
+		else
+		{
+			// printf("Mur à gauche");
 			return -1;
 		}
 	}
 }
-int wRight(Lab* L, int index) {
+int wRight(Lab* L, int index)
+{
 	int size = L->size;
 	Cell* origin = L->tab;
-	if ((index + 1) % size == 0) {
-		//printf("Right %d : NULL\n", index);
+	if ((index + 1) % size == 0)
+	{
+		// printf("Right %d : NULL\n", index);
 		return -1;
 	}
-	else {
-		if (index + 1 > L->size * L->size) {
-			//printf("\nIndex problem %d\n", index + 1);
+	else
+	{
+		if (index + 1 > L->size * L->size)
+		{
+			// printf("\nIndex problem %d\n", index + 1);
 		}
-		if (((origin + index)->r) == false) {
-			//printf("Aucun à droite");
+		if (((origin + index)->r) == false)
+		{
+			// printf("Aucun à droite");
 			return (index + 1);
 		}
-		else {
+		else
+		{
 			return -1;
-			//printf("Mur à droite");
+			// printf("Mur à droite");
 		}
 	}
 }
-int wTop(Lab* L, int index) {
+int wTop(Lab* L, int index)
+{
 	int size = L->size;
 	Cell* origin = L->tab;
-	if (index < size) {
-		//printf("Top %d : NULL\n", index);
+	if (index < size)
+	{
+		// printf("Top %d : NULL\n", index);
 		return -1;
 	}
-	else {
-		if (index - size > L->size * L->size) {
-			//printf("\nIndex problem %d\n", index - size);
+	else
+	{
+		if (index - size > L->size * L->size)
+		{
+			// printf("\nIndex problem %d\n", index - size);
 		}
-		if (((origin + index)->t) == false) {
-			//printf("Aucun au dessus");
+		if (((origin + index)->t) == false)
+		{
+			// printf("Aucun au dessus");
 			return (index - size);
 		}
-		else {
-			//printf("Mur au dessus");
+		else
+		{
+			// printf("Mur au dessus");
 			return -1;
 		}
-	}	
+	}
 }
-int wDown(Lab* L, int index) {
-	printf("\033[1m\033[31m");
+int wDown(Lab* L, int index)
+{
+	// printf("\033[1m\033[31m");
 	int size = L->size;
 	Cell* origin = L->tab;
 
-	if (index >= ((size * size) - size)) {
-		//printf("Bottom %d : NULL\n", index);
+	if (index >= ((size * size) - size))
+	{
+		// printf("Bottom %d : NULL\n", index);
 		return -1;
 	}
-	else {
-		if (index + size > L->size * L->size) {
-			//printf("\nIndex problem %d\n", index + size);
-		}		
-		if (((origin + index)->d) == false) {
-			//printf("Aucun en dessous");
+	else
+	{
+		if (index + size > L->size * L->size)
+		{
+			// printf("\nIndex problem %d\n", index + size);
+		}
+		if (((origin + index)->d) == false)
+		{
+			// printf("Aucun en dessous");
 			return (index + size);
 		}
-		else {
-			//printf("Mur en dessous");
+		else
+		{
+			// printf("Mur en dessous");
 			return -1;
 		}
 	}
-	printf("\033[0m");
+	// printf("\033[0m");
 }
 
-Path* newPath() 
+Path* newPath()
 {
 	Path* p = (Path*)malloc(sizeof(Path));
-	if (p != NULL) {
+	if (p != NULL)
+	{
 		p->cells = (int*)malloc(sizeof(int) * 300);
-		//p->tps = (Teleporteurs_Pair*)malloc(sizeof(Teleporteurs_Pair) * 300);
+		// p->tps = (Teleporteurs_Pair*)malloc(sizeof(Teleporteurs_Pair) * 300);
 		p->pathSize = 0;
-		//p->tpSize = 0;
+		// p->tpSize = 0;
 	}
 	return p;
 }
-Path* clone(Path* basic) 
+Path* clone(Path* basic)
 {
 	Path* p = (Path*)malloc(sizeof(Path));
-	if (p != NULL) {
-		p->cells = (int*)malloc(sizeof(int) * 300);
-		//p->tps = (Teleporteurs_Pair*)malloc(sizeof(Teleporteurs_Pair) * 300);
+	if (p != NULL)
+	{
+		p->cells = (int*)malloc(sizeof(int) * 1000);
+		// p->tps = (Teleporteurs_Pair*)malloc(sizeof(Teleporteurs_Pair) * 300);
 		p->pathSize = 0;
-		//p->tpSize = 0;
-		for (int i = 0; i < basic->pathSize; i++) {
-			if (p->cells != NULL) {
+		// p->tpSize = 0;
+		for (int i = 0; i < basic->pathSize; i++)
+		{
+			if (p->cells != NULL)
+			{
 				(*(p->cells + i)) = (*(basic->cells + i));
 			}
 		}
@@ -1018,20 +1072,32 @@ Path* clone(Path* basic)
 	}
 	return p;
 }
-Path* Solve(Lab* L, Teleporteurs_Pair* pairs, int nbTpPair) {
+Path* Solve(Lab* L, Teleporteurs_Paire* pairs, int nbTpPair)
+{
 	Cell* origin = L->tab;
 	Path* P = newPath(100);
-	return PathIt(L, pairs, nbTpPair, P, 0);
+	return PathIt(L, pairs, nbTpPair, P, 0, true);
 }
-Path* PathIt(Lab* Lab, Teleporteurs_Pair* pairs, int nbTpPair, Path* actual, int index) {
-	if ((index + 1) == Lab->size * Lab->size) {
+Path* PathIt(Lab* Lab, Teleporteurs_Paire* pairs, int nbTpPair, Path* actual, int index, bool first)
+{
+	Teleporteurs_Paire* newTp = GetStart(index, pairs, nbTpPair);
+
+	if ((index + 1) == Lab->size * Lab->size)
+	{
 		(*(actual->cells + actual->pathSize)) = index;
 		actual->pathSize++;
-		printf("\nLast case call. %d \n", actual->pathSize);
-		printPath(actual);
+		// printf("\nLast case call. %d \n", actual->pathSize);
+		// printPath(actual);
 		return actual;
 	}
-	if (index != -1) {
+	else if (newTp != NULL)
+	{
+		(*(actual->cells + actual->pathSize)) = index;
+		actual->pathSize++;
+		return PathIt(Lab, pairs, nbTpPair, clone(actual), newTp->sortie, false);
+	}
+	else if (index != -1)
+	{
 		(*(actual->cells + actual->pathSize)) = index;
 		actual->pathSize++;
 		Path* R = NULL;
@@ -1039,203 +1105,336 @@ Path* PathIt(Lab* Lab, Teleporteurs_Pair* pairs, int nbTpPair, Path* actual, int
 		Path* T = NULL;
 		Path* D = NULL;
 
-		if (!Contains(actual, wRight(Lab, index))) {
-			R = PathIt(Lab, pairs, nbTpPair, clone(actual), wRight(Lab, index));
-			if (R != NULL) {
-				
+		if (!ContainsPath(actual, wRight(Lab, index)))
+		{
+			R = PathIt(Lab, pairs, nbTpPair, clone(actual), wRight(Lab, index), false);
+			if (first) {
+				//printPath(R);
 			}
 		}
-		if (!Contains(actual, wLeft(Lab, index))) {
-			L = PathIt(Lab, pairs, nbTpPair, clone(actual), wLeft(Lab, index));
+		if (!ContainsPath(actual, wLeft(Lab, index)))
+		{
+			L = PathIt(Lab, pairs, nbTpPair, clone(actual), wLeft(Lab, index), false);
+			if (first) {
+				//printPath(L);
+			}
 		}
-		if (!Contains(actual, wTop(Lab, index))) {
-			T = PathIt(Lab, pairs, nbTpPair, clone(actual), wTop(Lab, index));
+		if (!ContainsPath(actual, wTop(Lab, index)))
+		{
+			T = PathIt(Lab, pairs, nbTpPair, clone(actual), wTop(Lab, index), false);
+			if (first) {
+				//printPath(T);
+			}
 		}
-		if (!Contains(actual, wDown(Lab, index))) {
-			D = PathIt(Lab, pairs, nbTpPair, clone(actual), wDown(Lab, index));
+		if (!ContainsPath(actual, wDown(Lab, index)))
+		{
+			D = PathIt(Lab, pairs, nbTpPair, clone(actual), wDown(Lab, index),false);
+			if (first) {
+				//printPath(D);
+			}
 		}
 
-
-		if (D == NULL && R == NULL && T == NULL && L == NULL) {
-			//printf("NULL");
+		if (D == NULL && R == NULL && T == NULL && L == NULL)
+		{
 			return NULL;
 		}
-		else {
-			if (R != NULL) {
-				return R;
+		else
+		{
+			int i = 0;
+			if (R != NULL)
+			{
+				i++;
 			}
-			if (L != NULL) {
-				return L;
+			if (L != NULL)
+			{
+				i++;
 			}
-			if (T != NULL) {
-				return T;
+			if (T != NULL)
+			{
+				i++;
 			}
-			if (D != NULL) {
-				return D;
+			if (D != NULL)
+			{
+				i++;
 			}
+			Path* P = (Path*)malloc(sizeof(Path) * i);
+
+			if (P != NULL) {
+				int n = 0;
+
+				
+				//printf("\nPoss : ");
+				if (R != NULL)
+				{
+					(*(P + n)) = (*R);
+						//printf(" %d-> ", (*(P + n)).pathSize);
+					n++;
+				}
+				if (L != NULL)
+				{
+					(*(P + n)) = (*L);
+						//printf(" %d-> ", (*(P + n)).pathSize);
+					n++;
+				}
+				if (T != NULL)
+				{
+					(*(P + n)) = (*T);
+						//printf(" %d-> ", (*(P + n)).pathSize);
+					n++;
+				}
+				if (D != NULL)
+				{
+					(*(P + n)) = (*D);
+						//printf(" %d-> ", (*(P + n)).pathSize);
+					n++;
+				}
+
+				Path* Min = P;				
+				//printf("a_min:%d ", Min->pathSize);
+
+				for (int u = 0; u < i; u++) {
+					if ((P + u)->pathSize < (Min->pathSize)) {
+						Min = (P + u);
+						//printf("a_min:%d ", Min->pathSize);
+					}
+				}
+				//printf("\n");
+				if (first) {
+					//printPath(Min);
+				}
+				return Min;
+			}
+			return P;
 		}
-		//else {
-		//	Path* F = (Path*)malloc(sizeof(Path) * 4);
-		//	Path* Smaller = (Path*)malloc(sizeof(Path));
-		//	if (F != NULL) {
-		//		if (R != NULL && R->pathSize >= 0) {
-		//			(*(F)) = (*R);
-		//			printf(" P%d ", (F->pathSize));
-		//			printf(" P%d ", (R->pathSize));
-		//			Smaller = R;
-		//		}
-		//		if (L != NULL && L->pathSize >= 0) {
-		//			(*(F + 1)) = (*L);
-		//			printf(" P%d ", (F->pathSize));
-		//			printf(" P%d ", (L->pathSize));
-		//			Smaller = L;
-		//		}
-		//		if (T != NULL && T->pathSize >= 0) {
-		//			(*(F + 2)) = (*T);
-		//			printf(" P%d ", (F->pathSize));
-		//			printf(" P%d ", (T->pathSize));
-		//			Smaller = T;
-		//		}
-		//		if (D != NULL && D->pathSize >= 0) {
-		//			(*(F + 3)) = (*D);
-		//			printf(" P%d ", (F->pathSize));
-		//			printf(" P%d ", (D->pathSize));
-		//			Smaller = D;
-		//		}
-		//		for (int i = 0; i < 4; i++) {
-		//			if ((F + i) != NULL && Smaller != NULL) {
-		//				if (((F + i)->pathSize) < (Smaller->pathSize)) {
-		//					Smaller = (F + i);
-		//				}
-		//			}
-		//		}
-		//	}
-		//	if (Smaller != NULL) {
-		//		printPath(Smaller);
-		//	}
-		//	return Smaller;
-		//}
 	}
-	else {
+	else
+	{
 		return NULL;
 	}
+	return NULL;
 }
 
-bool Contains(Path* actual, int index) {
-	for (int i = 0; i < actual->pathSize; i++) {
-		if ((*(actual->cells + i)) == index) {
+bool ContainsPath(Path* actual, int index)
+{
+	for (int i = 0; i < actual->pathSize; i++)
+	{
+		if ((*(actual->cells + i)) == index)
+		{
 			return true;
 		}
 	}
 	return false;
 }
-int Check(Teleporteurs_Pair* pair, int nbTpPair, int labSize, int index) {
-	
-	for (int i = 0; i < nbTpPair; i++) {
-		Teleporteur_Pos p1 = (pair + i)->Teleporteur1;
-		Teleporteur_Pos p2 = (pair + i)->Teleporteur2;
-		if (p1.x + (p2.y * labSize) == index) {
-			// tp.
+int ContainsTp(int index, Teleporteurs_Paire* T, int nbPaire) {
+	if (T == NULL) { return -1; }
+	for (int i = 0; i < nbPaire; i++) {
+		if ((*(T + i)).entree == index || (*(T + i)).sortie == index) {
+			return i;
 		}
+	}
+	return -1;
+}
+
+Teleporteurs_Paire* GetStart(int index, Teleporteurs_Paire* T, int nbPaire) {
+	if (T == NULL) { return NULL; }
+	for (int i = 0; i < nbPaire; i++) {
+		if ((*(T + i)).entree == index) {
+			return (T+i);
+		}
+	}
+	return NULL;
+}
+
+void ApparitionGardes(char* maze, int cote, int Quantite_Garde, int Quantite_teleporteur, Teleporteurs_Paire* P) {
+	srand(time(NULL));
+	Garde* garde = (Garde*)malloc(Quantite_Garde * sizeof(Garde));
+	if (garde == NULL) return;
+	DoubleLinkedList* List = newDoubleLinkedList();
+	DoubleLinkedList* LaDirection = newDoubleLinkedList();
+
+	for (int i = 1; i < pow(cote, 2); i++) {
+		int count = 0;
+		int sortie = 0;
+		if (*(maze + i) == 'e' || *(maze + i) == 'j' || *(maze + i) == 'k' || *(maze + i) == 'm') {
+			for (int j = 1; j <= 5; j++) {
+				if (*(maze + (i + j)) == 'a' || *(maze + (i + j)) == 'b' || *(maze + (i + j)) == 'd') {
+					count++;
+					sortie++;
+					switch (*(maze + (i + j))) {
+					case 'a':
+						for (int k = 0; k < Quantite_teleporteur; k++) {
+							if (*(maze + (i + j + cote)) == (P + k)) {
+								break;
+							}
+							if (*(maze + (i + j - cote)) == (P + k)) {
+								break;
+							}
+						}
+					case 'b':
+						for (int k = 0; k < Quantite_teleporteur; k++) {
+							if (*(maze + (i + j + cote)) == (P + k)) {
+								break;
+							}
+						}
+					case 'd':
+						for (int k = 0; k < Quantite_teleporteur; k++) {
+							if (*(maze + (i + j - cote)) == (P + k)) {
+								break;
+							}
+						}
+					}
+					
+				}
+				else if (*(maze + (i + j)) == 'f') {
+					count++;
+				}
+				else break;
+			}
+			if (i != 0) {
+				if (count >= 3 && sortie >= 1 && i != 0) {
+					//ajout i à la liste chainée
+					DoubleLinkedListElem* elem = NewDoubleLinkedListItem(i);
+					DoubleLinkedListElem* elemDirection = NewDoubleLinkedListItem(1);
+					insertItemAtDoubleLinkedListTail(List, elem);
+					insertItemAtDoubleLinkedListTail(LaDirection, elemDirection);
+				}
+			}
+		}
+		count = 0;
+		sortie = 0;
+		if (*(maze + i) == 'b' || *(maze + i) == 'h' || *(maze + i) == 'k' || *(maze + i) == 'n') {
+			for (int j = 1; j <= 5; j++) {
+				if (*(maze + (i + (j * cote))) == 'a' || *(maze + (i + (j * cote))) == 'c' || *(maze + (i + (j * cote))) == 'e') {
+					count++;
+					sortie++;
+					switch (*(maze + (i + j))) {
+					case 'a':
+						for (int k = 0; k < Quantite_teleporteur; k++) {
+							if (*(maze + (i + j + 1)) == (P + k)) {
+								break;
+							}
+							if (*(maze + (i + j - 1)) == (P + k)) {
+								break;
+							}
+						}
+					case 'c':
+						for (int k = 0; k < Quantite_teleporteur; k++) {
+							if (*(maze + (i + j - 1)) == (P + k)) {
+								break;
+							}
+						}
+					case 'e':
+						for (int k = 0; k < Quantite_teleporteur; k++) {
+							if (*(maze + (i + j + 1)) == (P + k)) {
+								break;
+							}
+						}
+					}
+				}
+				else if (*(maze + (i + (j * cote))) == 'g') {
+					count++;
+				}
+				else break;
+			}
+			if (i != 0) {
+				if (count >= 3 && sortie >= 1 && i != 0) {
+					//ajout i à la liste chainée
+					DoubleLinkedListElem* elem = NewDoubleLinkedListItem(i);
+					DoubleLinkedListElem* elemDirection = NewDoubleLinkedListItem(2);
+					insertItemAtDoubleLinkedListTail(List, elem);
+					insertItemAtDoubleLinkedListTail(LaDirection, elemDirection);
+				}
+			}
+		}
+	}
+	printf("\n;");
+	for (int i = 0; i < Quantite_Garde; i++) {
+		int r = rand() % getDoubleLinkedListSize(List);
+		(garde + i)->Id = i + 1;
+		(garde + i)->position = getDoubleLinkedListElem(List, r)->data;
+		(garde + i)->move = getDoubleLinkedListElem(LaDirection, r)->data;
+		DeleteDoubleLinkedListItem(List, getDoubleLinkedListElem(List, r));
+		DeleteDoubleLinkedListItem(LaDirection, getDoubleLinkedListElem(LaDirection, r));
+		if (i < Quantite_Garde -1) {
+			printf("%d:%d,", (garde + i)->position, (garde + i)->move);
+		}
+		if (i == Quantite_Garde-1) {
+			printf("%d:%d", (garde + i)->position, (garde + i)->move);
+		}
+	}
+	return;
+}
+
+int readFile(char* filename, int tableau[]) {
+	FILE* stream;
+	errno_t err;
+	//int tableau[2] = { 0 };
+
+	err = fopen_s(&stream, filename, "r");
+	if (err == 0) {
+		//printf("Le fichier 'file.txt' est ouvert\n");
+	}
+	else
+		//printf("Le fichier 'file.txt' n'est pas ouvert\n");
+	if (stream == NULL) {
+		//printf("\nstream pas OK");
+		return -1;
+	}
+	else //printf("\nstream ok");
+
+	fseek(stream, 0, SEEK_SET);
+
+	/*char* value;
+	value = fgetc(stream);
+	printf("%c", value);*/
+	if (stream != NULL) {
+		for (int i = 0; i < 4; i++) {
+			fscanf_s(stream, "%d", &tableau[i]);
+		}
+	}
+
+	if (stream) {
+		err = fclose(stream);
+		if (err == 0) {
+			//printf("\nLe fichier 'file.txt' est ferme\n");
+			return 1;
+		}
+
 		else {
-			// no tp.
+			//printf("\nLe fichier 'file.txt' n'est pas ferme\n");
+			return -1;
 		}
 	}
-	return 0;
+	return 1;
 }
 
-bool verifHaut(char* posHero) {
-	if (posHero == "a" || posHero == "c" || posHero == "d" || posHero == "e" || posHero == "g" || posHero == "i" || posHero == "j" || posHero == "l") {
-		return true; // Pas de mur
-	}
-	else {
-		return false; // mur
-	}
+int main()
+{
+	int tableau[4] = { 0 };
+	readFile("DonneesLabyrinthe.csv", tableau);
+	int SIZ3 = tableau[0];
+	int TELEPORTE = tableau[1];
+	int GARDAVOU = tableau[2];
+	int THEMA = tableau[3];
+	//printf("\nsize : %d\nteleporteur : %d\ngarde : %d\ntheme : %d\n", SIZ3, TELEPORTE, GARDAVOU, THEMA);
+	srand(time(NULL));
+	Lab* newl = NewLab(SIZ3);
+	Free* P = NewFree(100);
+	int o = tryPath(newl, 0, P);
+	Teleporteurs_Paire* pairs = recherche_loc_tp(TELEPORTE, letterSansPrintf(newl), newl->size*newl->size);
+	letter(newl);
+	Path* S = Solve(newl, pairs, TELEPORTE);
+//	show(newl, S, pairs, 5);
+//	printf("\n_____ SOLVE  FINAL _____\n\n");
+	printPath(S);
+	printTp(pairs, TELEPORTE);
+//	printf("\n____ ____ ____ ____ ____\n\n");
+
+	//Path* W = Solve(newl, NULL, 0);
+	//show(newl, W, NULL, 0);
+//	printf("\n_____ SOLVE  FINAL _____\n\n");
+//	printPath(W);
+//	printf("\n____ ____ ____ ____ ____\n\n");
+	ApparitionGardes(letterSansPrintf(newl), sqrt(newl->size * newl->size), GARDAVOU, TELEPORTE, pairs);
+	return EXIT_SUCCESS;
 }
-
-bool verifDroite(char* posHero) {
-	if (posHero == "a" || posHero == "b" || posHero == "d" || posHero == "e" || posHero == "f" || posHero == "j" || posHero == "k" || posHero == "m") {
-		return true; // Pas de mur
-	}
-	else {
-		return false; // mur
-	}
-}
-
-bool verifBas(char* posHero) {
-	if (posHero == "a" || posHero == "b" || posHero == "c" || posHero == "e" || posHero == "g" || posHero == "h" || posHero == "k" || posHero == "n") {
-		return true; // Pas de mur
-	}
-	else {
-		return false; // mur
-	}
-}
-
-bool verifGauche(char* posHero) {
-	if (posHero == "a" || posHero == "b" || posHero == "c" || posHero == "d" || posHero == "f" || posHero == "h" || posHero == "i" || posHero == "o") {
-		return true; // Pas de mur
-	}
-	else {
-		return false; // mur
-	}
-}
-
-int main() {
-	
-	//Garde* garde = (Garde*)malloc(sizeof(Garde));
-	//srand(time(NULL));
-	//Lab* newl = NewLab(5);
-	//Free* P = NewFree(100);
-	//int o = tryPath(newl, 0, P);
-	////show(newl);
-	//letter(newl);
-	////Generation_Teleporteurs(letter(newl), 40, 3);
-	//ApparitionGardes(letter(newl), 40, 3);
-	//ChoixMouvementGardes(letter(newl), 40, garde, 3);
-	//MouvementGardes(letter(newl), 40, garde, 3);
-	// 
-
-	////letter(newl);
-	//Teleporteurs_Pair* pairs = NULL;
-	//Path* S = Solve(newl, pairs, 3);
-	//show(newl, S);
-	//printf("TAILLE : %d \n", S->pathSize);
-	//printPath(S);
-	//return EXIT_SUCCESS;
-
-	//printPath(S);
-	//readFile("CaCLC.csv");
-	
-	
-	//char posHero = readFile("CaCLC.csv");
-	//printf("Valeur : %c", posHero);
-	
-	/* Récupère la valeur de la position de héros dans le fichier CaCLC.csv  */
-	char* posHero = readFile("CaCLC.csv");
-	if (verifHaut(posHero)) {
-		printf("Haut : pas de mur\n");
-	}
-	else {
-		printf("Haut : mur\n");
-	}
-	if (verifDroite(posHero)) {
-		printf("Droite : pas de mur\n");
-	}
-	else {
-		printf("Droite : mur\n");
-	}
-	if (verifBas(posHero)) {
-		printf("Bas : pas de mur\n");
-	}
-	else {
-		printf("Bas : mur\n");
-	}
-	if (verifGauche(posHero)) {
-		printf("Gauche : pas de mur\n");
-	}
-	else {
-		printf("Gauche : mur\n");
-	}
-}
-
-
