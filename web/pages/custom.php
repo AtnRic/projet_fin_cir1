@@ -59,13 +59,13 @@ require '../tools/_main_tools.php';
     <div class="range">
       <form method="post" action="custom.php" class="builder">
         <p>Size</p>
-        <input type="range" name="mazeSize" min="5" max="30" value="5">
+        <input type="range" name="mazeSize" min="7" max="30" value="5">
         <br>
         <p>Guards</p>
-        <input type="range" name="nbrGuard" min="0" max="10" value="0">
+        <input type="range" name="nbrGuard" min="1" max="10" value="0">
         <br>
         <p>Teleporters</p>
-        <input type="range" name="nbrTP" min="0" max="5" value="0">
+        <input type="range" name="nbrTP" min="1" max="5" value="0">
         <br>
         <label>Theme</label>
         <select name="theme">
