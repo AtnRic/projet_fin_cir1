@@ -17,7 +17,5 @@ echo "
     <title>$pageName - S.L 3000</title>
     <script src='https://kit.fontawesome.com/235593db07.js' crossorigin='anonymous'></script>
     <link rel='icon' type='image/png' href='../images/bat.png'/>
-    <link rel='stylesheet' href='../css/home.css'>
+    <link rel='stylesheet' href='../css/$cssPath'>
     </head>";
-
-// <link rel='stylesheet' href='../css/home.css'>
