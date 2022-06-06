@@ -115,7 +115,10 @@ echo "<div id='popup' style='background-image: url($link)'>
         text-decoration: none;
     }
 
-    
+    a:hover{
+        box-shadow: none;
+        border: none;
+    }
 
 
     @media screen and (max-width: 1300px) {
