@@ -6,23 +6,27 @@
         $data = $_POST['functionParameters'];
     }
     if($functionName == 'save'){
-        echo $data . ' saving...';
+        echo $data[0] . $data[1] .' saving...';
     }
-    //niveau custom
-    if($custom==true){
-        $connexion=connect();
-        $idpseudo=GetUserId($_COOKIE["login"]);
-        $resultat=mysqli_query($connexion,"INSERT INTO custom_level VALUES (".$name.",".$theme.",".$idpseudo.",".$data.",".$custom.")");
-    }
+    $idpseudo=GetUserId($_SESSION['login']);
+    $theme=$data[1];
     //niveau random
-    if($custom==false){
-        $theme=$_GET['theme'];
-        $custom=$_GET['custom'];
+    if($custom=='false'){
+        $string_theme=GetTheme($theme);
         $connexion=connect();
         $random=rand(min:0,max:10001);
-        $idpseudo=GetUserId($_COOKIE["login"]);
         $name="$string_theme#$random";
+        echo $data;
+        echo $name;
+        echo $idpseudo;
+        echo $theme;
+        echo $custom;
         $resultat=mysqli_query($connexion,"INSERT INTO custom_level VALUES (".$name.",".$theme.",".$idpseudo.",".$data.",".$custom.")");
     }
+    //niveau custom
+    if($custom=='true'){
+        $connexion=connect();
+        $resultat=mysqli_query($connexion,"INSERT INTO custom_level VALUES (".$name.",".$theme.",".$idpseudo.",".$data.",".$custom.")");
+        }
     //console: Save()
 ?>
