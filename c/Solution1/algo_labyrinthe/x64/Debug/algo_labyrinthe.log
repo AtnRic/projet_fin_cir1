@@ -1,17 +1,2 @@
-﻿  main.c
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(204,8): warning C4244: 'fonction' : conversion de 'time_t' en 'unsigned int', perte possible de données
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(358,50): warning C4244: 'fonction' : conversion de 'double' en 'float', perte possible de données
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(358,10): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(1253,8): warning C4244: 'fonction' : conversion de 'time_t' en 'unsigned int', perte possible de données
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(1270,47): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'Teleporteurs_Paire *' sont différents
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(1273,47): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'Teleporteurs_Paire *' sont différents
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(1279,47): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'Teleporteurs_Paire *' sont différents
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(1285,47): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'Teleporteurs_Paire *' sont différents
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(1319,44): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'Teleporteurs_Paire *' sont différents
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(1322,44): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'Teleporteurs_Paire *' sont différents
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(1328,44): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'Teleporteurs_Paire *' sont différents
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(1334,44): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'Teleporteurs_Paire *' sont différents
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(1435,8): warning C4244: 'fonction' : conversion de 'time_t' en 'unsigned int', perte possible de données
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(1453,43): warning C4244: 'fonction' : conversion de 'double' en 'int', perte possible de données
-C:\MAMP\htdocs\Projet CIR1\c\Solution1\algo_labyrinthe\main.c(110): warning C4715: 'getDoubleLinkedListSize' : les chemins de contrôle ne retournent pas tous une valeur
+﻿  LINK : C:\MAMP\htdocs\Projet CIR1\c\Solution1\x64\Debug\algo_labyrinthe.exe introuvable ou non généré par la dernière édition de liens incrémentielle ; édition de liens complète en cours
   algo_labyrinthe.vcxproj -> C:\MAMP\htdocs\Projet CIR1\c\Solution1\x64\Debug\algo_labyrinthe.exe
