@@ -195,6 +195,10 @@ function PHP_Start(anime, custom, data) {
 // Lancement différent.
 function sch_Start(anime, custom, data) {
   if (custom == true) {
+    if (data == null) {
+      console.log("RELOAD");
+      location.reload();
+    }
     let output = data;
     BaseOut = output;
 
@@ -205,7 +209,11 @@ function sch_Start(anime, custom, data) {
     gardeOut = newOut[3].split(",");
     LongestSolver = newOut[4];
 
-    console.log("SOLUTION L : " + LongestSolver);
+    console.log("SOLUTION TP " + tpOut.length + " : " + tpOut);
+    console.log("SOLUTION GARDE " + gardeOut.length + " : " + gardeOut);
+    console.log("SOLUTION S " + Solver.length + " : " + Solver);
+    console.log("SOLUTION L " + LongestSolver.length + " : " + LongestSolver);
+    console.log("Taille : " + Math.sqrt(newOut[0].length) + " : " + newOut[0]);
 
     for (i = 0; i < tpOut.length; i++) {
       tpOut[i] = tpOut[i].split(":").map(function (item) {
@@ -223,8 +231,6 @@ function sch_Start(anime, custom, data) {
     for (i = 0; i < gardeOut.length; i++) {
       gardeList.push(new Garde(i, gardeOut[i][1], gardeOut[i][0]));
     }
-    //console.log(gardeList);
-    //console.log(tpOut);
 
     if (output.length == 0) {
       location.reload();
@@ -239,58 +245,70 @@ function sch_Start(anime, custom, data) {
       tpOut
     );
   } else {
-    PHP_Function(
-      "../tools/function.php",
-      "generation",
-      function Handle(output) {
-        console.log(output);
-        BaseOut = output;
-        newOut = output.split(";");
-        solveOut = newOut[1].split(",");
-        Solver = solveOut;
-        tpOut = newOut[2].split(",");
-        gardeOut = newOut[3].split(",");
-        LongestSolver = newOut[4].split(",");
+    using = false;
+    while (using == false) {
+      PHP_Function(
+        "../tools/function.php",
+        "generation",
+        function Handle(output) {
+          console.log(output);
+          if (output == null || output == "") {
+            using = false;
+          } else {
+            using = true;
+            BaseOut = output;
+            newOut = output.split(";");
+            solveOut = newOut[1].split(",");
+            Solver = solveOut;
+            tpOut = newOut[2].split(",");
+            gardeOut = newOut[3].split(",");
+            LongestSolver = newOut[4].split(",");
 
-        console.log("SOLUTION L : " + LongestSolver);
+            console.log("SOLUTION TP " + tpOut.length + " : " + tpOut);
+            console.log("SOLUTION GARDE " + gardeOut.length + " : " + gardeOut);
+            console.log("SOLUTION S " + Solver.length + " : " + Solver);
+            console.log(
+              "SOLUTION L " + LongestSolver.length + " : " + LongestSolver
+            );
+            console.log(
+              "Taille : " + Math.sqrt(newOut[0].length) + " : " + newOut[0]
+            );
 
-        console.log(
-          "Taille : " + Math.sqrt(newOut[0].length) + " : " + newOut[0]
-        );
+            for (i = 0; i < tpOut.length; i++) {
+              tpOut[i] = tpOut[i].split(":").map(function (item) {
+                return parseInt(item, 10);
+              });
+            }
 
-        for (i = 0; i < tpOut.length; i++) {
-          tpOut[i] = tpOut[i].split(":").map(function (item) {
-            return parseInt(item, 10);
-          });
+            for (i = 0; i < gardeOut.length; i++) {
+              gardeOut[i] = gardeOut[i].split(":").map(function (item) {
+                return parseInt(item, 10);
+              });
+            }
+
+            gardeList = [];
+            for (i = 0; i < gardeOut.length; i++) {
+              gardeList.push(new Garde(i, gardeOut[i][1], gardeOut[i][0]));
+            }
+            //console.log(gardeList);
+            //console.log(tpOut);
+
+            if (output.length == 0) {
+              location.reload();
+            }
+            gardeGlobal = gardeList;
+            Launch(
+              Math.sqrt(newOut[0].length),
+              Array.from(newOut[0]),
+              0,
+              anime,
+              solveOut,
+              tpOut
+            );
+          }
         }
-
-        for (i = 0; i < gardeOut.length; i++) {
-          gardeOut[i] = gardeOut[i].split(":").map(function (item) {
-            return parseInt(item, 10);
-          });
-        }
-
-        gardeList = [];
-        for (i = 0; i < gardeOut.length; i++) {
-          gardeList.push(new Garde(i, gardeOut[i][1], gardeOut[i][0]));
-        }
-        //console.log(gardeList);
-        //console.log(tpOut);
-
-        if (output.length == 0) {
-          location.reload();
-        }
-        gardeGlobal = gardeList;
-        Launch(
-          Math.sqrt(newOut[0].length),
-          Array.from(newOut[0]),
-          0,
-          anime,
-          solveOut,
-          tpOut
-        );
-      }
-    );
+      );
+    }
   }
 }
 
@@ -529,8 +547,11 @@ function Launch(size, tab, spawnCellId, boolAnimation, solver, tps) {
   //#endregion
 
   //#region GARDE/TP
-  GenerationGarde();
-
+  if (gardeGlobal.length == 1 && gardeGlobal[0] == "") {
+    console.log("Aucun garde.");
+  } else {
+    GenerationGarde();
+  }
   Teleporter(tps);
   //#endregion
 
@@ -538,8 +559,6 @@ function Launch(size, tab, spawnCellId, boolAnimation, solver, tps) {
   setTimeout(function () {
     SpawnPlayer(spawnCellId, solver);
   }, 3000);
-  //#endregion
-
   //#endregion
 }
 
@@ -915,6 +934,9 @@ function GenerationGarde() {
     var Cell = document.getElementById(gardeGlobal[i].pos);
     const GardeDiv = document.createElement("div");
     const GardeImg = document.createElement("img");
+    if (Cell == null) {
+      break;
+    }
     Cell.appendChild(GardeDiv);
     let box = document.getElementById("1");
     let width = box.offsetWidth;
@@ -943,6 +965,10 @@ function GenerationGarde() {
 // Mouvement d'un garde dans une certaine position.
 function MoveGarde(size, move) {
   for (i = 0; i < gardeGlobal.length; i++) {
+    let GardeCheck = document.getElementById("G_div" + gardeGlobal[i].id);
+    if (GardeCheck == null) {
+      break;
+    }
     indexIndent = 0;
     XposIndent = 0;
     YposIndent = 0;
@@ -1195,6 +1221,9 @@ function Teleporter(tab) {
 
   TpStruct = tab;
   for (i = 0; i < tab.length; i++) {
+    if (tab[i][0] < 0) {
+      break;
+    }
     TeleporterStart.push(tab[i][0]);
     let Cell1 = document.getElementById(tab[i][0]);
     let Cell2 = document.getElementById(tab[i][1]);
