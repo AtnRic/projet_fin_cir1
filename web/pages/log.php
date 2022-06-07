@@ -224,7 +224,6 @@ if ($count == 4) {
     if (!isset($_COOKIE['login']) && !isset($_COOKIE['mdp_hash'])) {
         setcookie("login", $login, time() + (3600 * 24 * 365));
         setcookie("mdp_hash", $mdp_hash, time() + (3600 * 24 * 365));
-        $_SESSION["login"]=$_COOKIE['login'];
     }
     $newURL = "home.php";
     header('Location: ' . $newURL);

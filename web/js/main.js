@@ -540,8 +540,6 @@ function Launch(size, tab, spawnCellId, boolAnimation, solver, tps) {
   }, 3000);
   //#endregion
 
-  //#region SAVING
-  Save();
   //#endregion
 }
 
@@ -824,7 +822,7 @@ function Save() {
   Arg.push(BaseOut);
   Arg.push(ThemeGlobal);
   PHP_Function(
-    "../tools/save.php",
+    "../pages/save.php",
     "save",
     function Handle(output) {
       console.log("Resultat: " + output);
