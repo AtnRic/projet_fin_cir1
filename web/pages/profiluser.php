@@ -45,7 +45,6 @@ include "../tools/_main_tools.php";
                 }
                 ?>
                 <img width="50%" src=<?php echo $avatar ?>>
-
             </div>
             <div id="profil">
                 <div id="pseudo"><?php echo $_COOKIE["login"] ?></div>
