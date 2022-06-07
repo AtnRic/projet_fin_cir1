@@ -125,14 +125,17 @@ function SetAmbiance(AmbianceName) {
   switch (AmbianceName) {
     case "Jungle":
       console.warn("A:\n JUNGLE.");
+      ThemeGlobal = 1;
       Ambiance = Jungle;
       break;
     case "Retro":
       console.warn("A:\n RETRO.");
+      ThemeGlobal = 2;
       Ambiance = Retro;
       break;
     case "Space":
       console.warn("A:\n SPACE.");
+      ThemeGlobal = 3;
       Ambiance = Space;
       break;
   }
@@ -149,6 +152,9 @@ for (i = 0; i < document.getElementsByClassName("restart").length; i++) {
   document
     .getElementsByClassName("restart")
     [i].addEventListener("click", Restart);
+}
+for (i = 0; i < document.getElementsByClassName("save").length; i++) {
+  document.getElementsByClassName("save")[i].addEventListener("click", Save);
 }
 
 // Fonction appelée depuis le js.
@@ -311,6 +317,7 @@ function Restart() {
 //#region  Variables globales.
 let Path = [];
 let Mouvement = 1;
+let ThemeGlobal;
 let BaseOut; // Ensemble de la génération.
 let Solver; // Index du solver.
 let LongestSolver;
@@ -813,13 +820,16 @@ function CanMove(index, lab, direction) {
 
 // Sauvegarde du niveau.
 function Save() {
+  Arg = [];
+  Arg.push(BaseOut);
+  Arg.push(ThemeGlobal);
   PHP_Function(
     "../tools/save.php",
     "save",
     function Handle(output) {
       console.log("Resultat: " + output);
     },
-    BaseOut
+    Arg
   );
 }
 

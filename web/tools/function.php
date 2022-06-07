@@ -38,6 +38,6 @@ if($functionName == 'generation')
     echo $out; // true ou false.
 }
 if($functionName == 'save'){
-    echo $data . ' saving...';
+    echo $data[0] . " /// " . $data[1];
 }
 ?>
