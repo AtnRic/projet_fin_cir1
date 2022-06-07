@@ -206,7 +206,7 @@ Teleporteurs_Paire* recherche_loc_tp(int nb_paires, char* maze, int size) {
 	int pos;
 	if (tab != NULL) {
 		for (int i = 0; i < nb_paires; i++) {
-			if (getDoubleLinkedListSize(List) == 0) break;
+			if (getDoubleLinkedListSize(List) == 0) return;
 			int max_index = getDoubleLinkedListSize(List);
 
 			//tirage d'une entrée
@@ -218,7 +218,7 @@ Teleporteurs_Paire* recherche_loc_tp(int nb_paires, char* maze, int size) {
 
 
 			//tirage d'une sortie
-			pos = (rand() * (max_index - 1) / RAND_MAX) - 1;
+			pos = (rand() * (max_index) / RAND_MAX-1);
 			DoubleLinkedListElem* elem_sortie = getDoubleLinkedListElem(List, pos);
 			(*(tab + i)).sortie = elem_sortie->data;
 			DeleteDoubleLinkedListItem(List, elem_sortie);
@@ -911,9 +911,10 @@ int printPath(Path* P)
 	 //printf("\n");
 	return 0;
 }
-int printTp(Teleporteurs_Paire* P, int nbPaire) {
+int printTp(Teleporteurs_Paire* P) {
 	printf("\n");
 	printf(";");
+	int nbPaire = sizeof(P);
 	for (int i = 0; i < nbPaire; i++) {
 		printf("%d:%d", (P + i)->entree, (P + i)->sortie);
 		if (i != nbPaire - 1) {
@@ -1572,7 +1573,7 @@ int main()
 //	show(newl, S, pairs, 5);
 //	printf("\n_____ SOLVE  FINAL _____\n\n");
 	printPath(S);
-	printTp(pairs, TELEPORTE);
+	printTp(pairs);
 //	printf("\n____ ____ ____ ____ ____\n\n");
 
 	//Path* W = Solve(newl, NULL, 0);

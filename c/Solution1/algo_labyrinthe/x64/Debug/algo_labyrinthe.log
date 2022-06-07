@@ -1,17 +1,21 @@
 ﻿  main.c
-C:\MAMP\htdocs\projet cir1\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(204,12): warning C4244: 'fonction' : conversion de 'time_t' en 'unsigned int', perte possible de données
-C:\MAMP\htdocs\projet cir1\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(359,50): warning C4244: 'fonction' : conversion de 'double' en 'float', perte possible de données
-C:\MAMP\htdocs\projet cir1\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(359,15): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
-C:\MAMP\htdocs\projet cir1\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1392,114): warning C4029: la déclaration de la liste de paramètres formels est différente de la définition
-C:\MAMP\htdocs\projet cir1\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1393,12): warning C4244: 'fonction' : conversion de 'time_t' en 'unsigned int', perte possible de données
-C:\MAMP\htdocs\projet cir1\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1410,47): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'Teleporteurs_Paire *' sont différents
-C:\MAMP\htdocs\projet cir1\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1413,47): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'Teleporteurs_Paire *' sont différents
-C:\MAMP\htdocs\projet cir1\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1419,47): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'Teleporteurs_Paire *' sont différents
-C:\MAMP\htdocs\projet cir1\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1425,47): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'Teleporteurs_Paire *' sont différents
-C:\MAMP\htdocs\projet cir1\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1457,44): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'Teleporteurs_Paire *' sont différents
-C:\MAMP\htdocs\projet cir1\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1460,44): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'Teleporteurs_Paire *' sont différents
-C:\MAMP\htdocs\projet cir1\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1466,44): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'Teleporteurs_Paire *' sont différents
-C:\MAMP\htdocs\projet cir1\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1472,44): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'Teleporteurs_Paire *' sont différents
-C:\MAMP\htdocs\projet cir1\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1565,12): warning C4244: 'fonction' : conversion de 'time_t' en 'unsigned int', perte possible de données
-C:\MAMP\htdocs\projet cir1\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1583,47): warning C4244: 'fonction' : conversion de 'double' en 'int', perte possible de données
-C:\MAMP\htdocs\projet cir1\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(110): warning C4715: 'getDoubleLinkedListSize' : les chemins de contrôle ne retournent pas tous une valeur
+C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(204,8): warning C4244: 'fonction' : conversion de 'time_t' en 'unsigned int', perte possible de données
+C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(209,44): warning C4033: 'recherche_loc_tp' doit retourner une valeur
+C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(359,50): warning C4244: 'fonction' : conversion de 'double' en 'float', perte possible de données
+C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(359,10): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
+C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(914,36): warning C4029: la déclaration de la liste de paramètres formels est différente de la définition
+C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1393,114): warning C4029: la déclaration de la liste de paramètres formels est différente de la définition
+C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1394,8): warning C4244: 'fonction' : conversion de 'time_t' en 'unsigned int', perte possible de données
+C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1411,47): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'Teleporteurs_Paire *' sont différents
+C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1414,47): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'Teleporteurs_Paire *' sont différents
+C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1420,47): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'Teleporteurs_Paire *' sont différents
+C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1426,47): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'Teleporteurs_Paire *' sont différents
+C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1458,44): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'Teleporteurs_Paire *' sont différents
+C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1461,44): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'Teleporteurs_Paire *' sont différents
+C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1467,44): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'Teleporteurs_Paire *' sont différents
+C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1473,44): warning C4047: '==' : les niveaux d'indirection de 'int' et de 'Teleporteurs_Paire *' sont différents
+C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1566,8): warning C4244: 'fonction' : conversion de 'time_t' en 'unsigned int', perte possible de données
+C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(1584,43): warning C4244: 'fonction' : conversion de 'double' en 'int', perte possible de données
+C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(110): warning C4715: 'getDoubleLinkedListSize' : les chemins de contrôle ne retournent pas tous une valeur
+C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\algo_labyrinthe\main.c(235): warning C4715: 'recherche_loc_tp' : les chemins de contrôle ne retournent pas tous une valeur
+  algo_labyrinthe.vcxproj -> C:\MAMP\htdocs\projet2\projet_fin_cir1\c\Solution1\x64\Debug\algo_labyrinthe.exe

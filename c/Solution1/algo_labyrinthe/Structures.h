@@ -17,6 +17,7 @@ typedef struct DoubleLinkedList {
 typedef struct Teleporteurs_Paire {
 	int entree;
 	int sortie;
+	int size;
 }Teleporteurs_Paire;
 
 // cr�ation d'une nouvelle liste cha�n�e bilat�re vide
@@ -113,10 +114,10 @@ typedef struct Garde {
 
 	/* Direction dans laquelle le garde va se d�placer */
 
-	bool t;     //top
+	bool t;  //top
 	bool d;  //down
 	bool r;  //right
-	bool l;     //left
+	bool l;  //left
 
 	int move; //nombre de case avant de toucher le mur en face et de devoir faire demi-tour
 	int choix;
