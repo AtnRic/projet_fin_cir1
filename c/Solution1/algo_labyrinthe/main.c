@@ -1079,6 +1079,14 @@ Path* Solve(Lab* L, Teleporteurs_Paire* pairs, int nbTpPair)
 	Path* P = newPath(100);
 	return PathIt(L, pairs, nbTpPair, P, 0, true);
 }
+
+Path* SolveLong(Lab* L, Teleporteurs_Paire* pairs, int nbTpPair)
+{
+	Cell* origin = L->tab;
+	Path* P = newPath(100);
+	return PathItLong(L, pairs, nbTpPair, P, 0, true);
+}
+
 Path* PathIt(Lab* Lab, Teleporteurs_Paire* pairs, int nbTpPair, Path* actual, int index, bool first)
 {
 	Teleporteurs_Paire* newTp = GetStart(index, pairs, nbTpPair);
@@ -1195,6 +1203,141 @@ Path* PathIt(Lab* Lab, Teleporteurs_Paire* pairs, int nbTpPair, Path* actual, in
 
 				for (int u = 0; u < i; u++) {
 					if ((P + u)->pathSize < (Min->pathSize)) {
+						Min = (P + u);
+						//printf("a_min:%d ", Min->pathSize);
+					}
+				}
+				//printf("\n");
+				if (first) {
+					//printPath(Min);
+				}
+				return Min;
+			}
+			return P;
+		}
+	}
+	else
+	{
+		return NULL;
+	}
+	return NULL;
+}
+Path* PathItLong(Lab* Lab, Teleporteurs_Paire* pairs, int nbTpPair, Path* actual, int index, bool first)
+{
+	Teleporteurs_Paire* newTp = GetStart(index, pairs, nbTpPair);
+
+	if ((index + 1) == Lab->size * Lab->size)
+	{
+		(*(actual->cells + actual->pathSize)) = index;
+		actual->pathSize++;
+		// printf("\nLast case call. %d \n", actual->pathSize);
+		// printPath(actual);
+		return actual;
+	}
+	else if (newTp != NULL)
+	{
+		(*(actual->cells + actual->pathSize)) = index;
+		actual->pathSize++;
+		return PathItLong(Lab, pairs, nbTpPair, clone(actual), newTp->sortie, false);
+	}
+	else if (index != -1)
+	{
+		(*(actual->cells + actual->pathSize)) = index;
+		actual->pathSize++;
+		Path* R = NULL;
+		Path* L = NULL;
+		Path* T = NULL;
+		Path* D = NULL;
+
+		if (!ContainsPath(actual, wRight(Lab, index)))
+		{
+			R = PathItLong(Lab, pairs, nbTpPair, clone(actual), wRight(Lab, index), false);
+			if (first) {
+				//printPath(R);
+			}
+		}
+		if (!ContainsPath(actual, wLeft(Lab, index)))
+		{
+			L = PathItLong(Lab, pairs, nbTpPair, clone(actual), wLeft(Lab, index), false);
+			if (first) {
+				//printPath(L);
+			}
+		}
+		if (!ContainsPath(actual, wTop(Lab, index)))
+		{
+			T = PathItLong(Lab, pairs, nbTpPair, clone(actual), wTop(Lab, index), false);
+			if (first) {
+				//printPath(T);
+			}
+		}
+		if (!ContainsPath(actual, wDown(Lab, index)))
+		{
+			D = PathItLong(Lab, pairs, nbTpPair, clone(actual), wDown(Lab, index), false);
+			if (first) {
+				//printPath(D);
+			}
+		}
+
+		if (D == NULL && R == NULL && T == NULL && L == NULL)
+		{
+			return NULL;
+		}
+		else
+		{
+			int i = 0;
+			if (R != NULL)
+			{
+				i++;
+			}
+			if (L != NULL)
+			{
+				i++;
+			}
+			if (T != NULL)
+			{
+				i++;
+			}
+			if (D != NULL)
+			{
+				i++;
+			}
+			Path* P = (Path*)malloc(sizeof(Path) * i);
+
+			if (P != NULL) {
+				int n = 0;
+
+
+				//printf("\nPoss : ");
+				if (R != NULL)
+				{
+					(*(P + n)) = (*R);
+					//printf(" %d-> ", (*(P + n)).pathSize);
+					n++;
+				}
+				if (L != NULL)
+				{
+					(*(P + n)) = (*L);
+					//printf(" %d-> ", (*(P + n)).pathSize);
+					n++;
+				}
+				if (T != NULL)
+				{
+					(*(P + n)) = (*T);
+					//printf(" %d-> ", (*(P + n)).pathSize);
+					n++;
+				}
+				if (D != NULL)
+				{
+					(*(P + n)) = (*D);
+					//printf(" %d-> ", (*(P + n)).pathSize);
+					n++;
+				}
+
+				Path* Min = P;
+				//printf("a_min:%d ", Min->pathSize);
+
+				for (int u = 0; u < i; u++) {
+					if ((P + u)->pathSize > (Min->pathSize)) {
 						Min = (P + u);
 						//printf("a_min:%d ", Min->pathSize);
 					}
@@ -1438,5 +1581,9 @@ int main()
 //	printPath(W);
 //	printf("\n____ ____ ____ ____ ____\n\n");
 	ApparitionGardes(letterSansPrintf(newl), sqrt(newl->size * newl->size), GARDAVOU, TELEPORTE, pairs);
+
+	Path* Slong = SolveLong(newl, pairs, TELEPORTE);
+	printPath(Slong);
+
 	return EXIT_SUCCESS;
 }
