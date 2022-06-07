@@ -74,7 +74,14 @@ require '../tools/_main_tools.php';
           <option>Space</option>
         </select>
         <br>
-        <input type="submit" value="Generate">
+        <form method="POST">
+        <input type="submit" name="customgo" value="Generate">
+        </form>
+        <?php
+        if(isset($_POST["customgo"])){
+          $_SESSION["custom"]='true';
+        }
+        ?>
       </form>
     </div>
   </section>
