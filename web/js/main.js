@@ -205,6 +205,9 @@ function sch_Start(anime, custom, data) {
     gardeOut = newOut[3].split(",");
     LongestSolver = newOut[4];
 
+    console.log("SOLUTION TP : " + tpOut);
+    console.log("SOLUTION GARDE : " + gardeOut);
+    console.log("SOLUTION S : " + LongestSolver);
     console.log("SOLUTION L : " + LongestSolver);
 
     for (i = 0; i < tpOut.length; i++) {
@@ -223,8 +226,6 @@ function sch_Start(anime, custom, data) {
     for (i = 0; i < gardeOut.length; i++) {
       gardeList.push(new Garde(i, gardeOut[i][1], gardeOut[i][0]));
     }
-    //console.log(gardeList);
-    //console.log(tpOut);
 
     if (output.length == 0) {
       location.reload();
@@ -243,7 +244,6 @@ function sch_Start(anime, custom, data) {
       "../tools/function.php",
       "generation",
       function Handle(output) {
-        console.log(output);
         BaseOut = output;
         newOut = output.split(";");
         solveOut = newOut[1].split(",");
@@ -252,11 +252,10 @@ function sch_Start(anime, custom, data) {
         gardeOut = newOut[3].split(",");
         LongestSolver = newOut[4].split(",");
 
+        console.log("SOLUTION TP : " + tpOut);
+        console.log("SOLUTION GARDE : " + gardeOut);
+        console.log("SOLUTION S : " + LongestSolver);
         console.log("SOLUTION L : " + LongestSolver);
-
-        console.log(
-          "Taille : " + Math.sqrt(newOut[0].length) + " : " + newOut[0]
-        );
 
         for (i = 0; i < tpOut.length; i++) {
           tpOut[i] = tpOut[i].split(":").map(function (item) {
@@ -274,8 +273,6 @@ function sch_Start(anime, custom, data) {
         for (i = 0; i < gardeOut.length; i++) {
           gardeList.push(new Garde(i, gardeOut[i][1], gardeOut[i][0]));
         }
-        //console.log(gardeList);
-        //console.log(tpOut);
 
         if (output.length == 0) {
           location.reload();
@@ -343,7 +340,6 @@ function Launch(size, tab, spawnCellId, boolAnimation, solver, tps) {
   LabSize = size;
 
   //#region ROWS
-  //console.log("Size: " + size);
   makeRows(size);
   cellNum = size;
   //#endregion
@@ -658,7 +654,6 @@ function Click(event) {
     // Sortie du mouvement.
     setTimeout(function () {
       if (Attack) {
-        console.log("Finish");
         Loose();
       }
       if (TeleporterStart.includes(PlayerPos)) {
@@ -734,7 +729,7 @@ function Win() {
   document.getElementById("short").innerHTML =
     "shortest solution : " + Solver.length;
   document.getElementById("long").innerHTML =
-    "longest solution : " + 2 * Solver.length;
+    "longest solution : " + LongestSolver.length;
   document.getElementById("number").innerHTML = "number of steps :" + Mouvement;
   PlaySound("../son/sound_hero_win.mp3");
 
@@ -756,9 +751,7 @@ function Loose() {
   PlaySound(Ambiance.DeathSound);
   finish = true;
   let player = document.getElementById("playerimg");
-  console.log(player);
   player.src = Ambiance.Death;
-  console.log(Ambiance.Death);
 
   // Animation de mort.
   anime({
@@ -894,11 +887,9 @@ function PHP_Function(fileName, functionName, Awaiting, Arguments) {
     },
     success: function (data) {
       Awaiting(data);
-      console.log(data);
       return data;
     },
     error: function (data) {
-      console.error(data);
       return data;
     },
   });
@@ -917,6 +908,9 @@ function GenerationGarde() {
     var Cell = document.getElementById(gardeGlobal[i].pos);
     const GardeDiv = document.createElement("div");
     const GardeImg = document.createElement("img");
+    if (gardeGlobal[i].pos == null) {
+      break;
+    }
     Cell.appendChild(GardeDiv);
     let box = document.getElementById("1");
     let width = box.offsetWidth;
@@ -1021,7 +1015,6 @@ function MoveGarde(size, move) {
     gardeGlobal[i].pos += indexIndent;
     let newCell = document.getElementById(gardeGlobal[i].pos);
     if (newCell == null) {
-      console.log(gardeGlobal[i].pos);
     }
     let Garde = document.getElementById("G_div" + gardeGlobal[i].id);
     let GardeImg = document.getElementById("G_ui" + gardeGlobal[i].id);
@@ -1316,9 +1309,6 @@ function Shortest() {
 
   for (i = 1; i < Solver.length - 1; i++) {
     if (Path.includes(arrOfNum[i]) == false) {
-      console.log(
-        "case non contenue par le chemin " + arrOfNum[i] + " " + Path
-      );
       return false;
     }
   }
@@ -1337,9 +1327,6 @@ function Longest() {
 
   for (i = 1; i < LongestSolver.length - 1; i++) {
     if (Path.includes(arrOfNum[i]) == false) {
-      console.log(
-        "case non contenue par le chemin " + arrOfNum[i] + " " + Path
-      );
       return false;
     }
   }
