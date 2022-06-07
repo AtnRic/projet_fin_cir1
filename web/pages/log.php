@@ -1,9 +1,8 @@
 <?php
-session_start();
+    session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <title>Connexion</title>
@@ -11,60 +10,59 @@ session_start();
     <link rel='icon' href='../images/front/favicon.ico' type='image/x-icon'>
     <meta name="viewport" content="width=device-width,initial-scale=1">
 </head>
-
 <body>
 
-    <script>
-        activate = true; //pour désactiver facilement
-        document.addEventListener("keydown", function(event) {
-            if (activate == true) {
-                if (event.key == " ") { //quand espace est pressé
-                    location.href = "#choose" //on scroll vers la page suivante
-                    activate = false;
-                }
+<script>
+    activate = true; //pour désactiver facilement
+    document.addEventListener("keydown", function (event) {
+        if (activate == true) {
+            if (event.key == " ") {//quand espace est pressé
+                location.href = "#choose" //on scroll vers la page suivante
+                activate = false;
             }
-        });
-    </script>
+        }
+    });
+</script>
 
-    <div class="press">
-        <h1 id="name">Maze'ltov</h1>
-        <img src="../images/front/retro_logo.png" alt="Logo" id="logoimage">
-        <a href="#choose">
-            <h1 id="press">PRESS START</h1>
+<div class="press">
+    <h1 id="name">Maze'ltov</h1>
+    <img src="../images/front/retro_logo.png" alt="Logo" id="logoimage">
+    <a href="#choose">
+        <h1 id="press">PRESS START</h1>
+    </a>
+
+</div>
+
+<div class="choose" id="choose">
+    <h1>Choose your player :</h1>
+    <div class="container">
+        <a href="log.php?type=i#log">
+            <div class="login but">
+                <div class="tuile"></div>
+                <h3>Login</h3>
+            </div>
+        </a>
+        <a href="log.php?type=u#log">
+            <div class="signup but">
+                <div class="tuile"></div>
+                <h3>Sign Up</h3>
+            </div>
+        </a>
+        <a href="log.php?type=w#log">
+            <div class="without but">
+                <div class="tuile">
+                    <div class="hero"></div>
+                </div>
+                <h3>Play without account</h3>
+            </div>
         </a>
 
     </div>
-
-    <div class="choose" id="choose">
-        <h1>Choose your player :</h1>
-        <div class="container">
-            <a href="log.php?type=i#log">
-                <div class="login but">
-                    <div class="tuile"></div>
-                    <h3>Login</h3>
-                </div>
-            </a>
-            <a href="log.php?type=u#log">
-                <div class="signup but">
-                    <div class="tuile"></div>
-                    <h3>Sign Up</h3>
-                </div>
-            </a>
-            <a href="log.php?type=w#log">
-                <div class="without but">
-                    <div class="tuile">
-                        <div class="hero"></div>
-                    </div>
-                    <h3>Play without account</h3>
-                </div>
-            </a>
-
-        </div>
-    </div>
-    <div id="log">
-        <?php
+</div>
+<div id="log">
+    <?php
         $type = $_GET['type'];
-        if ($type == 'i') {
+        if($type == 'i'){
             echo "<h1>Login</h1>";
             echo "<form class='formulaires' action='' method='POST'>
                 <label for='login'></label><input type='text' id='login' name='login' placeholder='nickname' autofocus required ><br>
@@ -72,7 +70,7 @@ session_start();
                 <input type='submit' class='sub' name='sub' value='Envoyer'>
             </form>";
         }
-        if ($type == 'u') {
+        if($type == 'u'){
             echo "<h1>Sign up</h1>";
             echo "<form class='formulaires' action='' method='POST'>
                 <label for='pseudo'></label><input type='text' id='pseudo' name='pseudo' placeholder='nickname' autofocus required ><br>
@@ -82,7 +80,7 @@ session_start();
                 <input type='submit' class='sub' name='sub' value='Envoyer'>
             </form>";
         }
-        if ($type == 'w') {
+        if($type == 'w'){
             echo "<h1 id='title'>Play without account</h1>";
             echo "<form class='formulaires' action='' method='POST'>
                 <div id='guest'>
@@ -93,10 +91,9 @@ session_start();
                 <input type='submit' class='sub' name='subanonymes' value='Send'/>
             </form>";
         }
-        ?>
-    </div>
+    ?>
+</div>
 </body>
-
 </html>
 
 
@@ -119,7 +116,7 @@ if (isset($_POST['mdpin'])) {
                     border-color:red;
                 }
                 </style>";
-        echo "<p style='color:red;'>Password invalid</p>";
+        echo"<p style='color:red;'>Password invalid</p>";
     } else {
         $count++;
     }
@@ -135,7 +132,7 @@ if (isset($_POST['mdpin'])) {
                         border-color:red;
                     }
                     </style>";
-        echo "<p style='color:red;'>Pseudo empty</p>";
+        echo"<p style='color:red;'>Pseudo empty</p>";
     } else {
         $count++;
     }
@@ -152,7 +149,7 @@ if (isset($_POST['mdpin'])) {
                         border-color:red;
                     }
                     </style>";
-        echo "<p style='color:red;'>Password empty</p>";
+        echo"<p style='color:red;'>Password empty</p>";
     }
     if (empty($_POST['verifmdp'])) {
         echo Console("Password empty.");
@@ -166,7 +163,7 @@ if (isset($_POST['mdpin'])) {
                         border-color:red;
                     }
                     </style>";
-        echo "<p style='color:red;'>Password empty</p>";
+        echo"<p style='color:red;'>Password empty</p>";            
     }
 } else {
     echo "<style>
@@ -227,7 +224,6 @@ if ($count == 4) {
     if (!isset($_COOKIE['login']) && !isset($_COOKIE['mdp_hash'])) {
         setcookie("login", $login, time() + (3600 * 24 * 365));
         setcookie("mdp_hash", $mdp_hash, time() + (3600 * 24 * 365));
-        $_SESSION["login"] = $_COOKIE['login'];
     }
     $newURL = "home.php";
     header('Location: ' . $newURL);
@@ -289,7 +285,7 @@ if ($count == 2) {
     if (!isset($_COOKIE['login']) && !isset($_COOKIE['mdp_hash'])) {
         setcookie("login", $login, time() + (3600 * 24 * 365));
         setcookie("mdp_hash", $mdp_hash, time() + (3600 * 24 * 365));
-        $_SESSION["login"] = $_COOKIE['login'];
+        $_SESSION["login"]=$_COOKIE['login'];
     }
     //ajouter utilisateur dans la base de données
     $newURL = "home.php";

@@ -218,13 +218,13 @@ function GetUserLevels($username){
 //Récupére le theme pour l'afficher dans l'explorateur de niveaux sur la page de profil
 function GetTheme($Theme){
     if($Theme==1){
-        echo"Jungle";
+        return "Jungle";
     }
     if($Theme==2){
-        echo"Retro";
+        return "Retro";
     }
     if($Theme==3){
-        echo"Space";
+        return "Space";
     }
 }
 
@@ -238,7 +238,7 @@ function GetUserId($nickname)
     {
         if($ligne['Pseudo'] == $nickname)
         {    
-            return $ligne['id'];
+            return $ligne['ID'];
         }
     }
     return null;
