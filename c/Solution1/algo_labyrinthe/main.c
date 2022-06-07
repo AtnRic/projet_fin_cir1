@@ -1080,14 +1080,12 @@ Path* Solve(Lab* L, Teleporteurs_Paire* pairs, int nbTpPair)
 	Path* P = newPath(100);
 	return PathIt(L, pairs, nbTpPair, P, 0, true);
 }
-
 Path* SolveLong(Lab* L, Teleporteurs_Paire* pairs, int nbTpPair)
 {
 	Cell* origin = L->tab;
 	Path* P = newPath(100);
 	return PathItLong(L, pairs, nbTpPair, P, 0, true);
 }
-
 Path* PathIt(Lab* Lab, Teleporteurs_Paire* pairs, int nbTpPair, Path* actual, int index, bool first)
 {
 	Teleporteurs_Paire* newTp = GetStart(index, pairs, nbTpPair);
@@ -1553,6 +1551,9 @@ int readFile(char* filename, int tableau[]) {
 	}
 	return 1;
 }
+
+
+int B = 0;
 
 int main()
 {

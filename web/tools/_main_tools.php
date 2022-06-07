@@ -65,8 +65,32 @@ function signup($pseudo): bool
             return false;
         }
     }
+
+    // Met un avatar au hasard au nouvel utilisateur
+    $random = rand(1, 6);
+    switch ($random) {
+        case 1:
+            $avatar = 'jungle hero';
+            break;
+        case 2:
+            $avatar = 'jungle guard';
+            break;
+        case 3:
+            $avatar = 'retro hero';
+            break;
+        case 4:
+            $avatar = 'retro guard';
+            break;
+        case 5:
+            $avatar = 'space hero';
+            break;
+        case 6:
+            $avatar = 'space guard';
+            break;
+    }
+    
     $mdp_hash = hash('sha256', $_POST['mdpin']);//on fait un hash du mot de passe pour ne pas stocker le mot de passe en clair
-    $requete2 = "INSERT INTO `users` (`Pseudo`, `Mdp`, `Nbr_Points`) VALUES ('$pseudo', '$mdp_hash', 0)"; //La requete SQL
+    $requete2 = "INSERT INTO `users` (`Pseudo`, `Mdp`, `Nbr_Points`, `avatar`) VALUES ('$pseudo', '$mdp_hash', 0, '$avatar')"; //La requete SQL
     $resultat2 = mysqli_query($connexion, $requete2); //Executer la requete
     if (!$resultat2){
         echo Console("<p>Erreur d'exécution de la requete : ".mysqli_error($connexion)."</p>");
