@@ -9,7 +9,7 @@ echo "
     <div class='but'>
         <a><p>replay</p></a>
         <a><p>home</p></a>
-        <a id='save'><p>save</p></a>
+        <a id='save' href='../../tools/save.php?custom=false&theme=2'><p>save</p></a>
     </div>
 
 </div>";
