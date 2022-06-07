@@ -195,6 +195,10 @@ function PHP_Start(anime, custom, data) {
 // Lancement différent.
 function sch_Start(anime, custom, data) {
   if (custom == true) {
+    if (data == null) {
+      console.log("RELOAD");
+      location.reload();
+    }
     let output = data;
     BaseOut = output;
 
@@ -244,6 +248,11 @@ function sch_Start(anime, custom, data) {
       "../tools/function.php",
       "generation",
       function Handle(output) {
+        console.log(output);
+        if (output == null || output == "") {
+          console.log("RELOAD");
+          location.reload();
+        }
         BaseOut = output;
         newOut = output.split(";");
         solveOut = newOut[1].split(",");
@@ -252,10 +261,12 @@ function sch_Start(anime, custom, data) {
         gardeOut = newOut[3].split(",");
         LongestSolver = newOut[4].split(",");
 
-        console.log("SOLUTION TP : " + tpOut);
-        console.log("SOLUTION GARDE : " + gardeOut);
-        console.log("SOLUTION S : " + LongestSolver);
-        console.log("SOLUTION L : " + LongestSolver);
+        console.log("SOLUTION TP " + tpOut.length + " : " + tpOut);
+        console.log("SOLUTION GARDE " + gardeOut.length + " : " + gardeOut);
+        console.log("SOLUTION S " + Solver.length + " : " + Solver);
+        console.log(
+          "SOLUTION L " + LongestSolver.length + " : " + LongestSolver
+        );
 
         for (i = 0; i < tpOut.length; i++) {
           tpOut[i] = tpOut[i].split(":").map(function (item) {
@@ -525,8 +536,11 @@ function Launch(size, tab, spawnCellId, boolAnimation, solver, tps) {
   //#endregion
 
   //#region GARDE/TP
-  GenerationGarde();
-
+  if (gardeGlobal.length == 1 && gardeGlobal[0] == "") {
+    console.log("Aucun garde.");
+  } else {
+    GenerationGarde();
+  }
   Teleporter(tps);
   //#endregion
 
@@ -534,10 +548,6 @@ function Launch(size, tab, spawnCellId, boolAnimation, solver, tps) {
   setTimeout(function () {
     SpawnPlayer(spawnCellId, solver);
   }, 3000);
-  //#endregion
-
-  //#region SAVING
-  Save();
   //#endregion
 }
 
@@ -908,7 +918,7 @@ function GenerationGarde() {
     var Cell = document.getElementById(gardeGlobal[i].pos);
     const GardeDiv = document.createElement("div");
     const GardeImg = document.createElement("img");
-    if (gardeGlobal[i].pos == null) {
+    if (Cell == null) {
       break;
     }
     Cell.appendChild(GardeDiv);
@@ -939,6 +949,10 @@ function GenerationGarde() {
 // Mouvement d'un garde dans une certaine position.
 function MoveGarde(size, move) {
   for (i = 0; i < gardeGlobal.length; i++) {
+    let GardeCheck = document.getElementById("G_div" + gardeGlobal[i].id);
+    if (GardeCheck == null) {
+      break;
+    }
     indexIndent = 0;
     XposIndent = 0;
     YposIndent = 0;
@@ -1190,6 +1204,9 @@ function Teleporter(tab) {
 
   TpStruct = tab;
   for (i = 0; i < tab.length; i++) {
+    if (tab[i][0] < 0) {
+      break;
+    }
     TeleporterStart.push(tab[i][0]);
     let Cell1 = document.getElementById(tab[i][0]);
     let Cell2 = document.getElementById(tab[i][1]);
