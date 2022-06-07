@@ -190,8 +190,6 @@ function PHP_Start(anime, custom, data) {
 function sch_Start(anime, custom, data) {
   if (custom == true) {
     let output = data;
-    console.log(data);
-    console.log(output);
     BaseOut = output;
 
     newOut = output.split(";");
@@ -199,6 +197,9 @@ function sch_Start(anime, custom, data) {
     Solver = solveOut;
     tpOut = newOut[2].split(",");
     gardeOut = newOut[3].split(",");
+    LongestSolver = newOut[4];
+
+    console.log("SOLUTION L : " + LongestSolver);
 
     for (i = 0; i < tpOut.length; i++) {
       tpOut[i] = tpOut[i].split(":").map(function (item) {
@@ -243,6 +244,9 @@ function sch_Start(anime, custom, data) {
         Solver = solveOut;
         tpOut = newOut[2].split(",");
         gardeOut = newOut[3].split(",");
+        LongestSolver = newOut[4].split(",");
+
+        console.log("SOLUTION L : " + LongestSolver);
 
         console.log(
           "Taille : " + Math.sqrt(newOut[0].length) + " : " + newOut[0]
@@ -309,6 +313,7 @@ let Path = [];
 let Mouvement = 1;
 let BaseOut; // Ensemble de la génération.
 let Solver; // Index du solver.
+let LongestSolver;
 let Labyrinthe; // Lettres du labyrinthe.
 let PlayerPos; // Position du joueur.
 let LabSize; // Taille du labyrinthe.
@@ -545,6 +550,9 @@ function Click(event) {
     if (event.key == "p") {
       Solveur(Solver);
     }
+    if (event.key == "o") {
+      LongestSolv(LongestSolver);
+    }
     // Mouvement vers le bas.
     else if (event.key == "ArrowDown") {
       if (CanMove(PlayerPos, Labyrinthe, "d") || cheat == true) {
@@ -732,6 +740,7 @@ function Win() {
   initConfetti();
   render();
   Shortest();
+  Longest();
 }
 
 // Niveau perdu.
@@ -875,7 +884,7 @@ function PHP_Function(fileName, functionName, Awaiting, Arguments) {
     },
     success: function (data) {
       Awaiting(data);
-      //console.log(data);
+      console.log(data);
       return data;
     },
     error: function (data) {
@@ -1048,8 +1057,57 @@ function MoveGarde(size, move) {
 }
 
 let Solved = false;
+let SolvedLong = false;
 // Envoyer la liste de cases qui composent le chemin du solveur.
+function LongestSolv(tab) {
+  console.log("Long : " + tab.length);
+
+  if (!SolvedLong) {
+    SolvedLong = true;
+    for (i = 0; i < tab.length; i++) {
+      let Cell = document.getElementById(tab[i]);
+      const Div = document.createElement("div");
+
+      let box = document.getElementById("1");
+      let width = box.offsetWidth;
+      let height = box.offsetHeight;
+
+      Div.style.width = width + "px";
+      Div.style.height = height + "px";
+
+      const Img = document.createElement("img");
+      Cell.appendChild(Div);
+      Div.appendChild(Img);
+
+      Div.classList.add("Solveur");
+      Img.classList.add("SolveurImg");
+      Img.classList.add("s" + i);
+      Img.classList.add("l" + i);
+      Img.src = "../images/solveur/point.png";
+      anime({
+        targets: ".l" + i,
+        scale: [
+          { value: 0, easing: "easeOutSine", duration: 500 + i * 75 },
+          { value: 1, easing: "easeInOutQuad", duration: 1200 },
+          { value: 0, easing: "easeOutSine", duration: 500 },
+        ],
+      });
+    }
+  } else {
+    for (i = 0; i < tab.length; i++) {
+      anime({
+        targets: ".l" + i,
+        scale: [
+          { value: 0, easing: "easeOutSine", duration: 500 + i * 75 },
+          { value: 1, easing: "easeInOutQuad", duration: 1200 },
+          { value: 0, easing: "easeOutSine", duration: 500 },
+        ],
+      });
+    }
+  }
+}
 function Solveur(tab) {
+  console.log("Court : " + tab.length);
   if (!Solved) {
     Solved = true;
     for (i = 0; i < tab.length; i++) {
@@ -1071,30 +1129,30 @@ function Solveur(tab) {
       Div.classList.add("Solveur");
       Img.classList.add("SolveurImg");
       Img.classList.add("s" + i);
+      Img.classList.add("sh" + i);
       Img.src = "../images/solveur/point.png";
       anime({
-        targets: ".s" + i,
+        targets: ".sh" + i,
         scale: [
           { value: 0, easing: "easeOutSine", duration: 500 + i * 75 },
           { value: 1, easing: "easeInOutQuad", duration: 1200 },
-          { value: 0, easing: "easeOutSine", duration: 500 + i * 75 },
+          { value: 0, easing: "easeOutSine", duration: 500 },
         ],
       });
     }
   } else {
     for (i = 0; i < tab.length; i++) {
       anime({
-        targets: ".s" + i,
+        targets: ".sh" + i,
         scale: [
           { value: 0, easing: "easeOutSine", duration: 500 + i * 75 },
           { value: 1, easing: "easeInOutQuad", duration: 1200 },
-          { value: 0, easing: "easeOutSine", duration: 500 + i * 75 },
+          { value: 0, easing: "easeOutSine", duration: 500 },
         ],
       });
     }
   }
 }
-
 // Génération des téléporteurs, 0 => [0, 1], 1 => [1, 2]
 function Teleporter(tab) {
   let Cell1 = document.getElementById(0);
@@ -1187,13 +1245,12 @@ function Teleporter(tab) {
     Img2.src = src2;
   }
 }
-
 // Téléportation du joueur.
 function TeleportePlayer(cellId) {
   PlayerPos = cellId;
   let newPos = document.getElementById(PlayerPos);
   let Player = document.getElementById("player");
-
+  NewCell();
   PlaySound("../son/sound_teleportation.mp3");
   anime({
     targets: "#player",
@@ -1208,7 +1265,6 @@ function TeleportePlayer(cellId) {
     });
   }, 500);
 }
-
 // Lecture d'un son.
 function PlaySound(path) {
   let file = new Audio(path);
@@ -1258,6 +1314,27 @@ function Shortest() {
   }
   if (Path.length < Solver.length + LabSize) {
     console.log("Shortest.");
+    return true;
+  }
+  return false;
+}
+
+function Longest() {
+  const arrOfNum = [];
+  LongestSolver.forEach((str) => {
+    arrOfNum.push(Number(str));
+  });
+
+  for (i = 1; i < LongestSolver.length - 1; i++) {
+    if (Path.includes(arrOfNum[i]) == false) {
+      console.log(
+        "case non contenue par le chemin " + arrOfNum[i] + " " + Path
+      );
+      return false;
+    }
+  }
+  if (Path.length < LongestSolver.length + LabSize) {
+    console.log("Longest.");
     return true;
   }
   return false;
