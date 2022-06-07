@@ -142,10 +142,9 @@ const container = document.getElementById("container");
 let rows = document.getElementsByClassName("gridRow");
 let cells = document.getElementsByClassName("cell");
 
-// Lancement complet du jeu.
+// Ajout des class aux pop-up.
 let start = false;
 document.getElementById("popup").style.visibility = "hidden";
-
 for (i = 0; i < document.getElementsByClassName("restart").length; i++) {
   document
     .getElementsByClassName("restart")
@@ -306,6 +305,7 @@ function Restart() {
 }
 
 //#region  Variables globales.
+let Path = [];
 let Mouvement = 1;
 let BaseOut; // Ensemble de la génération.
 let Solver; // Index du solver.
@@ -550,7 +550,6 @@ function Click(event) {
       if (CanMove(PlayerPos, Labyrinthe, "d") || cheat == true) {
         MoveGarde(height, 2);
         activate = true;
-        Mouvement++;
         anime({
           targets: "#playerimg",
           translateX: [X, -(7.5 * X)],
@@ -559,6 +558,7 @@ function Click(event) {
           loop: false,
         });
         PlayerPos += cellNum;
+        NewCell();
         let newPos = document.getElementById(PlayerPos);
         newPos.appendChild(Player);
         PlayerAnim(0, -height);
@@ -569,7 +569,6 @@ function Click(event) {
       if (CanMove(PlayerPos, Labyrinthe, "t") || cheat == true) {
         MoveGarde(height, 4);
         activate = true;
-        Mouvement++;
         anime({
           targets: "#playerimg",
           translateX: [X, -(7.5 * X)],
@@ -578,6 +577,7 @@ function Click(event) {
           loop: false,
         });
         PlayerPos -= cellNum;
+        NewCell();
         let newPos = document.getElementById(PlayerPos);
         newPos.appendChild(Player);
         PlayerAnim(0, height);
@@ -588,7 +588,6 @@ function Click(event) {
       if (CanMove(PlayerPos, Labyrinthe, "l") || cheat == true) {
         MoveGarde(height, 3);
         activate = true;
-        Mouvement++;
         anime({
           targets: "#playerimg",
           translateX: [X, -(7.5 * X)],
@@ -597,6 +596,7 @@ function Click(event) {
           loop: false,
         });
         PlayerPos -= 1;
+        NewCell();
         let newPos = document.getElementById(PlayerPos);
         PlayerImg.src = Ambiance.Pl;
         newPos.appendChild(Player);
@@ -608,7 +608,6 @@ function Click(event) {
       if (CanMove(PlayerPos, Labyrinthe, "r") || cheat == true) {
         MoveGarde(height, 1);
         activate = true;
-        Mouvement++;
         anime({
           targets: "#playerimg",
           translateX: [X, -(7.5 * X)],
@@ -617,6 +616,7 @@ function Click(event) {
           loop: false,
         });
         PlayerPos += 1;
+        NewCell();
         let newPos = document.getElementById(PlayerPos);
         PlayerImg.src = Ambiance.Pr;
         newPos.appendChild(Player);
@@ -731,6 +731,7 @@ function Win() {
   // Lancement des conf.
   initConfetti();
   render();
+  Shortest();
 }
 
 // Niveau perdu.
@@ -1232,4 +1233,32 @@ function ThemeSound() {
 // Retour sur la page main.
 function Return() {
   document.location.href = "../pages/home.php";
+}
+
+// Ajout d'une case.
+function NewCell() {
+  Mouvement++;
+  Path.push(PlayerPos);
+}
+
+// Comparaison du chemin et du solveur.
+function Shortest() {
+  const arrOfNum = [];
+  Solver.forEach((str) => {
+    arrOfNum.push(Number(str));
+  });
+
+  for (i = 1; i < Solver.length - 1; i++) {
+    if (Path.includes(arrOfNum[i]) == false) {
+      console.log(
+        "case non contenue par le chemin " + arrOfNum[i] + " " + Path
+      );
+      return false;
+    }
+  }
+  if (Path.length < Solver.length + LabSize) {
+    console.log("Shortest.");
+    return true;
+  }
+  return false;
 }
