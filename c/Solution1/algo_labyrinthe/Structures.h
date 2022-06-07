@@ -121,7 +121,7 @@ typedef struct Garde {
 	int position;
 }Garde;
 
-void ApparitionGardes(char* maze, int cote, int Quantite_Garde, int Quantite_teleporteur, Teleporteurs_Paire* P);
+int ApparitionGardes(char* maze, int cote, int Quantite_Garde, int Quantite_teleporteur, Teleporteurs_Paire* P);
 /*Fin gardes*/
 
 int readFile(char* filename, int tableau[]);

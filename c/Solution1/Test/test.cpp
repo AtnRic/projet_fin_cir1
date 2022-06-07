@@ -6,7 +6,12 @@ TEST(TestCaseName, TestName) {
   EXPECT_TRUE(true);
 }
 
+TEST(AppartitionGardes, ApparitionGardes1) {
+	ASSERT_STREQ("eafbdaeertrezxdtytreytae", "eafbdaeertrezxdtytreytae");
+}
+
 TEST(ApparitionGardes, Test_Appartion_Gardes_basic) {
 	ApparitionGardes("eafbdaeertrezxdtytreytae", 5, 1, 0, recherche_loc_tp(0, "eafbdaeertrezxdtytreytae", 25));
 	EXPECT_TRUE(true);
 }
+

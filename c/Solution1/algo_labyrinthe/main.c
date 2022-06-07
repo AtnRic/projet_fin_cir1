@@ -447,6 +447,7 @@ int Left(Lab* L, int index)
 {
 	// printf("\033[1m\033[31m");
 	int size = L->size;
+	if (size == 0) return -1;
 	Cell* origin = L->tab;
 	if ((index % size) == 0)
 	{
@@ -471,6 +472,7 @@ int Right(Lab* L, int index)
 {
 	// printf("\033[1m\033[31m");
 	int size = L->size;
+	if (size == 0) return -1;
 	Cell* origin = L->tab;
 	if ((index + 1) % size == 0)
 	{
@@ -925,6 +927,7 @@ int printTp(Teleporteurs_Paire* P, int nbPaire) {
 int wLeft(Lab* L, int index)
 {
 	int size = L->size;
+	if (size == 0) return -1;
 	Cell* origin = L->tab;
 	if ((index % size) == 0 && index != 0)
 	{
@@ -952,6 +955,7 @@ int wLeft(Lab* L, int index)
 int wRight(Lab* L, int index)
 {
 	int size = L->size;
+	if (size == 0) return -1;
 	Cell* origin = L->tab;
 	if ((index + 1) % size == 0)
 	{
@@ -1245,10 +1249,10 @@ Teleporteurs_Paire* GetStart(int index, Teleporteurs_Paire* T, int nbPaire) {
 	return NULL;
 }
 
-void ApparitionGardes(char* maze, int cote, int Quantite_Garde, int Quantite_teleporteur, Teleporteurs_Paire* P) {
+int ApparitionGardes(char* maze, int cote, int Quantite_Garde, int Quantite_teleporteur, Teleporteurs_Paire* P) {
 	srand(time(NULL));
 	Garde* garde = (Garde*)malloc(Quantite_Garde * sizeof(Garde));
-	if (garde == NULL) return;
+	if (garde == NULL) return -1;
 	DoubleLinkedList* List = newDoubleLinkedList();
 	DoubleLinkedList* LaDirection = newDoubleLinkedList();
 
@@ -1292,12 +1296,14 @@ void ApparitionGardes(char* maze, int cote, int Quantite_Garde, int Quantite_tel
 			}
 			if (i != 0) {
 				if (count >= 3 && sortie >= 1 && i != 0) {
+					if (i == 0) return -1;
 					//ajout i à la liste chainée
 					DoubleLinkedListElem* elem = NewDoubleLinkedListItem(i);
 					DoubleLinkedListElem* elemDirection = NewDoubleLinkedListItem(1);
 					insertItemAtDoubleLinkedListTail(List, elem);
 					insertItemAtDoubleLinkedListTail(LaDirection, elemDirection);
 				}
+				if (i == 0) return -1;
 			}
 		}
 		count = 0;
@@ -1338,17 +1344,20 @@ void ApparitionGardes(char* maze, int cote, int Quantite_Garde, int Quantite_tel
 			}
 			if (i != 0) {
 				if (count >= 3 && sortie >= 1 && i != 0) {
+					if (i == 0 || count < 3 || sortie < 1) return -1;
 					//ajout i à la liste chainée
 					DoubleLinkedListElem* elem = NewDoubleLinkedListItem(i);
 					DoubleLinkedListElem* elemDirection = NewDoubleLinkedListItem(2);
 					insertItemAtDoubleLinkedListTail(List, elem);
 					insertItemAtDoubleLinkedListTail(LaDirection, elemDirection);
 				}
+				if (i == 0) return -1;
 			}
 		}
 	}
 	printf("\n;");
 	for (int i = 0; i < Quantite_Garde; i++) {
+		if ((getDoubleLinkedListSize(List) == 0 || getDoubleLinkedListSize(LaDirection) == 0) && i == 0) return -1;
 		int r = rand() % getDoubleLinkedListSize(List);
 		(garde + i)->Id = i + 1;
 		(garde + i)->position = getDoubleLinkedListElem(List, r)->data;
@@ -1358,11 +1367,17 @@ void ApparitionGardes(char* maze, int cote, int Quantite_Garde, int Quantite_tel
 		if (i < Quantite_Garde -1) {
 			printf("%d:%d,", (garde + i)->position, (garde + i)->move);
 		}
+		/*if (List->size > 1 && LaDirection > 1) {
+			printf("%d:%d,", (garde + i)->position, (garde + i)->move);
+		}*/
 		if (i == Quantite_Garde-1) {
 			printf("%d:%d", (garde + i)->position, (garde + i)->move);
 		}
+		/*if (List->size == 1 && LaDirection->size == 1) {
+			printf("%d:%d", (garde + i)->position, (garde + i)->move);
+		}*/
 	}
-	return;
+	return 1;
 }
 
 int readFile(char* filename, int tableau[]) {
