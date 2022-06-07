@@ -18,7 +18,33 @@ include "../tools/_main_tools.php";
     <main>
         <div id="informations">
             <div id="picture">
-                <img width="50%" src="./../images/profileuser/profil/profile_retro.png">
+                <?php
+                $connexion = connect();
+                $username = $_COOKIE["login"];
+                $resultat = mysqli_query($connexion, "SELECT `avatar` FROM `users` WHERE Pseudo = '$username'");
+                $row = mysqli_fetch_assoc($resultat);
+                switch ($row['avatar']) {
+                    case 'jungle hero':
+                        $avatar = './../images/profileuser/profil/profile_jungle_hero.png';
+                        break;
+                    case 'jungle guard':
+                        $avatar = './../images/profileuser/profil/profile_jungle_guard.png';
+                        break;
+                    case 'retro hero':
+                        $avatar = './../images/profileuser/profil/profile_retro_hero.png';
+                        break;
+                    case 'retro guard':
+                        $avatar = './../images/profileuser/profil/profile_retro_guard.png';
+                        break;
+                    case 'space hero':
+                        $avatar = './../images/profileuser/profil/profile_space_hero.png';
+                        break;
+                    case 'space guard':
+                        $avatar = './../images/profileuser/profil/profile_space_guard.png';
+                        break;
+                }
+                ?>
+                <img width="50%" src=<?php echo $avatar ?>>
             </div>
             <div id="profil">
                 <div id="pseudo"><?php echo $_COOKIE["login"] ?></div>
@@ -64,19 +90,60 @@ include "../tools/_main_tools.php";
                 <span>Gallery of your levels</span>
             </div>
             <div id="level">
-                <!-- Manque le back -->
+                <?php
+                $connexion = connect();
+                $username = $_COOKIE['login'];
+                $resultat = mysqli_query($connexion, "SELECT `NAME` FROM `custom_level` WHERE `AUTHOR` = 'Dousai'");
+                if ($resultat) {
+                    while ($row = mysqli_fetch_assoc($resultat)) {
+                ?>
+                        <a href="#"> <?php echo $row['NAME'] ?></a>
+                        <br>
+                <?php
+                    }
+                }
+                ?>
             </div>
             <div id="buttonLevel">
                 <a href="./custom.php">Create a level</a>
             </div>
         </div>
         <div id="parameters">
+            <a onclick="openPopup('avatar')">Change avatar</a>
+            <span style="width:10%;display:inline-block"></span>
             <a onclick="openPopup('resetStats')">Reset stats</a>
             <span style="width:10%;display:inline-block"></span>
             <a onclick="openPopup('newPseudo')">Change pseudo</a>
         </div>
     </main>
     <div id="popup">
+        <div id="avatar">
+            <p>Change your avatar</p>
+            <form method="POST">
+                <select name="avatar">
+                    <option>jungle hero</option>
+                    <option>jungle guard</option>
+                    <option>retro hero</option>
+                    <option>retro guard</option>
+                    <option>jungle hero</option>
+                    <option>space hero</option>
+                    <option>space guard</option>
+                </select>
+                <br>
+                <input type="submit" value="change">
+            </form>
+            <?php
+            if (isset($_POST['avatar'])) {
+                $avatar = $_POST['avatar'];
+                $username = $_COOKIE["login"];
+                $connexion = connect();
+                $resultat = mysqli_query($connexion, "UPDATE users SET avatar='$avatar' WHERE Pseudo='$username'");
+                unset($_POST['avatar']);
+                header('Location: ./profiluser.php');
+            }
+            ?>
+            <a onclick="closePopup('avatar')">Close</a>
+        </div>
         <div id="newPseudo">
             <p>Change pseudo</p>
             <form method="POST">
@@ -89,7 +156,8 @@ include "../tools/_main_tools.php";
                 $newPseudo = $_POST['newPseudo'];
                 $username = $_COOKIE["login"];
                 $connexion = connect();
-                $resultat = mysqli_query($connexion, "UPDATE users SET Pseudo='$newPseudo' WHERE Pseudo='$username'");
+                $resultat1 = mysqli_query($connexion, "UPDATE users SET Pseudo='$newPseudo' WHERE Pseudo='$username'");
+                $resultat2 = mysqli_query($connexion, "UPDATE custom_level SET AUTHOR='$newPseudo' WHERE AUTHOR='$username'");
                 setcookie("login", $newPseudo, time() + (3600 * 24 * 365));
                 unset($_POST['newPseudo']);
                 header('Location: ./profiluser.php');
@@ -122,18 +190,16 @@ include "../tools/_main_tools.php";
             document.getElementById($name).style.display = "block"
             document.querySelector('header').style.opacity = "0.3"
             document.querySelector('main').style.opacity = "0.3"
-            document.querySelector('header').classList.add('disableLink');
-            document.querySelector('main').classList.add('disableLink');
-
+            document.querySelector('header').style.pointerEvents = "none"
+            document.querySelector('main').style.pointerEvents = "none"
         }
 
         function closePopup($name) {
             document.getElementById($name).style.display = "none"
             document.querySelector('header').style.opacity = "1"
             document.querySelector('main').style.opacity = "1"
-            document.querySelector('header').classList.remove('disableLink');
-            document.querySelector('main').classList.remove('disableLink');
-
+            document.querySelector('header').style.pointerEvents = "auto"
+            document.querySelector('main').style.pointerEvents = "auto  "
         }
     </script>
 </body>
