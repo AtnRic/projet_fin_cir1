@@ -29,7 +29,7 @@ if($functionName == 'generation')
 {
     $output = "";
     $var = 0;
-    exec('new07.06.exe', $output, $var);
+    exec('07.06.exe', $output, $var);
     // Appeler le C, lancement du jeu ?
     $out = "";
     for($i = 0; $i < count($output); $i++){
