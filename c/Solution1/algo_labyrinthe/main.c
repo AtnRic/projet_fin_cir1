@@ -447,7 +447,6 @@ int Left(Lab* L, int index)
 {
 	// printf("\033[1m\033[31m");
 	int size = L->size;
-	if (size == 0) return -1;
 	Cell* origin = L->tab;
 	if ((index % size) == 0)
 	{
@@ -472,7 +471,6 @@ int Right(Lab* L, int index)
 {
 	// printf("\033[1m\033[31m");
 	int size = L->size;
-	if (size == 0) return -1;
 	Cell* origin = L->tab;
 	if ((index + 1) % size == 0)
 	{
@@ -1249,10 +1247,10 @@ Teleporteurs_Paire* GetStart(int index, Teleporteurs_Paire* T, int nbPaire) {
 	return NULL;
 }
 
-int ApparitionGardes(char* maze, int cote, int Quantite_Garde, int Quantite_teleporteur, Teleporteurs_Paire* P) {
+void ApparitionGardes(char* maze, int cote, int Quantite_Garde, int Quantite_teleporteur, Teleporteurs_Paire* P) {
 	srand(time(NULL));
 	Garde* garde = (Garde*)malloc(Quantite_Garde * sizeof(Garde));
-	if (garde == NULL) return -1;
+	if (garde == NULL) return;
 	DoubleLinkedList* List = newDoubleLinkedList();
 	DoubleLinkedList* LaDirection = newDoubleLinkedList();
 
@@ -1344,40 +1342,40 @@ int ApparitionGardes(char* maze, int cote, int Quantite_Garde, int Quantite_tele
 			}
 			if (i != 0) {
 				if (count >= 3 && sortie >= 1 && i != 0) {
-					if (i == 0 || count < 3 || sortie < 1) return -1;
+					if (i == 0 || count < 3 || sortie < 1) return;
 					//ajout i à la liste chainée
 					DoubleLinkedListElem* elem = NewDoubleLinkedListItem(i);
 					DoubleLinkedListElem* elemDirection = NewDoubleLinkedListItem(2);
 					insertItemAtDoubleLinkedListTail(List, elem);
 					insertItemAtDoubleLinkedListTail(LaDirection, elemDirection);
 				}
-				if (i == 0) return -1;
+				if (i == 0) return;
 			}
 		}
 	}
 	printf("\n;");
-	for (int i = 0; i < Quantite_Garde; i++) {
-		if ((getDoubleLinkedListSize(List) == 0 || getDoubleLinkedListSize(LaDirection) == 0) && i == 0) return -1;
+	int SIZE = List->size;
+	for (int i = 0; i < SIZE; i++) {
 		int r = rand() % getDoubleLinkedListSize(List);
 		(garde + i)->Id = i + 1;
 		(garde + i)->position = getDoubleLinkedListElem(List, r)->data;
 		(garde + i)->move = getDoubleLinkedListElem(LaDirection, r)->data;
 		DeleteDoubleLinkedListItem(List, getDoubleLinkedListElem(List, r));
 		DeleteDoubleLinkedListItem(LaDirection, getDoubleLinkedListElem(LaDirection, r));
-		if (i < Quantite_Garde -1) {
+		if (i < SIZE -1) {
 			printf("%d:%d,", (garde + i)->position, (garde + i)->move);
 		}
 		/*if (List->size > 1 && LaDirection > 1) {
 			printf("%d:%d,", (garde + i)->position, (garde + i)->move);
 		}*/
-		if (i == Quantite_Garde-1) {
+		if (i == SIZE-1) {
 			printf("%d:%d", (garde + i)->position, (garde + i)->move);
 		}
 		/*if (List->size == 1 && LaDirection->size == 1) {
 			printf("%d:%d", (garde + i)->position, (garde + i)->move);
 		}*/
 	}
-	return 1;
+	return;
 }
 
 int readFile(char* filename, int tableau[]) {
