@@ -9,8 +9,8 @@ echo "
     <p id='long'>longest solution : </p>
     <div class='star'>
         <div class='center_img'>
-            <img src='../images/popup/star.png' alt='star'>
-            <img src='../images/popup/star_empty.png' alt='star'>
+            <img id='starOne' src='../images/popup/star.png' alt='star'>
+            <img id='starTwo' src='../images/popup/star_empty.png' alt='star'>
         </div>    
     </div>  
     <div class='but'>

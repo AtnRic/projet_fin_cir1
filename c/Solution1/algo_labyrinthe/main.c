@@ -206,6 +206,7 @@ Teleporteurs_Paire* recherche_loc_tp(int nb_paires, char* maze, int size) {
 	int pos;
 	if (tab != NULL) {
 		for (int i = 0; i < nb_paires; i++) {
+			if (getDoubleLinkedListSize(List) == 0) break;
 			int max_index = getDoubleLinkedListSize(List);
 
 			//tirage d'une entrée
@@ -1349,6 +1350,7 @@ void ApparitionGardes(char* maze, int cote, int Quantite_Garde, int Quantite_tel
 	}
 	printf("\n;");
 	for (int i = 0; i < Quantite_Garde; i++) {
+		if (getDoubleLinkedListSize(List) == 0) break;
 		int r = rand() % getDoubleLinkedListSize(List);
 		(garde + i)->Id = i + 1;
 		(garde + i)->position = getDoubleLinkedListElem(List, r)->data;
