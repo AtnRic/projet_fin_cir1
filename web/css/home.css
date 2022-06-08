@@ -49,7 +49,7 @@ body {
 }
 
 #left-leaves {
-    position: absolute;
+    position: abs   olute;
     left: 0;
     bottom: 0;
     max-height: 105vh;
@@ -551,10 +551,6 @@ section {
     background: none;
 }
 
-@keyframes orbite {
-    from {transform: translate(-50%, -50%) rotate(0deg);}
-    to {transform: translate(-50%, -50%) rotate(360deg);}
-}
 
 .orbite_earth::after {
     position: absolute;

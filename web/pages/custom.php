@@ -46,9 +46,22 @@ require '../tools/_main_tools.php';
   }
   ?>
   <section class="back">
+    <div class="orbite-mars"></div>
+    <div class="orbite-earth"></div>
+    <div class="star1"></div>
+    <div class="star2"></div>
     <div class="moon"></div>
+    <img src="../images/accueil/Piranha_Plant.gif" class="plant">
+    <img src="../images/accueil/mario-pipe.png" class="pipe">
+    <div id="right-side"></div>
+    <img src="../images/accueil/ground.png" id="ground">
     <img src="../images/accueil/static-left-leaves.png" class="left">
+    <img src="../images/accueil/middle-left-leaf.png" id="middle">
+    <img src="../images/accueil/middle-left-leaf-bis.png" id="middlebis">
+    <img src="../images/accueil/upper-bottom-left-leaf.png" id="upper-bottom-left-leaf">
+    <img src="../images/accueil/bottom-left-leaf.png" id="bottom-left-leaf">
     <img src="../" alt="" class="right">
+
     <!-- <div id="right"></div> -->
     <div class="range">
       <form method="POST" action="custom.php" class="builder">
@@ -68,7 +81,7 @@ require '../tools/_main_tools.php';
           <option>Space</option>
         </select>
         <br>
-        <input type="submit" value="Generate">
+        <input type="submit" value="Generate" class="valid validate">
       </form>
     </div>
   </section>
@@ -76,9 +89,6 @@ require '../tools/_main_tools.php';
     <h1>Welcome to the level maker  </h1>
     <p>Here you can create your own maze</p>
   </div>
-
-  ";
-  ?>
   
   
 </body>
