@@ -18,7 +18,7 @@ require '../tools/_main_tools.php';
     $_SESSION['custom']=true;
     if (isset($_POST['mazeSize']) && isset($_POST['nbrGuard']) && isset($_POST['nbrTP']) && isset($_POST['theme'])){
         echo Console("<p>Erreur d'exécution de la requete </p>");
-        $_SESSION["name"]=$_POST['Maze_Name'];
+        $_SESSION["name"]=$_POST["levelname"];
         $_SESSION["mazeSize"] = $_POST['mazeSize'];
         $_SESSION["nbrGuard"] = $_POST['nbrGuard'];
         $_SESSION["nbrTP"] = $_POST['nbrTP'];
@@ -58,6 +58,8 @@ require '../tools/_main_tools.php';
     <!-- <div id="right"></div> -->
     <div class="range">
       <form method="post" action="custom.php" class="builder">
+        <p>Level name:</p>
+        <input type="text" name="levelname" min="1" max="20" placeholder="Level Name">
         <p>Size</p>
         <input type="range" name="mazeSize" min="7" max="30" value="5">
         <br>
@@ -74,14 +76,7 @@ require '../tools/_main_tools.php';
           <option>Space</option>
         </select>
         <br>
-        <form method="POST">
         <input type="submit" name="customgo" value="Generate">
-        </form>
-        <?php
-        if(isset($_POST["customgo"])){
-          $_SESSION["custom"]='true';
-        }
-        ?>
       </form>
     </div>
   </section>
