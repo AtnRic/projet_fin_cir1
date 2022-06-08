@@ -844,7 +844,7 @@ function Save() {
     "../pages/save.php",
     "save",
     function Handle(output) {
-      console.log("Resultat: " + output);
+      document.location.href = "../pages/profiluser.php";
     },
     Arg
   );
