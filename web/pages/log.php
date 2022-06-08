@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -218,7 +221,7 @@ if ($count == 4) {
 
     $login = $_POST['pseudo'];
     $mdp_hash = hash('sha256', $_POST['mdpin']); //on fait un hash du mot de passe pour ne pas stocker le mot de passe en clair
-    if (!isset($_COOKIE['pseudo']) && !isset($_COOKIE['mdp_hash'])) {
+    if (!isset($_COOKIE['login']) && !isset($_COOKIE['mdp_hash'])) {
         setcookie("login", $login, time() + (3600 * 24 * 365));
         setcookie("mdp_hash", $mdp_hash, time() + (3600 * 24 * 365));
     }
@@ -279,9 +282,10 @@ if (isset($_POST['mdpco'])) {
 if ($count == 2) {
     $login = $_POST['login'];
     $mdp_hash = hash('sha256', $_POST['mdpco']); //on fait un hash du mot de passe pour ne pas stocker le mot de passe en clair
-    if (!isset($_COOKIE['pseudo']) && !isset($_COOKIE['mdp_hash'])) {
+    if (!isset($_COOKIE['login']) && !isset($_COOKIE['mdp_hash'])) {
         setcookie("login", $login, time() + (3600 * 24 * 365));
         setcookie("mdp_hash", $mdp_hash, time() + (3600 * 24 * 365));
+        $_SESSION["login"]=$_COOKIE['login'];
     }
     //ajouter utilisateur dans la base de données
     $newURL = "home.php";

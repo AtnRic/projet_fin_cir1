@@ -206,6 +206,7 @@ Teleporteurs_Paire* recherche_loc_tp(int nb_paires, char* maze, int size) {
 	int pos;
 	if (tab != NULL) {
 		for (int i = 0; i < nb_paires; i++) {
+			if (getDoubleLinkedListSize(List) == 0) return;
 			int max_index = getDoubleLinkedListSize(List);
 
 			//tirage d'une entrée
@@ -217,7 +218,7 @@ Teleporteurs_Paire* recherche_loc_tp(int nb_paires, char* maze, int size) {
 
 
 			//tirage d'une sortie
-			pos = (rand() * (max_index - 1) / RAND_MAX) - 1;
+			pos = (rand() * (max_index) / RAND_MAX-1);
 			DoubleLinkedListElem* elem_sortie = getDoubleLinkedListElem(List, pos);
 			(*(tab + i)).sortie = elem_sortie->data;
 			DeleteDoubleLinkedListItem(List, elem_sortie);
@@ -910,9 +911,10 @@ int printPath(Path* P)
 	 //printf("\n");
 	return 0;
 }
-int printTp(Teleporteurs_Paire* P, int nbPaire) {
+int printTp(Teleporteurs_Paire* P) {
 	printf("\n");
 	printf(";");
+	int nbPaire = sizeof(P);
 	for (int i = 0; i < nbPaire; i++) {
 		printf("%d:%d", (P + i)->entree, (P + i)->sortie);
 		if (i != nbPaire - 1) {
@@ -1078,6 +1080,14 @@ Path* Solve(Lab* L, Teleporteurs_Paire* pairs, int nbTpPair)
 	Path* P = newPath(100);
 	return PathIt(L, pairs, nbTpPair, P, 0, true);
 }
+
+Path* SolveLong(Lab* L, Teleporteurs_Paire* pairs, int nbTpPair)
+{
+	Cell* origin = L->tab;
+	Path* P = newPath(100);
+	return PathItLong(L, pairs, nbTpPair, P, 0, true);
+}
+
 Path* PathIt(Lab* Lab, Teleporteurs_Paire* pairs, int nbTpPair, Path* actual, int index, bool first)
 {
 	Teleporteurs_Paire* newTp = GetStart(index, pairs, nbTpPair);
@@ -1213,6 +1223,141 @@ Path* PathIt(Lab* Lab, Teleporteurs_Paire* pairs, int nbTpPair, Path* actual, in
 	}
 	return NULL;
 }
+Path* PathItLong(Lab* Lab, Teleporteurs_Paire* pairs, int nbTpPair, Path* actual, int index, bool first)
+{
+	Teleporteurs_Paire* newTp = GetStart(index, pairs, nbTpPair);
+
+	if ((index + 1) == Lab->size * Lab->size)
+	{
+		(*(actual->cells + actual->pathSize)) = index;
+		actual->pathSize++;
+		// printf("\nLast case call. %d \n", actual->pathSize);
+		// printPath(actual);
+		return actual;
+	}
+	else if (newTp != NULL)
+	{
+		(*(actual->cells + actual->pathSize)) = index;
+		actual->pathSize++;
+		return PathItLong(Lab, pairs, nbTpPair, clone(actual), newTp->sortie, false);
+	}
+	else if (index != -1)
+	{
+		(*(actual->cells + actual->pathSize)) = index;
+		actual->pathSize++;
+		Path* R = NULL;
+		Path* L = NULL;
+		Path* T = NULL;
+		Path* D = NULL;
+
+		if (!ContainsPath(actual, wRight(Lab, index)))
+		{
+			R = PathItLong(Lab, pairs, nbTpPair, clone(actual), wRight(Lab, index), false);
+			if (first) {
+				//printPath(R);
+			}
+		}
+		if (!ContainsPath(actual, wLeft(Lab, index)))
+		{
+			L = PathItLong(Lab, pairs, nbTpPair, clone(actual), wLeft(Lab, index), false);
+			if (first) {
+				//printPath(L);
+			}
+		}
+		if (!ContainsPath(actual, wTop(Lab, index)))
+		{
+			T = PathItLong(Lab, pairs, nbTpPair, clone(actual), wTop(Lab, index), false);
+			if (first) {
+				//printPath(T);
+			}
+		}
+		if (!ContainsPath(actual, wDown(Lab, index)))
+		{
+			D = PathItLong(Lab, pairs, nbTpPair, clone(actual), wDown(Lab, index), false);
+			if (first) {
+				//printPath(D);
+			}
+		}
+
+		if (D == NULL && R == NULL && T == NULL && L == NULL)
+		{
+			return NULL;
+		}
+		else
+		{
+			int i = 0;
+			if (R != NULL)
+			{
+				i++;
+			}
+			if (L != NULL)
+			{
+				i++;
+			}
+			if (T != NULL)
+			{
+				i++;
+			}
+			if (D != NULL)
+			{
+				i++;
+			}
+			Path* P = (Path*)malloc(sizeof(Path) * i);
+
+			if (P != NULL) {
+				int n = 0;
+
+
+				//printf("\nPoss : ");
+				if (R != NULL)
+				{
+					(*(P + n)) = (*R);
+					//printf(" %d-> ", (*(P + n)).pathSize);
+					n++;
+				}
+				if (L != NULL)
+				{
+					(*(P + n)) = (*L);
+					//printf(" %d-> ", (*(P + n)).pathSize);
+					n++;
+				}
+				if (T != NULL)
+				{
+					(*(P + n)) = (*T);
+					//printf(" %d-> ", (*(P + n)).pathSize);
+					n++;
+				}
+				if (D != NULL)
+				{
+					(*(P + n)) = (*D);
+					//printf(" %d-> ", (*(P + n)).pathSize);
+					n++;
+				}
+
+				Path* Min = P;
+				//printf("a_min:%d ", Min->pathSize);
+
+				for (int u = 0; u < i; u++) {
+					if ((P + u)->pathSize > (Min->pathSize)) {
+						Min = (P + u);
+						//printf("a_min:%d ", Min->pathSize);
+					}
+				}
+				//printf("\n");
+				if (first) {
+					//printPath(Min);
+				}
+				return Min;
+			}
+			return P;
+		}
+	}
+	else
+	{
+		return NULL;
+	}
+	return NULL;
+}
 
 bool ContainsPath(Path* actual, int index)
 {
@@ -1263,22 +1408,22 @@ void ApparitionGardes(char* maze, int cote, int Quantite_Garde, int Quantite_tel
 					switch (*(maze + (i + j))) {
 					case 'a':
 						for (int k = 0; k < Quantite_teleporteur; k++) {
-							if (*(maze + (i + j + cote)) == (P + k)) {
+							if ((maze + (i + j + cote)) == (P + k)) {
 								break;
 							}
-							if (*(maze + (i + j - cote)) == (P + k)) {
+							if ((maze + (i + j - cote)) == (P + k)) {
 								break;
 							}
 						}
 					case 'b':
 						for (int k = 0; k < Quantite_teleporteur; k++) {
-							if (*(maze + (i + j + cote)) == (P + k)) {
+							if ((maze + (i + j + cote)) == (P + k)) {
 								break;
 							}
 						}
 					case 'd':
 						for (int k = 0; k < Quantite_teleporteur; k++) {
-							if (*(maze + (i + j - cote)) == (P + k)) {
+							if ((maze + (i + j - cote)) == (P + k)) {
 								break;
 							}
 						}
@@ -1310,22 +1455,22 @@ void ApparitionGardes(char* maze, int cote, int Quantite_Garde, int Quantite_tel
 					switch (*(maze + (i + j))) {
 					case 'a':
 						for (int k = 0; k < Quantite_teleporteur; k++) {
-							if (*(maze + (i + j + 1)) == (P + k)) {
+							if ((maze + (i + j + 1)) == (P + k)) {
 								break;
 							}
-							if (*(maze + (i + j - 1)) == (P + k)) {
+							if ((maze + (i + j - 1)) == (P + k)) {
 								break;
 							}
 						}
 					case 'c':
 						for (int k = 0; k < Quantite_teleporteur; k++) {
-							if (*(maze + (i + j - 1)) == (P + k)) {
+							if ((maze + (i + j - 1)) == (P + k)) {
 								break;
 							}
 						}
 					case 'e':
 						for (int k = 0; k < Quantite_teleporteur; k++) {
-							if (*(maze + (i + j + 1)) == (P + k)) {
+							if ((maze + (i + j + 1)) == (P + k)) {
 								break;
 							}
 						}
@@ -1348,19 +1493,26 @@ void ApparitionGardes(char* maze, int cote, int Quantite_Garde, int Quantite_tel
 		}
 	}
 	printf("\n;");
-	for (int i = 0; i < Quantite_Garde; i++) {
+	int SIZE = List->size;
+	for (int i = 0; i < SIZE; i++) {
 		int r = rand() % getDoubleLinkedListSize(List);
 		(garde + i)->Id = i + 1;
 		(garde + i)->position = getDoubleLinkedListElem(List, r)->data;
 		(garde + i)->move = getDoubleLinkedListElem(LaDirection, r)->data;
 		DeleteDoubleLinkedListItem(List, getDoubleLinkedListElem(List, r));
 		DeleteDoubleLinkedListItem(LaDirection, getDoubleLinkedListElem(LaDirection, r));
-		if (i < Quantite_Garde -1) {
+		if (i < SIZE - 1) {
 			printf("%d:%d,", (garde + i)->position, (garde + i)->move);
 		}
-		if (i == Quantite_Garde-1) {
+		/*if (List->size > 1 && LaDirection > 1) {
+			printf("%d:%d,", (garde + i)->position, (garde + i)->move);
+		}*/
+		if (i == SIZE - 1) {
 			printf("%d:%d", (garde + i)->position, (garde + i)->move);
 		}
+		/*if (List->size == 1 && LaDirection->size == 1) {
+			printf("%d:%d", (garde + i)->position, (garde + i)->move);
+		}*/
 	}
 	return;
 }
@@ -1427,7 +1579,7 @@ int main()
 //	show(newl, S, pairs, 5);
 //	printf("\n_____ SOLVE  FINAL _____\n\n");
 	printPath(S);
-	printTp(pairs, TELEPORTE);
+	//printTp(pairs);
 //	printf("\n____ ____ ____ ____ ____\n\n");
 
 	//Path* W = Solve(newl, NULL, 0);
@@ -1436,5 +1588,9 @@ int main()
 //	printPath(W);
 //	printf("\n____ ____ ____ ____ ____\n\n");
 	ApparitionGardes(letterSansPrintf(newl), sqrt(newl->size * newl->size), GARDAVOU, TELEPORTE, pairs);
+
+	Path* Slong = SolveLong(newl, pairs, TELEPORTE);
+	printPath(Slong);
+
 	return EXIT_SUCCESS;
 }

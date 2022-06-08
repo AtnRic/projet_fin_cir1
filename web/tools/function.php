@@ -30,7 +30,7 @@ if($functionName == 'generation')
 {
     $output = "";
     $var = 0;
-    exec('main.exe', $output, $var);
+    exec('new07.06.exe', $output, $var);
     // Appeler le C, lancement du jeu ?
     $out = "";
     for($i = 0; $i < count($output); $i++){
@@ -39,6 +39,6 @@ if($functionName == 'generation')
     echo $out; // true ou false.
 }
 if($functionName == 'save'){
-    echo $data . ' saving...';
+    echo $data[0] . " /// " . $data[1];
 }
 ?>

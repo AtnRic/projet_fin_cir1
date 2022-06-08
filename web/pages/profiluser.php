@@ -1,184 +1,280 @@
 <?php
-    include "../tools/_main_tools.php";
-?>    
+include "../tools/_main_tools.php";
+?>
 <!DOCTYPE html>
-<html lang='fr'>
+<html lang='en'>
+
 <head>
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="stylesheet" type="text/css" href="../css/profiluser.css">
-<link rel='icon' href='../images/front/favicon.ico' type='image/x-icon'>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../css/profiluser.css">
+    <link rel='icon' href='../images/front/favicon.ico' type='image/x-icon'>
+    <title>Page de profil</title>
 </head>
+
+<?php
+function isStarShort($username, $name)
+{
+    $connexion = connect();
+    $username = $_COOKIE['login'];
+    $resultat = mysqli_query($connexion, "SELECT `etoileCheminCourt` FROM `custom_level` WHERE `AUTHOR` = '$username' AND `NAME` = '$name'");
+    $row = mysqli_fetch_assoc($resultat);
+    if ($row['etoileCheminCourt'] == 1) {
+        return '&#9733';
+    } else {
+        return '&#9734';
+    }
+    mysqli_close($connexion);
+}
+
+function isStarLong($username, $name)
+{
+    $connexion = connect();
+    $username = $_COOKIE['login'];
+    $resultat = mysqli_query($connexion, "SELECT `etoileCheminLong` FROM `custom_level` WHERE `AUTHOR` = '$username' AND `NAME` = '$name'");
+    $row = mysqli_fetch_assoc($resultat);
+    if ($row['etoileCheminLong'] == 1) {
+        return '&#9733';
+    } else {
+        return '&#9734';
+    }
+    mysqli_close($connexion);
+}
+
+?>
+
 <body>
-    <div id="block">
-        <!--Premiere moitier-->
-        <div id="first">
-            <!--Image joueur-->
-            <input id="imageuser" type="image" src="../images/profileuser/profil/gigachad.png">
-            <!--Pseudo player-->
-            <div id="pseudo"><label><?php echo $_COOKIE["login"] ?></div>
-            <form method="POST">
-                <input class="button"type="submit" value="Reset stats" name="chadbutton">
-                <input class="button"type="submit" value="Change pseudo" name="Change_Name">
-            </form>
-            <?php
-            if(isset($_POST["chadbutton"])){
-                ?>
-                <style>
-                    #reset{
-                        display: block;
-                    }
-                </style>
+    <header>
+        <a href="./home.php" id="homeButton">MENU</a>
+    </header>
+    <main>
+        <div id="informations">
+            <div id="picture">
                 <?php
-                if(isset($_POST["OMEGALUL"])){
-                    ResetPoint($_COOKIE["login"]);
-                    header("Location:profiluser.php");
+                $connexion = connect();
+                $username = $_COOKIE["login"];
+                $resultat = mysqli_query($connexion, "SELECT `avatar` FROM `users` WHERE Pseudo = '$username'");
+                $row = mysqli_fetch_assoc($resultat);
+                switch ($row['avatar']) {
+                    case 'jungle hero':
+                        $avatar = './../images/profileuser/profil/profile_jungle_hero.png';
+                        break;
+                    case 'jungle guard':
+                        $avatar = './../images/profileuser/profil/profile_jungle_guard.png';
+                        break;
+                    case 'retro hero':
+                        $avatar = './../images/profileuser/profil/profile_retro_hero.png';
+                        break;
+                    case 'retro guard':
+                        $avatar = './../images/profileuser/profil/profile_retro_guard.png';
+                        break;
+                    case 'space hero':
+                        $avatar = './../images/profileuser/profil/profile_space_hero.png';
+                        break;
+                    case 'space guard':
+                        $avatar = './../images/profileuser/profil/profile_space_guard.png';
+                        break;
                 }
-            }
-            if(isset($_POST["Change_Name"])){
+                mysqli_close($connexion);
                 ?>
-                <style>
-                    #newpseudo{
-                        display: block;
-                    }
-                </style>
-                <?php
-            }    
-            ?>    
-        </div>
-        <!--deuxieme moitier-->
-        <div id="second">
-            <!--information compte-->
+                <img width="50%" src=<?php echo $avatar ?>>
+            </div>
+            <div id="profil">
+                <div id="pseudo"><?php echo $_COOKIE["login"] ?></div>
+                <div id="points"><?php echo GetUserPoints($_COOKIE["login"]) . 'pts'; ?></div>
+            </div>
             <div id="rank">
-                <p>Points Account total : <span class="score"><?php echo GetUserPoints($_COOKIE["login"]);?></span></p>
-                <p>Account levels :<br/></p>
-                <?php $Rank=Rank_User($_COOKIE["login"]);?>
-                <img src="../images/profileuser/Rank/wood.png" alt="Woodrank" id="wood" class="rank_image"/>
-                <img id="bronze" class="rank_image" src="../images/profileuser/Rank/Bronze.png" alt="Bronzerank"/>
-                <img id="silver" class="rank_image" src="../images/profileuser/Rank/Silver.png" alt="Silverrank">
-                <img src="../images/profileuser/Rank/gold.png" alt="Goldrank" id="gold" class="rank_image">
-                <img src="../images/profileuser/Rank/Diamond.png" alt="Diamondrank" id="diamond" class="rank_image">
-                <img  src="../images/profileuser/Rank/Chad.png" alt="Chadrank" id="chad" class="rank_image">
                 <?php
-                switch($Rank){
+                $rank = Rank_User($_COOKIE["login"]);
+                switch ($rank) {
                     case 0:
-                        echo "wood rank";
-                        ?>
-                        <style>
-                            #wood{
-                                display: block;
-                            }
-                        </style>
-                        <?php
-                        break;     
+                        $grade = "./../images/profileuser/Rank/wood.png";
+                        $name = 'wood';
+                        break;
                     case 1:
-                        echo "bronze rank";
-                        ?>
-                        <style>
-                            #bronze{
-                                display: block;
-                            }
-                        </style>
-                        <?php
-                        break;  
+                        $grade = './../images/profileuser/Rank/Bronze.png';
+                        $name = 'bronze';
+                        break;
                     case 2:
-                        echo "silver rank";
-                        ?>
-                        <style>
-                            #silver{
-                                display: block;
-                            }
-                        </style>
-                        <?php
-                        break;   
+                        $grade = './../images/profileuser/Rank/Silver.png';
+                        $name = 'silver';
+                        break;
                     case 3:
-                        echo "gold rank";
-                        ?>
-                        <style>
-                            #gold{
-                                display: block;
-                            }
-                        </style>
-                        <?php 
-                        break;  
+                        $grade = './../images/profileuser/Rank/gold.png';
+                        $name = 'gold';
+                        break;
                     case 4:
-                        echo "diamond rank";
-                        ?>
-                        <style>
-                            #diamond{
-                                display: block;
-                            }
-                        </style>
-                        <?php
-                        break;    
+                        $grade = './../images/profileuser/Rank/Diamond.png';
+                        $name = 'diamond';
+                        break;
                     case 5:
-                        echo "chad of the maze rank";
-                        ?>
-                        <style>
-                            #chad{
-                                display: block;
-                            }
-                        </style>
-                        <?php
-                        break;      
+                        $grade = './../images/profileuser/Rank/Chad.png';
+                        $name = 'chad';
+                        break;
                 }
                 ?>
-            </div>
-            <div id="leveleditor">
-                <div>Gallery of your levels</div>
-                <a><div  class="niveau">Level 1</div></a>
-                <a><div  class="niveau">Level 2</div></a>
-                <input class="button" type="submit" value="Create a level" href="">  
+                <img width="30%" src=<?php echo $grade ?>>
+                <br>
+                <span> <?php echo $name ?></span>
             </div>
         </div>
-        <!--POPUP 1,changement de pseudo-->
-        <div class="Popup" id="newpseudo">
-            <p>Enter your new name</p>
+        <div id="levels">
+            <div id="titleLevels">
+                <span>Gallery of your levels</span>
+            </div>
+            <div id="level">
+                <?php
+                $connexion = connect();
+                $username = $_COOKIE['login'];
+                $resultat = mysqli_query($connexion, "SELECT `NAME` FROM `custom_level` WHERE `AUTHOR` = '$username'");
+                if ($resultat) {
+                    while ($row = mysqli_fetch_assoc($resultat)) {
+                        $name = $row['NAME'];
+                        $starShort = isStarShort($username, $name);
+                        $starLong = isStarLong($username, $name);
+                ?>
+                        <a href="#"><?php echo $name . "<span style='width:2%;display:inline-block'></span> <span style='font-size:30px;display:inline-block'> $starShort </span>" . "<span style='font-size:30px;display:inline-block'> $starLong </span>" ?></a>
+                        <br>
+                <?php
+                    }
+                }
+                mysqli_close($connexion);
+                ?>
+            </div>
+            <div id="buttonLevel">
+                <a href="./custom.php">Create a level</a>
+            </div>
+        </div>
+        <div id="parameters">
+            <a onclick="openPopup('avatar')">Change avatar</a>
+            <span style="width:10%;display:inline-block"></span>
+            <a onclick="openPopup('resetStats')">Reset stats</a>
+            <span style="width:10%;display:inline-block"></span>
+            <a onclick="openPopup('newPseudo')">Change pseudo</a>
+        </div>
+    </main>
+    <div id="popup">
+        <div id="avatar">
+            <p>Change your avatar</p>
             <form method="POST">
-            <input type="text" name="PogChamp">
-            <br>
-            <input type="submit" name="PEPPE">
+                <select name="avatar">
+                    <option>jungle hero</option>
+                    <option>jungle guard</option>
+                    <option>retro hero</option>
+                    <option>retro guard</option>
+                    <option>space hero</option>
+                    <option>space guard</option>
+                </select>
+                <br>
+                <input type="submit" value="change">
             </form>
             <?php
-            if(isset($_POST["PEPPE"]) && isset($_POST["PogChamp"])){
-                $newPseudo=$_POST["PogChamp"];
-                $username=$_COOKIE["login"];
-                $connexion=connect();
-                $resultat=mysqli_query($connexion,"UPDATE users SET Pseudo='$newPseudo' WHERE Pseudo='$username'");
-                setcookie("login", $newPseudo, time() + (3600 * 24 * 365));
-                header("Location:profiluser.php");
-            }
-            elseif(empty($_POST["PogChamp"])){
-                echo "Pseudo invalide";
+            if (isset($_POST['avatar'])) {
+                $avatar = $_POST['avatar'];
+                $username = $_COOKIE["login"];
+                $connexion = connect();
+                $resultat = mysqli_query($connexion, "UPDATE users SET avatar='$avatar' WHERE Pseudo='$username'");
+                unset($_POST['avatar']);
+                header('Location: ./profiluser.php');
             }
             ?>
+            <a onclick="closePopup('avatar')">close</a>
         </div>
-        <!--POPUP 2,reset de compte-->
-        <div class="Popup" id="reset">
-                <p>Are you sure about that ?</p>
-                <form method="POST"> 
-                <input type="submit" value="YES" name="OMGALUL"/>
-                <input type="submit" value="NO" name="POGGERS"/>
-                </form>
-                <?php
-                if(isset($_POST["OMGALUL"])){
-                    $connexion=connect();
-                    $username=$_COOKIE["login"];
-                    $resultat=mysqli_query($connexion,"UPDATE users SET Nbr_Points='0' WHERE Pseudo='$username'");
-                    header("Location:profiluser.php");
+        <div id="newPseudo">
+            <p>Change pseudo</p>
+            <form method="POST">
+                <input type="text" name="newPseudo" style="width: 50%;" placeholder="New pseudo">
+                <br>
+                <input type="submit" value="change">
+            </form>
+            <?php
+            $erreurNom = false;
+            if (isset($_POST['newPseudo'])) {
+                $newPseudo = $_POST['newPseudo'];
+                $username = $_COOKIE["login"];
+                $connexion = connect();
+                $verif = mysqli_query($connexion, "SELECT `Pseudo` from `users` WHERE `Pseudo` = '$newPseudo'");
+                if (mysqli_num_rows($verif) == 1) {
+                    $erreurNom = true;
+                    $nomPris = $newPseudo;
+                    setcookie("erreurNom", $erreurNom, time() + (3600 * 24 * 365));
+                    setcookie("nomPris", $nomPris, time() + (3600 * 24 * 365));
+                } else {
+                    $resultat1 = mysqli_query($connexion, "UPDATE users SET Pseudo='$newPseudo' WHERE Pseudo='$username'");
+                    $resultat2 = mysqli_query($connexion, "UPDATE custom_level SET AUTHOR='$newPseudo' WHERE AUTHOR='$username'");
+                    setcookie("login", $newPseudo, time() + (3600 * 24 * 365));
                 }
-                if(isset($_POST["POGGERS"])){
-                   ?>
-                   <style>
-                        .Popup{
-                            display: none;
-                        }
-                   </style>
-                   <?php
+                unset($_POST['newPseudo']);
+                header('Location: ./profiluser.php');
+            }
+            ?>
+            <a onclick="closePopup('newPseudo')">close</a>
+        </div>
+        <?php
+        if (isset($_COOKIE['erreurNom']) && $_COOKIE['erreurNom'] == true) {
+        ?>
+            <style>
+                #warning {
+                    display: block;
+                }
+
+                footer, main {
+                    opacity: 0.3;
+                }
+
+                footer>a, main>a {
+                    pointer-events: none;
+                }
+            </style>
+            <div id="warning">
+                <?php $nomPris = $_COOKIE['nomPris'] ?>
+                <p><?php echo $nomPris ?> is already taken</p>
+                <a onclick="closePopup('warning')">close</a>
+            </div>
+        <?php
+            $_COOKIE['erreurNom'] == false;
+        }
+        if (isset($_COOKIE['erreurNom'])) {
+            setcookie('erreurNom', "", 0);
+        }
+        if (isset($_COOKIE['nomPris'])) {
+            setcookie('nomPris', "", 0);
+        }
+        ?>
+        <div id="resetStats">
+            <p>You want to reset your statistics ?</p>
+            <p>Sure ?</p>
+            <form method="POST">
+                <input type="submit" name="resetStats" value="YES">
+                <input type="submit" onclick="closePopup('resetStats')" value="NO">
+                <?php
+                if (isset($_POST["resetStats"])) {
+                    $connexion = connect();
+                    $username = $_COOKIE["login"];
+                    $resultat = mysqli_query($connexion, "UPDATE users SET Nbr_Points='0' WHERE Pseudo='$username'");
+                    unset($_POST['resetStats']);
+                    header('Location: ./profiluser.php');
                 }
                 ?>
-        </div>
-        <div>
-        
+            </form>
+            <a onclick="closePopup('resetStats')">close</a>
         </div>
     </div>
+
+    <script>
+        function openPopup($name) {
+            document.getElementById($name).style.display = "block"
+            document.querySelector('header').style.opacity = "0.3"
+            document.querySelector('main').style.opacity = "0.3"
+            document.querySelector('header').style.pointerEvents = "none"
+            document.querySelector('main').style.pointerEvents = "none"
+        }
+
+        function closePopup($name) {
+            document.getElementById($name).style.display = "none"
+            document.querySelector('header').style.opacity = "1"
+            document.querySelector('main').style.opacity = "1"
+            document.querySelector('header').style.pointerEvents = "auto"
+            document.querySelector('main').style.pointerEvents = "auto  "
+        }
+    </script>
 </body>

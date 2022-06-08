@@ -9,9 +9,8 @@ echo "<div id='popup_lose' style='background-image: url($link)'>
     <div class='but'>
         <button class='restart'><a>replay</a></button>
         <button><a href='./home.php'>home</a></button>
-        <button id='save'><a>save</a></button>
+        <button class='save'><a>save</a></button>
     </div>
-
 </div>";
 ?>
 

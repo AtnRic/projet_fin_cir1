@@ -17,7 +17,7 @@ echo "<div id='popup' style='background-image: url($link)'>
     <div class='but'>
         <button class='restart'>replay</button>
         <button><a href='./home.php'>home</a></button>
-        <button id='save'>save</button>
+        <button class='save'><a> save </a></button>
     <button><a href='./retro.php'>next level</a></button>
     </div>
 
@@ -115,7 +115,10 @@ echo "<div id='popup' style='background-image: url($link)'>
         text-decoration: none;
     }
 
-    
+    a:hover{
+        box-shadow: none;
+        border: none;
+    }
 
 
     @media screen and (max-width: 1300px) {
