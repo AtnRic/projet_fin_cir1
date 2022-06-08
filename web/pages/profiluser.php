@@ -16,9 +16,9 @@ function isStarShort($username, $name)
 {
     $connexion = connect();
     $username = $_COOKIE['login'];
-    $resultat = mysqli_query($connexion, "SELECT `etoileCheminCourt` FROM `custom_level` WHERE `AUTHOR` = '$username' AND `NAME` = '$name'");
+    $resultat = mysqli_query($connexion, "SELECT `STAR_SHORT` FROM `custom_level` WHERE `AUTHOR` = '$username' AND `NAME` = '$name'");
     $row = mysqli_fetch_assoc($resultat);
-    if ($row['etoileCheminCourt'] == 1) {
+    if ($row['STAR_SHORT'] == 1) {
         return '&#9733';
     } else {
         return '&#9734';
@@ -30,9 +30,9 @@ function isStarLong($username, $name)
 {
     $connexion = connect();
     $username = $_COOKIE['login'];
-    $resultat = mysqli_query($connexion, "SELECT `etoileCheminLong` FROM `custom_level` WHERE `AUTHOR` = '$username' AND `NAME` = '$name'");
+    $resultat = mysqli_query($connexion, "SELECT `STAR_LONG` FROM `custom_level` WHERE `AUTHOR` = '$username' AND `NAME` = '$name'");
     $row = mysqli_fetch_assoc($resultat);
-    if ($row['etoileCheminLong'] == 1) {
+    if ($row['STAR_LONG'] == 1) {
         return '&#9733';
     } else {
         return '&#9734';
