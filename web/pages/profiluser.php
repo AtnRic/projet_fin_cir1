@@ -11,37 +11,6 @@ include "../tools/_main_tools.php";
     <title>Page de profil</title>
 </head>
 
-<?php
-function isStarShort($username, $name)
-{
-    $connexion = connect();
-    $username = $_COOKIE['login'];
-    $resultat = mysqli_query($connexion, "SELECT `etoileCheminCourt` FROM `custom_level` WHERE `AUTHOR` = '$username' AND `NAME` = '$name'");
-    $row = mysqli_fetch_assoc($resultat);
-    if ($row['etoileCheminCourt'] == 1) {
-        return '&#9733';
-    } else {
-        return '&#9734';
-    }
-    mysqli_close($connexion);
-}
-
-function isStarLong($username, $name)
-{
-    $connexion = connect();
-    $username = $_COOKIE['login'];
-    $resultat = mysqli_query($connexion, "SELECT `etoileCheminLong` FROM `custom_level` WHERE `AUTHOR` = '$username' AND `NAME` = '$name'");
-    $row = mysqli_fetch_assoc($resultat);
-    if ($row['etoileCheminLong'] == 1) {
-        return '&#9733';
-    } else {
-        return '&#9734';
-    }
-    mysqli_close($connexion);
-}
-
-?>
-
 <body>
     <header>
         <a href="./home.php" id="homeButton">MENU</a>
@@ -129,10 +98,8 @@ function isStarLong($username, $name)
                 if ($resultat) {
                     while ($row = mysqli_fetch_assoc($resultat)) {
                         $name = $row['NAME'];
-                        $starShort = isStarShort($username, $name);
-                        $starLong = isStarLong($username, $name);
                 ?>
-                        <a href="#"><?php echo $name . "<span style='width:2%;display:inline-block'></span> <span style='font-size:30px;display:inline-block'> $starShort </span>" . "<span style='font-size:30px;display:inline-block'> $starLong </span>" ?></a>
+                        <a href="#"><?php echo $name ?></a>
                         <br>
                 <?php
                     }
@@ -149,7 +116,7 @@ function isStarLong($username, $name)
             <span style="width:10%;display:inline-block"></span>
             <a onclick="openPopup('resetStats')">Reset stats</a>
             <span style="width:10%;display:inline-block"></span>
-            <a onclick="openPopup('newPseudo')">Change pseudo</a>
+            <a onclick="openPopup('newPseudo')">Change username</a>
         </div>
     </main>
     <div id="popup">

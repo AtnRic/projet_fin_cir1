@@ -111,9 +111,9 @@ if (isset($_POST['mdpin'])) {
                 .formulaires #mdpin{
                     outline: none;
                     border-style: solid;
-                    border-radius: 5px;
-                    border-width: 2px;
+                    border-width: 5px;
                     border-color:red;
+                    margin: 10px;
                 }
                 </style>";
         echo"<p style='color:red;'>Password invalid</p>";
@@ -127,9 +127,9 @@ if (isset($_POST['mdpin'])) {
                     .formulaires #pseudo{
                         outline: none;
                         border-style: solid;
-                        border-radius: 5px;
-                        border-width: 2px;
+                        border-width: 5px;
                         border-color:red;
+                        margin: 10px;
                     }
                     </style>";
         echo"<p style='color:red;'>Pseudo empty</p>";
@@ -144,9 +144,9 @@ if (isset($_POST['mdpin'])) {
                     .formulaires #mdpin{
                         outline: none;
                         border-style: solid;
-                        border-radius: 5px;
-                        border-width: 2px;
+                        border-width: 5px;
                         border-color:red;
+                        margin: 10px;
                     }
                     </style>";
         echo"<p style='color:red;'>Password empty</p>";
@@ -158,9 +158,9 @@ if (isset($_POST['mdpin'])) {
                     .formulaires #verifmdp{
                         outline: none;
                         border-style: solid;
-                        border-radius: 5px;
-                        border-width: 2px;
+                        border-width: 5px;
                         border-color:red;
+                        margin: 10px;
                     }
                     </style>";
         echo"<p style='color:red;'>Password empty</p>";            
@@ -170,9 +170,9 @@ if (isset($_POST['mdpin'])) {
             .formulaires input[type=text]:focus, input[type=password]:focus{
                 outline: none;
                 border-style: solid;
-                border-radius: 5px;
-                border-width: 2px;
+                border-width: 5px;
                 border-color:white;
+                margin: 10px;
             }
             </style>";
 }
@@ -186,9 +186,9 @@ if (isset($_POST['mdpin']) && isset($_POST['verifmdp'])) {
                 .formulaires #verifmdp, #mdpin{
                     outline: none;
                     border-style: solid;
-                    border-radius: 5px;
-                    border-width: 2px;
+                    border-width: 5px;
                     border-color:red;
+                    margin: 10px;
                 }
                 </style>";
     } else {
@@ -208,10 +208,9 @@ if ($count == 3) {
             .formulaires #mdpin{
                 outline: none;
                 border-style: solid;
-                border-radius: 5px;
-                border-width: 2px;
+                border-width: 5px;
                 border-color:red;
-            }
+                margin: 10px;
             </style>";
     }
 }
@@ -240,9 +239,9 @@ if (isset($_POST['mdpco'])) {
                         .formulaire #login{
                             outline: none;
                             border-style: solid;
-                            border-radius: 5px;
-                            border-width: 2px;
+                            border-width: 5px;
                             border-color:red;
+                            margin: 10px;
                         }
               </style>";
     } else {
@@ -259,9 +258,9 @@ if (isset($_POST['mdpco'])) {
                     .formulaire #login{
                         outline: none;
                         border-style: solid;
-                        border-radius: 5px;
-                        border-width: 2px;
+                        border-width: 5px;
                         border-color:red;
+                        margin: 10px;
                     }
                     </style>";
         }
@@ -271,9 +270,9 @@ if (isset($_POST['mdpco'])) {
                 .formulaires input[type=text]:focus, input[type=password]:focus{
                     outline: none;
                     border-style: solid;
-                    border-radius: 5px;
-                    border-width: 2px;
+                    border-width: 5px;
                     border-color:white;
+                    margin: 10px;
                 }
                 </style>";
 }
@@ -302,9 +301,9 @@ if (isset($_POST["subanonymes"])) {
                     .formulaires #login{
                         outline: none;
                         border-style: solid;
-                        border-radius: 5px;
-                        border-width: 2px;
+                        border-width: 5px;
                         border-color:red;
+                        margin: 10px;
                     }
                     </style>";
     } else {

@@ -207,7 +207,7 @@ function sch_Start(anime, custom, data) {
     Solver = solveOut;
     tpOut = newOut[2].split(",");
     gardeOut = newOut[3].split(",");
-    LongestSolver = newOut[4];
+    LongestSolver = newOut[4].split(",");
 
     console.log("SOLUTION TP " + tpOut.length + " : " + tpOut);
     console.log("SOLUTION GARDE " + gardeOut.length + " : " + gardeOut);
@@ -742,6 +742,36 @@ function SpawnPlayer(cellId, solver) {
 
 // Niveau fini.
 function Win() {
+  if (Solved == false && SolvedLong == false) {
+    if (Shortest()) {
+      PHP_Function(
+        "../pages/points.php",
+        "short",
+        function Handle(output) {
+          console.log(output);
+        },
+        LabSize
+      );
+    }
+    if (Longest()) {
+      PHP_Function(
+        "../pages/points.php",
+        "long",
+        function Handle(output) {
+          console.log(output);
+        },
+        LabSize
+      );
+    }
+  }
+  PHP_Function(
+    "../pages/points.php",
+    "finish",
+    function Handle(output) {
+      console.log(output);
+    },
+    LabSize
+  );
   Mouvement++;
   // Fin de la partie.
   finish = true;
@@ -763,8 +793,6 @@ function Win() {
   // Lancement des conf.
   initConfetti();
   render();
-  Shortest();
-  Longest();
 }
 
 // Niveau perdu.
@@ -844,7 +872,7 @@ function Save() {
     "../pages/save.php",
     "save",
     function Handle(output) {
-      console.log("Resultat: " + output);
+      document.location.href = "../pages/profiluser.php";
     },
     Arg
   );
@@ -1358,6 +1386,7 @@ function Shortest() {
 
 function Longest() {
   const arrOfNum = [];
+  console.log(LongestSolver);
   LongestSolver.forEach((str) => {
     arrOfNum.push(Number(str));
   });
