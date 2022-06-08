@@ -134,6 +134,7 @@ echo "
         text-align: center;
         /*padding: 4.5em 0;
         height: 7.5em;*/
+        height: 100%;
         height: 57vh;
         max-width: 750px;
         margin: auto;
