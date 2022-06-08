@@ -59,6 +59,7 @@ body {
 #middle {
     position: absolute;
     top: 50vh;
+    left: 0;
     transform: translateY(-50%);
     max-height: 30vh;
     animation-name: middle-leaf;
@@ -69,6 +70,7 @@ body {
 #middlebis {
     position: absolute;
     top: 50vh;
+    left: 0;
     max-height: 20vh;
     animation-name: middle-leaf-bis;
     animation-duration: 6s;
