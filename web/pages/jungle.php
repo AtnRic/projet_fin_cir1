@@ -3,7 +3,9 @@
 <head>
     <title>Maze'ltov - jungle</title>
     <link rel="stylesheet" type="text/css" href="../css/main.css">
+    <link rel="stylesheet" type="text/css" href="../css/overlay.css">
     <link rel='icon' href='../images/front/favicon.ico' type='image/x-icon'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -17,6 +19,7 @@
     include 'popups/popup_lose_jungle.php';
     include 'popups/popup_intro_jungle.php';
     include 'popups/popup_win_jungle.php';
+    include 'overlay.html';
     ?>
 </body>  
 <script src="../js/conf.js"></script>

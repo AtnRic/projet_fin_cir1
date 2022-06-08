@@ -79,6 +79,7 @@ echo "<div id='popup' style='background-image: url($link)'>
         flex-wrap: wrap;
         margin: 10px;
         top: 30px;
+
     }
     .but{
         position: absolute;
