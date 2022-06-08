@@ -116,7 +116,7 @@ include "../tools/_main_tools.php";
             <span style="width:10%;display:inline-block"></span>
             <a onclick="openPopup('resetStats')">Reset stats</a>
             <span style="width:10%;display:inline-block"></span>
-            <a onclick="openPopup('newPseudo')">Change pseudo</a>
+            <a onclick="openPopup('newPseudo')">Change username</a>
         </div>
     </main>
     <div id="popup">
