@@ -16,7 +16,7 @@ echo "
     <div class='but'>
         <a class='restart'><p>replay</p></a>
         <a id='home' href='./home.php'><p>home</p></a>
-        <a id='save'><p>save</p></a>
+        <a class='save'><p>save</p></a>
         <a id='next' href='./space.php'><p>next level</p></a>
     </div>
 

@@ -72,6 +72,17 @@ main {
     text-align: center;
 }
 
+#level {
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+#level>a {
+    margin-top: 2%;
+    color: white;
+    text-decoration: none;
+}
+
 #buttonLevel>a {
     text-decoration: none;
     color: white;
@@ -88,7 +99,7 @@ main {
     margin-top: 100px;
 }
 
-#newPseudo {
+#avatar {
     display: none;
     z-index: 1;
     position: fixed;
@@ -101,12 +112,39 @@ main {
     text-align: center;
 }
 
-#newPseudo>p {
+#avatar>p,
+#avatar>form>select,
+#avatar>form>input {
     margin-bottom: 10%;
 }
 
-#newPseudo>form>input {
+#newPseudo {
+    display: none;
+    z-index: 2;
+    position: fixed;
+    top: 15%;
+    left: 37%;
+    width: 25%;
+    height: 32%;
+    background-color: black;
+    border: solid 2px white;
+    text-align: center;
+}
+
+#newPseudo>p,#newPseudo>form>input {
     margin-bottom: 10%;
+}
+#warning{
+    display:none;
+    z-index: 3;
+    position: fixed;
+    top: 15%;
+    left: 27%;
+    width: 45%;
+    height: 12%;
+    background-color: black;
+    border: solid 2px white;
+    text-align: center;
 }
 
 #resetStats {
@@ -122,16 +160,8 @@ main {
     text-align: center;
 }
 
-#resetStats>p {
+#resetStats>p,#resetStats>form>input {
     margin-bottom: 5%;
-}
-
-#resetStats>form>input {
-    margin-bottom: 5%;
-}
-
-.disableLink {
-    pointer-events: none;
 }
 
 @keyframes blink {

@@ -17,6 +17,7 @@ typedef struct DoubleLinkedList {
 typedef struct Teleporteurs_Paire {
 	int entree;
 	int sortie;
+	int size;
 }Teleporteurs_Paire;
 
 // cr�ation d'une nouvelle liste cha�n�e bilat�re vide
@@ -92,7 +93,9 @@ typedef struct Path {
 Path* newPath();
 Path* clone(Path* base);
 Path* Solve(Lab* L, Teleporteurs_Paire* pairs, int nbTpPair);
+Path* PathItLong(Lab* Lab, Teleporteurs_Paire* pairs, int nbTpPair, Path* actual, int index, bool first);
 Path* PathIt(Lab* Lab, Teleporteurs_Paire* pairs, int nbTpPair, Path* actual, int index, bool first);
+Path* SolveLong(Lab* L, Teleporteurs_Paire* pairs, int nbTpPair);
 int show(Lab* L, Path* P, Teleporteurs_Paire * T, int nbPaire);
 bool ContainsPath(Path* actual, int index);
 int ContainsTp(int index, Teleporteurs_Paire* T, int nbPaire);
@@ -111,10 +114,10 @@ typedef struct Garde {
 
 	/* Direction dans laquelle le garde va se d�placer */
 
-	bool t;     //top
+	bool t;  //top
 	bool d;  //down
 	bool r;  //right
-	bool l;     //left
+	bool l;  //left
 
 	int move; //nombre de case avant de toucher le mur en face et de devoir faire demi-tour
 	int choix;
