@@ -15,7 +15,6 @@
     include 'popups/popup_intro_space.php';
     include 'popups/popup_win_space.php';
     include 'popups/popup_lose_space.php'; ?>
-
 </body>
 <script src="../js/conf.js"></script>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
