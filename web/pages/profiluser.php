@@ -11,6 +11,37 @@ include "../tools/_main_tools.php";
     <title>Page de profil</title>
 </head>
 
+<?php
+function isStarShort($username, $name)
+{
+    $connexion = connect();
+    $username = $_COOKIE['login'];
+    $resultat = mysqli_query($connexion, "SELECT `etoileCheminCourt` FROM `custom_level` WHERE `AUTHOR` = '$username' AND `NAME` = '$name'");
+    $row = mysqli_fetch_assoc($resultat);
+    if ($row['etoileCheminCourt'] == 1) {
+        return '&#9733';
+    } else {
+        return '&#9734';
+    }
+    mysqli_close($connexion);
+}
+
+function isStarLong($username, $name)
+{
+    $connexion = connect();
+    $username = $_COOKIE['login'];
+    $resultat = mysqli_query($connexion, "SELECT `etoileCheminLong` FROM `custom_level` WHERE `AUTHOR` = '$username' AND `NAME` = '$name'");
+    $row = mysqli_fetch_assoc($resultat);
+    if ($row['etoileCheminLong'] == 1) {
+        return '&#9733';
+    } else {
+        return '&#9734';
+    }
+    mysqli_close($connexion);
+}
+
+?>
+
 <body>
     <header>
         <a href="./home.php" id="homeButton">MENU</a>
@@ -43,6 +74,7 @@ include "../tools/_main_tools.php";
                         $avatar = './../images/profileuser/profil/profile_space_guard.png';
                         break;
                 }
+                mysqli_close($connexion);
                 ?>
                 <img width="50%" src=<?php echo $avatar ?>>
             </div>
@@ -93,15 +125,19 @@ include "../tools/_main_tools.php";
                 <?php
                 $connexion = connect();
                 $username = $_COOKIE['login'];
-                $resultat = mysqli_query($connexion, "SELECT `NAME` FROM `custom_level` WHERE `AUTHOR` = 'Dousai'");
+                $resultat = mysqli_query($connexion, "SELECT `NAME` FROM `custom_level` WHERE `AUTHOR` = '$username'");
                 if ($resultat) {
                     while ($row = mysqli_fetch_assoc($resultat)) {
+                        $name = $row['NAME'];
+                        $starShort = isStarShort($username, $name);
+                        $starLong = isStarLong($username, $name);
                 ?>
-                        <a href="#"> <?php echo $row['NAME'] ?></a>
+                        <a href="#"><?php echo $name . "<span style='width:2%;display:inline-block'></span> <span style='font-size:30px;display:inline-block'> $starShort </span>" . "<span style='font-size:30px;display:inline-block'> $starLong </span>" ?></a>
                         <br>
                 <?php
                     }
                 }
+                mysqli_close($connexion);
                 ?>
             </div>
             <div id="buttonLevel">
@@ -125,7 +161,6 @@ include "../tools/_main_tools.php";
                     <option>jungle guard</option>
                     <option>retro hero</option>
                     <option>retro guard</option>
-                    <option>jungle hero</option>
                     <option>space hero</option>
                     <option>space guard</option>
                 </select>
@@ -142,7 +177,7 @@ include "../tools/_main_tools.php";
                 header('Location: ./profiluser.php');
             }
             ?>
-            <a onclick="closePopup('avatar')">Close</a>
+            <a onclick="closePopup('avatar')">close</a>
         </div>
         <div id="newPseudo">
             <p>Change pseudo</p>
@@ -152,19 +187,59 @@ include "../tools/_main_tools.php";
                 <input type="submit" value="change">
             </form>
             <?php
+            $erreurNom = false;
             if (isset($_POST['newPseudo'])) {
                 $newPseudo = $_POST['newPseudo'];
                 $username = $_COOKIE["login"];
                 $connexion = connect();
-                $resultat1 = mysqli_query($connexion, "UPDATE users SET Pseudo='$newPseudo' WHERE Pseudo='$username'");
-                $resultat2 = mysqli_query($connexion, "UPDATE custom_level SET AUTHOR='$newPseudo' WHERE AUTHOR='$username'");
-                setcookie("login", $newPseudo, time() + (3600 * 24 * 365));
+                $verif = mysqli_query($connexion, "SELECT `Pseudo` from `users` WHERE `Pseudo` = '$newPseudo'");
+                if (mysqli_num_rows($verif) == 1) {
+                    $erreurNom = true;
+                    $nomPris = $newPseudo;
+                    setcookie("erreurNom", $erreurNom, time() + (3600 * 24 * 365));
+                    setcookie("nomPris", $nomPris, time() + (3600 * 24 * 365));
+                } else {
+                    $resultat1 = mysqli_query($connexion, "UPDATE users SET Pseudo='$newPseudo' WHERE Pseudo='$username'");
+                    $resultat2 = mysqli_query($connexion, "UPDATE custom_level SET AUTHOR='$newPseudo' WHERE AUTHOR='$username'");
+                    setcookie("login", $newPseudo, time() + (3600 * 24 * 365));
+                }
                 unset($_POST['newPseudo']);
                 header('Location: ./profiluser.php');
             }
             ?>
-            <a onclick="closePopup('newPseudo')">Close</a>
+            <a onclick="closePopup('newPseudo')">close</a>
         </div>
+        <?php
+        if (isset($_COOKIE['erreurNom']) && $_COOKIE['erreurNom'] == true) {
+        ?>
+            <style>
+                #warning {
+                    display: block;
+                }
+
+                footer, main {
+                    opacity: 0.3;
+                }
+
+                footer>a, main>a {
+                    pointer-events: none;
+                }
+            </style>
+            <div id="warning">
+                <?php $nomPris = $_COOKIE['nomPris'] ?>
+                <p><?php echo $nomPris ?> is already taken</p>
+                <a onclick="closePopup('warning')">close</a>
+            </div>
+        <?php
+            $_COOKIE['erreurNom'] == false;
+        }
+        if (isset($_COOKIE['erreurNom'])) {
+            setcookie('erreurNom', "", 0);
+        }
+        if (isset($_COOKIE['nomPris'])) {
+            setcookie('nomPris', "", 0);
+        }
+        ?>
         <div id="resetStats">
             <p>You want to reset your statistics ?</p>
             <p>Sure ?</p>
@@ -181,7 +256,7 @@ include "../tools/_main_tools.php";
                 }
                 ?>
             </form>
-            <a onclick="closePopup('resetStats')">Close</a>
+            <a onclick="closePopup('resetStats')">close</a>
         </div>
     </div>
 

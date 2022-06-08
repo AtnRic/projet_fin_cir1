@@ -12,7 +12,6 @@ body {
     background-color: black;
     color: white;
     font-family: -apple-system, BlinkMacSystemFont, 'Montserrat', 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    overflow: hidden;
 }
 
 a:hover {
@@ -73,12 +72,12 @@ main {
     text-align: center;
 }
 
-#level{
+#level {
     margin-top: 2%;
     margin-bottom: 2%;
 }
 
-#level>a{
+#level>a {
     margin-top: 2%;
     color: white;
     text-decoration: none;
@@ -107,15 +106,21 @@ main {
     top: 15%;
     left: 37%;
     width: 25%;
-    height: 20%;
+    height: 32%;
     background-color: black;
     border: solid 2px white;
     text-align: center;
 }
 
+#avatar>p,
+#avatar>form>select,
+#avatar>form>input {
+    margin-bottom: 10%;
+}
+
 #newPseudo {
     display: none;
-    z-index: 1;
+    z-index: 2;
     position: fixed;
     top: 15%;
     left: 37%;
@@ -126,12 +131,20 @@ main {
     text-align: center;
 }
 
-#newPseudo>p {
+#newPseudo>p,#newPseudo>form>input {
     margin-bottom: 10%;
 }
-
-#newPseudo>form>input {
-    margin-bottom: 10%;
+#warning{
+    display:none;
+    z-index: 3;
+    position: fixed;
+    top: 15%;
+    left: 27%;
+    width: 45%;
+    height: 12%;
+    background-color: black;
+    border: solid 2px white;
+    text-align: center;
 }
 
 #resetStats {
@@ -147,11 +160,7 @@ main {
     text-align: center;
 }
 
-#resetStats>p {
-    margin-bottom: 5%;
-}
-
-#resetStats>form>input {
+#resetStats>p,#resetStats>form>input {
     margin-bottom: 5%;
 }
 

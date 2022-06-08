@@ -1080,12 +1080,14 @@ Path* Solve(Lab* L, Teleporteurs_Paire* pairs, int nbTpPair)
 	Path* P = newPath(100);
 	return PathIt(L, pairs, nbTpPair, P, 0, true);
 }
+
 Path* SolveLong(Lab* L, Teleporteurs_Paire* pairs, int nbTpPair)
 {
 	Cell* origin = L->tab;
 	Path* P = newPath(100);
 	return PathItLong(L, pairs, nbTpPair, P, 0, true);
 }
+
 Path* PathIt(Lab* Lab, Teleporteurs_Paire* pairs, int nbTpPair, Path* actual, int index, bool first)
 {
 	Teleporteurs_Paire* newTp = GetStart(index, pairs, nbTpPair);
@@ -1406,22 +1408,22 @@ void ApparitionGardes(char* maze, int cote, int Quantite_Garde, int Quantite_tel
 					switch (*(maze + (i + j))) {
 					case 'a':
 						for (int k = 0; k < Quantite_teleporteur; k++) {
-							if (*(maze + (i + j + cote)) == (P + k)) {
+							if ((maze + (i + j + cote)) == (P + k)) {
 								break;
 							}
-							if (*(maze + (i + j - cote)) == (P + k)) {
+							if ((maze + (i + j - cote)) == (P + k)) {
 								break;
 							}
 						}
 					case 'b':
 						for (int k = 0; k < Quantite_teleporteur; k++) {
-							if (*(maze + (i + j + cote)) == (P + k)) {
+							if ((maze + (i + j + cote)) == (P + k)) {
 								break;
 							}
 						}
 					case 'd':
 						for (int k = 0; k < Quantite_teleporteur; k++) {
-							if (*(maze + (i + j - cote)) == (P + k)) {
+							if ((maze + (i + j - cote)) == (P + k)) {
 								break;
 							}
 						}
@@ -1453,22 +1455,22 @@ void ApparitionGardes(char* maze, int cote, int Quantite_Garde, int Quantite_tel
 					switch (*(maze + (i + j))) {
 					case 'a':
 						for (int k = 0; k < Quantite_teleporteur; k++) {
-							if (*(maze + (i + j + 1)) == (P + k)) {
+							if ((maze + (i + j + 1)) == (P + k)) {
 								break;
 							}
-							if (*(maze + (i + j - 1)) == (P + k)) {
+							if ((maze + (i + j - 1)) == (P + k)) {
 								break;
 							}
 						}
 					case 'c':
 						for (int k = 0; k < Quantite_teleporteur; k++) {
-							if (*(maze + (i + j - 1)) == (P + k)) {
+							if ((maze + (i + j - 1)) == (P + k)) {
 								break;
 							}
 						}
 					case 'e':
 						for (int k = 0; k < Quantite_teleporteur; k++) {
-							if (*(maze + (i + j + 1)) == (P + k)) {
+							if ((maze + (i + j + 1)) == (P + k)) {
 								break;
 							}
 						}
@@ -1491,20 +1493,26 @@ void ApparitionGardes(char* maze, int cote, int Quantite_Garde, int Quantite_tel
 		}
 	}
 	printf("\n;");
-	for (int i = 0; i < Quantite_Garde; i++) {
-		if (getDoubleLinkedListSize(List) == 0) break;
+	int SIZE = List->size;
+	for (int i = 0; i < SIZE; i++) {
 		int r = rand() % getDoubleLinkedListSize(List);
 		(garde + i)->Id = i + 1;
 		(garde + i)->position = getDoubleLinkedListElem(List, r)->data;
 		(garde + i)->move = getDoubleLinkedListElem(LaDirection, r)->data;
 		DeleteDoubleLinkedListItem(List, getDoubleLinkedListElem(List, r));
 		DeleteDoubleLinkedListItem(LaDirection, getDoubleLinkedListElem(LaDirection, r));
-		if (i < Quantite_Garde -1) {
+		if (i < SIZE - 1) {
 			printf("%d:%d,", (garde + i)->position, (garde + i)->move);
 		}
-		if (i == Quantite_Garde-1) {
+		/*if (List->size > 1 && LaDirection > 1) {
+			printf("%d:%d,", (garde + i)->position, (garde + i)->move);
+		}*/
+		if (i == SIZE - 1) {
 			printf("%d:%d", (garde + i)->position, (garde + i)->move);
 		}
+		/*if (List->size == 1 && LaDirection->size == 1) {
+			printf("%d:%d", (garde + i)->position, (garde + i)->move);
+		}*/
 	}
 	return;
 }
@@ -1552,9 +1560,6 @@ int readFile(char* filename, int tableau[]) {
 	return 1;
 }
 
-
-int B = 0;
-
 int main()
 {
 	int tableau[4] = { 0 };
@@ -1574,7 +1579,7 @@ int main()
 //	show(newl, S, pairs, 5);
 //	printf("\n_____ SOLVE  FINAL _____\n\n");
 	printPath(S);
-	printTp(pairs);
+	//printTp(pairs);
 //	printf("\n____ ____ ____ ____ ____\n\n");
 
 	//Path* W = Solve(newl, NULL, 0);
