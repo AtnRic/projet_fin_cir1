@@ -207,7 +207,7 @@ function sch_Start(anime, custom, data) {
     Solver = solveOut;
     tpOut = newOut[2].split(",");
     gardeOut = newOut[3].split(",");
-    LongestSolver = newOut[4];
+    LongestSolver = newOut[4].split(",");
 
     console.log("SOLUTION TP " + tpOut.length + " : " + tpOut);
     console.log("SOLUTION GARDE " + gardeOut.length + " : " + gardeOut);
@@ -1358,6 +1358,7 @@ function Shortest() {
 
 function Longest() {
   const arrOfNum = [];
+  console.log(LongestSolver);
   LongestSolver.forEach((str) => {
     arrOfNum.push(Number(str));
   });
