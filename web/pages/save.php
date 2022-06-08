@@ -39,7 +39,7 @@
             }
             $d = $data[0];
             //$resultat=mysqli_query($connexion,"INSERT INTO `custom_level` ( `NAME` , `THEME` , `ID_AUTHOR` , `DATA` , `CUSTOM` ) VALUES (`$name`,`$theme`,`$idpseudo`,`$data[0]`,`$custom`)");
-            $resultat = mysqli_query($connexion, "INSERT INTO `custom_level` (`NAME`, `THEME`, `ID_AUTHOR`, `DATA`, `CUSTOM`) VALUES ('$name','$theme','$idpseudo','$d','0');");
+            $resultat = mysqli_query($connexion, "INSERT INTO `custom_level` (`NAME`, `THEME`, `ID_AUTHOR`, `DATA`, `CUSTOM`, `AUTHOR`, `STAR_SHORT`, `STAR_LONG`) VALUES ('$name','$theme','$idpseudo','$d','0', 'Patrick', 1, 0);");
             echo $resultat;
         }
         //niveau custom
