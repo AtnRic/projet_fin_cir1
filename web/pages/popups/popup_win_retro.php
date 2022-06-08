@@ -7,13 +7,8 @@ echo "
     <p id='number'>number of steps : </p>
     <p id='short'>shortest solution : </p>
     <p id='long'>longest solution : </p>
-    <div class='star'>
-        <div class='center_img'>
-            <img id='starOne' src='../images/popup/star.png' alt='star'>
-            <img id='starTwo' src='../images/popup/star_empty.png' alt='star'>
-        </div>    
-    </div>  
-    <div class='but'>
+     
+    <div class='but retro'>
         <a class='restart'><p>replay</p></a>
         <a href='./home.php'><p>home</p></a>
         <a class='save'><p>save</p></a>
@@ -32,7 +27,7 @@ echo "
         font-family: "8-bit HUD", serif;
     }
     #popup{
-        z-index: 10;
+        z-index: 15;
         visibility: hidden;
         position: absolute;
         top: 22.4vh;
@@ -40,7 +35,6 @@ echo "
         width: 60vh;
         left: 50%;
         transform: translateX(-50%);
-
         border-style: solid;
         border-width: 5px;
         border-color: #0ff;
@@ -48,7 +42,6 @@ echo "
         background-color: rgba(0,4, 23, 0.75);
         border-radius: 20px;
         padding: 20px;
-
         text-align: center;
         align-items: center;
     }
@@ -85,41 +78,28 @@ echo "
         box-shadow: 0 0 10px 3px #0ff;
         background-color: transparent;
     }
-
-    .star{
-        background-image: none;
-        background-color: transparent;
-        width: 100%;
-        justify-content: center;
-        display: flex;
-
-    }
-    .center_img{
-        background-color: transparent;
-        width: 200px;
-        background-image: none;
-        justify-content: center;
-        display: flex;
-    }
     img{
         background-color: transparent;
         display: flex;
         justify-content: center;
-
         margin: auto;
         height: 50px;
         width: 50px;
     }
-    #popup .but{
+    #popup .but.retro{
+
         position: relative;
-        top: 25px;
     }
+
     .but, a{
         background-color: transparent;
         text-decoration: none;
     }
     a p{
         position: static;
+    }
+    .but.retro{
+        top: 166px;
     }
 </style>
 
