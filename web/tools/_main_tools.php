@@ -140,7 +140,7 @@ function Rank_User($username){
         }
         if($Points>=10000 && $Points<25000){
             $rank=1;//Copper premier rank
-            echo"true 1";
+            //echo"true 1";
             return $rank;
         }
         if ($Points>=25000 && $Points<50000){
