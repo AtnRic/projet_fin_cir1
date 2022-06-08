@@ -742,6 +742,36 @@ function SpawnPlayer(cellId, solver) {
 
 // Niveau fini.
 function Win() {
+  if (Solved == false && SolvedLong == false) {
+    if (Shortest()) {
+      PHP_Function(
+        "../pages/points.php",
+        "short",
+        function Handle(output) {
+          console.log(output);
+        },
+        LabSize
+      );
+    }
+    if (Longest()) {
+      PHP_Function(
+        "../pages/points.php",
+        "long",
+        function Handle(output) {
+          console.log(output);
+        },
+        LabSize
+      );
+    }
+  }
+  PHP_Function(
+    "../pages/points.php",
+    "finish",
+    function Handle(output) {
+      console.log(output);
+    },
+    LabSize
+  );
   Mouvement++;
   // Fin de la partie.
   finish = true;
@@ -763,8 +793,6 @@ function Win() {
   // Lancement des conf.
   initConfetti();
   render();
-  Shortest();
-  Longest();
 }
 
 // Niveau perdu.
