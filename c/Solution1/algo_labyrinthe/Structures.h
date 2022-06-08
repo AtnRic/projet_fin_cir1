@@ -17,7 +17,6 @@ typedef struct DoubleLinkedList {
 typedef struct Teleporteurs_Paire {
 	int entree;
 	int sortie;
-	int size;
 }Teleporteurs_Paire;
 
 // cr�ation d'une nouvelle liste cha�n�e bilat�re vide

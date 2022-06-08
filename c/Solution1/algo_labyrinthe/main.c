@@ -181,10 +181,10 @@ DoubleLinkedListElem * getDoubleLinkedListElem(DoubleLinkedList* list, int pos) 
 ///recherche des endroits ou placer les tp dans le labyrinthe et stocke dans une liste chainée
 /// </summary>
 /// <returns></returns>
-Teleporteurs_Paire* recherche_loc_tp(int nb_paires, char* maze, int size) {
+Teleporteurs_Paire* recherche_loc_tp(int nb_paires, char* maze, int size, int* sizetab) {
 	/*recherche localisation des tp*/
 	DoubleLinkedList* List = newDoubleLinkedList();
-	if (nb_paires >= size / 2) return NULL;
+	
 
 
 	for (int i = 1; i < size - 1; i++) {
@@ -195,22 +195,24 @@ Teleporteurs_Paire* recherche_loc_tp(int nb_paires, char* maze, int size) {
 	}
 	//printf("positions trouvees :\n");
 	//DisplayDoubleList(List);
-
+	//printf("\n%d\n", getDoubleLinkedListSize(List));
 
 
 	/*Creation de paires de tp*/
 	//printf("\nCreation des paires de teleporteurs :\n");
 	Teleporteurs_Paire* tab = (Teleporteurs_Paire*)malloc(sizeof(Teleporteurs_Paire) * nb_paires);
 	srand(time(NULL));
-
+	int size2 = 0;
 	int pos;
-	if (tab != NULL) {
+	(*sizetab) = 0;
+	if (tab != NULL || getDoubleLinkedListSize(List)<=2) {
 		for (int i = 0; i < nb_paires; i++) {
-			if (getDoubleLinkedListSize(List) == 0) return;
+
+
 			int max_index = getDoubleLinkedListSize(List);
 
 			//tirage d'une entrée
-			pos = (rand() * max_index / RAND_MAX) - 1;
+			pos = (rand() * max_index / RAND_MAX);
 			DoubleLinkedListElem* elem_entree = getDoubleLinkedListElem(List, pos);
 
 			(*(tab + i)).entree = elem_entree->data;
@@ -218,17 +220,19 @@ Teleporteurs_Paire* recherche_loc_tp(int nb_paires, char* maze, int size) {
 
 
 			//tirage d'une sortie
-			pos = (rand() * (max_index) / RAND_MAX-1);
+			max_index = getDoubleLinkedListSize(List);
+			pos = (rand() * max_index / RAND_MAX);
 			DoubleLinkedListElem* elem_sortie = getDoubleLinkedListElem(List, pos);
-			(*(tab + i)).sortie = elem_sortie->data;
+  			(*(tab + i)).sortie = elem_sortie->data;
 			DeleteDoubleLinkedListItem(List, elem_sortie);
 
 			//DisplayDoubleList(List);
 			//printf("\n\n");
+			size2++;
+			if (getDoubleLinkedListSize(List) <= 2) break;
 		}
-		for (int j = 0; j < nb_paires; j++) {
-			//printf("Paire %d = [%d, %d]\n", j + 1, (*(tab + j)).entree, (*(tab + j)).sortie);
-		}
+		(*sizetab) = size2;
+		
 		return tab;
 	}
 	return NULL;
@@ -817,7 +821,6 @@ char* letter(Lab* L)
 	}
 	return c;
 }
-
 char* letterSansPrintf(Lab* L) 
 {
 	char* c = (char*)malloc(sizeof(char) * L->size * L->size);
@@ -889,7 +892,6 @@ char* letterSansPrintf(Lab* L)
 	}
 	return c;
 }
-
 int printPath(Path* P)
 {
 	if (P == NULL) { return -1; }
@@ -911,10 +913,10 @@ int printPath(Path* P)
 	 //printf("\n");
 	return 0;
 }
-int printTp(Teleporteurs_Paire* P) {
+
+int printTp(Teleporteurs_Paire* P, int nbPaire) {
 	printf("\n");
 	printf(";");
-	int nbPaire = sizeof(P);
 	for (int i = 0; i < nbPaire; i++) {
 		printf("%d:%d", (P + i)->entree, (P + i)->sortie);
 		if (i != nbPaire - 1) {
@@ -1382,6 +1384,7 @@ int ContainsTp(int index, Teleporteurs_Paire* T, int nbPaire) {
 
 Teleporteurs_Paire* GetStart(int index, Teleporteurs_Paire* T, int nbPaire) {
 	if (T == NULL) { return NULL; }
+	if (nbPaire == 0) { return NULL; }
 	for (int i = 0; i < nbPaire; i++) {
 		if ((*(T + i)).entree == index) {
 			return (T+i);
@@ -1493,20 +1496,26 @@ void ApparitionGardes(char* maze, int cote, int Quantite_Garde, int Quantite_tel
 		}
 	}
 	printf("\n;");
-	for (int i = 0; i < Quantite_Garde; i++) {
-		if (getDoubleLinkedListSize(List) == 0) break;
+	int SIZE = List->size;
+	for (int i = 0; i < SIZE; i++) {
 		int r = rand() % getDoubleLinkedListSize(List);
 		(garde + i)->Id = i + 1;
 		(garde + i)->position = getDoubleLinkedListElem(List, r)->data;
 		(garde + i)->move = getDoubleLinkedListElem(LaDirection, r)->data;
 		DeleteDoubleLinkedListItem(List, getDoubleLinkedListElem(List, r));
 		DeleteDoubleLinkedListItem(LaDirection, getDoubleLinkedListElem(LaDirection, r));
-		if (i < Quantite_Garde -1) {
+		if (i < SIZE - 1) {
 			printf("%d:%d,", (garde + i)->position, (garde + i)->move);
 		}
-		if (i == Quantite_Garde-1) {
+		/*if (List->size > 1 && LaDirection > 1) {
+			printf("%d:%d,", (garde + i)->position, (garde + i)->move);
+		}*/
+		if (i == SIZE - 1) {
 			printf("%d:%d", (garde + i)->position, (garde + i)->move);
 		}
+		/*if (List->size == 1 && LaDirection->size == 1) {
+			printf("%d:%d", (garde + i)->position, (garde + i)->move);
+		}*/
 	}
 	return;
 }
@@ -1567,24 +1576,29 @@ int main()
 	Lab* newl = NewLab(SIZ3);
 	Free* P = NewFree(100);
 	int o = tryPath(newl, 0, P);
-	Teleporteurs_Paire* pairs = recherche_loc_tp(TELEPORTE, letterSansPrintf(newl), newl->size*newl->size);
-	letter(newl);
-	Path* S = Solve(newl, pairs, TELEPORTE);
-//	show(newl, S, pairs, 5);
-//	printf("\n_____ SOLVE  FINAL _____\n\n");
-	printPath(S);
-	printTp(pairs);
-//	printf("\n____ ____ ____ ____ ____\n\n");
+	int* sizetab = (int*)malloc(sizeof(int));//nombre de paires de tp effectivements créés
+	if (sizetab != NULL) {
+		Teleporteurs_Paire* pairs = recherche_loc_tp(TELEPORTE, letterSansPrintf(newl), newl->size * newl->size, sizetab);
 
-	//Path* W = Solve(newl, NULL, 0);
-	//show(newl, W, NULL, 0);
-//	printf("\n_____ SOLVE  FINAL _____\n\n");
-//	printPath(W);
-//	printf("\n____ ____ ____ ____ ____\n\n");
-	ApparitionGardes(letterSansPrintf(newl), sqrt(newl->size * newl->size), GARDAVOU, TELEPORTE, pairs);
+		letter(newl);
+		//Path* S = Solve(newl, pairs, TELEPORTE);
 
-	Path* Slong = SolveLong(newl, pairs, TELEPORTE);
-	printPath(Slong);
+		Path* S = Solve(newl, pairs, (*sizetab));
+		//	show(newl, S, pairs, 5);
+		//	printf("\n_____ SOLVE  FINAL _____\n\n");
+		printPath(S);
+		printTp(pairs, (*sizetab));
+		//	printf("\n____ ____ ____ ____ ____\n\n");
 
+			//Path* W = Solve(newl, NULL, 0);
+			//show(newl, W, NULL, 0);
+		//	printf("\n_____ SOLVE  FINAL _____\n\n");
+		//	printPath(W);
+		//	printf("\n____ ____ ____ ____ ____\n\n");
+		ApparitionGardes(letterSansPrintf(newl), sqrt(newl->size * newl->size), GARDAVOU, TELEPORTE, pairs);
+
+		Path* Slong = SolveLong(newl, pairs, sizetab);
+		printPath(Slong);
+	}
 	return EXIT_SUCCESS;
 }
