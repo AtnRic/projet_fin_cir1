@@ -5,6 +5,8 @@
     <title>Maze'ltov - retro</title>
     <link rel="stylesheet" type="text/css" href="../css/retro.css">
     <link rel='icon' href='../images/front/favicon.ico' type='image/x-icon'>
+    <link rel="stylesheet" type="text/css" href="../css/overlay.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     <div class="two sline"></div>
@@ -15,6 +17,7 @@
         include 'popups/popup_intro_retro.php';
         include 'popups/popup_win_retro.php';
         include 'popups/popup_lose_retro.php';
+        include 'overlay.html';
     ?>
 </body>
 <div class="preload" style="display: none"><img rel="preload" loading="eager" src="../images/retro/retro.png" alt=""></div>
