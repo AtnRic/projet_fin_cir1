@@ -179,7 +179,7 @@ function GetUserPoints($username){
 //Reset les points de l'utilisateur connecté
 function ResetPoint($username){
     $connexion=connect();
-    $resultat=mysqli_query($connexion,"UPDATE Nbr_Points=0 FROM dbjeu WHERE Pseudo='$username'");
+    $resultat=mysqli_query($connexion,"UPDATE users SET Nbr_Points=0 WHERE Pseudo='$username'");
 }
 
 function GetUserLevels($username){
