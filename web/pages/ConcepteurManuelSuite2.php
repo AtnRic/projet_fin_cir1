@@ -40,7 +40,9 @@ if (isset($_GET['mazeSize']) && isset($_GET['theme'])) {
     <form action="ConcepteurManuelSuite2.php?mazeSize=<?php echo$mazeSize;?>&theme=<?php echo $theme;?>" method="post">
         <div>
             <label>Maze :</label>
-            <textarea name="code_labyrinthe"></textarea>
+            <label>
+                <textarea name="code_labyrinthe"></textarea>
+            </label>
         </div>
         <br>
         <input type="submit" name="submit1" value="Send">
@@ -49,8 +51,8 @@ if (isset($_GET['mazeSize']) && isset($_GET['theme'])) {
 </body>
 
 <?php
-if (isset($_GET['code_labyrinthe'])){
-    $code_labyrinthe = $_GET['code_labyrinthe'];
+if (isset($_POST['code_labyrinthe'])){
+    $code_labyrinthe = $_POST['code_labyrinthe'];
     $mazeSize = $_GET['mazeSize'];
     $theme = $_GET['theme'];
     $customMazee = array(
