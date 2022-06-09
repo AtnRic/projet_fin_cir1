@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Maze'ltov - retro</title>
+    <title>retro - Maze'ltov</title>
     <link rel="stylesheet" type="text/css" href="../css/retro.css">
     <link rel='icon' href='../images/front/favicon.ico' type='image/x-icon'>
     <link rel="stylesheet" type="text/css" href="../css/overlay.css">
@@ -63,7 +63,7 @@ else {?>
         }
         ?>
         <script>
-            PHP_Start(true, true, '<?php echo $data; ?>');
+            PHP_Start(false, true, '<?php echo $data; ?>');
         </script>
     <?php
     }

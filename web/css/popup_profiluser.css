@@ -1,7 +1,25 @@
+@font-face {
+    font-family: "8-bit HUD";
+    src: url('../images/font/8-bit-hud.ttf');
+}
+
+*, html{
+    overflow: hidden;
+    background-color: black;
+    color: white;
+    font-family: "8-bit HUD";
+}
+
 #Thepopup{
     position: absolute;
     top: 50%;
-    bottom: 50%;
-    transform: translateY(50%) translateX(50%);
+    width: 100vw;
+    transform: translateY(-50%);
     text-align: center;
+    justify-content: center;
+    background-color: black;
+    color: white;
+}
+.close{
+   top: 30px;
 }

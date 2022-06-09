@@ -8,7 +8,7 @@ include "../tools/_main_tools.php";
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="stylesheet" type="text/css" href="../css/profiluser.css">
     <link rel='icon' href='../images/front/favicon.ico' type='image/x-icon'>
-    <title>Page de profil</title>
+    <title>Profil - Maze'ltov</title>
 </head>
 
 <body>
@@ -101,7 +101,7 @@ include "../tools/_main_tools.php";
                         $newurl=GenerateLevelCustom($name);
                 ?>
                             <a href="<?php echo $newurl;?>" id="eachLevel" ><?php echo $name ?> </a>
-                            <a class="button" href="#popup1?name=<?php echo $name; ?>">Let me Pop up</a>
+                            <a class="button" href="popup_profiluser.php?level_name=<?php echo $name; ?>">Share</a>
                             
                             <br>
                 <?php

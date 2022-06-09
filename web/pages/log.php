@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Connexion</title>
+    <title>Connexion - Maze'ltov</title>
     <link rel="stylesheet" type="text/css" href="../css/log.css">
     <link rel='icon' href='../images/front/favicon.ico' type='image/x-icon'>
     <meta name="viewport" content="width=device-width,initial-scale=1">
