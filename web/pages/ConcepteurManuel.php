@@ -1,3 +1,8 @@
+<?php
+session_start();
+$_SESSION['customManuel']=true;
+?>
+
 <body>
 <h1>Concepteur Manuel</h1>
 <div class="range">

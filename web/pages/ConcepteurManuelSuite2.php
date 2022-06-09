@@ -1,9 +1,9 @@
 <body>
 <?php
 if (isset($_POST['mazeSize']) && isset($_POST['theme'])) {
-    $mazeSize = $_POST['mazeSize'];
-    $theme = $_POST['theme'];
-    switch ($theme) {
+    $_SESSION["mazeSize"] = $_POST['mazeSize'];
+    $_SESSION["theme"] = $_POST['theme'];
+    switch ($_SESSION["theme"]) {
         case('Jungle'):
             $theme = 1;
             break;
@@ -17,7 +17,7 @@ if (isset($_POST['mazeSize']) && isset($_POST['theme'])) {
 }
 ?>
 <h1>Manual custom :</h1>
-<h2>You have chosen a maze of <?php echo"$mazeSize"?> side squares (<?php $tot = $mazeSize*$mazeSize; echo"$tot"?>): </h2>
+<h2>You have chosen a maze of <?php echo"$_SESSION["mazeSize"]"?> side squares (<?php $tot = $mazeSize*$mazeSize; echo"$tot"?>): </h2>
 <div>
     <p>
         Please enter the letters of the generation without spaces, without line breaks, boxes from left to right, line by line
@@ -37,15 +37,13 @@ if (isset($_POST['mazeSize']) && isset($_POST['theme'])) {
 
 <?php
 if (isset($_POST['submit'])&&isset($_POST['code_labyrinthe'])){
-    $code_labyrinthe = $_POST['code_labyrinthe'];
+    $_SESSION["code_labyrinthe"] = $_POST['code_labyrinthe'];
     $customMaze = array(
-        array($_SESSION["mazeSize"]),
         array($_SESSION["code_labyrinthe"]),
-        array($_SESSION["theme"])
     );
 
     $path = './dataCustomMaze.csv';
-    if ($file = @fopen('../tools/DonneesLabyrinthe.csv', 'w')) {
+    if ($file = @fopen('../tools/ManuelChaineCaractere.csv', 'w')) {
         foreach ($customMaze as $ligne) {
             fputcsv($file, $ligne);
         }
@@ -60,7 +58,7 @@ if (isset($_POST['mazeSize'])&&isset($_POST['theme'])){
     );
 
     $path = './dataCustomMaze.csv';
-    if ($file = @fopen('../tools/DonneesLabyrinthe.csv', 'w')) {
+    if ($file = @fopen('../tools/ManuelAutresDonnees.csv', 'w')) {
         foreach ($customMaze as $ligne) {
             fputcsv($file, $ligne);
         }
