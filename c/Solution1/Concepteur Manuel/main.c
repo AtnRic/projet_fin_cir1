@@ -1520,7 +1520,6 @@ void ApparitionGardes(char* maze, int cote, int Quantite_Garde, int Quantite_tel
 int readFile(char* filename, int tableau[]) {
 	FILE* stream;
 	errno_t err;
-	//int tableau[2] = { 0 };
 
 	err = fopen_s(&stream, filename, "r");
 	if (err == 0) {
@@ -1540,8 +1539,8 @@ int readFile(char* filename, int tableau[]) {
 	value = fgetc(stream);
 	printf("%c", value);*/
 	if (stream != NULL) {
-		for (int i = 0; i < 4; i++) {
-			fscanf_s(stream, "%d", &tableau[i]);
+		for (int i = 0; i < 3; i++) {
+				fscanf_s(stream, "%d", &tableau[i]);
 		}
 	}
 
@@ -1560,24 +1559,66 @@ int readFile(char* filename, int tableau[]) {
 	return 1;
 }
 
+void receptionTypeChaine(CSV_lineStruct* lines)
+{
+	int i = 0;
+	CSV_lineStruct line[1];
+	FILE* stream;
+	errno_t err;
+
+	err = fopen_s(&stream, "ManuelChaineCaractere.csv", "r");
+	if (err == 0) {
+		//printf("Le fichier 'file.txt' est ouvert\n");
+	}
+	else
+		//printf("Le fichier 'file.txt' n'est pas ouvert\n");
+		if (stream == NULL) {
+			//printf("\nstream pas OK");
+			return -1;
+		}
+		else printf("\nstream ok");
+
+	fseek(stream, 0, SEEK_SET);
+
+	if (stream != NULL)
+	{
+		if (res = fscanf_s(fichier, "%s", lines[i].Chaine))
+		{
+			// on gère l'erreur
+			if (res == EOF) printf("Fin de fichier");
+			if (res == 2) printf("Seulement deux champs ont été lus");
+			if (res == 1) printf("Un seul un champ a été lu");
+			if (res == 0) printf("Aucun champ n'a été lu");
+		}
+		else
+		{
+			printf("%s", lines[i].Chaine);
+		}
+		// On ferme le fichier
+		fclose(fichier);
+	}
+	else printf("Erreur fichier ManuelChaineCaractere.csv");
+}
+
 int main()
 {
-	int tableau[3] = { 0 };
-	readFile("../algo_labyrinthe/DonneesLabyrinthe.csv", tableau);
+	CSV_lineStruct* lines;
+	int tableau[2] = { 0 };
+	readFile("ManuelAutresDonnees.csv", tableau);
+	receptionTypeChaine(lines);
 	int SIZ3 = tableau[0];
-	char* Code_labyrinthe = tableau[1];
-	int Theme = tableau[2];
+	int Theme = tableau[1];
 	//printf("\nsize : %d\nteleporteur : %d\ngarde : %d\ntheme : %d\n", SIZ3, TELEPORTE, GARDAVOU, THEMA);
 	srand(time(NULL));
 	//Lab* newl = NewLab(SIZ3);
 	Free* P = NewFree(100);
 	//int o = tryPath(newl, 0, P);
-	Teleporteurs_Paire* pairs = recherche_loc_tp(0, Code_labyrinthe, SIZ3*SIZ3);
+//	Teleporteurs_Paire* pairs = recherche_loc_tp(0, *Code_labyrinthe, SIZ3*SIZ3);
 	//letter(newl);
-	Path* S = Solve(Code_labyrinthe, pairs, 0);
+//	Path* S = Solve(*Code_labyrinthe, pairs, 0);
 	//	show(newl, S, pairs, 5);
 	//	printf("\n_____ SOLVE  FINAL _____\n\n");
-	printPath(S);
+//	printPath(S);
 	//printTp(pairs);
 //	printf("\n____ ____ ____ ____ ____\n\n");
 
@@ -1587,8 +1628,8 @@ int main()
 //	printPath(W);
 //	printf("\n____ ____ ____ ____ ____\n\n");
 
-	Path* Slong = SolveLong(Code_labyrinthe, pairs, 0);
-	printPath(Slong);
+//	Path* Slong = SolveLong(*Code_labyrinthe, pairs, 0);
+//	printPath(Slong);
 
 	return EXIT_SUCCESS;
 }
