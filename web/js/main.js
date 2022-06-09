@@ -189,6 +189,7 @@ for (i = 0; i < document.getElementsByClassName("account").length; i++) {
       document.location.href = "../pages/profiluser.php";
     });
 }
+
 // Fonction appelée depuis le js.
 function PHP_Start(anime, custom, data) {
   document.getElementById("popup_intro").style.visibility = "visible";
@@ -771,7 +772,7 @@ function SpawnPlayer(cellId, solver) {
 // Niveau fini.
 function Win() {
   if (Solved == false && SolvedLong == false) {
-    if (Shortest()) {
+    if (Shortest() == true) {
       PHP_Function(
         "../pages/points.php",
         "short",
@@ -781,7 +782,7 @@ function Win() {
         LabSize
       );
     }
-    if (Longest()) {
+    if (Longest() == true) {
       PHP_Function(
         "../pages/points.php",
         "long",
@@ -1411,6 +1412,8 @@ function Shortest() {
     console.log("Shortest.");
     return true;
   }
+  console.log("Non Shortest.");
+
   return false;
 }
 
@@ -1433,5 +1436,7 @@ function Longest() {
     console.log("Longest.");
     return true;
   }
+  console.log("Non Longest.");
+
   return false;
 }
