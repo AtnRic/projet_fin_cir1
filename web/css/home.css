@@ -860,3 +860,26 @@ section {
     background: url(../images/accueil/sus.gif) center center / cover no-repeat;
 }
 
+#to-custom {
+    color: black;
+    position: absolute;
+    padding: 2vh 5vh;
+    bottom: -195vh;
+    left: 50%;
+    border: none;
+    border-radius: 2vh;
+    transform: translateX(-50%);
+    transition: all 0.1s ease;
+    text-decoration: none;
+    font-size: 4vh;
+    font-weight: 800;
+    font-style: italic;
+    background: url(../images/accueil/noice.png) center center / cover no-repeat;
+
+}
+
+#to-custom:hover {
+    background: url(../images/accueil/noice.gif) center center / cover no-repeat;
+    transform: translateX(-50%) translateY(-1vh);
+    box-shadow: 0 1vh 2vh black;
+}
