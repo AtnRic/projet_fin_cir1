@@ -1,3 +1,5 @@
+let custom; // Si la page a été customisé
+
 // Lettres du labyrinthe
 var correspondance = {
   a: [0, 0, 0, 0],
@@ -189,18 +191,25 @@ for (i = 0; i < document.getElementsByClassName("account").length; i++) {
       document.location.href = "../pages/profiluser.php";
     });
 }
+
 // Fonction appelée depuis le js.
 function PHP_Start(anime, custom, data) {
   document.getElementById("popup_intro").style.visibility = "visible";
   animation = anime;
+  console.log("custom : " + custom);
+  console.log("data : " + data);
   if (custom) {
-    start = true;
-    MainMusic = PlaySound(Ambiance.Theme);
-    document.getElementById("popup_intro").style.visibility = "hidden";
-    sch_Start(anime, custom, data);
+    document.addEventListener("keydown", function (event) {
+      if (!start && event.key != "m") {
+        start = true;
+        MainMusic = PlaySound(Ambiance.Theme);
+        document.getElementById("popup_intro").style.visibility = "hidden";
+        sch_Start(anime, custom, data);
+      }
+    });
   } else {
     document.addEventListener("keydown", function (event) {
-      if (!start && event.key != "m" && event.key != "r") {
+      if (!start && event.key != "m") {
         start = true;
         document.getElementById("popup_intro").style.visibility = "hidden";
         MainMusic = PlaySound(Ambiance.Theme);
@@ -771,7 +780,7 @@ function SpawnPlayer(cellId, solver) {
 // Niveau fini.
 function Win() {
   if (Solved == false && SolvedLong == false) {
-    if (Shortest()) {
+    if (Shortest() == true) {
       PHP_Function(
         "../pages/points.php",
         "short",
@@ -781,7 +790,7 @@ function Win() {
         LabSize
       );
     }
-    if (Longest()) {
+    if (Longest() == true) {
       PHP_Function(
         "../pages/points.php",
         "long",
@@ -899,7 +908,8 @@ function Save() {
     "../pages/save.php",
     "save",
     function Handle(output) {
-      document.location.href = "../pages/profiluser.php";
+      console.log(output);
+      //document.location.href = "../pages/profiluser.php";
     },
     Arg
   );
@@ -1411,6 +1421,8 @@ function Shortest() {
     console.log("Shortest.");
     return true;
   }
+  console.log("Non Shortest.");
+
   return false;
 }
 
@@ -1433,5 +1445,7 @@ function Longest() {
     console.log("Longest.");
     return true;
   }
+  console.log("Non Longest.");
+
   return false;
 }

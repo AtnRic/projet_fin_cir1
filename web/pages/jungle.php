@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>Maze'ltov - jungle</title>
     <link rel="stylesheet" type="text/css" href="../css/main.css">
@@ -15,20 +16,36 @@
         <table id="container"></table>
     </div>
     <?php
-    $custom=false;
+    if (isset($_SESSION['custom'])) {
+        $custom = $_SESSION['custom'];
+        if ($custom == 1) {
+            $custom = true;
+        } else {
+            $custom = false;
+        }
+    } else {
+        $custom = false;
+    }
+
+    if (isset($_SESSION['data'])) {
+        $data = $_SESSION['data'];
+    } else {
+        $data = null;
+    }
+    
     include 'popups/popup_lose_jungle.php';
     include 'popups/popup_intro_jungle.php';
     include 'popups/popup_win_jungle.php';
     include 'overlay.html';
     ?>
-</body>  
+</body>
 <script src="../js/conf.js"></script>
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 <script src="../js/node_modules/animejs/lib/anime.min.js"></script>
 <script src="../js/main.js"></script>
 <script>
-SetAmbiance("Jungle");
-PHP_Start(true, false, null);
+    SetAmbiance("Jungle");
+    PHP_Start(true, '<?php echo $custom ?>', '<?php echo $data ?>');
 </script>
 
 </html>

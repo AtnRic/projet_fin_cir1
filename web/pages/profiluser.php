@@ -10,6 +10,14 @@ include "../tools/_main_tools.php";
     <link rel='icon' href='../images/front/favicon.ico' type='image/x-icon'>
     <title>Page de profil</title>
 </head>
+<?php
+if (isset($_POST['clicked'])) {
+    $theme = $_POST['theme'];
+    $_SESSION['custom'] = $_POST['custom'];
+    $_SESSION['data'] = $_POST['data'];
+    header("Location: ./$theme.php");
+}
+?>
 
 <body>
     <header>
@@ -94,13 +102,20 @@ include "../tools/_main_tools.php";
                 <?php
                 $connexion = connect();
                 $username = $_COOKIE['login'];
-                $resultat = mysqli_query($connexion, "SELECT `NAME` FROM `custom_level` WHERE `AUTHOR` = '$username'");
+                $resultat = mysqli_query($connexion, "SELECT `NAME`, `THEME`, `CUSTOM`, `DATA` FROM `custom_level` WHERE `AUTHOR` = '$username'");
                 if ($resultat) {
                     while ($row = mysqli_fetch_assoc($resultat)) {
                         $name = $row['NAME'];
+                        $theme = GetTheme($row['THEME']);
+                        $custom = $row['CUSTOM'];
+                        $data = $row['DATA'];
                 ?>
-                        <a href="#"><?php echo $name ?></a>
-                        <br>
+                        <form method="POST">
+                            <input type="hidden" name="custom" value="<?php echo $custom ?>"/>
+                            <input type="hidden" name="data" value="<?php echo $data ?>"/>
+                            <input type="hidden" name="theme" value="<?php echo $theme ?>"/>
+                            <input id="eachLevel" type="submit" name="clicked" value="<?php echo $name ?>" />
+                        </form>
                 <?php
                     }
                 }
@@ -184,11 +199,13 @@ include "../tools/_main_tools.php";
                     display: block;
                 }
 
-                footer, main {
+                footer,
+                main {
                     opacity: 0.3;
                 }
 
-                footer>a, main>a {
+                footer>a,
+                main>a {
                     pointer-events: none;
                 }
             </style>
