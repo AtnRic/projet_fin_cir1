@@ -31,7 +31,7 @@
     SetAmbiance("Space");
 </script>
 <?php
-if($_GET["custom"]==1){
+if($_GET["custo"]==1){
     $custom=true;
     $idpseudo=$_GET["ID_AUTHOR"];
     $level_name=$_GET["NAME"];
@@ -46,7 +46,7 @@ if($_GET["custom"]==1){
     </script>
     <?php
 }
-if($_GET["custom"]==0){
+if($_GET["custo"]==0){
 ?>
 <script>
 PHP_Start(true, false, null);
