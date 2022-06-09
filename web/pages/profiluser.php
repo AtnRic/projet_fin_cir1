@@ -29,9 +29,9 @@ if (isset($_POST['clicked'])) {
                 <?php
                 $connexion = connect();
                 $username = $_COOKIE["login"];
-                $resultat = mysqli_query($connexion, "SELECT `avatar` FROM `users` WHERE Pseudo = '$username'");
+                $resultat = mysqli_query($connexion, "SELECT `Pseudo` FROM `users` WHERE Pseudo = '$username'");
                 $row = mysqli_fetch_assoc($resultat);
-                switch ($row['avatar']) {
+                switch ($row['Pseudo']) {
                     case 'jungle hero':
                         $avatar = './../images/profileuser/profil/profile_jungle_hero.png';
                         break;
@@ -101,8 +101,8 @@ if (isset($_POST['clicked'])) {
             <div id="level">
                 <?php
                 $connexion = connect();
-                $username = $_COOKIE['login'];
-                $resultat = mysqli_query($connexion, "SELECT `NAME`, `THEME`, `CUSTOM`, `DATA` FROM `custom_level` WHERE `AUTHOR` = '$username'");
+                $idpseudo = $_COOKIE['login'];
+                $resultat = mysqli_query($connexion, "SELECT `NAME`, `THEME`, `CUSTOM`, `DATA` FROM `custom_level` WHERE `ID_AUTHOR` = '$idpseudo'");
                 if ($resultat) {
                     while ($row = mysqli_fetch_assoc($resultat)) {
                         $name = $row['NAME'];
