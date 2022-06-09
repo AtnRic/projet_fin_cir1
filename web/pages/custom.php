@@ -59,7 +59,7 @@ require '../tools/_main_tools.php';
     <div class="range">
       <form method="post" action="custom.php" class="builder">
         <p>Level name:</p>
-        <input type="text" name="levelname" min="1" max="20" placeholder="Level Name">
+        <input type="text" name="levelname" min="1" max="20" placeholder="Level Name" required>
         <p>Size</p>
         <input type="range" name="mazeSize" min="7" max="30" value="5">
         <br>

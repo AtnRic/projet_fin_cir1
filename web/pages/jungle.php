@@ -45,7 +45,7 @@
 <script src="../js/main.js"></script>
 <script>
     SetAmbiance("Jungle");
-    PHP_Start(true, '<?php echo $custom ?>'', '<?php echo $data ?>');
+    PHP_Start(true, '<?php echo $custom ?>', '<?php echo $data ?>');
 </script>
 
 </html>
