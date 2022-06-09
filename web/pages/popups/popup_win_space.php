@@ -7,12 +7,7 @@ echo "
     <p id='number'>number of steps : </p>
     <p id='short'>shortest solution : </p>
     <p id='long'>longest solution : </p>
-    <div class='star'>
-        <div class='center_img'>
-            <img src='../images/popup/star.png' alt='star'>
-            <img src='../images/popup/star_empty.png' alt='star'>
-        </div>    
-    </div>  
+     
     <div class='but'>
         <a class='restart'><p>replay</p></a>
         <a id='home' href='./home.php'><p>home</p></a>
@@ -43,9 +38,9 @@ echo "
             background-color: #2E4052;
             border-radius: 20px;
             padding: 15px;
-
             text-align: center;
             align-items: center;
+            z-index: 15;
         }
         #popup h1, p, h2{
             color: white;
@@ -61,6 +56,8 @@ echo "
         }
         #popup p{
             font-size: 1.5em;
+            margin-top: 10px;
+            margin-bottom: 10px;
         }
         #popup a{
             background-image: none;
@@ -76,22 +73,6 @@ echo "
         #popup a p:hover{
             text-decoration: underline;
         }
-
-        #popup .star{
-            background-image: none;
-            background-color: transparent;
-            width: 100%;
-            justify-content: center;
-            display: flex;
-
-        }
-        #popup .center_img{
-            background-color: transparent;
-            width: 200px;
-            background-image: none;
-            justify-content: center;
-            display: flex;
-        }
         #popup img{
             background-color: transparent;
             display: flex;
@@ -104,7 +85,7 @@ echo "
         #popup .but{
             background-image: none;
             position: relative;
-            top: 25px;
+            bottom: -240px;
         }
         #popup .but, a{
             background-image: none;

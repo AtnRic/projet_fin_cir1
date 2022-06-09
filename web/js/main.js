@@ -156,7 +156,39 @@ for (i = 0; i < document.getElementsByClassName("restart").length; i++) {
 for (i = 0; i < document.getElementsByClassName("save").length; i++) {
   document.getElementsByClassName("save")[i].addEventListener("click", Save);
 }
-
+for (i = 0; i < document.getElementsByClassName("long").length; i++) {
+  document
+    .getElementsByClassName("long")
+    [i].addEventListener("click", function () {
+      if (finish == false) {
+        LongestSolv(LongestSolver);
+      }
+    });
+}
+for (i = 0; i < document.getElementsByClassName("short").length; i++) {
+  document
+    .getElementsByClassName("short")
+    [i].addEventListener("click", function () {
+      if (finish == false) {
+        Solveur(Solver);
+      }
+    });
+}
+for (i = 0; i < document.getElementsByClassName("exit").length; i++) {
+  document.getElementsByClassName("exit")[i].addEventListener("click", Return);
+}
+for (i = 0; i < document.getElementsByClassName("sound").length; i++) {
+  document
+    .getElementsByClassName("sound")
+    [i].addEventListener("click", ThemeSound);
+}
+for (i = 0; i < document.getElementsByClassName("account").length; i++) {
+  document
+    .getElementsByClassName("account")
+    [i].addEventListener("click", function () {
+      document.location.href = "../pages/profiluser.php";
+    });
+}
 // Fonction appelée depuis le js.
 function PHP_Start(anime, custom, data) {
   document.getElementById("popup_intro").style.visibility = "visible";
@@ -314,6 +346,8 @@ function sch_Start(anime, custom, data) {
 
 // Relancer le labyrinthe sans relancer la page.
 function Restart() {
+  MainMusic.pause();
+  MainMusic = null;
   var e = document.getElementById("container");
   var child = e.lastElementChild;
   while (child) {
@@ -329,6 +363,7 @@ function Restart() {
   LabSize = 0;
   finish = false;
   cheat = false;
+  ThemeGlobal;
   PHP_Start(animation, true, BaseOut);
 }
 
@@ -570,15 +605,8 @@ function Click(event) {
 
   // On vérifie que le mouvement préc. est bien fini & que le joueur n'a pas fini la partie.
   if (activate == false && finish == false) {
-    // Génération du solveur.
-    if (event.key == "p") {
-      Solveur(Solver);
-    }
-    if (event.key == "o") {
-      LongestSolv(LongestSolver);
-    }
     // Mouvement vers le bas.
-    else if (event.key == "ArrowDown") {
+    if (event.key == "ArrowDown") {
       if (CanMove(PlayerPos, Labyrinthe, "d") || cheat == true) {
         MoveGarde(height, 2);
         activate = true;
@@ -772,7 +800,6 @@ function Win() {
     },
     LabSize
   );
-  Mouvement++;
   // Fin de la partie.
   finish = true;
   MainMusic.pause();
@@ -1215,6 +1242,7 @@ function Solveur(tab) {
     }
   }
 }
+
 // Génération des téléporteurs, 0 => [0, 1], 1 => [1, 2]
 function Teleporter(tab) {
   let Cell1 = document.getElementById(0);
@@ -1310,6 +1338,7 @@ function Teleporter(tab) {
     Img2.src = src2;
   }
 }
+
 // Téléportation du joueur.
 function TeleportePlayer(cellId) {
   PlayerPos = cellId;
@@ -1330,6 +1359,7 @@ function TeleportePlayer(cellId) {
     });
   }, 500);
 }
+
 // Lecture d'un son.
 function PlaySound(path) {
   let file = new Audio(path);
