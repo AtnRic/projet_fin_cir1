@@ -52,4 +52,19 @@ if (isset($_POST['submit'])&&isset($_POST['code_labyrinthe'])){
         fclose($file);
     }
 }
+
+if (isset($_POST['mazeSize'])&&isset($_POST['theme'])){
+    $customMaze = array(
+        array($_SESSION["mazeSize"]),
+        array($_SESSION["theme"])
+    );
+
+    $path = './dataCustomMaze.csv';
+    if ($file = @fopen('../tools/DonneesLabyrinthe.csv', 'w')) {
+        foreach ($customMaze as $ligne) {
+            fputcsv($file, $ligne);
+        }
+        fclose($file);
+    }
+}
 ?>

@@ -22,6 +22,8 @@ typedef struct Teleporteurs_Paire {
 
 typedef struct CSV_lineStruct {
 	char Chaine[900];
+	int size;
+	int theme;
 } CSV_lineStruct;
 
 // cr�ation d'une nouvelle liste cha�n�e bilat�re vide

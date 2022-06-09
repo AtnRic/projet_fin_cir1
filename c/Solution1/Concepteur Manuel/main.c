@@ -1561,20 +1561,21 @@ int readFile(char* filename, int tableau[]) {
 
 void receptionTypeChaine(CSV_lineStruct* lines)
 {
-	int i = 0;
-	CSV_lineStruct line[1];
+	//CSV_lineStruct* lines[0];
 	FILE* stream;
 	errno_t err;
 
 	err = fopen_s(&stream, "ManuelChaineCaractere.csv", "r");
 	if (err == 0) {
-		printf("Le fichier 'file.txt' est ouvert\n");
+		//printf("Le fichier 'file.txt' est ouvert\n");
 	}
-	else
-		printf("Le fichier 'file.txt' n'est pas ouvert\n");
+	else{
+		//printf("Le fichier 'file.txt' n'est pas ouvert\n");
+	}
+		
 	
 	if (stream == NULL) {
-			printf("\nstream pas OK");
+			//printf("\nstream pas OK");
 	}
 	else /*printf("\nstream ok");*/
 			fseek(stream, 0, SEEK_SET);
@@ -1582,14 +1583,115 @@ void receptionTypeChaine(CSV_lineStruct* lines)
 	if (stream != NULL)
 	{
 		for (int i = 0; i < 1; i++) {
-			fscanf_s(stream, "%c", lines[i].Chaine);
-			printf("%s", lines[i].Chaine);
+			fscanf_s(stream, "%s", lines[i].Chaine, _countof(lines[i].Chaine));
+			//printf("%s", lines[i].Chaine);
 		}
 	}
 	
 	if (stream)
 		err = fclose(stream);
 }
+
+Lab* Converter(char* letters, int labsize) {
+	Lab* newl = NewLab(labsize);
+	newl->size = labsize;
+	for (int i = 0; i < labsize * labsize; i++) {
+		switch ((*(letters + i))) {
+		case 'a':
+			(*(newl->tab + i)).t = false;
+			(*(newl->tab + i)).r = false;
+			(*(newl->tab + i)).d = false;
+			(*(newl->tab + i)).l = false;
+			break;
+		case 'b':
+			(*(newl->tab + i)).t = true;
+			(*(newl->tab + i)).r = false;
+			(*(newl->tab + i)).d = false;
+			(*(newl->tab + i)).l = false;
+			break;
+		case 'c':
+			(*(newl->tab + i)).t = false;
+			(*(newl->tab + i)).r = true;
+			(*(newl->tab + i)).d = false;
+			(*(newl->tab + i)).l = false;
+			break;
+		case 'd':
+			(*(newl->tab + i)).t = false;
+			(*(newl->tab + i)).r = false;
+			(*(newl->tab + i)).d = true;
+			(*(newl->tab + i)).l = false;
+			break;
+		case 'e':
+			(*(newl->tab + i)).t = false;
+			(*(newl->tab + i)).r = false;
+			(*(newl->tab + i)).d = false;
+			(*(newl->tab + i)).l = true;
+			break;
+		case 'f':
+			(*(newl->tab + i)).t = true;
+			(*(newl->tab + i)).r = false;
+			(*(newl->tab + i)).d = true;
+			(*(newl->tab + i)).l = false;
+			break;
+		case 'g':
+			(*(newl->tab + i)).t = false;
+			(*(newl->tab + i)).r = true;
+			(*(newl->tab + i)).d = false;
+			(*(newl->tab + i)).l = true;
+			break;
+		case 'h':
+			(*(newl->tab + i)).t = true;
+			(*(newl->tab + i)).r = true;
+			(*(newl->tab + i)).d = false;
+			(*(newl->tab + i)).l = false;
+			break;
+		case 'i':
+			(*(newl->tab + i)).t = false;
+			(*(newl->tab + i)).r = true;
+			(*(newl->tab + i)).d = true;
+			(*(newl->tab + i)).l = false;
+			break;
+		case 'j':
+			(*(newl->tab + i)).t = false;
+			(*(newl->tab + i)).r = false;
+			(*(newl->tab + i)).d = true;
+			(*(newl->tab + i)).l = true;
+			break;
+		case 'k':
+			(*(newl->tab + i)).t = true;
+			(*(newl->tab + i)).r = false;
+			(*(newl->tab + i)).d = false;
+			(*(newl->tab + i)).l = true;
+			break;
+		case 'l':
+			(*(newl->tab + i)).t = false;
+			(*(newl->tab + i)).r = true;
+			(*(newl->tab + i)).d = true;
+			(*(newl->tab + i)).l = true;
+			break;
+		case 'm':
+			(*(newl->tab + i)).t = true;
+			(*(newl->tab + i)).r = false;
+			(*(newl->tab + i)).d = true;
+			(*(newl->tab + i)).l = true;
+			break;
+		case 'n':
+			(*(newl->tab + i)).t = true;
+			(*(newl->tab + i)).r = true;
+			(*(newl->tab + i)).d = false;
+			(*(newl->tab + i)).l = true;
+			break;
+		case 'o':
+			(*(newl->tab + i)).t = true;
+			(*(newl->tab + i)).r = true;
+			(*(newl->tab + i)).d = true;
+			(*(newl->tab + i)).l = false;
+			break;
+		}
+	}
+	return newl;
+}
+
 
 int main()
 {
@@ -1599,29 +1701,34 @@ int main()
 	receptionTypeChaine(lines);
 	int SIZ3 = tableau[0];
 	int Theme = tableau[1];
-	printf("%d, %d", SIZ3, Theme);
-	//printf("\nsize : %d\nteleporteur : %d\ngarde : %d\ntheme : %d\n", SIZ3, TELEPORTE, GARDAVOU, THEMA);
+	//Lab* newl = Converter(lines[0].Chaine, SIZ3);
+	char* Tab = lines[0].Chaine;
+
 	srand(time(NULL));
-	//Lab* newl = NewLab(SIZ3);
-	Free* P = NewFree(100);
-	//int o = tryPath(newl, 0, P);
-//	Teleporteurs_Paire* pairs = recherche_loc_tp(0, *Code_labyrinthe, SIZ3*SIZ3);
-	//letter(newl);
-//	Path* S = Solve(*Code_labyrinthe, pairs, 0);
-	//	show(newl, S, pairs, 5);
+	
+	Lab* newl = Converter(Tab, SIZ3);
+	Free* P = NewFree(SIZ3*SIZ3);
+	Teleporteurs_Paire* pairs = recherche_loc_tp(0, newl, SIZ3*SIZ3);
+	newl = Converter(letterSansPrintf(newl), SIZ3);
+	//printf("\n\n\n\n------------------Test------------------------\n");
+	letter(newl);
+	//printf("\n\n\n\n----------------Solveur-----------------------\n");
+	
+	Path* S = Solve(newl, pairs, 0);
+//		show(newl, S, pairs, 5);
 	//	printf("\n_____ SOLVE  FINAL _____\n\n");
-//	printPath(S);
+//	printPath(
 	//printTp(pairs);
 //	printf("\n____ ____ ____ ____ ____\n\n");
 
-	//Path* W = Solve(newl, NULL, 0);
+	Path* W = Solve(newl, NULL, 0);
 	//show(newl, W, NULL, 0);
 //	printf("\n_____ SOLVE  FINAL _____\n\n");
-//	printPath(W);
+	printPath(W);
 //	printf("\n____ ____ ____ ____ ____\n\n");
-
-//	Path* Slong = SolveLong(*Code_labyrinthe, pairs, 0);
-//	printPath(Slong);
+printf("\n;\n;");
+	Path* Slong = SolveLong(newl, pairs, 0);
+	printPath(Slong);
 
 	return EXIT_SUCCESS;
 }
