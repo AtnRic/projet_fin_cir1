@@ -35,7 +35,9 @@
                 echo"yesyes";
             }
             $d = $data[0];
-            $resultat = mysqli_query($connexion, "INSERT INTO `custom_level` (`NAME`, `THEME`, `ID_AUTHOR`, `DATA`, `CUSTOM`) VALUES ('$name','$theme','$idpseudo','$d','0');");
+            $newlink=GenerateLevelCustom($name);
+            echo $newlink;
+            $resultat = mysqli_query($connexion, "INSERT INTO `custom_level` (`NAME`, `THEME`, `ID_AUTHOR`, `DATA`, `CUSTOM` , `LINK`) VALUES ('$name','$theme','$idpseudo','$d','0', '$newlink');");
             echo $resultat;
         }
         //niveau custom
@@ -44,7 +46,8 @@
             $custom=true;
             $name = $_SESSION['name'];
             $sessionCustom = $_SESSION["custom"];
-            $resultat = mysqli_query($connexion, "INSERT INTO `custom_level` (`NAME`, `THEME`, `ID_AUTHOR`, `DATA`, `CUSTOM`) VALUES ('$name','$theme','$idpseudo','$data[0]','$sessionCustom');");
+            $newlink=GenerateLevelCustom($name);
+            $resultat = mysqli_query($connexion, "INSERT INTO `custom_level` (`NAME`, `THEME`, `ID_AUTHOR`, `DATA`, `CUSTOM` , `LINK`) VALUES ('$name','$theme','$idpseudo','$data[0]','$sessionCustom' , '$newlink');");
             echo "-_-custom true-_-";
             unset($_SESSION['custom']);
         }
