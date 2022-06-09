@@ -52,7 +52,7 @@ require '../tools/_main_tools.php';
                       fputcsv($file, $ligne);
                     }
                     fclose($file);
-                    header("Location:jungle.php");
+                    header("Location:jungle.php?custo=0");
                   }
                   else header("Location:home.php");
 
@@ -95,7 +95,7 @@ require '../tools/_main_tools.php';
                       fputcsv($file, $ligne);
                     }
                     fclose($file);
-                    header("Location:retro.php");
+                    header("Location:retro.php?custo=0");
                   }
                   else header("Location:home.php");
 
@@ -136,7 +136,7 @@ require '../tools/_main_tools.php';
                       fputcsv($file, $ligne);
                     }
                     fclose($file);
-                    header("Location:space.php");
+                    header("Location:space.php?custo=0");
                   }
                   else header("Location:home.php");
             }

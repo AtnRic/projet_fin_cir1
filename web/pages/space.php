@@ -14,26 +14,7 @@
         <table id="container"></table>
     </div>
     <?php
-    if (isset($_SESSION['custom'])) {
-        $custom = $_SESSION['custom'];
-        if ($custom == 1) {
-            $custom = true;
-        } else {
-            $custom = false;
-        }
-    } else {
-        $custom = false;
-    }
-
-    if (isset($_SESSION['data'])) {
-        $data = $_SESSION['data'];
-    } else {
-        $data = null;
-    }
-
-    $custom = 0;
-    $data = 0;
-
+    include '../tools/_main_tools.php';
     include 'popups/popup_intro_space.php';
     include 'popups/popup_win_space.php';
     include 'popups/popup_lose_space.php';
@@ -48,7 +29,29 @@
 </script>
 <script>
     SetAmbiance("Space");
-    PHP_Start(true, '<?php echo $custom ?>', <?php echo $data ?>);
 </script>
-
+<?php
+if($_GET["custom"]==1){
+    $custom=true;
+    $idpseudo=$_GET["ID_AUTHOR"];
+    $level_name=$_GET["NAME"];
+    $connexion=connect();
+    $resultat=mysqli_query($connexion,"SELECT DATA FROM custom_level WHERE ID_AUTHOR='$idpseudo' AND NAME='$level_name'");
+    while($ligne=mysqli_fetch_assoc($resultat)){
+        $data=$ligne["DATA"];
+    }
+    ?>
+    <script>
+        PHP_Start(true, true, '<?php echo $data; ?>');
+    </script>
+    <?php
+}
+if($_GET["custom"]==0){
+?>
+<script>
+PHP_Start(true, false, null);
+</script>
+<?php
+}
+?>
 </html>
