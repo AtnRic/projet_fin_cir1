@@ -288,67 +288,132 @@ function sch_Start(anime, custom, data) {
   } else {
     using = false;
     while (using == false) {
-      PHP_Function(
-        "../tools/function.php",
-        "generation",
-        function Handle(output) {
-          console.log(output);
-          if (output == null || output == "") {
-            using = false;
-          } else {
-            using = true;
-            BaseOut = output;
-            newOut = output.split(";");
-            solveOut = newOut[1].split(",");
-            Solver = solveOut;
-            tpOut = newOut[2].split(",");
-            gardeOut = newOut[3].split(",");
-            LongestSolver = newOut[4].split(",");
+      if(Manuel == true){
+        console.log("reload");
+        PHP_Function(
+            "../tools/function.php",
+            "customManuel",
+            function Handle(output) {
+              console.log(output);
+              if (output == null || output == "") {
+                using = false;
+              } else {
+                using = true;
+                BaseOut = output;
+                newOut = output.split(";");
+                solveOut = newOut[1].split(",");
+                Solver = solveOut;
+                tpOut = newOut[2].split(",");
+                gardeOut = newOut[3].split(",");
+                LongestSolver = newOut[4].split(",");
 
-            console.log("SOLUTION TP " + tpOut.length + " : " + tpOut);
-            console.log("SOLUTION GARDE " + gardeOut.length + " : " + gardeOut);
-            console.log("SOLUTION S " + Solver.length + " : " + Solver);
-            console.log(
-              "SOLUTION L " + LongestSolver.length + " : " + LongestSolver
-            );
-            console.log(
-              "Taille : " + Math.sqrt(newOut[0].length) + " : " + newOut[0]
-            );
+                console.log("SOLUTION TP " + tpOut.length + " : " + tpOut);
+                console.log("SOLUTION GARDE " + gardeOut.length + " : " + gardeOut);
+                console.log("SOLUTION S " + Solver.length + " : " + Solver);
+                console.log(
+                    "SOLUTION L " + LongestSolver.length + " : " + LongestSolver
+                );
+                console.log(
+                    "Taille : " + Math.sqrt(newOut[0].length) + " : " + newOut[0]
+                );
 
-            for (i = 0; i < tpOut.length; i++) {
-              tpOut[i] = tpOut[i].split(":").map(function (item) {
-                return parseInt(item, 10);
-              });
+                for (i = 0; i < tpOut.length; i++) {
+                  tpOut[i] = tpOut[i].split(":").map(function (item) {
+                    return parseInt(item, 10);
+                  });
+                }
+
+                for (i = 0; i < gardeOut.length; i++) {
+                  gardeOut[i] = gardeOut[i].split(":").map(function (item) {
+                    return parseInt(item, 10);
+                  });
+                }
+
+                gardeList = [];
+                for (i = 0; i < gardeOut.length; i++) {
+                  gardeList.push(new Garde(i, gardeOut[i][1], gardeOut[i][0]));
+                }
+                //console.log(gardeList);
+                //console.log(tpOut);
+
+                if (output.length == 0) {
+                  location.reload();
+                }
+                gardeGlobal = gardeList;
+                Launch(
+                    Math.sqrt(newOut[0].length),
+                    Array.from(newOut[0]),
+                    0,
+                    anime,
+                    solveOut,
+                    tpOut
+                );
+              }
             }
+        );
+      }else {
+        PHP_Function(
+            "../tools/function.php",
+            "generation",
+            function Handle(output) {
+              console.log(output);
+              if (output == null || output == "") {
+                using = false;
+              } else {
+                using = true;
+                BaseOut = output;
+                newOut = output.split(";");
+                solveOut = newOut[1].split(",");
+                Solver = solveOut;
+                tpOut = newOut[2].split(",");
+                gardeOut = newOut[3].split(",");
+                LongestSolver = newOut[4].split(",");
 
-            for (i = 0; i < gardeOut.length; i++) {
-              gardeOut[i] = gardeOut[i].split(":").map(function (item) {
-                return parseInt(item, 10);
-              });
-            }
+                console.log("SOLUTION TP " + tpOut.length + " : " + tpOut);
+                console.log("SOLUTION GARDE " + gardeOut.length + " : " + gardeOut);
+                console.log("SOLUTION S " + Solver.length + " : " + Solver);
+                console.log(
+                    "SOLUTION L " + LongestSolver.length + " : " + LongestSolver
+                );
+                console.log(
+                    "Taille : " + Math.sqrt(newOut[0].length) + " : " + newOut[0]
+                );
 
-            gardeList = [];
-            for (i = 0; i < gardeOut.length; i++) {
-              gardeList.push(new Garde(i, gardeOut[i][1], gardeOut[i][0]));
-            }
-            //console.log(gardeList);
-            //console.log(tpOut);
+                for (i = 0; i < tpOut.length; i++) {
+                  tpOut[i] = tpOut[i].split(":").map(function (item) {
+                    return parseInt(item, 10);
+                  });
+                }
 
-            if (output.length == 0) {
-              location.reload();
+                for (i = 0; i < gardeOut.length; i++) {
+                  gardeOut[i] = gardeOut[i].split(":").map(function (item) {
+                    return parseInt(item, 10);
+                  });
+                }
+
+                gardeList = [];
+                for (i = 0; i < gardeOut.length; i++) {
+                  gardeList.push(new Garde(i, gardeOut[i][1], gardeOut[i][0]));
+                }
+                //console.log(gardeList);
+                //console.log(tpOut);
+
+                if (output.length == 0) {
+                  location.reload();
+                }
+                gardeGlobal = gardeList;
+                Launch(
+                    Math.sqrt(newOut[0].length),
+                    Array.from(newOut[0]),
+                    0,
+                    anime,
+                    solveOut,
+                    tpOut
+                );
+              }
             }
-            gardeGlobal = gardeList;
-            Launch(
-              Math.sqrt(newOut[0].length),
-              Array.from(newOut[0]),
-              0,
-              anime,
-              solveOut,
-              tpOut
-            );
-          }
-        }
-      );
+        );
+      }
     }
   }
 }
@@ -398,6 +463,7 @@ let cheat = false;
 let finish = false; // Le jeu est-il fini.
 let Event;
 let Attack = false;
+let Manuel = false;
 //#endregion
 
 // Création d'une grid avec spawn du joueur et des gardes.
@@ -1288,7 +1354,8 @@ function Teleporter(tab) {
 
   TpStruct = tab;
   for (i = 0; i < tab.length; i++) {
-    if (tab[i][0] < 0) {
+    if (tab[i][0] <= 1) {
+      console.log("ça marche");
       break;
     }
     TeleporterStart.push(tab[i][0]);

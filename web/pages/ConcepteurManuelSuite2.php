@@ -68,7 +68,7 @@ if (isset($_POST['code_labyrinthe'])){
 
     switch($theme){
         case 1: header("Location: jungle.php"); break;
-        case 2: header("Location: retro.php"); break;
+        case 2: header("Location: retro.php?customManuel=1"); break;
         case 3: header("Location: space.php"); break;
     }
 }

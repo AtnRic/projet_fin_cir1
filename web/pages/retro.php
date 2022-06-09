@@ -32,8 +32,8 @@ include 'overlay.html';
     SetAmbiance("Retro");
 </script>
 <?php
-if($_GET["custo"]==1){
-    $custom=true;
+if(isset($_GET["customManuel"])){
+    $custom=false;
     $idpseudo=$_GET["ID_AUTHOR"];
     $level_name=$_GET["NAME"];
     $connexion=connect();
@@ -43,17 +43,41 @@ if($_GET["custo"]==1){
     }
     ?>
     <script>
-        PHP_Start(true, true, '<?php echo $data; ?>');
-    </script>
-    <?php
-}
-if($_GET["custo"]==0){
-    ?>
-    <script>
+        console.log("C'est bon");
+        Manuel=true;
         PHP_Start(false, false, null);
     </script>
-    <?php
+    <?PHP
 }
-?>
+else {?>
+<script>console.log("La poire");</script>
+<?php
+    if($_GET["custo"]==1){
+        $custom=true;
+        $idpseudo=$_GET["ID_AUTHOR"];
+        $level_name=$_GET["NAME"];
+        $connexion=connect();
+        $resultat=mysqli_query($connexion,"SELECT DATA FROM custom_level WHERE ID_AUTHOR='$idpseudo' AND NAME='$level_name'");
+        while($ligne=mysqli_fetch_assoc($resultat)){
+            $data=$ligne["DATA"];
+        }
+        ?>
+        <script>
+            PHP_Start(true, true, '<?php echo $data; ?>');
+        </script>
+    <?php
+    }
+    if($_GET["custo"]==0){
+    ?>
+        <script>
+            PHP_Start(false, false, null);
+        </script>
+    <?php
+    }
+}
+    ?>
+
+
+
 
 </html>

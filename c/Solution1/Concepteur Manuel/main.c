@@ -1702,33 +1702,38 @@ int main()
 	int SIZ3 = tableau[0];
 	int Theme = tableau[1];
 	//Lab* newl = Converter(lines[0].Chaine, SIZ3);
-	char* Tab = lines[0].Chaine;
+	char* Tab;
+	if (lines[0].Chaine) {
+		Tab = lines[0].Chaine;
+	}
+	else return EXIT_FAILURE;
+	
 
 
 	srand(time(NULL));
 	
 	Lab* newl = Converter(Tab, SIZ3);
 	Free* P = NewFree(SIZ3*SIZ3);
-	Teleporteurs_Paire* pairs = recherche_loc_tp(0, newl, SIZ3*SIZ3);
+	Teleporteurs_Paire* pairs = recherche_loc_tp(2, newl, SIZ3*SIZ3);
 	newl = Converter(letterSansPrintf(newl), SIZ3);
 	//printf("\n\n\n\n------------------Test------------------------\n");
 	letter(newl);
 	//printf("\n\n\n\n----------------Solveur-----------------------\n");
 	
-	Path* S = Solve(newl, pairs, 0);
+	Path* S = Solve(newl, pairs, 2);
 //		show(newl, S, pairs, 5);
 	//	printf("\n_____ SOLVE  FINAL _____\n\n");
 //	printPath(
 	//printTp(pairs);
 //	printf("\n____ ____ ____ ____ ____\n\n");
-
-	Path* W = Solve(newl, NULL, 0);
+	Path* W = Solve(newl, NULL, 2);
 	//show(newl, W, NULL, 0);
 //	printf("\n_____ SOLVE  FINAL _____\n\n");
 	printPath(W);
 //	printf("\n____ ____ ____ ____ ____\n\n");
+	//printTp(pairs);
 printf("\n;\n;");
-	Path* Slong = SolveLong(newl, pairs, 0);
+	Path* Slong = SolveLong(newl, pairs, 2);
 	printPath(Slong);
 
 	return EXIT_SUCCESS;
