@@ -32,6 +32,7 @@ if($functionName == 'generation')
     $var = 0;
     if(isset($_SESSION["customManuel"])){
         exec('Concepteur_Manuel.exe', $output, $var);
+        session_destroy();
     }
     else{
         exec('new07.06.exe', $output, $var);
