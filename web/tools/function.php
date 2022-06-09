@@ -30,7 +30,7 @@ if($functionName == 'generation')
 {
     $output = "";
     $var = 0;
-    if(isset($_SESSION["customManuel"])){
+    if(isset($_GET["customManuel"])){
         exec('Concepteur_Manuel.exe', $output, $var);
         session_destroy();
     }

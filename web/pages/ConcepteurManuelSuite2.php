@@ -45,7 +45,7 @@ if (isset($_GET['mazeSize']) && isset($_GET['theme'])) {
             </label>
         </div>
         <br>
-        <input type="submit" name="submit1" value="Send">
+        <a href="../tools/function.php?customManuel=1"><input type="submit" name="submit1" value="Send"></a>
     </form>
 </div>
 </body>
