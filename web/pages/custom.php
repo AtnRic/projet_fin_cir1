@@ -96,6 +96,6 @@ require '../tools/_main_tools.php';
     <h1>Welcome to the level maker  </h1>
     <p>Here you can create your own maze</p>
   </div>
-  <a href="home.php" id="to-home">Home</a>
+  <a href="ConcepteurManuel.php" id="to-home">Manual custom</a>
   
 </body>
