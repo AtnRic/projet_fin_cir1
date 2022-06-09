@@ -17,7 +17,7 @@
             echo $string_theme;
             $connexion=connect();
             $random=rand(min:0,max:10001);
-            $name="$string_theme#$random";
+            $name="".$string_theme."_".$random."";
             $custom=0;
             echo "\nid pseudo\n";
             echo $idpseudo;
@@ -33,10 +33,6 @@
             }
             else{
                 echo"yesyes";
-            }
-            if(!$connexion){
-                echo 'ERROR';
-                echo mysqli_error($connexion);
             }
             $d = $data[0];
             $resultat = mysqli_query($connexion, "INSERT INTO `custom_level` (`NAME`, `THEME`, `ID_AUTHOR`, `DATA`, `CUSTOM`) VALUES ('$name','$theme','$idpseudo','$d','0');");
