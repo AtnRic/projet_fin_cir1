@@ -207,22 +207,29 @@ function GetUserLevels($username){
     }
 }
 
-/*function GenerateLevelCustom($name){
+function GenerateLevelCustom($name){
     $connexion=connect();
-    $idpseudo=GetUserId($_COOKIE["login"])
-    $resultat=mysqli_query($connexion,'SELECT "data,theme,custom" FROM custom_level WHERE "$idpseudo=custom_level.ID_AUTHOR ');
-}*/
+    $idpseudo=GetUserId($_COOKIE["login"]);
+    $resultat=mysqli_query($connexion,"SELECT THEME FROM custom_level WHERE ID_AUTHOR='$idpseudo' AND NAME='$name' ");
+    while($ligne=mysqli_fetch_assoc($resultat)){
+        $theme=$ligne['THEME'];
+    }
+    $string_theme=GetTheme($theme);
+    $newurl="$string_theme.php?NAME=$name&ID_AUTHOR=$idpseudo";
+    $_SESSION["saved_level"]=1;
+    return $newurl;
+}
 
 //Récupére le theme pour l'afficher dans l'explorateur de niveaux sur la page de profil
 function GetTheme($Theme){
     if($Theme==1){
-        return "Jungle";
+        return "jungle";
     }
     if($Theme==2){
-        return "Retro";
+        return "retro";
     }
     if($Theme==3){
-        return "Space";
+        return "space";
     }
 }
 

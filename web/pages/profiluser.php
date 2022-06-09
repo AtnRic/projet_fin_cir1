@@ -93,13 +93,14 @@ include "../tools/_main_tools.php";
             <div id="level">
                 <?php
                 $connexion = connect();
-                $username = $_COOKIE['login'];
+                $idpseudo=GetUserId($_COOKIE["login"]);
                 $resultat = mysqli_query($connexion, "SELECT `NAME` FROM `custom_level` WHERE `AUTHOR` = '$username'");
                 if ($resultat) {
                     while ($row = mysqli_fetch_assoc($resultat)) {
                         $name = $row['NAME'];
+                        $newurl=GenerateLevelCustom($name)
                 ?>
-                        <a href="#"><?php echo $name ?></a>
+                        <a href="<?php echo $newurl;?>"><?php echo $name ?></a>
                         <br>
                 <?php
                     }
@@ -215,9 +216,7 @@ include "../tools/_main_tools.php";
                 <input type="submit" onclick="closePopup('resetStats')" value="NO">
                 <?php
                 if (isset($_POST["resetStats"])) {
-                    $connexion = connect();
-                    $username = $_COOKIE["login"];
-                    $resultat = mysqli_query($connexion, "UPDATE users SET Nbr_Points='0' WHERE Pseudo='$username'");
+                    ResetPoint($_COOKIE["login"]);
                     unset($_POST['resetStats']);
                     header('Location: ./profiluser.php');
                 }
