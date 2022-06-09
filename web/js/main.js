@@ -900,7 +900,8 @@ function Save() {
     "../pages/save.php",
     "save",
     function Handle(output) {
-      document.location.href = "../pages/profiluser.php";
+      console.log(output);
+      //document.location.href = "../pages/profiluser.php";
     },
     Arg
   );
