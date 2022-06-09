@@ -31,8 +31,8 @@
     </script>
 <?php
 $custo=$_GET["custo"];
-if($custo==1){
-    $custom=true;
+if(isset($_GET["customManuel"])){
+    $custom=false;
     $idpseudo=$_GET["ID_AUTHOR"];
     $level_name=$_GET["NAME"];
     $connexion=connect();
@@ -42,16 +42,36 @@ if($custo==1){
     }
     ?>
     <script>
-        PHP_Start(true, true, '<?php echo $data; ?>');
+        console.log("C'est bon");
+        Manuel=true;
+        PHP_Start(false, false, null);
+    </script>
+    <?PHP
+}
+else {
+    if($custo==1){
+        $custom=true;
+        $idpseudo=$_GET["ID_AUTHOR"];
+        $level_name=$_GET["NAME"];
+        $connexion=connect();
+        $resultat=mysqli_query($connexion,"SELECT DATA FROM custom_level WHERE ID_AUTHOR='$idpseudo' AND NAME='$level_name'");
+        while($ligne=mysqli_fetch_assoc($resultat)){
+            $data=$ligne["DATA"];
+        }
+        ?>
+        <script>
+            PHP_Start(true, true, '<?php echo $data; ?>');
+        </script>
+        <?php
+    }
+
+    if($custo==0){
+    ?>
+    <script>
+    PHP_Start(true, false, null);
     </script>
     <?php
-}
-if($custo==0){
-?>
-<script>
-PHP_Start(true, false, null);
-</script>
-<?php
+    }
 }
 ?>
 </html>
