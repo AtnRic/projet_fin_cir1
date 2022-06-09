@@ -101,11 +101,24 @@ include "../tools/_main_tools.php";
                         $newurl=GenerateLevelCustom($name);
                 ?>
                             <a href="<?php echo $newurl;?>" id="eachLevel" ><?php echo $name ?> </a>
+                            <a class="button" href="#popup1?name=<?php echo $name; ?>">Let me Pop up</a>
+                            
+                            <br>
                 <?php
                     }
                 }
                 mysqli_close($connexion);
                 ?>
+                <div id="popup1" class="overlay">
+                    <div class="popup">
+                        <h2>Here i am</h2>
+                        <a class="close" href="#">&times;</a>
+                        <div class="content">
+                            Thank to pop me out of that button, but now i'm done so you can close this window.
+                        </div>
+                    </div>
+                </div>
+                
             </div>
             <div id="buttonLevel">
                 <a href="./custom.php">Create a level</a>
