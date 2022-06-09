@@ -101,7 +101,7 @@ include "../tools/_main_tools.php";
                         $newurl=GenerateLevelCustom($name);
                 ?>
                             <a href="<?php echo $newurl;?>" id="eachLevel" ><?php echo $name ?> </a>
-                            <a class="button" href="#popup1?name=<?php echo $name; ?>">Let me Pop up</a>
+                            <a class="button" href="popup_profiluser.php?level_name=<?php echo $name; ?>">Share</a>
                             
                             <br>
                 <?php
@@ -109,17 +109,6 @@ include "../tools/_main_tools.php";
                 }
                 mysqli_close($connexion);
                 ?>
-                <div id="popup1" class="overlay">
-                    <div class="popup">
-                        <h2>Here is the Link to let your friends play this level</h2>
-                        <a class="close" href="#">&times;</a>
-                        <div class="content">
-                            <?php
-                             $newlink=GenerateLevelCustom($_GET["name"]) 
-                            ?>
-                        </div>
-                    </div>
-                </div>
                 
             </div>
             <div id="buttonLevel">
