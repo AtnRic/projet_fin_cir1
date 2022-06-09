@@ -12,7 +12,7 @@ echo "
         <a class='restart'><p>replay</p></a>
         <a href='./home.php'><p>home</p></a>
         <a class='save'><p>save</p></a>
-        <a href='./space.php'><p>next level</p></a>
+        <a href='home.php?mazeSize=35&nbrTP=10&nbrGuard=10&theme=3'><p>next level</p></a>
     </div>
 
 </div>";

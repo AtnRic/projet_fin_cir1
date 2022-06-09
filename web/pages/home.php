@@ -151,6 +151,7 @@ require '../tools/_main_tools.php';
         <h1>Welcome to Maze'ltov</h1>
         <p>Choose your level</p>
     </div>
+    <a href="custom.php" id="to-custom">Custom</a>
 <!-- <h2 class="title sub own">Or create your own !</h2> -->
 </body>
 </html>

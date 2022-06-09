@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>Maze'ltov - jungle</title>
     <link rel="stylesheet" type="text/css" href="../css/main.css">
@@ -15,43 +16,36 @@
         <table id="container"></table>
     </div>
     <?php
-    $custom=false;
-    include '../tools/_main_tools.php';
+    if (isset($_SESSION['custom'])) {
+        $custom = $_SESSION['custom'];
+        if ($custom == 1) {
+            $custom = true;
+        } else {
+            $custom = false;
+        }
+    } else {
+        $custom = false;
+    }
+
+    if (isset($_SESSION['data'])) {
+        $data = $_SESSION['data'];
+    } else {
+        $data = null;
+    }
+    
     include 'popups/popup_lose_jungle.php';
     include 'popups/popup_intro_jungle.php';
     include 'popups/popup_win_jungle.php';
     include 'overlay.html';
     ?>
 </body>
-    <script src="../js/conf.js"></script>
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
-    <script src="../js/node_modules/animejs/lib/anime.min.js"></script>
-    <script src="../js/main.js"></script>
-    <script>
-    SetAmbiance("Jungle");
-    </script>
-<?php
-if(isset($_SESSION["saved_level"])){
-    $custom=true;
-    $idpseudo=$_GET["ID_AUTHOR"];
-    $level_name=$_GET["NAME"];
-    $connexion=connect();
-    $resultat=mysqli_query($connexion,"SELECT DATA FROM custom_level WHERE ID_AUTHOR='$idpseudo' AND NAME='$level_name'");
-    while($ligne=mysqli_fetch_assoc($resultat)){
-        $data=$ligne["DATA"];
-    }
-    ?>
-    <script>
-        PHP_Start(true, true, '<?php echo $data; ?>');
-    </script>
-    <?php
-}
-if(empty($_SESSION["saved_level"])){
-?>
+<script src="../js/conf.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<script src="../js/node_modules/animejs/lib/anime.min.js"></script>
+<script src="../js/main.js"></script>
 <script>
-PHP_Start(true, false, null);
+    SetAmbiance("Jungle");
+    PHP_Start(true, '<?php echo $custom ?>', '<?php echo $data ?>');
 </script>
-<?php
-}
-?>
+
 </html>
