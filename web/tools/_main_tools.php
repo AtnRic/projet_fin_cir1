@@ -207,6 +207,12 @@ function GetUserLevels($username){
     }
 }
 
+function GenerateLevelCustom($name){
+    $connexion=connect();
+    $idpseudo=GetUserId($_COOKIE["login"])
+    $resultat=mysqli_query($connexion,'SELECT "data,theme,custom" FROM custom_level WHERE "$idpseudo=custom_level.ID_AUTHOR ')
+}
+
 //Récupére le theme pour l'afficher dans l'explorateur de niveaux sur la page de profil
 function GetTheme($Theme){
     if($Theme==1){
