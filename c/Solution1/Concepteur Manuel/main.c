@@ -1568,46 +1568,38 @@ void receptionTypeChaine(CSV_lineStruct* lines)
 
 	err = fopen_s(&stream, "ManuelChaineCaractere.csv", "r");
 	if (err == 0) {
-		//printf("Le fichier 'file.txt' est ouvert\n");
+		printf("Le fichier 'file.txt' est ouvert\n");
 	}
 	else
-		//printf("Le fichier 'file.txt' n'est pas ouvert\n");
-		if (stream == NULL) {
-			//printf("\nstream pas OK");
-			return -1;
-		}
-		else printf("\nstream ok");
-
-	fseek(stream, 0, SEEK_SET);
+		printf("Le fichier 'file.txt' n'est pas ouvert\n");
+	
+	if (stream == NULL) {
+			printf("\nstream pas OK");
+	}
+	else /*printf("\nstream ok");*/
+			fseek(stream, 0, SEEK_SET);
 
 	if (stream != NULL)
 	{
-		if (res = fscanf_s(fichier, "%s", lines[i].Chaine))
-		{
-			// on gère l'erreur
-			if (res == EOF) printf("Fin de fichier");
-			if (res == 2) printf("Seulement deux champs ont été lus");
-			if (res == 1) printf("Un seul un champ a été lu");
-			if (res == 0) printf("Aucun champ n'a été lu");
-		}
-		else
-		{
+		for (int i = 0; i < 1; i++) {
+			fscanf_s(stream, "%c", lines[i].Chaine);
 			printf("%s", lines[i].Chaine);
 		}
-		// On ferme le fichier
-		fclose(fichier);
 	}
-	else printf("Erreur fichier ManuelChaineCaractere.csv");
+	
+	if (stream)
+		err = fclose(stream);
 }
 
 int main()
 {
-	CSV_lineStruct* lines;
+	CSV_lineStruct* lines = (CSV_lineStruct*)malloc(sizeof(CSV_lineStruct));
 	int tableau[2] = { 0 };
 	readFile("ManuelAutresDonnees.csv", tableau);
 	receptionTypeChaine(lines);
 	int SIZ3 = tableau[0];
 	int Theme = tableau[1];
+	printf("%d, %d", SIZ3, Theme);
 	//printf("\nsize : %d\nteleporteur : %d\ngarde : %d\ntheme : %d\n", SIZ3, TELEPORTE, GARDAVOU, THEMA);
 	srand(time(NULL));
 	//Lab* newl = NewLab(SIZ3);
