@@ -140,7 +140,7 @@ function Rank_User($username){
         }
         if($Points>=10000 && $Points<25000){
             $rank=1;//Copper premier rank
-            echo"true 1";
+            //echo"true 1";
             return $rank;
         }
         if ($Points>=25000 && $Points<50000){
@@ -179,32 +179,24 @@ function GetUserPoints($username){
 //Reset les points de l'utilisateur connecté
 function ResetPoint($username){
     $connexion=connect();
-    $resultat=mysqli_query($connexion,"UPDATE Nbr_Points=0 FROM dbjeu WHERE Pseudo='$username'");
+    $resultat=mysqli_query($connexion,"UPDATE users SET Nbr_Points=0 WHERE Pseudo='$username'");
 }
 
 function GetUserLevels($username){
     $connexion=connect();
-    $resultat=mysqli_query($connexion,"SELECT 'NAME,SIZE,GUARD_NUMBER,TELEPORTER_NUMBER,THEME' FROM 'custom_level,users' WHERE 'users.Pseudo=custom_level.AUTHOR'" );
+    $idpseudo=GetUserId($_COOKIE["login"]);
+    $resultat=mysqli_query($connexion,"SELECT 'NAME' FROM custom_level ,users WHERE '$idpseudo=custom_level.ID_AUTHOR'" );
     if($resultat!=NULL){
         while ($niveaux = mysqli_fetch_assoc($resultat)){
             $Name = $niveaux['NAME'];
-            $Size = $niveaux['SIZE'];
-            $Guard = $niveaux['GUARD_NUMBER'];
-            $Teleporteur = $niveaux['TELEPORTER_NUMBER'];
-            $Theme = $niveaux['THEME'];
             ?>
             <div id="niveaux_display">
-                <p><?php echo $Name;?></p>
-                <p>Size:<?php echo $Size;?></p>
-                <p>Guard Number:<?php echo $Guard;?></p>
-                <p>Portal Number:<?php echo $Teleporteur;?></p>
-                <p>Background:<?php echo GetTheme($Theme);?></p>
-                <a href="">play level</a>
+                <a href="lien vers la prochaine page.php"><?php echo $Name;?></a>
                 <input type="submit" value="Share" href="../tools/rintFile.php?"/>
             </div>
             <style>
                 #niveaux_display{
-                    border: solid 2px black;
+                    border: solid 2px blue;
                 }
             </style>
             <?php
@@ -214,6 +206,12 @@ function GetUserLevels($username){
         echo"erreur connexion data base";
     }
 }
+
+/*function GenerateLevelCustom($name){
+    $connexion=connect();
+    $idpseudo=GetUserId($_COOKIE["login"])
+    $resultat=mysqli_query($connexion,'SELECT "data,theme,custom" FROM custom_level WHERE "$idpseudo=custom_level.ID_AUTHOR ');
+}*/
 
 //Récupére le theme pour l'afficher dans l'explorateur de niveaux sur la page de profil
 function GetTheme($Theme){

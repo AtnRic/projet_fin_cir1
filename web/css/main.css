@@ -136,8 +136,6 @@ background-color:yellow;
 }
 
 
-
-
 .global{
   position: absolute;
   top: 50%;
@@ -157,7 +155,9 @@ background-color:yellow;
   top: 50%;
   transform: translateX(-50%) translateY(-50%);
 }
-
+.icon-link{
+  color: #82c38b;
+}
 
 /*
 @media screen and (min-width: 1600px) {

@@ -18,7 +18,7 @@ require '../tools/_main_tools.php';
     $_SESSION['custom']=true;
     if (isset($_POST['mazeSize']) && isset($_POST['nbrGuard']) && isset($_POST['nbrTP']) && isset($_POST['theme'])){
         echo Console("<p>Erreur d'exécution de la requete </p>");
-        $_SESSION["name"]=$_POST['Maze_Name'];
+        $_SESSION["name"]=$_POST["levelname"];
         $_SESSION["mazeSize"] = $_POST['mazeSize'];
         $_SESSION["nbrGuard"] = $_POST['nbrGuard'];
         $_SESSION["nbrTP"] = $_POST['nbrTP'];
@@ -52,25 +52,14 @@ require '../tools/_main_tools.php';
     }
     ?>
   <section class="back">
-    <div class="orbite-mars"></div>
-    <div class="orbite-earth"></div>
-    <div class="star1"></div>
-    <div class="star2"></div>
     <div class="moon"></div>
-    <img src="../images/accueil/Piranha_Plant.gif" class="plant">
-    <img src="../images/accueil/mario-pipe.png" class="pipe">
-    <div id="right-side"></div>
-    <img src="../images/accueil/ground.png" id="ground">
     <img src="../images/accueil/static-left-leaves.png" class="left">
-    <img src="../images/accueil/middle-left-leaf.png" id="middle">
-    <img src="../images/accueil/middle-left-leaf-bis.png" id="middlebis">
-    <img src="../images/accueil/upper-bottom-left-leaf.png" id="upper-bottom-left-leaf">
-    <img src="../images/accueil/bottom-left-leaf.png" id="bottom-left-leaf">
     <img src="../" alt="" class="right">
-
     <!-- <div id="right"></div> -->
     <div class="range">
       <form method="post" action="custom.php" class="builder">
+        <p>Level name:</p>
+        <input type="text" name="levelname" min="1" max="20" placeholder="Level Name">
         <p>Size</p>
         <input type="range" name="mazeSize" min="7" max="30" value="5">
         <br>
@@ -87,7 +76,7 @@ require '../tools/_main_tools.php';
           <option>Space</option>
         </select>
         <br>
-        <input type="submit" value="Generate" class="valid validate">
+        <input type="submit" name="customgo" value="Generate">
       </form>
     </div>
   </section>

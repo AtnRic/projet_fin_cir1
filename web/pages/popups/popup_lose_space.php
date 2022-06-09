@@ -35,6 +35,7 @@ echo "
             background-image: none;
             text-align: center;
             align-items: center;
+            z-index: 15;
         }
         #popup_lose h1, p, h2{
             background-image: none;
