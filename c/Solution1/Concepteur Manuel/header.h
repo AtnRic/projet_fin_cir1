@@ -20,6 +20,10 @@ typedef struct Teleporteurs_Paire {
 	int size;
 }Teleporteurs_Paire;
 
+typedef struct CSV_lineStruct {
+	char Chaine[900];
+} CSV_lineStruct;
+
 // cr�ation d'une nouvelle liste cha�n�e bilat�re vide
 // cette fonction renvoie un pointeur sur la nouvelle structure liste cha�n�e bilat�re vide
 DoubleLinkedList* newDoubleLinkedList();
