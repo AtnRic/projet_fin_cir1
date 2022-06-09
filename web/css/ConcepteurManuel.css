@@ -1,0 +1,135 @@
+.orbite-mars {
+    position: absolute;
+  
+    width: 100vw;
+    height: 100vw;
+  
+    border: none;
+    border-radius: 50%;
+  
+    top: 40%;
+  
+    left: 50%;
+    transform: translateX(-50%);
+  
+    /* background: yellow; */
+    animation-name: orbite;
+    animation-duration: 15s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+  }
+  
+  .orbite-earth {
+    position: absolute;
+  
+    width: 100vw;
+    height: 100vw;
+  
+    border: none;
+    border-radius: 50%;
+  
+    top: 50%;
+  
+    left: 50%;
+    transform: translateX(-50%);
+  
+    animation-name: orbite-earth;
+    animation-duration: 30s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+  }
+  .orbite-mars::after {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+  
+    width: 10vh;
+    height: 10vh;
+  
+    background: url(../images/accueil/mars.png) center center / cover no-repeat;
+  }
+  
+  .orbite-earth::after {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+  
+    width: 10vh;
+    height: 10vh;
+  
+    background: url(../images/accueil/earth.png) center center / cover no-repeat;
+  }
+  
+  @keyframes orbite {
+    from {transform: translateX(-50%) rotate(0deg);}
+    to {transform: translateX(-50%) rotate(360deg);}
+  }
+  
+  @keyframes orbite-earth {
+    from {transform: translateX(-50%) rotate(0deg);}
+    to {transform: translateX(-50%) rotate(360deg);}
+  }
+  
+  .back {
+    position: absolute;
+    top: 0;
+    left: 0;
+  
+    min-height: 100vh;
+    min-width: 100vw;
+  
+    background: url(../images/accueil/space-bg.png) center center / cover no-repeat;
+  }
+  
+  .moon {
+    position: absolute;
+  
+    top: 15vh;
+    right: 15vw;
+  
+    height: 20vh;
+    width: 20vh;
+  
+    background-color: white;
+  
+    border: none;
+    border-radius: 50%;
+  }
+  
+  .moon::after {
+    content: "";
+    position: absolute;
+  
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  
+    background: white;
+  
+    border: none;
+    border-radius: 50%;
+  
+    height: 40vw;
+    width: 40vw;
+  
+    filter: blur(20vw);
+  
+    animation-name: moon;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+  }
+  
+  
+  @keyframes moon {
+    0% {
+      opacity: 0.2;
+    }
+    50% {
+      opacity: 0.1;
+    }
+    100% {
+      opacity: 0.2;
+    }
+  }

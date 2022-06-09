@@ -534,3 +534,23 @@ select::after {
   box-shadow: none;
   background: url(../images/accueil/mario-button.gif) center bottom / cover no-repeat;
 }
+
+.formular {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: white;
+  transform: translate(-50%,-50%);
+  justify-content: center;
+  text-align: center;
+}
+
+.forbis {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  color: white;
+  transform: translate(-50%,-50%);
+  justify-content: center;
+  text-align: center;
+}

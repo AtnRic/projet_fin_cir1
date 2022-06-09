@@ -1,4 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Concepteur manuel</title>
+    <link rel="stylesheet" type="text/css" href="../css/custom.css">
+    <link rel='icon' href='../images/front/favicon.ico' type='image/x-icon'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
 <body>
+<section class="back">
+<div class="orbite-mars"></div>
+<div class="orbite-earth"></div>
+<div class="star1"></div>
+<div class="star2"></div>
+<div class="moon"></div>
+<img src="../images/accueil/Piranha_Plant.gif" class="plant">
+<img src="../images/accueil/mario-pipe.png" class="pipe">
+<div id="right-side"></div>
+<img src="../images/accueil/ground.png" id="ground">
+<img src="../images/accueil/static-left-leaves.png" class="left">
+<img src="../images/accueil/middle-left-leaf.png" id="middle">
+<img src="../images/accueil/middle-left-leaf-bis.png" id="middlebis">
+<img src="../images/accueil/upper-bottom-left-leaf.png" id="upper-bottom-left-leaf">
+<img src="../images/accueil/bottom-left-leaf.png" id="bottom-left-leaf">
+<img src="../" alt="" class="right">
 <?php
 if (isset($_GET['mazeSize']) && isset($_GET['theme'])) {
     $mazeSize = $_GET['mazeSize'];
@@ -29,6 +54,7 @@ if (isset($_GET['mazeSize']) && isset($_GET['theme'])) {
     }
 }
 ?>
+<div class="formular">
 <h1>Manual custom :</h1>
 <h2>You have chosen a maze of <?php $SSize=$mazeSize; echo"$SSize";?> side squares (<?php $tot = $SSize*$SSize; echo"$tot";?>): </h2>
 <div>
@@ -39,15 +65,16 @@ if (isset($_GET['mazeSize']) && isset($_GET['theme'])) {
 <div>
     <form action="ConcepteurManuelSuite2.php?mazeSize=<?php echo$mazeSize;?>&theme=<?php echo $theme;?>" method="post">
         <div>
-            <label>Maze :</label>
             <label>
                 <textarea name="code_labyrinthe"></textarea>
             </label>
         </div>
         <br>
-        <a href="../tools/function.php?customManuel=1"><input type="submit" name="submit1" value="Send"></a>
+        <a href="../tools/function.php?customManuel=1"><input type="submit" name="submit1" value="Send" class="valid validate"></a>
     </form>
 </div>
+</div>
+</section>
 </body>
 
 <?php
