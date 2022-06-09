@@ -88,7 +88,7 @@ require '../tools/_main_tools.php';
           <option>Space</option>
         </select>
         <br>
-        <input type="submit" name="customgo" value="Generate">
+        <input class="valid validate" type="submit" name="customgo" value="Generate">
       </form>
     </div>
   </section>
