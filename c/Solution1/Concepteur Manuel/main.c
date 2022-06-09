@@ -1732,7 +1732,7 @@ int main()
 	printPath(W);
 //	printf("\n____ ____ ____ ____ ____\n\n");
 	//printTp(pairs);
-printf("\n;\n;");
+printf("\n;1:2\n;");
 	Path* Slong = SolveLong(newl, pairs, 2);
 	printPath(Slong);
 
