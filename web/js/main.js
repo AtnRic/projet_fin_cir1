@@ -355,6 +355,7 @@ function sch_Start(anime, custom, data) {
 
 // Relancer le labyrinthe sans relancer la page.
 function Restart() {
+  start = false;
   MainMusic.pause();
   MainMusic = null;
   var e = document.getElementById("container");

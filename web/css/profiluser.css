@@ -160,18 +160,18 @@ main {
     text-align: center;
 }
 
-.overlay {
+#share{
+    display: none;
+    z-index: 1;
     position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: rgba(0, 0, 0, 0.7);
-    transition: opacity 500ms;
-    visibility: hidden;
-    opacity: 0;
-  }
-  
+    top: 15%;
+    left: 37%;
+    width: 25%;
+    height: 32%;
+    background-color: black;
+    border: solid 2px white;
+    text-align: center;
+}
 #resetStats>p,#resetStats>form>input {
     margin-bottom: 5%;
 }

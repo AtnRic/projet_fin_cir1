@@ -1,5 +1,5 @@
 <?php
-//echo "<canvas class='confetti' id='canvas'></canvas>";
+echo "<canvas class='confetti' id='canvas'></canvas>";
 echo "
 <div id='popup'>
     <h1>A grand day out</h1>

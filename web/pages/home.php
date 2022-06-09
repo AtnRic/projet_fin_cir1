@@ -116,7 +116,7 @@ require '../tools/_main_tools.php';
         <div class="orbite_mars"></div>
         <div id="iss"></div>
         <div class="ufo"></div>
-        <a href="?mazeSize=35&nbrTP=10&nbrGuard=10&theme=3">
+        <a href="?mazeSize=35&nbrTP=5&nbrGuard=10&theme=3">
         <?php
             if(isset($_GET['mazeSize']) && isset($_GET['nbrTP']) && isset($_GET['nbrGuard']) && isset($_GET['theme'])){
                 $mazeSize = $_GET['mazeSize'];
