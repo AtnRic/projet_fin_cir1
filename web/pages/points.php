@@ -15,18 +15,20 @@
         $points=$points+($data*10);
         echo"\npoints de fin user :\n";
         echo $points;
-        /*if($functionName == 'short'){
+        //si l'utilisateur effectue le chemin le plus court il reçoit 300 points en plus que les points de base
+        if($functionName == 'short'){
             $points+=300;
             echo"\nSHORT !!!\n";
         }
+        //si l'utilisateur effectue le chemin le plus long il reçoit 300 points en plus que les points de base
         if($functionName == 'long'){
             $points+=300;
             echo"\nLONG !!!\n";
-        }*/
+        }
         $resultat=mysqli_query($connexion,"UPDATE users SET Nbr_Points='$points' WHERE Pseudo='$username'");
     }
-    //si l'utilisateur effectue le chemin le plus court il reçoit 300 points en plus que les points de base
-    if($functionName == 'short'){
+    
+    /*if($functionName == 'short'){
         $connexion=connect();
         $username=$_COOKIE["login"];
         //récupére dans la base les points de l'utilisateur
@@ -39,7 +41,7 @@
         echo"\nSHORT !!!\n";
         $resultat=mysqli_query($connexion,"UPDATE users SET Nbr_Points='$points' WHERE Pseudo='$username'");
     }
-    //si l'utilisateur effectue le chemin le plus long il reçoit 300 points en plus que les points de base
+    
     if($functionName == 'long'){
         $connexion=connect();
         $username=$_COOKIE["login"];
@@ -52,5 +54,5 @@
         echo $points;
         echo"\nLONG !!!\n";
         $resultat=mysqli_query($connexion,"UPDATE users SET Nbr_Points='$points' WHERE Pseudo='$username'");
-    }
+    }*/
 ?>
