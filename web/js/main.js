@@ -1,3 +1,6 @@
+let custom; // Si la page a été customisé
+
+
 // Lettres du labyrinthe
 var correspondance = {
   a: [0, 0, 0, 0],
@@ -194,6 +197,8 @@ for (i = 0; i < document.getElementsByClassName("account").length; i++) {
 function PHP_Start(anime, custom, data) {
   document.getElementById("popup_intro").style.visibility = "visible";
   animation = anime;
+  console.log("custom : "+custom);
+  console.log("data : "+data);
   if (custom) {
     start = true;
     MainMusic = PlaySound(Ambiance.Theme);
