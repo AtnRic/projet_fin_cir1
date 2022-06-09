@@ -10,14 +10,6 @@ include "../tools/_main_tools.php";
     <link rel='icon' href='../images/front/favicon.ico' type='image/x-icon'>
     <title>Page de profil</title>
 </head>
-<?php
-if (isset($_POST['clicked'])) {
-    $theme = $_POST['theme'];
-    $_SESSION['custom'] = $_POST['custom'];
-    $_SESSION['data'] = $_POST['data'];
-    header("Location: ./$theme.php");
-}
-?>
 
 <body>
     <header>
@@ -29,9 +21,9 @@ if (isset($_POST['clicked'])) {
                 <?php
                 $connexion = connect();
                 $username = $_COOKIE["login"];
-                $resultat = mysqli_query($connexion, "SELECT `Pseudo` FROM `users` WHERE Pseudo = '$username'");
+                $resultat = mysqli_query($connexion, "SELECT `avatar` FROM `users` WHERE Pseudo = '$username'");
                 $row = mysqli_fetch_assoc($resultat);
-                switch ($row['Pseudo']) {
+                switch ($row['avatar']) {
                     case 'jungle hero':
                         $avatar = './../images/profileuser/profil/profile_jungle_hero.png';
                         break;
@@ -101,21 +93,14 @@ if (isset($_POST['clicked'])) {
             <div id="level">
                 <?php
                 $connexion = connect();
-                $idpseudo = $_COOKIE['login'];
-                $resultat = mysqli_query($connexion, "SELECT `NAME`, `THEME`, `CUSTOM`, `DATA` FROM `custom_level` WHERE `ID_AUTHOR` = '$idpseudo'");
+                $idpseudo = GetUserId($_COOKIE['login']);
+                $resultat = mysqli_query($connexion, "SELECT `NAME` FROM `custom_level` WHERE `ID_AUTHOR` = '$idpseudo'");
                 if ($resultat) {
                     while ($row = mysqli_fetch_assoc($resultat)) {
                         $name = $row['NAME'];
-                        $theme = GetTheme($row['THEME']);
-                        $custom = $row['CUSTOM'];
-                        $data = $row['DATA'];
+                        $newurl=GenerateLevelCustom($name);
                 ?>
-                        <form method="POST">
-                            <input type="hidden" name="custom" value="<?php echo $custom ?>"/>
-                            <input type="hidden" name="data" value="<?php echo $data ?>"/>
-                            <input type="hidden" name="theme" value="<?php echo $theme ?>"/>
-                            <input id="eachLevel" type="submit" name="clicked" value="<?php echo $name ?>" />
-                        </form>
+                            <a href="<?php echo $newurl;?>" id="eachLevel" ><?php echo $name ?> </a>
                 <?php
                     }
                 }
@@ -182,7 +167,6 @@ if (isset($_POST['clicked'])) {
                     setcookie("nomPris", $nomPris, time() + (3600 * 24 * 365));
                 } else {
                     $resultat1 = mysqli_query($connexion, "UPDATE users SET Pseudo='$newPseudo' WHERE Pseudo='$username'");
-                    $resultat2 = mysqli_query($connexion, "UPDATE custom_level SET AUTHOR='$newPseudo' WHERE AUTHOR='$username'");
                     setcookie("login", $newPseudo, time() + (3600 * 24 * 365));
                 }
                 unset($_POST['newPseudo']);
@@ -232,9 +216,7 @@ if (isset($_POST['clicked'])) {
                 <input type="submit" onclick="closePopup('resetStats')" value="NO">
                 <?php
                 if (isset($_POST["resetStats"])) {
-                    $connexion = connect();
-                    $username = $_COOKIE["login"];
-                    $resultat = mysqli_query($connexion, "UPDATE users SET Nbr_Points='0' WHERE Pseudo='$username'");
+                    ResetPoint($_COOKIE["login"]);
                     unset($_POST['resetStats']);
                     header('Location: ./profiluser.php');
                 }

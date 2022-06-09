@@ -207,6 +207,7 @@ function GetUserLevels($username){
     }
 }
 
+//Génére un lien pour les pages de niveaux enregistrées dans la base de donnée.
 function GenerateLevelCustom($name){
     $connexion=connect();
     $idpseudo=GetUserId($_COOKIE["login"]);
@@ -215,8 +216,7 @@ function GenerateLevelCustom($name){
         $theme=$ligne['THEME'];
     }
     $string_theme=GetTheme($theme);
-    $newurl="$string_theme.php?NAME=$name&ID_AUTHOR=$idpseudo";
-    $_SESSION["saved_level"]=1;
+    $newurl="$string_theme.php?NAME=$name&ID_AUTHOR=$idpseudo&custo=1";
     return $newurl;
 }
 

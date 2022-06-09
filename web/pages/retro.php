@@ -16,38 +16,44 @@
         <table id="container"></table>
     </div>
     <?php
-
-    if (isset($_SESSION['custom'])) {
-        $custom = $_SESSION['custom'];
-        if ($custom == 1) {
-            $custom = true;
-        } else {
-            $custom = false;
-        }
-    } else {
-        $custom = false;
-    }
-
-    if (isset($_SESSION['data'])) {
-        $data = $_SESSION['data'];
-    } else {
-        $data = null;
-    }
-
+    include '../tools/_main_tools.php';
     include 'popups/popup_intro_retro.php';
     include 'popups/popup_win_retro.php';
     include 'popups/popup_lose_retro.php';
     include 'overlay.html';
     ?>
 </body>
-<div class="preload" style="display: none"><img rel="preload" loading="eager" src="../images/retro/retro.png" alt=""></div>
-<script src="../js/conf.js"></script>
-<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-<script src="../js/node_modules/animejs/lib/anime.min.js"></script>
-<script src="../js/main.js"></script>
-<script>
-    SetAmbiance("Retro");
-    PHP_Start(false, '<?php echo $custom ?>', '<?php echo $data ?>');
-</script>
+    <div class="preload" style="display: none"><img rel="preload" loading="eager" src="../images/retro/retro.png" alt=""></div>
+    <script src="../js/conf.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="../js/node_modules/animejs/lib/anime.min.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+        SetAmbiance("Retro");
+    </script>
+<?php
+if($_GET["custo"]==1){
+    $custom=true;
+    $idpseudo=$_GET["ID_AUTHOR"];
+    $level_name=$_GET["NAME"];
+    $connexion=connect();
+    $resultat=mysqli_query($connexion,"SELECT DATA FROM custom_level WHERE ID_AUTHOR='$idpseudo' AND NAME='$level_name'");
+    while($ligne=mysqli_fetch_assoc($resultat)){
+        $data=$ligne["DATA"];
+    }
+    ?>
+    <script>
+        PHP_Start(true, true, '<?php echo $data; ?>');
+    </script>
+    <?php
+}
+if($_GET["custo"]==0){
+    ?>
+    <script>
+    PHP_Start(true, false, null);
+    </script>
+<?php
+}
+?>
 
 </html>
