@@ -182,7 +182,13 @@ for (i = 0; i < document.getElementsByClassName("sound").length; i++) {
     .getElementsByClassName("sound")
     [i].addEventListener("click", ThemeSound);
 }
-
+for (i = 0; i < document.getElementsByClassName("account").length; i++) {
+  document
+    .getElementsByClassName("account")
+    [i].addEventListener("click", function () {
+      document.location.href = "../pages/profiluser.php";
+    });
+}
 // Fonction appelée depuis le js.
 function PHP_Start(anime, custom, data) {
   document.getElementById("popup_intro").style.visibility = "visible";
