@@ -160,18 +160,18 @@ main {
     text-align: center;
 }
 
-.overlay2{
-    /*visibility: hidden;*/
-    position: absolute;
-    z-index: 2000;
-    /*opacity: 0;*/
+#share{
+    display: none;
+    z-index: 1;
+    position: fixed;
+    top: 15%;
+    left: 37%;
+    width: 25%;
+    height: 32%;
+    background-color: black;
+    border: solid 2px white;
+    text-align: center;
 }
-
-.overlay2:target{
-    visibility: visible;
-    opacity: 1; 
-}
-
 #resetStats>p,#resetStats>form>input {
     margin-bottom: 5%;
 }
