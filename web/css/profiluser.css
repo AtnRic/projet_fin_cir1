@@ -164,6 +164,11 @@ main {
     margin-bottom: 5%;
 }
 
+#eachLevel>input{
+    background-color: black;
+    color: white;
+}
+
 @keyframes blink {
     50% {
         opacity: 0.0;
