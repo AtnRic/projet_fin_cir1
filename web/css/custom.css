@@ -554,3 +554,45 @@ select::after {
   justify-content: center;
   text-align: center;
 }
+
+#pdf {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(300%);
+  color: white;
+  font-size: large;
+  overflow-x: hidden;
+  text-decoration: none;
+  animation-name: glow;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  transition: all 0.3 ease;
+}
+
+#pdf::before {
+  position: absolute;
+  content: '';
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background: none;
+  border: none;
+  border-bottom: 1px solid white;
+  transition: all 0.3s;
+}
+
+@keyframes glow {
+  0% { text-shadow: none;}
+  50% { text-shadow: #fff 1px 0px 10px;}
+  100% {text-shadow: none;}
+}
+
+#pdf:hover {
+  animation: none;
+}
+
+#pdf:hover::before {
+  width: 100%;
+}

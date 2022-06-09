@@ -61,7 +61,7 @@ if (isset($_GET['mazeSize']) && isset($_GET['theme'])) {
     <p>
         Please enter the letters of the generation without spaces, without line breaks, boxes from left to right, line by line
     </p>
-    <a href="Correspondences.pdf">Download PDF file of correspondences</a>
+    <a href="Correspondences.pdf" id="pdf">Download PDF file of correspondences</a>
 </div>
 <div>
     <form action="ConcepteurManuelSuite2.php?mazeSize=<?php echo$mazeSize;?>&theme=<?php echo $theme;?>" method="post">
