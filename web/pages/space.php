@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Maze'ltov - space</title>
+    <title>Space - Maze'ltov</title>
     <link rel="stylesheet" type="text/css" href="../css/space.css">
     <link rel='icon' href='../images/front/favicon.ico' type='image/x-icon'>
     <link rel="stylesheet" type="text/css" href="../css/overlay.css">

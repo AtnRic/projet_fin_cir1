@@ -19,12 +19,13 @@
 }
 
 .range {
-  width: 400px;
+  width: 500px;
   margin: auto;
   position: absolute;
-  top:50%;  
+  /* display: inline-block; */
+  top:20%;  
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
 }
 
 html, body {
@@ -183,6 +184,7 @@ html, body {
 .builder {
   text-align : center;
   padding: 5vh 10vh;
+  font-size: small;
 }
 
 .builder>p {
@@ -442,14 +444,16 @@ label {
 }
 
 select {
+  margin-right: auto;
+  margin-left: auto;
   margin-top: 2vh;
-  width: 100%;
+  width: 50%;
   min-width: 15ch;
   max-width: 30ch;
   border: 1px solid black;
   border-radius: 10px;
   padding: 0.25em 0.5em;
-  font-size: 1.25rem;
+  font-size: 1rem;
   cursor: pointer;
   line-height: 1.1;
   background-color: #fff;
@@ -469,14 +473,14 @@ select::after {
 }
 
 .valid {
-  width: 160px;
+  width: 100px;
   font-size: 16px;
   font-weight: 600;
   /* background-image: linear-gradient(to right,#25aae1,#4481eb,#04befe,#3f86ed); */
   color: #fff;
   cursor: pointer;
   margin: 20px;
-  height: 55px;
+  height: 35px;
   text-align:center;
   border: none;
   background-size: 300% 100%;
