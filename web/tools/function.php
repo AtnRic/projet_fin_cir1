@@ -30,7 +30,13 @@ if($functionName == 'generation')
 {
     $output = "";
     $var = 0;
-    exec('new07.06.exe', $output, $var);
+    if(isset($_SESSION["customManuel"])){
+        exec('Concepteur_Manuel.exe', $output, $var);
+    }
+    else{
+        exec('new07.06.exe', $output, $var);
+    }
+
     // Appeler le C, lancement du jeu ?
     $out = "";
     for($i = 0; $i < count($output); $i++){

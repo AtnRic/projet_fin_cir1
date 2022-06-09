@@ -1704,6 +1704,7 @@ int main()
 	//Lab* newl = Converter(lines[0].Chaine, SIZ3);
 	char* Tab = lines[0].Chaine;
 
+
 	srand(time(NULL));
 	
 	Lab* newl = Converter(Tab, SIZ3);
