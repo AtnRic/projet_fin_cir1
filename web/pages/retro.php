@@ -16,24 +16,7 @@
         <table id="container"></table>
     </div>
     <?php
-
-    if (isset($_SESSION['custom'])) {
-        $custom = $_SESSION['custom'];
-        if ($custom == 1) {
-            $custom = true;
-        } else {
-            $custom = false;
-        }
-    } else {
-        $custom = false;
-    }
-
-    if (isset($_SESSION['data'])) {
-        $data = $_SESSION['data'];
-    } else {
-        $data = null;
-    }
-
+    include '../tools/_main_tools.php';
     include 'popups/popup_intro_retro.php';
     include 'popups/popup_win_retro.php';
     include 'popups/popup_lose_retro.php';

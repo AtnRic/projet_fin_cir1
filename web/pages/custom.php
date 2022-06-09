@@ -79,7 +79,7 @@ require '../tools/_main_tools.php';
         <input type="range" name="nbrGuard" min="1" max="10" value="0">
         <br>
         <p>Teleporters</p>
-        <input type="range" name="nbrTP" min="1" max="5" value="0">
+        <input type="range" name="nbrTP" min="1" max="4" value="0">
         <br>
         <label>Theme</label>
         <select name="theme">
