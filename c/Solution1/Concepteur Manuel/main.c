@@ -1561,20 +1561,21 @@ int readFile(char* filename, int tableau[]) {
 
 void receptionTypeChaine(CSV_lineStruct* lines)
 {
-	int i = 0;
-	CSV_lineStruct line[1];
+	//CSV_lineStruct* lines[0];
 	FILE* stream;
 	errno_t err;
 
 	err = fopen_s(&stream, "ManuelChaineCaractere.csv", "r");
 	if (err == 0) {
-		printf("Le fichier 'file.txt' est ouvert\n");
+		//printf("Le fichier 'file.txt' est ouvert\n");
 	}
-	else
-		printf("Le fichier 'file.txt' n'est pas ouvert\n");
+	else{
+		//printf("Le fichier 'file.txt' n'est pas ouvert\n");
+	}
+		
 	
 	if (stream == NULL) {
-			printf("\nstream pas OK");
+			//printf("\nstream pas OK");
 	}
 	else /*printf("\nstream ok");*/
 			fseek(stream, 0, SEEK_SET);
@@ -1582,14 +1583,15 @@ void receptionTypeChaine(CSV_lineStruct* lines)
 	if (stream != NULL)
 	{
 		for (int i = 0; i < 1; i++) {
-			fscanf_s(stream, "%c", lines[i].Chaine);
-			printf("%s", lines[i].Chaine);
+			fscanf_s(stream, "%s", lines[i].Chaine, _countof(lines[i].Chaine));
+			//printf("%s", lines[i].Chaine);
 		}
 	}
 	
 	if (stream)
 		err = fclose(stream);
 }
+
 
 int main()
 {
@@ -1599,8 +1601,8 @@ int main()
 	receptionTypeChaine(lines);
 	int SIZ3 = tableau[0];
 	int Theme = tableau[1];
-	printf("%d, %d", SIZ3, Theme);
-	//printf("\nsize : %d\nteleporteur : %d\ngarde : %d\ntheme : %d\n", SIZ3, TELEPORTE, GARDAVOU, THEMA);
+	printf("\n%d, %d\n", SIZ3, Theme);
+	printf("\n%s\n\n\n\n\n", lines[0].Chaine);
 	srand(time(NULL));
 	//Lab* newl = NewLab(SIZ3);
 	Free* P = NewFree(100);
