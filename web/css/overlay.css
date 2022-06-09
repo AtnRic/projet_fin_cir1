@@ -1,11 +1,11 @@
 :root {
     /* --bg: #dcdde1;      */
     --reload: #535c68;  
-    --social-icon1: #e4405f;
-    --social-icon2: #3b5999;
-    --social-icon3: #e4405f;
-    --social-icon4: #cd201f;
-    --social-icon5: #0077B5;  
+    --social-icon1: black;
+    --social-icon2: black;
+    --social-icon3: black;
+    --social-icon4: black;
+    --social-icon5: black;  
 }
 
 * {
@@ -20,8 +20,7 @@
     height: 100vh;
     display: flex;
     align-items: center;
-    justify-content: center;  
-    /*background: var(--bg);*/
+    justify-content: center;
     z-index: 9;
     background-color: transparent;
     background-image: none;
@@ -30,7 +29,6 @@
 .icon-list {
     position: absolute;
     right: 0;
-    /*width: 100px;*/
     top: 50%;
     transform: translateY(-50%);
     height: 100%;
@@ -38,7 +36,6 @@
     padding: 0 1.5rem;
     display: grid;
     grid-template-rows: 14.28% 14.28% 14.28% 14.28% 14.28% 14.28% 14.28% ;
-    /*justify-content: space-between;*/
     background-color: transparent;
     background-image: none;
     column-width: 100px;
@@ -55,8 +52,7 @@
 .icon-link {  
     display: inline-flex;
     font-size: 3rem;  
-    text-decoration: none;  
-    /*color: var(--color-icon);*/
+    text-decoration: none;
     width: 6rem;
     height: 6rem;   
     transition: .5s linear;
@@ -117,4 +113,32 @@
 .icon-item:nth-child(5) a:hover:before {
     background: var(--social-icon5); 
 }
+
+.short i:hover {
+    animation-name: rotate;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    animation-duration: 2s;
+}
+
+.long i:hover {
+    animation-name: rotate;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    animation-duration: 4s;
+}
+
+@keyframes rotate {
+    0% {transform: rotate(0deg);}
+    100% {transform: rotate(360deg);}
+}
+
+.restart:hover {
+    transform: rotate(180deg);
+}
+
+.sound:hover {
+    transform: scale(1.1);
+}
+
 

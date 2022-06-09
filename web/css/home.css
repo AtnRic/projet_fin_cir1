@@ -583,8 +583,6 @@ section {
     animation-iteration-count: infinite;
     animation-timing-function: linear;
 
-    /* overflow: hidden; */
-
     background: none;
 }
 
@@ -596,6 +594,11 @@ section {
     width: 10vh;
     height: 10vh;
     background: url(../images/accueil/mars.png) center center / cover no-repeat;
+}
+
+@keyframes orbite {
+    from {transform: translate(-50%, -50%) rotate(0deg);}
+    to {transform: translate(-50%, -50%) rotate(360deg);}
 }
 
 #iss {
