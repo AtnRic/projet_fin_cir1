@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>Maze'ltov - space</title>
     <link rel="stylesheet" type="text/css" href="../css/space.css">
@@ -9,11 +10,30 @@
 </head>
 
 <body>
+    <div class="global">
+        <table id="container"></table>
+    </div>
+    <?php
+    if (isset($_SESSION['custom'])) {
+        $custom = $_SESSION['custom'];
+        if ($custom == 1) {
+            $custom = true;
+        } else {
+            $custom = false;
+        }
+    } else {
+        $custom = false;
+    }
 
-<div class="global">
-    <table id="container"></table>
-</div>
-<?php
+    if (isset($_SESSION['data'])) {
+        $data = $_SESSION['data'];
+    } else {
+        $data = null;
+    }
+
+    $custom = 0;
+    $data = 0;
+
     include 'popups/popup_intro_space.php';
     include 'popups/popup_win_space.php';
     include 'popups/popup_lose_space.php';
@@ -22,13 +42,13 @@
 
 </body>
 <script src="../js/conf.js"></script>
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 <script src="../js/node_modules/animejs/lib/anime.min.js"></script>
 <script src="../js/main.js">
 </script>
 <script>
     SetAmbiance("Space");
-    PHP_Start(true, false, null);
+    PHP_Start(true, <?php echo $custom ?>, <?php echo $data ?>);
 </script>
 
 </html>
